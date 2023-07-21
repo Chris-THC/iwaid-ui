@@ -8,6 +8,15 @@ import { Medicine } from "./Routes/Medicine";
 import { Calendar } from "./Routes/Calendar";
 
 export function Conteiner() {
+  const NotFound = () => {
+    return (
+      <div className=" container alert alert-danger">
+        <h1 className="text-center">404 - Página no encontrada</h1>
+        <p className="text-center">Lo sentimos, la página que estás buscando no existe.</p>
+      </div>
+    );
+  };
+
   return (
     <div>
       <MenuHamburger />
@@ -17,6 +26,7 @@ export function Conteiner() {
         <Route path="/patient" element={<Patient />} />
         <Route path="/medicine" element={<Medicine />} />
         <Route path="/calendar" element={<Calendar />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
   );

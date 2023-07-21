@@ -119,6 +119,16 @@ export const Menu = () => {
                     Agenda
                   </Link>
                 </li>
+                <li>
+                  <Link
+                    className="dropdown-item"
+                    to="/prescriptions"
+                    onClick={toggleDates}
+                    aria-expanded={isDatesOpen}
+                  >
+                    Prescripciones Médicas
+                  </Link>
+                </li>
               </ul>
             </li>
           </ul>

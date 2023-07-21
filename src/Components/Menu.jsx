@@ -1,27 +1,22 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-export const MenuHamburger = () => {
-  //% isMenuOpen: A boolean indicating whether the main menu is open or closed.
+export const Menu = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  //% isDatosMaestrosOpen: A boolean indicating whether the "Datos Maestros" dropdown menu is open or closed.
   const [isDataMasterOpen, setIsDataMasterOpen] = useState(false);
 
-  //% isCitasOpen: A boolean indicating whether the "Consulta" dropdown menu is open or closed.
   const [isDatesOpen, setIsDatesOpen] = useState(false);
 
-  //% toggleMenu(): Toggles the state of isMenuOpen to open or close the main menu.
   const toggleMenu = () => {
     setIsMenuOpen((prevIsMenuOpen) => !prevIsMenuOpen);
   };
 
-  //% toggleDatosMaestros(): Toggles the state of isDatosMaestrosOpen to open or close the "Datos Maestros" dropdown menu.
   const toggleDataMaster = () => {
     setIsDataMasterOpen((prevIsDatosMaestrosOpen) => !prevIsDatosMaestrosOpen);
   };
 
-  const toggleCitas = () => {
+  const toggleDates = () => {
     setIsDatesOpen((prevIsCitasOpen) => !prevIsCitasOpen);
   };
 
@@ -105,7 +100,7 @@ export const MenuHamburger = () => {
                 className="nav-link dropdown-toggle"
                 id="citasDropdown"
                 role="button"
-                onClick={toggleCitas}
+                onClick={toggleDates}
                 aria-expanded={isDatesOpen}
               >
                 Consulta
@@ -118,7 +113,7 @@ export const MenuHamburger = () => {
                   <Link
                     className="dropdown-item"
                     to="/calendar"
-                    onClick={toggleCitas}
+                    onClick={toggleDates}
                     aria-expanded={isDatesOpen}
                   >
                     Agenda

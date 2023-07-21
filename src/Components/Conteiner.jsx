@@ -1,5 +1,5 @@
 import React from "react";
-import { MenuHamburger } from "./MenuHamburger";
+import { Menu } from "./Menu";
 import { Routes, Route } from "react-router-dom";
 import { Home } from "./Routes/Home";
 import { Doctor } from "./Routes/Doctor";
@@ -11,15 +11,16 @@ export function Conteiner() {
   const NotFound = () => {
     return (
       <div className=" container alert alert-danger">
-        <h1 className="text-center">404 - Página no encontrada</h1>
-        <p className="text-center">Lo sentimos, la página que estás buscando no existe.</p>
+        <h1 className="text-center">
+          Lo sentimos, la página que estás buscando no se encuentra.
+        </h1>
       </div>
     );
   };
 
   return (
     <div>
-      <MenuHamburger />
+      <Menu />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/doctor" element={<Doctor />} />

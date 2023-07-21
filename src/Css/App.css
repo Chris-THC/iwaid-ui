@@ -1,0 +1,112 @@
+* {
+    margin: 0;
+    padding: 0;
+  }
+  
+  html,
+  body {
+    font-size: 18px;
+    background-color: #f5f6f7;
+  }
+
+  
+  .App {
+    min-height: 50vh;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  
+
+td.invisible {
+    display: none;
+  }
+  
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  th, td {
+    border: 1px solid #dddddd;
+    padding: 8px;
+  }
+  
+  /* Estilo para el encabezado (thead) */
+  thead {
+    background-color: #e1e1e1 ;
+  }
+
+  .Button{
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    padding: 6px;
+    font-size: 14px;
+    font-family: Roboto, sans-serif;
+    border: none;
+    border-radius: 4px 4px 4px 4px;
+    cursor: pointer;
+    outline: none;
+    text-transform: capitalize;
+    color: #fff;
+    user-select: none;
+  }
+  
+  .Eliminar{ 
+    background-color: #FF3B30;
+}
+  .Editar{
+    background-color: #007AFF;
+    margin-right: 4px;
+  }
+
+  .Agregar{
+    background-color: #0A84FF;
+    display: flex; 
+    align-items: center;
+    margin-left: auto;
+    margin-right: 4px;
+    font-size: 1.1em;
+    
+  }
+ 
+  .table-doctors-container{
+    min-height: 100px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+  
+  }
+
+  .title-doctors{
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;    background-color: #e1e1e1 ;
+    width: 100%;
+    height: 50px;
+    border-bottom: 2px solid #ccc; 
+  
+  
+  }
+
+  .title-doctores {
+    margin-top: 10px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;    background-color: #e1e1e1;
+    height: 40px;
+    border-bottom: 2px solid #ccc;
+    display: flex; /* Agregar esta línea para usar flexbox */
+    align-items: center; /* Centrar verticalmente el contenido */
+    padding-left: 10px; /* Añadir un espacio de 10px a la izquierda */
+  }
+  
+
+  .container-doctors{
+    width: 75%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }

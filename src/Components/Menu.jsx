@@ -24,7 +24,7 @@ export const Menu = () => {
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid">
         <p className="navbar-brand mr-2 ">
-          <h3 className="font-weight-bold">iwaid-UI</h3>
+          <h3 className="font-weight-bold">IWAID</h3>
         </p>
         <button
           className={`navbar-toggler ${isMenuOpen ? "" : "collapsed"}`}

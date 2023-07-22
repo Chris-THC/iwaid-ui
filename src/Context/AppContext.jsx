@@ -41,6 +41,7 @@ export const AppContext = (props) => {
   const [getDataFromTable, setGetDataFromTable] = useState({});
 
   const [actionButtonModal, setActionButtonModal] = useState("Agregar");
+  const [textAlert, setTextAlert] = useState("");
 
   const [showModal, setShowModal] = useState(false);
 
@@ -50,6 +51,16 @@ export const AppContext = (props) => {
 
   const handleCloseModal = () => {
     setShowModal(false);
+  };
+
+  const [showFloatingAlert, setShowFloatingAlert] = useState(false);
+
+  const handleShowFloatAlter = () => {
+    setShowFloatingAlert(true);
+  };
+
+  const handleCloseFloatAlert = () => {
+    setShowFloatingAlert(false);
   };
 
   return (
@@ -66,6 +77,11 @@ export const AppContext = (props) => {
         setGetDataFromTable,
         actionButtonModal,
         setActionButtonModal,
+        handleShowFloatAlter,
+        handleCloseFloatAlert,
+        showFloatingAlert,
+        textAlert,
+        setTextAlert,
       }}
     >
       {props.children}

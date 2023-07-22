@@ -3,8 +3,13 @@ import { Modal, Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { GetTheAppContext } from "../../Context/AppContext";
 export const FormPatient = ({ isGetData = {} }) => {
-  const { setDataUserPatient, handleCloseModal, actionButtonModal } =
-    useContext(GetTheAppContext);
+  const {
+    setDataUserPatient,
+    handleCloseModal,
+    actionButtonModal,
+    handleShowFloatAlter,
+    setTextAlert,
+  } = useContext(GetTheAppContext);
 
   const {
     register,
@@ -14,10 +19,10 @@ export const FormPatient = ({ isGetData = {} }) => {
 
   const onSubmitClick = (data) => {
     setDataUserPatient(data);
-    // let arrayDataTest = [...dataTest, data];
-    // setDataTest(arrayDataTest);
     console.log(data);
     handleCloseModal();
+    setTextAlert("Datos Guardados");
+    handleShowFloatAlter();
   };
 
   return (
@@ -130,11 +135,16 @@ export const FormPatient = ({ isGetData = {} }) => {
               className="form-control"
               placeholder="Numero de telefono"
               autoComplete="off"
-              {...register("telefono", { required: true, minLength: 10 })}
+              {...register("telefono", {
+                required: true,
+                pattern: {
+                  value: /^[0-9]{10}$/, // Expresión regular para aceptar solo 10 números
+                },
+              })}
             />
             {errors.telefono && (
               <span className="text-danger">
-                Ingrese un numero de teléfono valido
+                Ingrese exactamente 10 números
               </span>
             )}
           </div>

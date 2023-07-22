@@ -13,6 +13,8 @@ export const TablePatient = ({ dataTable }) => {
     showModal,
     setGetDataFromTable,
     setActionButtonModal,
+    handleShowFloatAlter,
+    setTextAlert,
   } = useContext(GetTheAppContext);
 
   const displayedFields = ["nombre", "fechaNacimiento", "ciudad", "telefono"];
@@ -67,7 +69,11 @@ export const TablePatient = ({ dataTable }) => {
                         id="btnTables"
                         className="ms-2 me-2 mb-1 d-inline"
                         variant="danger"
-                        onClick={() => console.log(item.nombre)}
+                        onClick={() => {
+                          console.log(item.nombre);
+                          setTextAlert(`Se ha eliminado: ${item.nombre}`);
+                          handleShowFloatAlter();
+                        }}
                       >
                         <MdDeleteForever
                           id="btnDeletePatient"

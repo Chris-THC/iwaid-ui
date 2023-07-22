@@ -7,7 +7,6 @@ export const ModalPatient = ({ show, handleClose }) => {
   const { setGetDataFromTable, getDataFromTable, actionButtonModal } =
     useContext(GetTheAppContext);
 
-  // console.log(getDataFromTable);
   return (
     <Modal
       size="lg"

@@ -3,6 +3,8 @@ import { Modal, Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { GetTheAppContext } from "../../Context/AppContext";
 export const FormMedicalPrescriptions = ({ isGetData = {} }) => {
+  const currentDate = new Date().toISOString().split("T")[0];
+
   const {
     setDataMedicalPrescription,
     handleCloseModal,
@@ -34,7 +36,7 @@ export const FormMedicalPrescriptions = ({ isGetData = {} }) => {
             <div className="form-group col-md-6">
               <label>Nombre Completo</label>
               <input
-                defaultValue={isGetData.nombrePaciente}
+                defaultValue={isGetData.nombre}
                 type="text"
                 className="form-control"
                 placeholder="Nombre Completo"
@@ -70,10 +72,18 @@ export const FormMedicalPrescriptions = ({ isGetData = {} }) => {
               type="date"
               className="form-control"
               autoComplete="off"
-              {...register("fecha", { required: true })}
+              {...register("fecha", {
+                required: true,
+                max: {
+                  value: currentDate,
+                },
+              })}
             />
             {errors.fecha && (
-              <span className="text-danger">El dato es requerido</span>
+              <span className="text-danger">
+                El dato es requerido o la fecha no puede ser posterior a la
+                fecha actual
+              </span>
             )}
           </div>
         </div>

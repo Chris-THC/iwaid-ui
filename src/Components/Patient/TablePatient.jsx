@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import { ModalPatient } from "./ModalPatient";
 import { GetTheAppContext } from "../../Context/AppContext";
-import "../../Css/Table.css";
-import { MdDeleteForever } from "react-icons/md";
-import { MdChangeCircle } from "react-icons/md";
+import "../../Css/TablePatients.css";
+import { MdDeleteForever, MdChangeCircle } from "react-icons/md";
+import { BsPersonFillAdd } from "react-icons/bs";
 import { Button } from "react-bootstrap";
 
 export const TablePatient = ({ dataTable }) => {
@@ -17,7 +17,7 @@ export const TablePatient = ({ dataTable }) => {
     setTextAlert,
   } = useContext(GetTheAppContext);
 
-  const displayedFields = ["nombre", "fechaNacimiento", "ciudad", "telefono"];
+  const displayedFields = ["nombre", "fechaNacimiento", "ciudad", "telefono","correo"];
 
   return (
     <div className="container mt-5">
@@ -37,7 +37,7 @@ export const TablePatient = ({ dataTable }) => {
                 setActionButtonModal("Agregar");
               }}
             >
-              Agregar
+              <BsPersonFillAdd /> Agregar
             </Button>
           </div>
         </div>
@@ -51,6 +51,7 @@ export const TablePatient = ({ dataTable }) => {
                   <th>Fecha de Nacimiento</th>
                   <th>Ciudad</th>
                   <th>Teléfono</th>
+                  <th>Correo</th>
                   <th>Opcion</th>
                 </tr>
               </thead>
@@ -78,7 +79,8 @@ export const TablePatient = ({ dataTable }) => {
                         <MdDeleteForever
                           id="btnDeletePatient"
                           className="btn-icon-lg"
-                        />
+                        />{" "}
+                        Eliminar
                       </Button>
 
                       <Button
@@ -91,7 +93,7 @@ export const TablePatient = ({ dataTable }) => {
                           setActionButtonModal("Editar");
                         }}
                       >
-                        <MdChangeCircle className="btn-icon-lg" />
+                        <MdChangeCircle className="btn-icon-lg" /> Editar
                       </Button>
                     </td>
                   </tr>

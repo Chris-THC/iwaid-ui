@@ -62,7 +62,10 @@ export const FormPatient = ({ isGetData = {} }) => {
                 })}
               />
               {errors.fechaNacimineto && (
-                <span className="text-danger">El dato es requerido o la fecha no puede ser posterior a la fecha actual</span>
+                <span className="text-danger">
+                  El dato es requerido o la fecha no puede ser posterior a la
+                  fecha actual
+                </span>
               )}
             </div>
 
@@ -125,10 +128,15 @@ export const FormPatient = ({ isGetData = {} }) => {
               className="form-control"
               placeholder="Ciudad"
               autoComplete="off"
-              {...register("ciudad", { required: true })}
+              {...register("ciudad", {
+                required: true,
+                pattern: {
+                  value: /^[a-zA-Z\sÀ-ÖØ-öø-ÿ]+$/,
+                },
+              })}
             />
             {errors.ciudad && (
-              <span className="text-danger">El dato es requerido</span>
+              <span className="text-danger">El dato es requerido y no se aceptan números </span>
             )}
           </div>
         </div>
@@ -145,7 +153,7 @@ export const FormPatient = ({ isGetData = {} }) => {
               {...register("telefono", {
                 required: true,
                 pattern: {
-                  value: /^[0-9]{10}$/, // Expresión regular para aceptar solo 10 números
+                  value: /^[0-9]{10}$/,
                 },
               })}
             />

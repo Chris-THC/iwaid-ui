@@ -3,6 +3,7 @@ import { createContext, useState } from "react";
 export const GetTheAppContext = createContext();
 
 export const AppContext = (props) => {
+  // TODO: This array data is for testing and I'll delete this one.
   const [dataTest, setDataTest] = useState([
     {
       nombrePaciente: "Juan Pérez",

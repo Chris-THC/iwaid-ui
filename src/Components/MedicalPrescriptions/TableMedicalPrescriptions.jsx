@@ -51,7 +51,7 @@ export const TableMedicalPrescriptions = ({ dataTable }) => {
                   <th>Medico</th>
                   <th>Fecha de Asignación</th>
                   <th>Medicamentos Prescritos</th>
-                  <th>Opcion</th>
+                  <th>Opción</th>
                 </tr>
               </thead>
               <tbody>

@@ -2,8 +2,8 @@ import React, { useContext } from "react";
 import { ModalMedicalPrescriptions } from "./ModalMedicalPrescriptions";
 import { GetTheAppContext } from "../../Context/AppContext";
 import "../../Css/TablaMedicalPrescriptions.css";
-import { MdDeleteForever } from "react-icons/md";
-import { MdChangeCircle } from "react-icons/md";
+import { MdDeleteForever, MdChangeCircle } from "react-icons/md";
+import { BsPersonFillAdd } from "react-icons/bs";
 import { Button } from "react-bootstrap";
 
 export const TableMedicalPrescriptions = ({ dataTable }) => {
@@ -15,7 +15,6 @@ export const TableMedicalPrescriptions = ({ dataTable }) => {
     setActionButtonModal,
     handleShowFloatAlter,
     setTextAlert,
-    
   } = useContext(GetTheAppContext);
 
   const displayedFields = ["nombrePaciente", "medico", "fecha", "medicamentos"];
@@ -38,7 +37,7 @@ export const TableMedicalPrescriptions = ({ dataTable }) => {
                 setActionButtonModal("Agregar");
               }}
             >
-              Agregar
+              <BsPersonFillAdd /> Agregar
             </Button>
           </div>
         </div>

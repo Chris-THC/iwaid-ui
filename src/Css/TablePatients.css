@@ -16,6 +16,10 @@
   .custom-table {
     font-size: 12px;
   }
+
+  #inputSearchPatient {
+    font-size: 12px;
+  }
 }
 
 @media (max-width: 550px) {
@@ -28,6 +32,10 @@
   }
 
   #idTextPatient {
+    font-size: 9px;
+  }
+
+  #inputSearchPatient {
     font-size: 9px;
   }
 

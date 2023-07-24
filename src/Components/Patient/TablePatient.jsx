@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 import { ModalPatient } from "./ModalPatient";
 import { GetTheAppContext } from "../../Context/AppContext";
 import "../../Css/TablePatients.css";
@@ -17,11 +17,22 @@ export const TablePatient = ({ dataTable }) => {
     setTextAlert,
   } = useContext(GetTheAppContext);
 
-  const displayedFields = ["nombre", "fechaNacimiento", "ciudad", "telefono","correo"];
+  const displayedFields = [
+    "nombre",
+    "fechaNacimiento",
+    "ciudad",
+    "telefono",
+    "correo",
+  ];
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const filteredData = dataTable.filter((item) =>
+    item.nombre.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <div className="container mt-5">
-      <div className=" card mt-4 row ">
+      <div className=" card mt-4 row">
         <div className="card-header d-flex">
           <div className="col-10">
             <h2 className="card-title">Pacientes</h2>
@@ -44,6 +55,20 @@ export const TablePatient = ({ dataTable }) => {
 
         <div className="card-header col-md-12">
           <div className=" card-body table-responsive">
+            <div className="mb-3 table-bordered custom-table col-md-4">
+              <label>
+                <h4>Buscar</h4>
+              </label>
+              <input
+                id="inputSearchPatient"
+                type="text"
+                autoComplete="off"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                placeholder="Buscar por Nombre..."
+                className="form-control rounded border"
+              />
+            </div>
             <table className="table table-bordered custom-table text-center">
               <thead>
                 <tr>
@@ -56,7 +81,7 @@ export const TablePatient = ({ dataTable }) => {
                 </tr>
               </thead>
               <tbody>
-                {dataTable.map((item, index) => (
+                {filteredData.map((item, index) => (
                   <tr key={index}>
                     {displayedFields.map((field) => (
                       <td key={field}>

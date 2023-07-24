@@ -52,7 +52,7 @@ export const TablePatient = ({ dataTable }) => {
                   <th>Ciudad</th>
                   <th>Teléfono</th>
                   <th>Correo</th>
-                  <th>Acción</th>
+                  <th>Opción</th>
                 </tr>
               </thead>
               <tbody>

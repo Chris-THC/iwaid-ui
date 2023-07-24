@@ -22,12 +22,18 @@ export const TablePatient = ({ dataTable }) => {
     "fechaNacimiento",
     "ciudad",
     "telefono",
-    "correo",
+    "rfc",
   ];
   const [searchTerm, setSearchTerm] = useState("");
+  const [searchOption, setSearchOption] = useState("nombre");
+
+  const handleSearchOptionChange = (e) => {
+    setSearchOption(e.target.value);
+    setSearchTerm("");
+  };
 
   const filteredData = dataTable.filter((item) =>
-    item.nombre.toLowerCase().includes(searchTerm.toLowerCase())
+    item[searchOption].toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
@@ -53,21 +59,40 @@ export const TablePatient = ({ dataTable }) => {
           </div>
         </div>
 
-        <div className="card-header col-md-12">
+        <div className="card-header">
           <div className=" card-body table-responsive">
-            <div className="mb-3 table-bordered custom-table col-md-4">
+            <div className="mb-3 table-bordered custom-table ">
               <label>
                 <h4>Buscar</h4>
               </label>
-              <input
-                id="inputSearchPatient"
-                type="text"
-                autoComplete="off"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                placeholder="Buscar por Nombre..."
-                className="form-control rounded border"
-              />
+
+              <div className="row">
+                <div className="col-md-2">
+                  <select
+                    id="selectSearchPatient"
+                    value={searchOption}
+                    onChange={handleSearchOptionChange}
+                    className="form-select mb-2"
+                  >
+                    <option value="nombre">Nombre</option>
+                    <option value="rfc">RFC</option>
+                    <option value="telefono">Número de Teléfono</option>
+                    <option value="correo">Correo</option>
+                  </select>
+                </div>
+
+                <div className="col-md-4">
+                  <input
+                    id="inputSearchPatient"
+                    type="text"
+                    autoComplete="off"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    placeholder={`Buscar por ${searchOption}...`}
+                    className="form-control rounded border"
+                  />
+                </div>
+              </div>
             </div>
             <table className="table table-bordered custom-table text-center">
               <thead>
@@ -76,7 +101,7 @@ export const TablePatient = ({ dataTable }) => {
                   <th>Fecha de Nacimiento</th>
                   <th>Ciudad</th>
                   <th>Teléfono</th>
-                  <th>Correo</th>
+                  <th>RFC</th>
                   <th>Opción</th>
                 </tr>
               </thead>

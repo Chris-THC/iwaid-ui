@@ -3,6 +3,9 @@ import { createContext, useState } from "react";
 export const GetTheAppContext = createContext();
 
 export const AppContext = (props) => {
+
+
+  // TODO: This data will be deleted when the frontend connects to the backend.
   const [dataTest, setDataTest] = useState([
     {
       nombre: "Juan Pérez",

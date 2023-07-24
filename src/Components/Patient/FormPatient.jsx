@@ -11,6 +11,7 @@ export const FormPatient = ({ isGetData = {} }) => {
     actionButtonModal,
     handleShowFloatAlter,
     setTextAlert,
+    setGetDataFromTable,
   } = useContext(GetTheAppContext);
 
   const {
@@ -136,7 +137,9 @@ export const FormPatient = ({ isGetData = {} }) => {
               })}
             />
             {errors.ciudad && (
-              <span className="text-danger">El dato es requerido y no se aceptan números </span>
+              <span className="text-danger">
+                El dato es requerido y no se aceptan números{" "}
+              </span>
             )}
           </div>
         </div>
@@ -183,7 +186,14 @@ export const FormPatient = ({ isGetData = {} }) => {
 
         <div>
           <Modal.Footer>
-            <Button type="submit">{actionButtonModal}</Button>
+            <Button
+              type="submit"
+              onClick={() => {
+                setGetDataFromTable({});
+              }}
+            >
+              {actionButtonModal}
+            </Button>
           </Modal.Footer>
         </div>
       </form>

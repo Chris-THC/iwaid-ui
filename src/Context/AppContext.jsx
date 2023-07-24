@@ -6,27 +6,27 @@ export const AppContext = (props) => {
   // TODO: This array data is for testing and I'll delete this one.
   const [dataTest, setDataTest] = useState([
     {
-      nombrePaciente: "Juan Pérez",
+      nombre: "Juan Pérez",
       medico: "Dr. Ana García",
       fecha: "2023-07-23",
       medicamentos:
         "Paracetamol (500mg) - Cada 8 horas (Para el dolor), Amoxicilina (875mg) - Cada 12 horas (Para la infección)",
     },
     {
-      nombrePaciente: "María López",
+      nombre: "María López",
       medico: "Dr. Luis Ramírez",
       fecha: "2023-07-22",
       medicamentos: "Ibuprofeno (400mg) - Cada 6 horas (Para la inflamación)",
     },
     {
-      nombrePaciente: "Carlos Gómez",
+      nombre: "Carlos Gómez",
       medico: "Dra. Laura Martínez",
       fecha: "2023-07-21",
       medicamentos:
         "Loratadina (10mg) - Cada 24 horas (Para las alergias), Dexametasona (2mg) - Cada 12 horas (Para la inflamación aguda)",
     },
     {
-      nombrePaciente: "Ana Castro",
+      nombre: "Ana Castro",
       medico: "Dr. Roberto Fernández",
       fecha: "2023-07-20",
       medicamentos:

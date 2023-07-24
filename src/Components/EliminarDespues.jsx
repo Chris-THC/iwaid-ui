@@ -1,12 +1,12 @@
-import React, { useContext, useState } from "react";
-import { ModalMedicalPrescriptions } from "./ModalMedicalPrescriptions";
+import React, { useState, useContext } from "react";
+import { ModalPatient } from "./ModalPatient";
 import { GetTheAppContext } from "../../Context/AppContext";
-import "../../Css/TablaMedicalPrescriptions.css";
+import "../../Css/TablePatients.css";
 import { MdDeleteForever, MdChangeCircle } from "react-icons/md";
 import { BsPersonFillAdd } from "react-icons/bs";
 import { Button } from "react-bootstrap";
 
-export const TableMedicalPrescriptions = ({ dataTable }) => {
+export const TablePatient = ({ dataTable }) => {
   const {
     handleShowModal,
     handleCloseModal,
@@ -17,8 +17,13 @@ export const TableMedicalPrescriptions = ({ dataTable }) => {
     setTextAlert,
   } = useContext(GetTheAppContext);
 
-  const displayedFields = ["nombre", "medico", "fecha", "medicamentos"];
-
+  const displayedFields = [
+    "nombre",
+    "fechaNacimiento",
+    "ciudad",
+    "telefono",
+    "rfc",
+  ];
   const [searchTerm, setSearchTerm] = useState("");
   const [searchOption, setSearchOption] = useState("nombre");
 
@@ -33,10 +38,10 @@ export const TableMedicalPrescriptions = ({ dataTable }) => {
 
   return (
     <div className="container mt-5">
-      <div className=" card mt-4 row ">
+      <div className=" card mt-4 row">
         <div className="card-header d-flex">
           <div className="col-10">
-            <h2 className="card-title">Prescripciones Médicas</h2>
+            <h2 className="card-title">Pacientes</h2>
           </div>
 
           <div className="col-2">
@@ -54,7 +59,7 @@ export const TableMedicalPrescriptions = ({ dataTable }) => {
           </div>
         </div>
 
-        <div className="card-header col-md-12">
+        <div className="card-header">
           <div className=" card-body table-responsive">
             <div className="mb-3 table-bordered custom-table ">
               <label>
@@ -70,8 +75,9 @@ export const TableMedicalPrescriptions = ({ dataTable }) => {
                     className="form-select mb-2"
                   >
                     <option value="nombre">Nombre</option>
-                    <option value="medico">Medico</option>
-                    <option value="fecha">Fecha</option>
+                    <option value="rfc">RFC</option>
+                    <option value="telefono">Número de Teléfono</option>
+                    <option value="correo">Correo</option>
                   </select>
                 </div>
 
@@ -88,14 +94,14 @@ export const TableMedicalPrescriptions = ({ dataTable }) => {
                 </div>
               </div>
             </div>
-
             <table className="table table-bordered custom-table text-center">
               <thead>
                 <tr>
                   <th>Nombre</th>
-                  <th>Medico</th>
-                  <th>Fecha de Asignación</th>
-                  <th>Medicamentos Prescritos</th>
+                  <th>Fecha de Nacimiento</th>
+                  <th>Ciudad</th>
+                  <th>Teléfono</th>
+                  <th>RFC</th>
                   <th>Opción</th>
                 </tr>
               </thead>
@@ -145,10 +151,7 @@ export const TableMedicalPrescriptions = ({ dataTable }) => {
               </tbody>
             </table>
           </div>
-          <ModalMedicalPrescriptions
-            show={showModal}
-            handleClose={handleCloseModal}
-          />
+          <ModalPatient show={showModal} handleClose={handleCloseModal} />
         </div>
       </div>
     </div>

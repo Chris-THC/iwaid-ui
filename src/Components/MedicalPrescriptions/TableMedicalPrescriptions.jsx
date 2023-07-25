@@ -19,17 +19,31 @@ export const TableMedicalPrescriptions = ({ dataTable }) => {
 
   const displayedFields = ["nombre", "medico", "fecha", "medicamentos"];
 
-  const [searchTerm, setSearchTerm] = useState("");
-  const [searchOption, setSearchOption] = useState("nombre");
+  const [searchByName, setSearchByName] = useState("");
+  const [searchByDoctor, setSearchByDoctor] = useState("");
+  const [searchByDate, setSearchByDate] = useState("");
 
-  const handleSearchOptionChange = (e) => {
-    setSearchOption(e.target.value);
-    setSearchTerm("");
+  const handleClear = () => {
+    setSearchByName("");
+    setSearchByDoctor("");
+    setSearchByDate("");
   };
 
-  const filteredData = dataTable.filter((item) =>
-    item[searchOption].toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filteredData = dataTable.filter((item) => {
+    const nombreMatches = item.nombre
+      .toLowerCase()
+      .includes(searchByName.toLowerCase());
+
+    const doctorMatches = item.medico
+      .toLowerCase()
+      .includes(searchByDoctor.toLowerCase());
+
+    const dateMatches = item.fecha
+      .toLowerCase()
+      .includes(searchByDate.toLowerCase());
+
+    return nombreMatches && doctorMatches && dateMatches;
+  });
 
   return (
     <div className="container mt-5">
@@ -56,35 +70,70 @@ export const TableMedicalPrescriptions = ({ dataTable }) => {
 
         <div className="card-header col-md-12">
           <div className=" card-body table-responsive">
-            <div className="mb-3 table-bordered custom-table ">
-              <label>
+            <div className="container mb-3">
+              <div className="col-md-4 mb-3">
                 <h4>Buscar</h4>
-              </label>
-
+              </div>
               <div className="row">
-                <div className="col-md-2">
-                  <select
-                    id="selectSearchPatient"
-                    value={searchOption}
-                    onChange={handleSearchOptionChange}
-                    className="form-select mb-2"
-                  >
-                    <option value="nombre">Nombre</option>
-                    <option value="medico">Medico</option>
-                    <option value="fecha">Fecha</option>
-                  </select>
-                </div>
+                <div className="container mb-3">
+                  <div className="row">
+                    <div className="col-md-4 mb-3">
+                      <label>Nombre</label>
+                      <input
+                        autoComplete="off"
+                        type="text"
+                        className="form-control"
+                        value={searchByName}
+                        onChange={(e) => {
+                          setSearchByName(e.target.value);
+                          setSearchByDoctor("");
+                          setSearchByDate("");
+                        }}
+                        placeholder="Buscar por nombre..."
+                        pattern="^[A-Za-z\s]+$"
+                      />
+                    </div>
+                    <div className="col-md-4 mb-3">
+                      <label>Medico</label>
+                      <input
+                        autoComplete="off"
+                        type="text"
+                        className="form-control"
+                        value={searchByDoctor}
+                        onChange={(e) => {
+                          setSearchByDoctor(e.target.value);
+                          setSearchByName("");
+                          setSearchByDate("");
+                        }}
+                        placeholder="Buscar por nombre..."
+                        pattern="^[A-Za-z\s]+$"
+                      />
+                    </div>
+                    <div className="col-md-4 mb-3">
+                      <label>Fecha</label>
+                      <input
+                        type="date"
+                        className="form-control"
+                        value={searchByDate}
+                        onChange={(e) => {
+                          setSearchByDate(e.target.value);
+                          setSearchByName("");
+                          setSearchByDoctor("")
+                        }}
+                        placeholder="Buscar por fecha de nacimiento..."
+                      />
+                    </div>
 
-                <div className="col-md-4">
-                  <input
-                    id="inputSearchPatient"
-                    type="text"
-                    autoComplete="off"
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                    placeholder={`Buscar por ${searchOption}...`}
-                    className="form-control rounded border"
-                  />
+                    <div className="col-md-12 d-flex flex-row-reverse ">
+                      <button
+                        className="btn btn-secondary"
+                        type="button"
+                        onClick={handleClear}
+                      >
+                        Limpiar
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

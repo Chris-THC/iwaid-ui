@@ -87,7 +87,11 @@ export const TablePatient = ({ dataTable }) => {
                         type="text"
                         className="form-control"
                         value={searchName}
-                        onChange={(e) => setSearchName(e.target.value)}
+                        onChange={(e) => {
+                          setSearchName(e.target.value);
+                          setSearchNumPhone("");
+                          setSearchEmail("");
+                        }}
                         placeholder="Buscar por nombre..."
                         pattern="^[A-Za-z\s]+$"
                       />
@@ -98,7 +102,11 @@ export const TablePatient = ({ dataTable }) => {
                         type="number"
                         className="form-control"
                         value={searchNumPhone}
-                        onChange={(e) => setSearchNumPhone(e.target.value)}
+                        onChange={(e) => {
+                          setSearchNumPhone(e.target.value);
+                          setSearchName("");
+                          setSearchEmail("");
+                        }}
                         placeholder="Buscar por teléfono..."
                       />
                     </div>
@@ -108,7 +116,11 @@ export const TablePatient = ({ dataTable }) => {
                         type="email"
                         className="form-control"
                         value={searchEmail}
-                        onChange={(e) => setSearchEmail(e.target.value)}
+                        onChange={(e) => {
+                          setSearchEmail(e.target.value);
+                          setSearchName("");
+                          setSearchNumPhone("");
+                        }}
                         placeholder="Buscar por correo..."
                       />
                     </div>

@@ -55,14 +55,14 @@ export const FormPatient = ({ isGetData = {} }) => {
                 type="date"
                 className="form-control"
                 autoComplete="off"
-                {...register("fechaNacimineto", {
+                {...register("fechaNacimiento", {
                   required: true,
                   max: {
                     value: currentDate,
                   },
                 })}
               />
-              {errors.fechaNacimineto && (
+              {errors.fechaNacimiento && (
                 <span className="text-danger">
                   El dato es requerido o la fecha no puede ser posterior a la
                   fecha actual

@@ -4,6 +4,10 @@
   width: 85px;
 }
 
+#btnAdd {
+  font-size: 12px;
+}
+
 .custom-table td,
 .custom-table th {
   padding: 0;
@@ -38,6 +42,10 @@
     font-size: 9px;
   }
 
+  #btnAdd {
+    font-size: 12px;
+  }
+
   #inputSearchPatient {
     font-size: 9px;
   }
@@ -51,4 +59,6 @@
     height: 25px;
     width: 70px;
   }
+
+  
 }

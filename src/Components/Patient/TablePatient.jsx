@@ -22,31 +22,43 @@ export const TablePatient = ({ dataTable }) => {
     "fechaNacimiento",
     "ciudad",
     "telefono",
-    "rfc",
+    "correo",
   ];
-  const [searchTerm, setSearchTerm] = useState("");
-  const [searchOption, setSearchOption] = useState("nombre");
+  const [searchName, setSearchName] = useState("");
+  const [searchNumPhone, setSearchNumPhone] = useState("");
+  const [searchEmail, setSearchEmail] = useState("");
 
-  const handleSearchOptionChange = (e) => {
-    setSearchOption(e.target.value);
-    setSearchTerm("");
+  const handleClear = () => {
+    setSearchName("");
+    setSearchNumPhone("");
+    setSearchEmail("");
   };
 
-  const filteredData = dataTable.filter((item) =>
-    item[searchOption].toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filteredData = dataTable.filter((item) => {
+    const nombreMatches = item.nombre
+      .toLowerCase()
+      .includes(searchName.toLowerCase());
+
+    const telefonoMatches = item.telefono.includes(searchNumPhone);
+
+    const correoMatches = item.correo
+      .toLowerCase()
+      .includes(searchEmail.toLowerCase());
+
+    return nombreMatches && telefonoMatches && correoMatches;
+  });
 
   return (
     <div className="container mt-5">
       <div className=" card mt-4 row">
         <div className="card-header d-flex">
-          <div className="col-10">
+          <div className="col-8">
             <h2 className="card-title">Pacientes</h2>
           </div>
 
-          <div className="col-2">
+          <div className="col-4 d-flex flex-row-reverse ">
             <Button
-              id="btnTables"
+              id="btnAdd"
               className="ms-2 me-2 mb-1"
               variant="primary"
               onClick={() => {
@@ -59,38 +71,57 @@ export const TablePatient = ({ dataTable }) => {
           </div>
         </div>
 
-        <div className="card-header">
+        <div className="card-header col-md-12">
           <div className=" card-body table-responsive">
-            <div className="mb-3 table-bordered custom-table ">
-              <label>
+            <div className="container mb-3">
+              <div className="col-md-4 mb-3">
                 <h4>Buscar</h4>
-              </label>
-
+              </div>
               <div className="row">
-                <div className="col-md-2">
-                  <select
-                    id="selectSearchPatient"
-                    value={searchOption}
-                    onChange={handleSearchOptionChange}
-                    className="form-select mb-2"
-                  >
-                    <option value="nombre">Nombre</option>
-                    <option value="rfc">RFC</option>
-                    <option value="telefono">Número de Teléfono</option>
-                    <option value="correo">Correo</option>
-                  </select>
-                </div>
-
-                <div className="col-md-4">
-                  <input
-                    id="inputSearchPatient"
-                    type="text"
-                    autoComplete="off"
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                    placeholder={`Buscar por ${searchOption}...`}
-                    className="form-control rounded border"
-                  />
+                <div className="container mb-3">
+                  <div className="row">
+                    <div className="col-md-4 mb-3">
+                      <label>Nombre</label>
+                      <input
+                        autoComplete="off"
+                        type="text"
+                        className="form-control"
+                        value={searchName}
+                        onChange={(e) => setSearchName(e.target.value)}
+                        placeholder="Buscar por nombre..."
+                        pattern="^[A-Za-z\s]+$"
+                      />
+                    </div>
+                    <div className="col-md-4 mb-3">
+                      <label>Teléfono</label>
+                      <input
+                        type="number"
+                        className="form-control"
+                        value={searchNumPhone}
+                        onChange={(e) => setSearchNumPhone(e.target.value)}
+                        placeholder="Buscar por teléfono..."
+                      />
+                    </div>
+                    <div className="col-md-4 mb-3">
+                      <label>Correo</label>
+                      <input
+                        type="email"
+                        className="form-control"
+                        value={searchEmail}
+                        onChange={(e) => setSearchEmail(e.target.value)}
+                        placeholder="Buscar por correo..."
+                      />
+                    </div>
+                    <div className="col-md-12 d-flex flex-row-reverse ">
+                      <button
+                        className="btn btn-secondary"
+                        type="button"
+                        onClick={handleClear}
+                      >
+                        Limpiar
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -101,7 +132,7 @@ export const TablePatient = ({ dataTable }) => {
                   <th>Fecha de Nacimiento</th>
                   <th>Ciudad</th>
                   <th>Teléfono</th>
-                  <th>RFC</th>
+                  <th>Correo</th>
                   <th>Opción</th>
                 </tr>
               </thead>

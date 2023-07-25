@@ -1,36 +1,49 @@
 import { Modal, Button } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
+import React, { useContext, useEffect } from "react";
+import { GetTheAppContext } from "../../Context/AppContext";
 
-export const MyModalEditar = ({ show, handleClose }) => {
-    const {
-      register,
-      handleSubmit,
-      formState: { errors },
-    } = useForm();
+export const FormDoctor = ({ isGetData = {} }) => {
+
+  const {
+    setDataUserDoctor,
+    handleCloseModal,
+    actionButtonModal,
+    handleShowFloatAlter,
+    setTextAlert,
+    setGetDataFromTable,
+  } = useContext(GetTheAppContext);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmitClick = (data) => {
+    setDataUserDoctor(data);
+    console.log(data);
+    handleCloseModal();
+    setTextAlert("Datos Guardados");
+    handleShowFloatAlter();
+  };
   
-    const onSubmitClick = (data) => {
-      console.log(data);
-      handleClose();
-    };
+  
   
     return (
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Editar Medico</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-        <div>
-  
+      
+  <div>
         <form onSubmit={handleSubmit(onSubmitClick)}>
     <div className="form-group">
       <label>Nombre Completo</label>
       <input
-        type="text"
-        className="form-control"
-        placeholder="Nombre Completo"
-        autoComplete="off"
-        {...register("nombre", { required: true })}
-      />
+             defaultValue={isGetData.name}
+              type="text"
+              className="form-control"
+              placeholder="Nombre Completo"
+              autoComplete="off"
+              {...register("nombre", { required: true })}
+            />
       {errors.nombre && (
         <span className="text-danger">El dato es requerido</span>
       )}
@@ -44,6 +57,7 @@ export const MyModalEditar = ({ show, handleClose }) => {
         placeholder="Especialización"
         autoComplete="off"
         {...register("especializacion", { required: true })}
+        defaultValue={isGetData.specialization}
       />
       {errors.especializacion && (
         <span className="text-danger">El dato es requerido</span>
@@ -58,6 +72,7 @@ export const MyModalEditar = ({ show, handleClose }) => {
         placeholder="Calle, Numero, Colonia"
         autoComplete="off"
         {...register("direccion", { required: true })}
+        defaultValue={isGetData.address}
       />
       {errors.direccion && (
         <span className="text-danger">El dato es requerido</span>
@@ -76,6 +91,7 @@ export const MyModalEditar = ({ show, handleClose }) => {
           pattern: /^[0-9]+$/,
           minLength: 10,
         })}
+        defaultValue={isGetData.phoneNumber}
       />
       {errors.telefono && (
         <span className="text-danger">
@@ -92,6 +108,7 @@ export const MyModalEditar = ({ show, handleClose }) => {
         autoComplete="off"
         placeholder="Agregar su email"
         {...register("email", { required: true })}
+        defaultValue={isGetData.email}
       />
       {errors.email && (
         <span className="text-danger">El dato es requerido</span>
@@ -105,14 +122,7 @@ export const MyModalEditar = ({ show, handleClose }) => {
     </div>
   </form>
   </div>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Cerrar
-          </Button>
-        </Modal.Footer>
-      </Modal>
     );
   };
-  
+
   

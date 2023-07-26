@@ -5,6 +5,9 @@
   width: 85px;
 }
 
+#btnAdd {
+  font-size: 12px;
+}
 
 .custom-table td,
   .custom-table th {

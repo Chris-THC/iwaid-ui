@@ -49,13 +49,13 @@ export const TableMedicalPrescriptions = ({ dataTable }) => {
     <div className="container mt-5">
       <div className=" card mt-4 row ">
         <div className="card-header d-flex">
-          <div className="col-10">
+          <div className="col-8">
             <h2 className="card-title">Prescripciones Médicas</h2>
           </div>
 
-          <div className="col-2">
+          <div className="col-4 d-flex flex-row-reverse ">
             <Button
-              id="btnTables"
+              id="btnAdd"
               className="ms-2 me-2 mb-1"
               variant="primary"
               onClick={() => {

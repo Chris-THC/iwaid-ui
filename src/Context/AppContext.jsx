@@ -13,6 +13,13 @@ export const AppContext = (props) => {
         "Paracetamol (500mg) - Cada 8 horas (Para el dolor), Amoxicilina (875mg) - Cada 12 horas (Para la infección)",
     },
     {
+      nombre: "Juan Hernandez",
+      medico: "Dr. Luis Ramírez",
+      fecha: "2023-07-25",
+      medicamentos:
+        "Paracetamol (500mg) - Cada 8 horas (Para el dolor), Amoxicilina (875mg) - Cada 12 horas (Para la infección)",
+    },
+    {
       nombre: "María López",
       medico: "Dr. Luis Ramírez",
       fecha: "2023-07-22",

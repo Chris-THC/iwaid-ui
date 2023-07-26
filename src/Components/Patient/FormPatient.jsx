@@ -78,7 +78,7 @@ export const FormPatient = ({ isGetData = {} }) => {
                 autoComplete="off"
                 {...register("sexo", { required: true })}
               >
-                <option value="Seleccionar">Seleccionar</option>
+                <option value="">Seleccionar</option>
                 <option value="Masculino">Masculino</option>
                 <option value="Femenino">Femenino</option>
               </select>

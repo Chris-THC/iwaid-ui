@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import { GetTheAppContext } from "../../Context/AppContext";
 import { TablaGeneric } from "./table";
+
 const MedicineList = () => {
  
   const { dataTestMedicine } = useContext(GetTheAppContext);

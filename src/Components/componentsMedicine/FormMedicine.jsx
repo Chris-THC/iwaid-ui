@@ -17,8 +17,9 @@ export const FormMedicine = ({ isGetData = {} }) => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm();
+
 
   const onSubmitClick = (data) => {
     setDataUserMedicine(data);
@@ -102,7 +103,15 @@ export const FormMedicine = ({ isGetData = {} }) => {
       
     <div>
       <Modal.Footer>
-        <Button type="submit">Editar</Button>
+      <Button
+              type="submit"
+              onClick={() => {
+                setGetDataFromTable({});
+              }}
+              disabled={!isValid}
+            >
+              {actionButtonModal}
+            </Button>
       </Modal.Footer>
     </div>
   </form>

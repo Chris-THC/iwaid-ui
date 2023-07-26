@@ -17,7 +17,7 @@ export const FormMedicalPrescriptions = ({ isGetData = {} }) => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm();
 
   const onSubmitClick = (data) => {
@@ -113,6 +113,7 @@ export const FormMedicalPrescriptions = ({ isGetData = {} }) => {
               onClick={() => {
                 setGetDataFromTable({});
               }}
+              disabled={!isValid}
             >
               {actionButtonModal}
             </Button>

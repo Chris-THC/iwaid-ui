@@ -1,7 +1,6 @@
 import React from "react";
-import MedicineList from "../componentsMedicine/MedicineList";
+import MedicineList from "../Medicine/MedicineList";
 export const Medicine = () => {
-  // TODO: The implementation will be worked on the following ticket IWAID-11
   return (
     <div>
       <MedicineList />

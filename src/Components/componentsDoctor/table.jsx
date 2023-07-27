@@ -1,9 +1,11 @@
 import React, {useState, useContext} from 'react';
 import '../../Css/CssTable.css';
-import { Button } from './Button';
 import { GetTheAppContext } from "../../Context/AppContext";
 import { ModalDoctor } from './modal';
 import { MyModalDelete } from './modalDelete';
+import { BsPersonFillAdd } from "react-icons/bs";
+import { MdChangeCircle, MdDeleteForever } from 'react-icons/md';
+import { Button } from "react-bootstrap";
 
 /*nombre, especialidad, dirección,
  número de teléfono y dirección de correo electrónico
@@ -40,74 +42,129 @@ export function TablaGeneric({ title, data, headers }) {
     "email",
   ];
   
-  const [searchTerm, setSearchTerm] = useState("");
-  const [searchOption, setSearchOption] = useState("name");
+  const [searchName, setSearchName] = useState("");
+  const [searchphoneNumber, setSearchphoneNumber] = useState("");
+  const [searchEmail, setSearchEmail] = useState("");
 
-  const handleSearchOptionChange = (e) => {
-    setSearchOption(e.target.value);
-    setSearchTerm("");
+  const handleClear = () => {
+    setSearchName("");
+    setSearchphoneNumber("");
+    setSearchEmail("");
   };
 
-  const filteredData = data.filter((item) =>
-    item[searchOption].toLowerCase().includes(searchTerm.toLowerCase())
-  );
-  
+  const filteredData = data.filter((item) => {
+    const nombreMatches = item.name
+      .toLowerCase()
+      .includes(searchName.toLowerCase());
 
+    const phoneNumberMatches = item.phoneNumber.includes(searchphoneNumber);
+
+    const emailMatches = item.specialization
+      .toLowerCase()
+      .includes(searchEmail.toLowerCase());
+
+    return nombreMatches && phoneNumberMatches && emailMatches;
+  });
 
   return (
-    <div className='container-doctors w-75 mt-4 mx-auto'>
-  <div className='title-doctors d-flex align-items-center justify-content-between'>
-    <h1 className='title-doctores'>{title}</h1>
-    <Button type='Agregar' onClick={() => {
-                handleShowModal();
-                setActionButtonModal("Agregar");
-              }} /> 
-  </div>
+    <div className="container mt-5">
+    <div className=" card mt-4 row">
+      <div className="card-header d-flex">
+        <div className="col-8">
+          <h2 className="card-title">Doctores</h2>
+        </div>
 
-
-  <div className="card-header">
-          <div className=" card-body table-responsive">
-            <div className="mb-3 table-bordered custom-table ">
-              <label>
-                <h4>Buscar</h4>
-              </label>
-      <div className="row">
-        <div className="col-md-2">
-          <select
-            id="selectSearchDoctor"
-            value={searchOption}
-            onChange={handleSearchOptionChange}
-            className="form-select mb-2"
+        <div className="col-4 d-flex flex-row-reverse ">
+        <Button
+            id="btnAdd"
+            className="ms-2 me-2 mb-1"
+            variant="primary"
+            onClick={() => {
+              handleShowModal();
+              setActionButtonModal("Agregar");
+            }}
           >
-            <option value="name">Nombre</option>
-            <option value="specialization">Especializacion</option>
-            <option value="phoneNumber">Número de Teléfono</option>
-            <option value="email">Correo</option>
-          </select>
-        </div><div className="col-md-4">
-                  <input
-                    id="inputSearchDoctor"
-                    type="text"
-                    autoComplete="off"
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                    placeholder={`Buscar por ${searchOption}...`}
-                    className="form-control rounded border"
-                  />
+            <BsPersonFillAdd /> Agregar
+          </Button>
+        </div>
+      </div>
+
+      <div className="card-header col-md-12">
+        <div className=" card-body table-responsive">
+          <div className="container mb-3">
+            <div className="col-md-4 mb-3">
+              <h4>Buscar</h4>
+            </div>
+            <div className="row">
+              <div className="container mb-3">
+                <div className="row">
+                  <div className="col-md-4 mb-3">
+                    <label>Nombre</label>
+                    <input
+                      autoComplete="off"
+                      type="text"
+                      className="form-control"
+                      value={searchName}
+                      onChange={(e) => {
+                        setSearchName(e.target.value);
+                        setSearchphoneNumber("");
+                        setSearchEmail("");
+                      }}
+                      placeholder="Buscar por nombre..."
+                      pattern="^[A-Za-z\s]+$"
+                    />
+                  </div>
+                  <div className="col-md-4 mb-3">
+                    <label>Teléfono</label>
+                    <input
+                      type="number"
+                      className="form-control"
+                      value={searchphoneNumber}
+                      onChange={(e) => {
+                        setSearchphoneNumber(e.target.value);
+                        setSearchName("");
+                        setSearchEmail("");
+                      }}
+                      placeholder="Buscar por Teléfono..."
+                    />
+                  </div>
+                  <div className="col-md-4 mb-3">
+                    <label>Especialidad</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      value={searchEmail}
+                      onChange={(e) => {
+                        setSearchEmail(e.target.value);
+                        setSearchName("");
+                        setSearchphoneNumber("");
+                      }}
+                      placeholder="Buscar por Especialidad..."
+                    />
+                  </div>
+                  
+                  <div className="col-md-12 d-flex flex-row-reverse ">
+                    <button
+                      className="btn btn-secondary"
+                      type="button"
+                      onClick={handleClear}
+                    >
+                      Limpiar
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
-
-
-  <div className='table-doctors-container'>
-    <div className='table-responsive'>
-      <table className='table'>
-            <thead className='thead-light'>
+          </div>
+          <table className="table table-bordered custom-table text-center">
+            <thead>
               <tr>
-                {headers.map((header, index) => (
-                  <th key={index}>{header}</th>
-                ))}
-                <th className='Action'>Acción</th>
+                <th>Nombre</th>
+                <th>Especialidad</th>
+                <th>Teléfono</th>
+                <th>Dirección</th>
+                <th>Correo</th>
+                <th>Acción</th>
               </tr>
             </thead>
             <tbody>
@@ -120,27 +177,48 @@ export function TablaGeneric({ title, data, headers }) {
                         </div>
                       </td>
                     ))}
-    <td className='Buttons'>
-      <Button type='Editar' onClick={() => {
-        handleShowModal();
-        setGetDataFromTable(item);
-        setActionButtonModal("Editar");
-      }} />
-      
-      <Button type='Eliminar' onClick={() => handleShowModalDelete()}/>
-      {/*Id={item.id}*/} 
-      <MyModalDelete show={showModalDelete} handleClose={handleCloseModalDelete}  />
+                    <td className='Buttons'>
+                    <Button
+                        id="btnTables"
+                        className="ms-2 me-2 mb-1"
+                        variant="primary"
+                        onClick={() => {
+                          handleShowModal();
+                          setGetDataFromTable(item);
+                          setActionButtonModal("Editar");
+                        }}
+                      >
+                        <MdChangeCircle className="btn-icon-lg" /> Editar
+                      </Button>
+                    <Button
+                        id="btnTables"
+                        className="ms-2 me-2 mb-1 d-inline"
+                        variant="danger"
+                        onClick={() => {
+                          console.log(item.nombre);
+                          
+                          handleShowModalDelete()
+                        }}
+                      >
+                        <MdDeleteForever
+                          id="btnDeletePatient"
+                          className="btn-icon-lg"
+                        />{" "}
+                        Eliminar
+                      </Button>
+                     
     </td>
-  </tr>
-              ))}
-            </tbody>
-          </table>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <ModalDoctor show={showModal} handleClose={handleCloseModal} />
+          <MyModalDelete show={showModalDelete} handleClose={handleCloseModalDelete}  />
         </div>
-        <ModalDoctor show={showModal} handleClose={handleCloseModal} />
       </div>
     </div>
-    </div>
-    </div>
+  
   
   );
 }

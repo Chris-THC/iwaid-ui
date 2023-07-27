@@ -7,12 +7,12 @@ export const AppContext = (props) => {
   
 
   const [dataTestDoctor, setDataTestDoctor] = useState([
-    {  name: "Juan", specialization: 25, phoneNumber: 1, address: 'av1 y calle 1', email: "juan@example.com" },
-    {  name: "María", specialization: 30, phoneNumber: 1, address: 'av1 y calle 1', email: "maria@example.com" },
-    {  name: "Pedro", specialization: 28, phoneNumber: 1, address: 'av1 y calle 1', email: "pedro@example.com" },
-    {  name: "María", specialization: 12, phoneNumber: 2, address: 'av2 y calle 2', email: "maria@example.com" },
-    {  name: "Carlos", specialization: 8, phoneNumber: 3, address: 'av3 y calle 3', email: "carlos@example.com" },
-    {  name: "Ana", specialization: 15, phoneNumber: 4, address: 'av4 y calle 4', email: "ana@example.com" }
+    {  name: "Juan", specialization: "Pediatra", phoneNumber: "1", address: 'av1 y calle 1', email: "juan@example.com" },
+    {  name: "María", specialization: "30", phoneNumber: "1", address: 'av1 y calle 1', email: "maria@example.com" },
+    {  name: "Pedro", specialization: "28", phoneNumber: "1", address: 'av1 y calle 1', email: "pedro@example.com" },
+    {  name: "María", specialization: "12", phoneNumber: "2", address: 'av2 y calle 2', email: "maria@example.com" },
+    {  name: "Carlos", specialization: "8", phoneNumber: "3", address: 'av3 y calle 3', email: "carlos@example.com" },
+    {  name: "Ana", specialization: "15", phoneNumber: "4", address: 'av4 y calle 4', email: "ana@example.com" }
   ]);
 
 

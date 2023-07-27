@@ -3,6 +3,11 @@
   height: 30px;
   width: 85px;
 }
+#btnClearTable {
+  font-size: 12px;
+  height: 35px;
+  width: 90px;
+}
 
 #btnAdd {
   font-size: 12px;

@@ -119,7 +119,7 @@ export const TablePatient = ({ dataTable }) => {
                         placeholder="Buscar por teléfono..."
                       />
                     </div>
-                    <div className="col-md-4 mb-1">
+                    <div className="col-md-3 mb-1">
                       <label>Correo</label>
                       <input
                         type="email"
@@ -134,7 +134,7 @@ export const TablePatient = ({ dataTable }) => {
                       />
                     </div>
 
-                    <div className="col-md-2 d-flex flex-row-reverse">
+                    <div className="col-md-3 d-flex flex-row-reverse">
                       <div className=" w-auto p-4">
                         <button
                           id="btnClearTable"
@@ -142,7 +142,7 @@ export const TablePatient = ({ dataTable }) => {
                           type="button"
                           onClick={handleClear}
                         >
-                          <GiLargePaintBrush /> Limpiar
+                          <GiLargePaintBrush /> Borrar
                         </button>
                       </div>
                     </div>

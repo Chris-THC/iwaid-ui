@@ -48,7 +48,7 @@ export const FormPatient = ({ isGetData = {} }) => {
       <form onSubmit={handleSubmit(onSubmitClick)}>
         <div className="form-row">
           <div className="form-group col-md-12">
-            <label>Nombre Completo</label>
+            <label>* Nombre Completo</label>
             <input
               defaultValue={isGetData.nombre}
               type="text"
@@ -64,7 +64,7 @@ export const FormPatient = ({ isGetData = {} }) => {
             />
             {errors.nombre && (
               <span className="text-danger">
-                El campo es solicitado y el campo del nombre no debe de llevar
+                El campo es solicitado o el campo del nombre no debe de llevar
                 números
               </span>
             )}
@@ -104,6 +104,7 @@ export const FormPatient = ({ isGetData = {} }) => {
                 <option value="">Seleccionar</option>
                 <option value="Masculino">Masculino</option>
                 <option value="Femenino">Femenino</option>
+                <option value="Otro">Otro</option>
               </select>
               {errors.sexo && (
                 <span className="text-danger">El dato es requerido</span>
@@ -113,7 +114,7 @@ export const FormPatient = ({ isGetData = {} }) => {
         </div>
 
         <div className="form-group col-md-8">
-          <label>RFC</label>
+          <label>* RFC</label>
           <input
             defaultValue={rfcValue || isGetData.rfc}
             type="text"

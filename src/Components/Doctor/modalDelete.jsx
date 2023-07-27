@@ -1,4 +1,4 @@
-// import { useState, useContext, useEffect } from 'react';
+
 import { Modal, Button } from 'react-bootstrap';
 
 
@@ -12,10 +12,10 @@ export const MyModalDelete = ({ show, handleClose, Id }) => {
   return (
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>
-        <Modal.Title>Confirmar Eliminación</Modal.Title>
+        <Modal.Title>Confirmar eliminación</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <p>¿Estás seguro de que deseas eliminar este usuario?</p>
+        <p>¿Está seguro de que desea eliminar este usuario?</p>
       </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={handleClose}>

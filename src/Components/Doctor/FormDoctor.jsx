@@ -1,6 +1,6 @@
 import { Modal, Button } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
-import React, { useContext, useEffect } from "react";
+import React, { useContext} from "react";
 import { GetTheAppContext } from "../../Context/AppContext";
 
 export const FormDoctor = ({ isGetData = {} }) => {
@@ -102,12 +102,12 @@ export const FormDoctor = ({ isGetData = {} }) => {
   )}
   {errors.telefono?.type === "minLength" && (
     <span className="text-danger">
-      El número de teléfono debe tener al menos 10 dígitos
+      Debe tener al menos 10 dígitos
     </span>
   )}
   {errors.telefono?.type === "maxLength" && (
     <span className="text-danger">
-      El número de teléfono debe tener 10 dígitos
+      Debe tener 10 dígitos
     </span>
   )}
 </div>

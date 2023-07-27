@@ -7,11 +7,9 @@ import { BsPersonFillAdd } from "react-icons/bs";
 import { MdChangeCircle, MdDeleteForever } from 'react-icons/md';
 import { Button } from "react-bootstrap";
 
-/*nombre, especialidad, dirección,
- número de teléfono y dirección de correo electrónico
-*/
 
-export function TablaGeneric({ title, data, headers }) {
+
+export function TablaGeneric({ title, data }) {
 
   const [showModalDelete, setShowModalDelete] = useState(false);
   // const[id, setid] = useState(null);
@@ -30,8 +28,6 @@ export function TablaGeneric({ title, data, headers }) {
     showModal,
     setGetDataFromTable,
     setActionButtonModal,
-    handleShowFloatAlter,
-    setTextAlert,
   } = useContext(GetTheAppContext);
 
   const displayedFields = [
@@ -71,7 +67,7 @@ export function TablaGeneric({ title, data, headers }) {
     <div className=" card mt-4 row">
       <div className="card-header d-flex">
         <div className="col-8">
-          <h2 className="card-title">Doctores</h2>
+          <h2 className="card-title">{title}</h2>
         </div>
 
         <div className="col-4 d-flex flex-row-reverse ">
@@ -223,84 +219,3 @@ export function TablaGeneric({ title, data, headers }) {
   );
 }
 
-
-// export function TablaGenerica({ title, data, headers }) {
-//   const [showModal, setShowModal] = useState(false);
-//   const [selectedPatient, setSelectedPatient] = useState(null);
-
-//   const handleButtonClick = (patient) => {
-//     setSelectedPatient(patient);
-//     setShowModal(true);
-//   };
-
-//   return (
-//     <div className='container-doctors'>
-//       <div className='title-doctors'>
-//         <h1 className='title-doctores'>{title}</h1>
-//         <Button tipo='Agregar' onClick={() => handleButtonClick(item)} />
-//       </div>
-//       <div className='table-doctors-container'>
-//         <table>
-//           <thead>
-//           <tr>
-//               {headers.map((header, index) => (
-//                 <th key={index}>{header}</th>
-//               ))}
-//               <th>Acción</th>
-//             </tr>
-//           </thead>
-//           <tbody>
-//             {data.map((item, index) => (
-//               <tr key={index}>
-//               {Object.keys(item).map((key) => (
-//                 key !== 'id' && <td key={key}>{item[key]}</td>
-//               ))}
-//                 <td>
-//                   <Button tipo='Editar' onClick={() => handleButtonClick(item)} />
-//                   <Button tipo='Eliminar' onClick={() => handleButtonClick(item)} />
-//                 </td>
-//               </tr>
-//             ))}
-//           </tbody>
-//         </table>
-//       </div>
-//       {showModal && <CreatePatient show={showModal} handleClose={() => setShowModal(false)} patient={selectedPatient} />}
-//     </div>
-//   );
-// }
-
-
-  // <div className='container-doctors'>
-    //   <div className='title-doctors'>
-    //     <h1 className='title-doctores'>{title}</h1>
-    //     <Button tipo='Agregar' onClick={handleShowModal} />
-    //     <MyModal show={showModal} handleClose={handleCloseModal} />
-    //   </div>
-    //   <div className='table-doctors-container'>
-    //     <table>
-    //       <thead>
-    //         <tr>
-    //           {headers.map((header, index) => (
-    //             <th key={index}>{header}</th>
-    //           ))}
-    //           <th>Acción</th>
-    //         </tr>
-    //       </thead>
-    //       <tbody>
-    //         {data.map((item, index) => (
-    //           <tr key={index}>
-    //             {Object.keys(item).map((key) => (
-    //               key !== 'id' && <td key={key}>{item[key]}</td>
-    //             ))}
-                
-    //               <td>
-    //                   <Button tipo='Editar' /> 
-    //                   <Button tipo='Eliminar' /> 
-    //               </td>
-               
-    //           </tr>
-    //         ))}
-    //       </tbody>
-    //     </table>
-    //   </div>
-    // </div>

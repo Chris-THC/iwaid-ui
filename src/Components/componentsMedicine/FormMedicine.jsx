@@ -18,8 +18,9 @@ export const FormMedicine = ({ isGetData = {} }) => {
     register,
     handleSubmit,
     formState: { errors, isValid },
-  } = useForm();
+  } = useForm({ mode: "all" });
 
+ 
 
   const onSubmitClick = (data) => {
     setDataUserMedicine(data);
@@ -51,37 +52,44 @@ export const FormMedicine = ({ isGetData = {} }) => {
         </div>
 
         <div className="form-group">
-          <label>Dosis</label>
-          <input
-            type="number"
-            className="form-control"
-            placeholder="Dosis en cantidad entera"
-            autoComplete="off"
-            {...register("dosis", {
-              required: true,
-              min: 1, // Puedes ajustar el mínimo de la dosis según tus necesidades
-            })}
-            defaultValue={isGetData.dosis}
-          />
-          {errors.dosis && (
-            <span className="text-danger">El dato es requerido</span>
-          )}
-        </div>
+  <label>Dosis (en gramos)</label>
+  <input
+    type="number"
+    className="form-control"
+    placeholder="Dosis en cantidad"
+    autoComplete="off"
+    step="any" 
+    {...register("dosis", {
+      required: true,
+      min: 0, // Puedes ajustar el mínimo de la dosis según tus necesidades
+    })}
+    defaultValue={isGetData.dosis}
+  />
+  {errors.dosis && (
+    <span className="text-danger">El dato es requerido</span>
+  )}
+</div>
 
-        <div className="form-group">
-          <label>Presentación</label>
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Presentación"
-            autoComplete="off"
-            {...register("presentation", { required: true })}
-            defaultValue={isGetData.presentation}
-          />
-          {errors.presentation && (
-            <span className="text-danger">El dato es requerido</span>
-          )}
-        </div>
+<div className="form-group col-md-4">
+              <label>Presentación</label>
+              <select
+                defaultValue={isGetData.presentation} // Aquí se asigna el valor al select
+                className="form-select"
+                autoComplete="off"
+                {...register("presentation", { required: true })}
+              >
+                <option value="">Seleccione una opción</option>
+                <option value="Sólidos">Sólidos</option>
+                <option value="Soluciones">Soluciones</option>
+                <option value="Suspensiones">Suspensiones</option>
+                <option value="Emulsiones">Emulsiones</option>
+                <option value="Otro">Otro</option>
+              </select>
+              {errors.presentation && (
+    <span className="text-danger">El dato es requerido</span>
+  )}
+            </div>
+          
 
         <div className="form-group">
           <label>Descripción</label>
@@ -97,9 +105,6 @@ export const FormMedicine = ({ isGetData = {} }) => {
           )}
         </div>
 
-        <button type="submit" className="btn btn-primary">
-          Enviar
-        </button>
       
     <div>
       <Modal.Footer>

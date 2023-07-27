@@ -60,5 +60,8 @@
     width: 70px;
   }
 
+  #btnTables  :hover {
+    background-color: #c70039;
+  }
   
 }

@@ -22,6 +22,9 @@ export const FormPatient = ({ isGetData = {} }) => {
   const onSubmitClick = (data) => {
     setDataUserPatient(data);
     console.log(data);
+    handleCloseModal();
+    setTextAlert("Datos Guardados");
+    handleShowFloatAlter();
   };
   const [rfcValue, setRfcValue] = useState("");
   const [rfcError, setRfcError] = useState("");

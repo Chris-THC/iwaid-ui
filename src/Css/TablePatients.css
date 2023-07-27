@@ -7,6 +7,9 @@
 #btnAdd {
   font-size: 12px;
 }
+#btnClearTable {
+  font-size: 14px;
+}
 
 .custom-table td,
 .custom-table th {
@@ -14,10 +17,14 @@
 }
 
 @media (max-width: 800px) {
-  td {
+  td,
+  th {
     font-size: 12px;
   }
   .custom-table {
+    font-size: 16px;
+  }
+  .inputTable {
     font-size: 12px;
   }
 
@@ -29,8 +36,9 @@
   }
 }
 
-@media (max-width: 550px) {
-  .custom-table {
+@media (max-width: 700px) {
+  td,
+  th {
     font-size: 9px;
   }
 
@@ -59,6 +67,4 @@
     height: 25px;
     width: 70px;
   }
-
-  
 }

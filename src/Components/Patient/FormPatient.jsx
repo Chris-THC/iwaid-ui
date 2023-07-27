@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Modal, Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { GetTheAppContext } from "../../Context/AppContext";
@@ -9,8 +9,7 @@ export const FormPatient = ({ isGetData = {} }) => {
     setDataUserPatient,
     handleCloseModal,
     actionButtonModal,
-    handleShowFloatAlter,
-    setTextAlert,
+
     setGetDataFromTable,
   } = useContext(GetTheAppContext);
 
@@ -18,16 +17,27 @@ export const FormPatient = ({ isGetData = {} }) => {
     register,
     handleSubmit,
     formState: { errors, isValid },
-  } = useForm();
+  } = useForm({ mode: "all" });
 
   const onSubmitClick = (data) => {
     setDataUserPatient(data);
     console.log(data);
-    handleCloseModal();
-    setTextAlert("Datos Guardados");
-    handleShowFloatAlter();
   };
+  const [rfcValue, setRfcValue] = useState("");
+  const [rfcError, setRfcError] = useState("");
 
+  const handleInputChange = (event) => {
+    const inputValue = event.target.value.toUpperCase(); // Convertir a mayúsculas
+    setRfcValue(inputValue);
+
+    // Validar el formato de RFC en tiempo real
+    const rfcPattern = /^[A-Z]{4}\d{6}[A-Z0-9]{3}$/;
+    if (!rfcPattern.test(inputValue)) {
+      setRfcError("El RFC debe tener un formato válido en mayúsculas.");
+    } else {
+      setRfcError("");
+    }
+  };
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmitClick)}>
@@ -40,10 +50,18 @@ export const FormPatient = ({ isGetData = {} }) => {
               className="form-control"
               placeholder="Nombre Completo"
               autoComplete="off"
-              {...register("nombre", { required: true })}
+              {...register("nombre", {
+                required: true,
+                pattern: {
+                  value: /^[a-zA-Z\sÀ-ÖØ-öø-ÿ]+$/,
+                },
+              })}
             />
             {errors.nombre && (
-              <span className="text-danger">El dato es requerido</span>
+              <span className="text-danger">
+                El campo es solicitado y el campo del nombre no debe de llevar
+                números
+              </span>
             )}
           </div>
 
@@ -64,8 +82,8 @@ export const FormPatient = ({ isGetData = {} }) => {
               />
               {errors.fechaNacimiento && (
                 <span className="text-danger">
-                  El dato es requerido o la fecha no puede ser posterior a la
-                  fecha actual
+                  El dato es solicitado o la fecha no puede ser mayor a la fecha
+                  actual
                 </span>
               )}
             </div>
@@ -92,17 +110,15 @@ export const FormPatient = ({ isGetData = {} }) => {
         <div className="form-group col-md-8">
           <label>RFC</label>
           <input
-            defaultValue={isGetData.rfc}
+            defaultValue={rfcValue || isGetData.rfc}
             type="text"
             className="form-control"
             placeholder="Agregar RFC"
             autoComplete="off"
-            pattern="^[A-Z]{4}\d{6}[A-Z0-9]{3}$"
             {...register("rfc", { required: true })}
+            onChange={handleInputChange}
           />
-          {errors.rfc && (
-            <span className="text-danger">El dato es requerido</span>
-          )}
+          {rfcError && <span className="text-danger">{rfcError}</span>}
         </div>
 
         <div className="form-group row">
@@ -168,18 +184,22 @@ export const FormPatient = ({ isGetData = {} }) => {
           </div>
 
           <div className="form-group col-md-6">
-            <label htmlFor="inputEmail">Email</label>
+            <label htmlFor="inputEmail">Correo</label>
             <input
               defaultValue={isGetData.correo}
               type="email"
               className="form-control"
               autoComplete="off"
               placeholder="Agregar su email"
-              pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
-              {...register("email", { required: true })}
+              {...register("email", {
+                required: true,
+                pattern: {
+                  value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$$/,
+                },
+              })}
             />
             {errors.email && (
-              <span className="text-danger">El dato es requerido</span>
+              <span className="text-danger">Formato de correo inválido</span>
             )}
           </div>
         </div>

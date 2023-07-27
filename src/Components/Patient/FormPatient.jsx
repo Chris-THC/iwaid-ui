@@ -9,7 +9,8 @@ export const FormPatient = ({ isGetData = {} }) => {
     setDataUserPatient,
     handleCloseModal,
     actionButtonModal,
-
+    setTextAlert,
+    handleShowFloatAlter,
     setGetDataFromTable,
   } = useContext(GetTheAppContext);
 
@@ -30,11 +31,9 @@ export const FormPatient = ({ isGetData = {} }) => {
   const [rfcError, setRfcError] = useState("");
 
   const handleInputChange = (event) => {
-    const inputValue = event.target.value.toUpperCase(); // Convertir a mayúsculas
+    const inputValue = event.target.value.toUpperCase();
     setRfcValue(inputValue);
-
-    // Validar el formato de RFC en tiempo real
-    const rfcPattern = /^[A-Z]{4}\d{6}[A-Z0-9]{3}$/;
+    const rfcPattern = /^[A-Z]{4}\d{6}[A-Z\d]{3}$/;
     if (!rfcPattern.test(inputValue)) {
       setRfcError("El RFC debe tener un formato válido en mayúsculas.");
     } else {
@@ -120,6 +119,7 @@ export const FormPatient = ({ isGetData = {} }) => {
             autoComplete="off"
             {...register("rfc", { required: true })}
             onChange={handleInputChange}
+            style={{ textTransform: "uppercase" }} // Establecer el texto en mayúsculas
           />
           {rfcError && <span className="text-danger">{rfcError}</span>}
         </div>

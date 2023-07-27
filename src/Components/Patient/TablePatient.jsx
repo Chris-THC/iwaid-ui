@@ -2,8 +2,8 @@ import React, { useState, useContext } from "react";
 import { ModalPatient } from "./ModalPatient";
 import { GetTheAppContext } from "../../Context/AppContext";
 import "../../Css/TablePatients.css";
-import { MdDeleteForever, MdChangeCircle } from "react-icons/md";
-import { BsPersonFillAdd } from "react-icons/bs";
+import { MdDeleteForever } from "react-icons/md";
+import { BsPersonFillAdd, BsPencilFill } from "react-icons/bs";
 import { GiLargePaintBrush } from "react-icons/gi";
 import { Button } from "react-bootstrap";
 import { MyModalDelete } from "./MyModalDelete";
@@ -196,7 +196,7 @@ export const TablePatient = ({ dataTable }) => {
                           setActionButtonModal("Editar");
                         }}
                       >
-                        <MdChangeCircle className="btn-icon-lg" /> Editar
+                        <BsPencilFill className="btn-icon-lg" /> Editar
                       </Button>
                       <Button
                         id="btnTables"

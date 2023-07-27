@@ -17,6 +17,7 @@ export const FormPatient = ({ isGetData = {} }) => {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors, isValid },
   } = useForm({ mode: "all" });
 
@@ -27,12 +28,13 @@ export const FormPatient = ({ isGetData = {} }) => {
     setTextAlert("Datos Guardados");
     handleShowFloatAlter();
   };
-  const [rfcValue, setRfcValue] = useState("");
+  const [rfcValue, setRfcValue] = useState(isGetData.rfc || "");
   const [rfcError, setRfcError] = useState("");
 
   const handleInputChange = (event) => {
     const inputValue = event.target.value.toUpperCase();
-    setRfcValue(inputValue);
+    setRfcValue(inputValue); // Actualiza el estado rfcValue con el valor en mayúsculas
+    setValue("rfc", inputValue); // Actualiza el valor del campo en el formulario en mayúsculas
     const rfcPattern = /^[A-Z]{4}\d{6}[A-Z\d]{3}$/;
     if (!rfcPattern.test(inputValue)) {
       setRfcError("El RFC debe tener un formato válido en mayúsculas.");
@@ -40,6 +42,7 @@ export const FormPatient = ({ isGetData = {} }) => {
       setRfcError("");
     }
   };
+
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmitClick)}>
@@ -115,11 +118,11 @@ export const FormPatient = ({ isGetData = {} }) => {
             defaultValue={rfcValue || isGetData.rfc}
             type="text"
             className="form-control"
-            placeholder="Agregar RFC"
+            placeholder="RFC"
             autoComplete="off"
             {...register("rfc", { required: true })}
             onChange={handleInputChange}
-            style={{ textTransform: "uppercase" }} // Establecer el texto en mayúsculas
+            style={{ textTransform: "uppercase" }}
           />
           {rfcError && <span className="text-danger">{rfcError}</span>}
         </div>

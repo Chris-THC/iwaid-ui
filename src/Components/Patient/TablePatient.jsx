@@ -26,35 +26,45 @@ export const TablePatient = ({ dataTable }) => {
     setActionButtonModal,
   } = useContext(GetTheAppContext);
 
-  const displayedFields = [
-    "nombre",
-    "fechaNacimiento",
-    "ciudad",
-    "telefono",
-    "correo",
-  ];
-  const [searchName, setSearchName] = useState("");
-  const [searchNumPhone, setSearchNumPhone] = useState("");
-  const [searchEmail, setSearchEmail] = useState("");
+  const displayedFields = ["name", "gender", "city", "dateOfBirth", "rfc"];
+  const [searchByName, setSearchByName] = useState("");
+  const [searchByGender, setSearchByGender] = useState("");
+  const [searchByCity, setSearchByCity] = useState("");
+  const [searchByDateOfBirth, setSearchByDateOfBirth] = useState("");
+  const [searchByRfc, setSearchByRfc] = useState("");
 
   const handleClear = () => {
-    setSearchName("");
-    setSearchNumPhone("");
-    setSearchEmail("");
+    setSearchByName("");
+    setSearchByGender("");
+    setSearchByCity("");
+    setSearchByDateOfBirth("");
+    setSearchByRfc("");
   };
 
   const filteredData = dataTable.filter((item) => {
-    const nombreMatches = item.nombre
+    const nameMatches = item.name
       .toLowerCase()
-      .includes(searchName.toLowerCase());
+      .includes(searchByName.toLowerCase());
 
-    const telefonoMatches = item.telefono.includes(searchNumPhone);
-
-    const correoMatches = item.correo
+    const genderMatches = item.gender
       .toLowerCase()
-      .includes(searchEmail.toLowerCase());
+      .includes(searchByGender.toLowerCase());
 
-    return nombreMatches && telefonoMatches && correoMatches;
+    const cityMatches = item.city
+      .toLowerCase()
+      .includes(searchByCity.toLowerCase());
+
+    const dateMatches = item.dateOfBirth
+      .toLowerCase()
+      .includes(searchByDateOfBirth.toLowerCase());
+
+    const rfcMatches = item.rfc
+      .toLowerCase()
+      .includes(searchByRfc.toLowerCase());
+
+    return (
+      nameMatches && genderMatches && cityMatches && dateMatches && rfcMatches
+    );
   });
 
   return (
@@ -95,46 +105,89 @@ export const TablePatient = ({ dataTable }) => {
                         autoComplete="off"
                         type="text"
                         className="form-control inputTable"
-                        value={searchName}
+                        value={searchByName}
                         onChange={(e) => {
-                          setSearchName(e.target.value);
-                          setSearchNumPhone("");
-                          setSearchEmail("");
+                          setSearchByName(e.target.value);
+                          setSearchByGender("");
+                          setSearchByCity("");
+                          setSearchByDateOfBirth("");
+                          setSearchByRfc("");
                         }}
                         placeholder="Buscar por nombre..."
-                        pattern="^[A-Za-z\s]+$"
+                        pattern="^[a-zA-Z\sÀ-ÖØ-öø-ÿ]+$"
                       />
                     </div>
-                    <div className="col-md-3 mb-1">
-                      <label>Teléfono</label>
-                      <input
-                        type="number"
+                    <div className="col-md-2 mb-1">
+                      <label>Género</label>
+                      <select
                         className="form-control inputTable"
-                        value={searchNumPhone}
+                        value={searchByGender}
                         onChange={(e) => {
-                          setSearchNumPhone(e.target.value);
-                          setSearchName("");
-                          setSearchEmail("");
+                          setSearchByGender(e.target.value);
+                          setSearchByName("");
+                          setSearchByCity("");
+                          setSearchByDateOfBirth("");
+                          setSearchByRfc("");
                         }}
-                        placeholder="Buscar por teléfono..."
-                      />
+                      >
+                        <option value="">Selecciona un género...</option>
+                        <option value="Masculino">Masculino</option>
+                        <option value="Femenino">Femenino</option>
+                        <option value="Otro">Otro</option>
+                      </select>
                     </div>
                     <div className="col-md-3 mb-1">
-                      <label>Correo</label>
+                      <label>Ciudad</label>
                       <input
-                        type="email"
+                        type="text"
                         className="form-control inputTable"
-                        value={searchEmail}
+                        value={searchByCity}
                         onChange={(e) => {
-                          setSearchEmail(e.target.value);
-                          setSearchName("");
-                          setSearchNumPhone("");
+                          setSearchByCity(e.target.value);
+                          setSearchByName("");
+                          setSearchByGender("");
+                          setSearchByDateOfBirth("");
+                          setSearchByRfc("");
                         }}
-                        placeholder="Buscar por correo..."
+                        placeholder="Buscar por ciudad..."
                       />
                     </div>
 
-                    <div className="col-md-3 d-flex flex-row-reverse">
+                    <div className="col-md-3 mb-1">
+                      <label>RFC</label>
+                      <input
+                        type="text"
+                        className="form-control inputTable"
+                        value={searchByRfc}
+                        onChange={(e) => {
+                          setSearchByRfc(e.target.value);
+                          setSearchByDateOfBirth("");
+                          setSearchByName("");
+                          setSearchByGender("");
+                          setSearchByCity("");
+                        }}
+                        placeholder="Buscar por fecha de nacimiento..."
+                      />
+                    </div>
+
+                    <div className="col-md-3 mb-1">
+                      <label>Rango año de nacimiento</label>
+                      <input
+                        type="number"
+                        className="form-control inputTable"
+                        value={searchByDateOfBirth}
+                        onChange={(e) => {
+                          setSearchByDateOfBirth(e.target.value);
+                          setSearchByName("");
+                          setSearchByGender("");
+                          setSearchByCity("");
+                          setSearchByRfc("");
+                        }}
+                        placeholder="Buscar por año de nacimiento..."
+                      />
+                    </div>
+
+                    <div className="col-md-8 d-flex flex-row-reverse">
                       <div className=" w-auto p-4">
                         <button
                           id="btnClearTable"
@@ -154,10 +207,10 @@ export const TablePatient = ({ dataTable }) => {
               <thead>
                 <tr>
                   <th>Nombre</th>
-                  <th>Fecha de Nacimiento</th>
+                  <th>Genero</th>
                   <th>Ciudad</th>
-                  <th>Teléfono</th>
-                  <th>Correo</th>
+                  <th>Fecha de nacimiento</th>
+                  <th>RFC</th>
                   <th>Acción</th>
                 </tr>
               </thead>
@@ -165,7 +218,7 @@ export const TablePatient = ({ dataTable }) => {
                 {filteredData.map((item, index) => (
                   <tr key={index}>
                     {displayedFields.map((field) => {
-                      if (field === "fechaNacimiento") {
+                      if (field === "dateOfBirth") {
                         return (
                           <td key={field}>
                             <div id="idTextPatient" className="d-inline">

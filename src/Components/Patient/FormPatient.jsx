@@ -50,19 +50,19 @@ export const FormPatient = ({ isGetData = {} }) => {
           <div className="form-group col-md-12">
             <label>* Nombre Completo</label>
             <input
-              defaultValue={isGetData.nombre}
+              defaultValue={isGetData.name}
               type="text"
               className="form-control"
               placeholder="Nombre Completo"
               autoComplete="off"
-              {...register("nombre", {
+              {...register("name", {
                 required: true,
                 pattern: {
                   value: /^[a-zA-Z\sÀ-ÖØ-öø-ÿ]+$/,
                 },
               })}
             />
-            {errors.nombre && (
+            {errors.name && (
               <span className="text-danger">
                 El campo es solicitado o el campo del nombre no debe de llevar
                 números
@@ -74,18 +74,18 @@ export const FormPatient = ({ isGetData = {} }) => {
             <div className="form-group col-md-8">
               <label>Fecha de Nacimiento</label>
               <input
-                defaultValue={isGetData.fechaNacimiento}
+                defaultValue={isGetData.dateOfBirth}
                 type="date"
                 className="form-control"
                 autoComplete="off"
-                {...register("fechaNacimiento", {
+                {...register("dateOfBirth", {
                   required: true,
                   max: {
                     value: currentDate,
                   },
                 })}
               />
-              {errors.fechaNacimiento && (
+              {errors.dateOfBirth && (
                 <span className="text-danger">
                   El dato es solicitado o la fecha no puede ser mayor a la fecha
                   actual
@@ -96,17 +96,17 @@ export const FormPatient = ({ isGetData = {} }) => {
             <div className="form-group col-md-4">
               <label>Género</label>
               <select
-                defaultValue={isGetData.genero} // Aquí se asigna el valor al select
+                defaultValue={isGetData.gender} // Aquí se asigna el valor al select
                 className="form-select"
                 autoComplete="off"
-                {...register("sexo", { required: true })}
+                {...register("gender", { required: true })}
               >
                 <option value="">Seleccionar</option>
                 <option value="Masculino">Masculino</option>
                 <option value="Femenino">Femenino</option>
                 <option value="Otro">Otro</option>
               </select>
-              {errors.sexo && (
+              {errors.gender && (
                 <span className="text-danger">El dato es requerido</span>
               )}
             </div>
@@ -132,14 +132,14 @@ export const FormPatient = ({ isGetData = {} }) => {
           <div className="form-group col-md-8">
             <label>Dirección</label>
             <input
-              defaultValue={isGetData.direccion}
+              defaultValue={isGetData.address}
               type="text"
               className="form-control"
               placeholder="Calle, Numero, Colonia"
               autoComplete="off"
-              {...register("direccion", { required: true })}
+              {...register("address", { required: true })}
             />
-            {errors.direccion && (
+            {errors.address && (
               <span className="text-danger">El dato es requerido</span>
             )}
           </div>
@@ -147,19 +147,19 @@ export const FormPatient = ({ isGetData = {} }) => {
           <div className="form-group col-md-4">
             <label>Ciudad</label>
             <input
-              defaultValue={isGetData.ciudad}
+              defaultValue={isGetData.city}
               type="text"
               className="form-control"
               placeholder="Ciudad"
               autoComplete="off"
-              {...register("ciudad", {
+              {...register("city", {
                 required: true,
                 pattern: {
                   value: /^[a-zA-Z\sÀ-ÖØ-öø-ÿ]+$/,
                 },
               })}
             />
-            {errors.ciudad && (
+            {errors.city && (
               <span className="text-danger">
                 El dato es requerido y no se aceptan números{" "}
               </span>
@@ -171,19 +171,19 @@ export const FormPatient = ({ isGetData = {} }) => {
           <div className="form-group col-md-6">
             <label htmlFor="inputPhone">Teléfono</label>
             <input
-              defaultValue={isGetData.telefono}
+              defaultValue={isGetData.phoneNumber}
               type="number"
               className="form-control"
               placeholder="Numero de telefono"
               autoComplete="off"
-              {...register("telefono", {
+              {...register("phoneNumber", {
                 required: true,
                 pattern: {
                   value: /^[0-9]{10}$/,
                 },
               })}
             />
-            {errors.telefono && (
+            {errors.phoneNumber && (
               <span className="text-danger">
                 Ingrese exactamente 10 números
               </span>
@@ -193,7 +193,7 @@ export const FormPatient = ({ isGetData = {} }) => {
           <div className="form-group col-md-6">
             <label htmlFor="inputEmail">Correo</label>
             <input
-              defaultValue={isGetData.correo}
+              defaultValue={isGetData.email}
               type="email"
               className="form-control"
               autoComplete="off"

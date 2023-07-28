@@ -31,14 +31,14 @@ export function TablaGeneric({ title, data }) {
 
   const displayedFields = [
     "name",
-    "specialization",
+    "specialty",
     "phoneNumber",
     "address",
     "email",
   ];
 
   const allSpecializations = [
-    ...new Set(data.map((item) => item.specialization)),
+    ...new Set(data.map((item) => item.specialty)),
   ];
 
   const [searchName, setSearchName] = useState("");
@@ -58,7 +58,7 @@ export function TablaGeneric({ title, data }) {
     const nameMatches = item.name.toLowerCase().includes(searchName.toLowerCase());
     const emailMatches = item.email.toLowerCase().includes(searchEmail.toLowerCase());
     const specializationMatches = searchSpecialization
-      ? item.specialization.toLowerCase() === searchSpecialization.toLowerCase()
+      ? item.specialty.toLowerCase() === searchSpecialization.toLowerCase()
       : true;
   
     return nameMatches && emailMatches && specializationMatches;
@@ -137,9 +137,9 @@ export function TablaGeneric({ title, data }) {
                         }
                       >
                         <option value="">Todas las especialidades</option>
-                        {allSpecializations.map((specialization, index) => (
-                          <option key={index} value={specialization}>
-                            {specialization}
+                        {allSpecializations.map((specialty, index) => (
+                          <option key={index} value={specialty}>
+                            {specialty}
                           </option>
                         ))}
                       </select>

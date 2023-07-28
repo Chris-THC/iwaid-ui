@@ -62,15 +62,15 @@ export const FormDoctor = ({ isGetData = {} }) => {
         <select
           className="form-select"
           autoComplete="off"
-          defaultValue={isGetData.specialization}
+          defaultValue={isGetData.specialty}
           {...register("especialidad", { required: true })}
         >
           <option value="">Seleccione una opción</option>
           <option value="General">General</option>
-          <option value="Urología">Urología</option>
-          <option value="Ginecología">Ginecología</option>
-          <option value="Pediatría">Pediatría</option>
-          <option value="Neurología">Neurología</option>
+          <option value="Urologia">Urología</option>
+          <option value="Ginecologia">Ginecología</option>
+          <option value="Pediatria">Pediatría</option>
+          <option value="Neurologia">Neurología</option>
           
         </select>
         {errors.especialidad && (

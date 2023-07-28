@@ -39,12 +39,11 @@ export function TablaGeneric({ title, data }) {
   ];
   
   const [searchName, setSearchName] = useState("");
-  const [searchphoneNumber, setSearchphoneNumber] = useState("");
+  
   const [searchEmail, setSearchEmail] = useState("");
 
   const handleClear = () => {
     setSearchName("");
-    setSearchphoneNumber("");
     setSearchEmail("");
   };
 
@@ -53,13 +52,13 @@ export function TablaGeneric({ title, data }) {
       .toLowerCase()
       .includes(searchName.toLowerCase());
 
-    const phoneNumberMatches = item.phoneNumber.includes(searchphoneNumber);
+    
 
     const emailMatches = item.specialization
       .toLowerCase()
       .includes(searchEmail.toLowerCase());
 
-    return nombreMatches && phoneNumberMatches && emailMatches;
+    return nombreMatches  && emailMatches;
   });
 
   return (
@@ -91,7 +90,7 @@ export function TablaGeneric({ title, data }) {
             <div className="col-md-4 mb-3">
               <h4>Buscar</h4>
             </div>
-            <div className="row">
+                        <div className="row">
               <div className="container mb-3">
                 <div className="row">
                   <div className="col-md-4 mb-3">
@@ -103,27 +102,13 @@ export function TablaGeneric({ title, data }) {
                       value={searchName}
                       onChange={(e) => {
                         setSearchName(e.target.value);
-                        setSearchphoneNumber("");
                         setSearchEmail("");
                       }}
                       placeholder="Buscar por nombre..."
                       pattern="^[A-Za-z\s]+$"
                     />
                   </div>
-                  <div className="col-md-4 mb-3">
-                    <label>Teléfono</label>
-                    <input
-                      type="number"
-                      className="form-control"
-                      value={searchphoneNumber}
-                      onChange={(e) => {
-                        setSearchphoneNumber(e.target.value);
-                        setSearchName("");
-                        setSearchEmail("");
-                      }}
-                      placeholder="Buscar por Teléfono..."
-                    />
-                  </div>
+
                   <div className="col-md-4 mb-3">
                     <label>Especialidad</label>
                     <input
@@ -133,13 +118,12 @@ export function TablaGeneric({ title, data }) {
                       onChange={(e) => {
                         setSearchEmail(e.target.value);
                         setSearchName("");
-                        setSearchphoneNumber("");
                       }}
                       placeholder="Buscar por Especialidad..."
                     />
                   </div>
-                  
-                  <div className="col-md-12 d-flex flex-row-reverse ">
+
+                  <div className="col-md-8 d-flex justify-content-start align-items-center">
                     <button
                       className="btn btn-secondary"
                       type="button"
@@ -152,6 +136,7 @@ export function TablaGeneric({ title, data }) {
               </div>
             </div>
           </div>
+          
           <table className="table table-bordered custom-table text-center">
             <thead>
               <tr>

@@ -34,26 +34,33 @@ export const FormDoctor = ({ isGetData = {} }) => {
       
   <div>
         <form onSubmit={handleSubmit(onSubmitClick)}>
-      <div className="form-group">
-        <label>Nombre Completo
-        <span className="text-danger">*</span>
-        </label>
-        <input
-          defaultValue={isGetData.name}
-          type="text"
-          className="form-control"
-          placeholder="Nombre Completo"
-          autoComplete="off"
-          {...register("nombre", {
-            required: true,
-            maxLength: 100,
-            pattern: /^[a-zA-Z0-9\s]+$/,
-          })}
-        />
-        {errors.nombre && (
-          <span className="text-danger">El dato es requerido y debe ser alfanumérico (máximo 100 caracteres)</span>
-        )}
-      </div>
+        <div>
+  <form onSubmit={handleSubmit(onSubmitClick)}>
+    <div className="form-group">
+      <label>
+        Nombre Completo<span className="text-danger">*</span>
+      </label>
+      <input
+        defaultValue={isGetData.name}
+        type="text"
+        className="form-control"
+        placeholder="Nombre Completo"
+        autoComplete="off"
+        {...register("nombre", {
+          required: true,
+          maxLength: 100,
+          pattern: /^[a-zA-Z\s]+$/,
+        })}
+      />
+      {errors.nombre && (
+        <span className="text-danger">
+          El dato es requerido (máximo 100 caracteres)
+        </span>
+      )}
+    </div>
+  </form>
+</div>
+
 
       <div className="form-group col-md-4">
         <label>Especialidad
@@ -103,7 +110,7 @@ export const FormDoctor = ({ isGetData = {} }) => {
         <span className="text-danger">*</span>
         </label>
         <input
-          type="tel"
+          type="text"
           className="form-control"
           placeholder="Número de teléfono"
           autoComplete="off"

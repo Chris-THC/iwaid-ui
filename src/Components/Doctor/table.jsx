@@ -9,10 +9,9 @@ import { Button } from "react-bootstrap";
 
 export function TablaGeneric({ title, data }) {
   const [showModalDelete, setShowModalDelete] = useState(false);
-  // const[id, setid] = useState(null);
+
   const handleShowModalDelete = () => {
     setShowModalDelete(true);
-    // setid(Id);
   };
 
   const handleCloseModalDelete = () => {
@@ -25,8 +24,6 @@ export function TablaGeneric({ title, data }) {
     showModal,
     setGetDataFromTable,
     setActionButtonModal,
-    getAllData,
-    mandarData
   } = useContext(GetTheAppContext);
 
   const displayedFields = [
@@ -37,9 +34,7 @@ export function TablaGeneric({ title, data }) {
     "email",
   ];
 
-  const allSpecializations = [
-    ...new Set(data.map((item) => item.specialty)),
-  ];
+  const allSpecializations = [...new Set(data.map((item) => item.specialty))];
 
   const [searchName, setSearchName] = useState("");
 
@@ -50,20 +45,21 @@ export function TablaGeneric({ title, data }) {
     setSearchName("");
     setSearchEmail("");
     setSearchSpecialization("");
-    // mandarData();
-    getAllData();
   };
 
   const filteredData = data.filter((item) => {
-    const nameMatches = item.name.toLowerCase().includes(searchName.toLowerCase());
-    const emailMatches = item.email.toLowerCase().includes(searchEmail.toLowerCase());
+    const nameMatches = item.name
+      .toLowerCase()
+      .includes(searchName.toLowerCase());
+    const emailMatches = item.email
+      .toLowerCase()
+      .includes(searchEmail.toLowerCase());
     const specializationMatches = searchSpecialization
       ? item.specialty.toLowerCase() === searchSpecialization.toLowerCase()
       : true;
-  
+
     return nameMatches && emailMatches && specializationMatches;
   });
-  
 
   return (
     <div className="container mt-5">
@@ -112,20 +108,6 @@ export function TablaGeneric({ title, data }) {
                         pattern="^[A-Za-z\s]+$"
                       />
                     </div>
-
-                    {/* <div className="col-md-4 mb-3">
-                    <label>Especialidad</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      value={searchEmail}
-                      onChange={(e) => {
-                        setSearchEmail(e.target.value);
-                        setSearchName("");
-                      }}
-                      placeholder="Buscar por Especialidad..."
-                    />
-                  </div> */}
 
                     <div className="col-md-4 mb-3">
                       <label>Especialidad</label>

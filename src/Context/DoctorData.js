@@ -31,10 +31,8 @@ export const createDoctorFunction = async (arrayData) => {
 };
 
 export const updateDoctorFunction = async (arrayData, idDoctor) => {
-  console.log(arrayData);
-  console.log(idDoctor);
+  const urlUpdate = `${doctorURL}${idDoctor}`;
   try {
-    const urlUpdate = `${doctorURL}${idDoctor}`;
     console.log(urlUpdate);
     const response = await axios.patch(urlUpdate, arrayData);
     console.log(response.data);

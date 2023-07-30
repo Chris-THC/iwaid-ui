@@ -30,20 +30,18 @@ export const FormDoctor = ({ isGetData = {} }) => {
       try {
         await createDoctorFunction(data);
         await getAllDoctorsDataFunction(setGetDataAllDoctors);
-        setTextAlert("Se Agregó un nuevo Doctor");
+        setTextAlert("Se agregó un nuevo doctor");
         handleShowFloatAlter();
       } catch (error) {
         console.error("Error al agregar el médico:", error);
       }
     } else if (actionButtonModal === "Editar") {
       handleCloseModal();
-      setTextAlert("Se Edito un Doctor");
-      console.log(data);
-      alert("Datos del Doctor editados");
-
+      setTextAlert("Se editó un doctor");
       try {
         await updateDoctorFunction(data, idDoctor);
         await getAllDoctorsDataFunction(setGetDataAllDoctors);
+        handleShowFloatAlter();
       } catch (error) {
         console.error("Error al agregar el médico:", error);
       }

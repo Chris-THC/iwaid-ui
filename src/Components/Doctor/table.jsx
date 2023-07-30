@@ -3,8 +3,9 @@ import "../../Css/CssTable.css";
 import { GetTheAppContext } from "../../Context/AppContext";
 import { ModalDoctor } from "./modal";
 import { MyModalDelete } from "./modalDelete";
-import { BsPersonFillAdd } from "react-icons/bs";
-import { MdChangeCircle, MdDeleteForever } from "react-icons/md";
+import { MdDeleteForever } from "react-icons/md";
+import { BsPersonFillAdd, BsPencilFill } from "react-icons/bs";
+import { GiLargePaintBrush } from "react-icons/gi";
 import { Button } from "react-bootstrap";
 
 export function TablaGeneric({ title, data }) {
@@ -134,7 +135,7 @@ export function TablaGeneric({ title, data }) {
                         type="button"
                         onClick={handleClear}
                       >
-                        Limpiar
+                        <GiLargePaintBrush /> Borrar
                       </button>
                     </div>
                   </div>
@@ -175,7 +176,7 @@ export function TablaGeneric({ title, data }) {
                           setActionButtonModal("Editar");
                         }}
                       >
-                        <MdChangeCircle className="btn-icon-lg" /> Editar
+                        <BsPencilFill className="btn-icon-lg" /> Editar
                       </Button>
                       <Button
                         id="btnTables"

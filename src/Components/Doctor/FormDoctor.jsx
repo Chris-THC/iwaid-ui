@@ -34,8 +34,6 @@ export const FormDoctor = ({ isGetData = {} }) => {
         handleShowFloatAlter();
       } catch (error) {
         console.error("Error al agregar el médico:", error);
-        setTextAlert("Error al agregar el médico");
-        handleShowFloatAlter();
       }
     } else if (actionButtonModal === "Editar") {
       handleCloseModal();

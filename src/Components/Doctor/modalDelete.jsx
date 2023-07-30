@@ -8,6 +8,8 @@ export const MyModalDelete = ({ show, handleClose }) => {
     deleteDoctorFunction,
     getAllDoctorsDataFunction,
     setGetDataAllDoctors,
+    setTextAlert,
+    handleShowFloatAlter,
   } = useContext(GetTheAppContext);
 
   const handleButtonClick = () => {
@@ -29,14 +31,12 @@ export const MyModalDelete = ({ show, handleClose }) => {
         <Button
           variant="danger"
           onClick={async () => {
-            console.log(`Eliminar al usuario con id: ${idDoctor}`);
-
-            // alert("Doctor Eliminado");
-
             try {
               await deleteDoctorFunction(idDoctor);
               await getAllDoctorsDataFunction(setGetDataAllDoctors);
               handleButtonClick();
+              setTextAlert(`Eliminar al usuario con id ${idDoctor}`);
+              handleShowFloatAlter();
             } catch (error) {
               console.error("Error al agregar el médico:", error);
             }

@@ -24,6 +24,7 @@ export function TablaGeneric({ title, data }) {
     showModal,
     setGetDataFromTable,
     setActionButtonModal,
+    setIdDoctor,
   } = useContext(GetTheAppContext);
 
   const displayedFields = [
@@ -169,6 +170,7 @@ export function TablaGeneric({ title, data }) {
                         variant="primary"
                         onClick={() => {
                           handleShowModal();
+                          setIdDoctor(item.id);
                           setGetDataFromTable(item);
                           setActionButtonModal("Editar");
                         }}
@@ -180,8 +182,8 @@ export function TablaGeneric({ title, data }) {
                         className="ms-2 me-2 mb-1 d-inline"
                         variant="danger"
                         onClick={() => {
-                          console.log(item.nombre);
-
+                          setIdDoctor(item.id);
+                          console.log(item.id);
                           handleShowModalDelete();
                         }}
                       >

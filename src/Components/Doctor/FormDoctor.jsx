@@ -5,15 +5,16 @@ import { GetTheAppContext } from "../../Context/AppContext";
 
 export const FormDoctor = ({ isGetData = {} }) => {
   const {
-    setDataUserDoctor,
     handleCloseModal,
     actionButtonModal,
-    handleShowFloatAlter,
     setTextAlert,
+    getDataFromTable,
     setGetDataFromTable,
     createDoctorFunction,
     getAllDoctorsDataFunction,
     setGetDataAllDoctors,
+    updateDoctorFunction,
+    idDoctor,
   } = useContext(GetTheAppContext);
 
   const {
@@ -24,25 +25,28 @@ export const FormDoctor = ({ isGetData = {} }) => {
 
   const onSubmitClick = async (data) => {
     if (actionButtonModal === "Agregar") {
-      setDataUserDoctor(data);
       handleCloseModal();
       setTextAlert("Se Agregó un nuevo Doctor");
-      // handleShowFloatAlert();
       alert("Doctor Agregado");
 
       try {
         await createDoctorFunction(data);
-        await getAllDoctorsDataFunction(setGetDataAllDoctors); // Asegúrate de que setGetDataAllDoctors sea una función válida
+        await getAllDoctorsDataFunction(setGetDataAllDoctors);
       } catch (error) {
         console.error("Error al agregar el médico:", error);
       }
     } else if (actionButtonModal === "Editar") {
-      // setDataUserDoctor(data);
       handleCloseModal();
       setTextAlert("Se Edito un Doctor");
-      handleShowFloatAlter();
       console.log(data);
       alert("Datos del Doctor editados");
+
+      try {
+        await updateDoctorFunction(data, idDoctor);
+        await getAllDoctorsDataFunction(setGetDataAllDoctors);
+      } catch (error) {
+        console.error("Error al agregar el médico:", error);
+      }
     }
   };
 
@@ -63,7 +67,7 @@ export const FormDoctor = ({ isGetData = {} }) => {
             {...register("name", {
               required: true,
               maxLength: 100,
-              pattern: /^[a-zA-Z0-9\s]+$/,
+              pattern: /^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\s]+$/,
             })}
           />
           {errors.name && (

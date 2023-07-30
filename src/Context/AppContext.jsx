@@ -2,6 +2,8 @@ import { createContext, useEffect, useState } from "react";
 import {
   getAllDoctorsDataFunction,
   createDoctorFunction,
+  updateDoctorFunction,
+  deleteDoctorFunction,
 } from "./DoctorData.js";
 
 export const GetTheAppContext = createContext();
@@ -16,6 +18,8 @@ export const AppContext = (props) => {
   const [actionButtonModal, setActionButtonModal] = useState("Agregar");
 
   const [textAlert, setTextAlert] = useState("");
+
+  const [idDoctor, setIdDoctor] = useState("");
 
   useEffect(() => {
     getAllDoctorsDataFunction(setGetDataAllDoctors);
@@ -62,6 +66,10 @@ export const AppContext = (props) => {
         setGetDataAllDoctors,
         getAllDoctorsDataFunction,
         createDoctorFunction,
+        updateDoctorFunction,
+        idDoctor,
+        setIdDoctor,
+        deleteDoctorFunction,
       }}
     >
       {props.children}

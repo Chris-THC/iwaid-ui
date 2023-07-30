@@ -19,13 +19,38 @@ export const getAllDoctorsDataFunction = async (setGetAllDoctors) => {
   }
 };
 
-
-
 export const createDoctorFunction = async (arrayData) => {
-  console.log(arrayData);
-
   try {
     const response = await axios.post(doctorURL, arrayData);
+    console.log(response.data);
+    return response.data;
+  } catch (error) {
+    console.error("Error al enviar la solicitud:", error);
+    return error;
+  }
+};
+
+export const updateDoctorFunction = async (arrayData, idDoctor) => {
+  console.log(arrayData);
+  console.log(idDoctor);
+  try {
+    const urlUpdate = `${doctorURL}${idDoctor}`;
+    console.log(urlUpdate);
+    const response = await axios.patch(urlUpdate, arrayData);
+    console.log(response.data);
+    return response.data;
+  } catch (error) {
+    console.error("Error al enviar la solicitud:", error);
+    return error;
+  }
+};
+
+export const deleteDoctorFunction = async (idDoctor) => {
+  console.log(idDoctor);
+  try {
+    const urlDelete = `${doctorURL}${idDoctor}`;
+    console.log(urlDelete);
+    const response = await axios.delete(urlDelete);
     console.log(response.data);
     return response.data;
   } catch (error) {

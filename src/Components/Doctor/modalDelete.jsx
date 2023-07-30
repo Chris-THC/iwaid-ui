@@ -1,14 +1,19 @@
+import { Modal, Button } from "react-bootstrap";
+import { GetTheAppContext } from "../../Context/AppContext";
+import { useContext } from "react";
 
-import { Modal, Button } from 'react-bootstrap';
+export const MyModalDelete = ({ show, handleClose }) => {
+  const {
+    idDoctor,
+    deleteDoctorFunction,
+    getAllDoctorsDataFunction,
+    setGetDataAllDoctors,
+  } = useContext(GetTheAppContext);
 
-
-export const MyModalDelete = ({ show, handleClose, Id }) => {
-
-  
   const handleButtonClick = () => {
     handleClose();
   };
-  
+
   return (
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>
@@ -21,7 +26,22 @@ export const MyModalDelete = ({ show, handleClose, Id }) => {
         <Button variant="secondary" onClick={handleClose}>
           Cancelar
         </Button>
-        <Button variant="danger" onClick={handleButtonClick}>
+        <Button
+          variant="danger"
+          onClick={async () => {
+            console.log(`Eliminar al usuario con id: ${idDoctor}`);
+
+            // alert("Doctor Eliminado");
+
+            try {
+              await deleteDoctorFunction(idDoctor);
+              await getAllDoctorsDataFunction(setGetDataAllDoctors);
+              handleButtonClick();
+            } catch (error) {
+              console.error("Error al agregar el médico:", error);
+            }
+          }}
+        >
           Eliminar
         </Button>
       </Modal.Footer>

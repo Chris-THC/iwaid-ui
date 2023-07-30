@@ -5,10 +5,10 @@ import { GetTheAppContext } from "../../Context/AppContext";
 
 export const FormDoctor = ({ isGetData = {} }) => {
   const {
+    handleShowFloatAlter,
     handleCloseModal,
     actionButtonModal,
     setTextAlert,
-    getDataFromTable,
     setGetDataFromTable,
     createDoctorFunction,
     getAllDoctorsDataFunction,
@@ -26,14 +26,16 @@ export const FormDoctor = ({ isGetData = {} }) => {
   const onSubmitClick = async (data) => {
     if (actionButtonModal === "Agregar") {
       handleCloseModal();
-      setTextAlert("Se Agregó un nuevo Doctor");
-      alert("Doctor Agregado");
 
       try {
         await createDoctorFunction(data);
         await getAllDoctorsDataFunction(setGetDataAllDoctors);
+        setTextAlert("Se Agregó un nuevo Doctor");
+        handleShowFloatAlter();
       } catch (error) {
         console.error("Error al agregar el médico:", error);
+        setTextAlert("Error al agregar el médico");
+        handleShowFloatAlter();
       }
     } else if (actionButtonModal === "Editar") {
       handleCloseModal();

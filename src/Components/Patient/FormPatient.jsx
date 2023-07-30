@@ -171,22 +171,33 @@ export const FormPatient = ({ isGetData = {} }) => {
           <div className="form-group col-md-6">
             <label htmlFor="inputPhone">Teléfono</label>
             <input
-              defaultValue={isGetData.phoneNumber}
-              type="number"
+              type="tel"
               className="form-control"
-              placeholder="Numero de telefono"
+              placeholder="Número de teléfono"
               autoComplete="off"
               {...register("phoneNumber", {
                 required: true,
-                pattern: {
-                  value: /^[0-9]{10}$/,
-                },
+                pattern: /^[0-9]+$/,
+                minLength: 10,
+                maxLength: 10,
               })}
+              defaultValue={isGetData.phoneNumber}
             />
-            {errors.phoneNumber && (
+            {errors.phoneNumber?.type === "required" && (
               <span className="text-danger">
-                Ingrese exactamente 10 números
+                El número de teléfono es requerido
               </span>
+            )}
+            {errors.phoneNumber?.type === "pattern" && (
+              <span className="text-danger">Ingrese solo números</span>
+            )}
+            {errors.phoneNumber?.type === "minLength" && (
+              <span className="text-danger">
+                Debe tener al menos 10 dígitos
+              </span>
+            )}
+            {errors.phoneNumber?.type === "maxLength" && (
+              <span className="text-danger">Debe tener 10 dígitos</span>
             )}
           </div>
 

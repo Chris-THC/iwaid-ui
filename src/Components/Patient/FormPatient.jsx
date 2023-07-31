@@ -48,7 +48,8 @@ export const FormPatient = ({ isGetData = {} }) => {
       <form onSubmit={handleSubmit(onSubmitClick)}>
         <div className="form-row">
           <div className="form-group col-md-12">
-            <label>* Nombre Completo</label>
+            <label>Nombre Completo</label>
+            <span className="text-danger">*</span>
             <input
               defaultValue={isGetData.name}
               type="text"
@@ -73,6 +74,7 @@ export const FormPatient = ({ isGetData = {} }) => {
           <div className="form-group row">
             <div className="form-group col-md-8">
               <label>Fecha de Nacimiento</label>
+              <span className="text-danger">*</span>
               <input
                 defaultValue={isGetData.dateOfBirth}
                 type="date"
@@ -95,6 +97,8 @@ export const FormPatient = ({ isGetData = {} }) => {
 
             <div className="form-group col-md-4">
               <label>Género</label>
+              <span className="text-danger">*</span>
+              <span className="text-danger">*</span>
               <select
                 defaultValue={isGetData.gender} // Aquí se asigna el valor al select
                 className="form-select"
@@ -114,7 +118,8 @@ export const FormPatient = ({ isGetData = {} }) => {
         </div>
 
         <div className="form-group col-md-8">
-          <label>* RFC</label>
+          <label>RFC</label>
+          <span className="text-danger">*</span>
           <input
             defaultValue={rfcValue || isGetData.rfc}
             type="text"
@@ -131,6 +136,7 @@ export const FormPatient = ({ isGetData = {} }) => {
         <div className="form-group row">
           <div className="form-group col-md-8">
             <label>Dirección</label>
+            <span className="text-danger">*</span>
             <input
               defaultValue={isGetData.address}
               type="text"
@@ -146,6 +152,7 @@ export const FormPatient = ({ isGetData = {} }) => {
 
           <div className="form-group col-md-4">
             <label>Ciudad</label>
+            <span className="text-danger">*</span>
             <input
               defaultValue={isGetData.city}
               type="text"
@@ -170,6 +177,7 @@ export const FormPatient = ({ isGetData = {} }) => {
         <div className="form-group row">
           <div className="form-group col-md-6">
             <label htmlFor="inputPhone">Teléfono</label>
+            <span className="text-danger">*</span>
             <input
               type="tel"
               className="form-control"
@@ -203,6 +211,7 @@ export const FormPatient = ({ isGetData = {} }) => {
 
           <div className="form-group col-md-6">
             <label htmlFor="inputEmail">Correo</label>
+            <span className="text-danger">*</span>
             <input
               defaultValue={isGetData.email}
               type="email"

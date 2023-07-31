@@ -207,11 +207,11 @@ export const TablePatient = ({ dataTable }) => {
               <thead>
                 <tr>
                   <th>Nombre</th>
-                  <th>Genero</th>
+                  <th>Género</th>
                   <th>Ciudad</th>
                   <th>Fecha de nacimiento</th>
                   <th>RFC</th>
-                  <th>Acción</th>
+                  <th>Acciones</th>
                 </tr>
               </thead>
               <tbody>
@@ -257,8 +257,6 @@ export const TablePatient = ({ dataTable }) => {
                         variant="danger"
                         onClick={() => {
                           console.log(item.nombre);
-                          // setTextAlert(`Se ha eliminado: ${item.nombre}`);
-                          // handleShowFloatAlter();
                           handleShowModalDelete();
                         }}
                       >

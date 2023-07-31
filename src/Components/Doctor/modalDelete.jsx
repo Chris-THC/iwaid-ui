@@ -24,7 +24,7 @@ export const MyModalDelete = ({ show, handleClose }) => {
         <Modal.Title>Confirmar eliminación</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <p>¿Está seguro de que desea eliminar este médico?</p>
+        <p>¿Está seguro que desea eliminar este médico?</p>
       </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={handleClose}>

@@ -30,7 +30,7 @@ export const FormDoctor = ({ isGetData = {} }) => {
       try {
         let info = await createDoctorFunction(data);
         await getAllDoctorsDataFunction(setGetDataAllDoctors);
-        setTextAlert("Se agregó un nuevo médico");
+        setTextAlert("Médico agregado exitosamente");
         console.log(info);
         handleShowFloatAlter();
       } catch (error) {
@@ -38,7 +38,7 @@ export const FormDoctor = ({ isGetData = {} }) => {
       }
     } else if (actionButtonModal === "Editar") {
       handleCloseModal();
-      setTextAlert(`Se actualizó los datos del médico ${data.name}`);
+      setTextAlert(`Médico ${data.name} actualizado exitosamente`);
       try {
         await updateDoctorFunction(data, doctorId);
         await getAllDoctorsDataFunction(setGetDataAllDoctors);

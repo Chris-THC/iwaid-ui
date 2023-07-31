@@ -1,11 +1,13 @@
 #btnTables {
   font-size: 12px;
+  height: 40px;
+  width: 50px;
 }
 
 #btnAdd {
   font-size: 12px;
   height: 40px;
-  width: 40px;
+  width: 45px;
 }
 
 #iconoClear {
@@ -17,64 +19,6 @@
 .custom-table td,
 .custom-table th {
   padding: 0;
-}
-
-/* En el archivo CssTable.css */
-.custom-table {
-  border-collapse: collapse;
-  width: 100%;
-  font-size: 14px;
-}
-
-.custom-table th,
-.custom-table td {
-  padding: 12px;
-  border: 1px solid #ddd;
-}
-
-.custom-table th {
-  background-color: #f2f2f2;
-  font-weight: bold;
-}
-
-.Buttons {
-  display: flex;
-  justify-content: center;
-}
-
-/* Estilos para los botones de acción */
-.btn-primary {
-  background-color: #007bff;
-  color: #fff;
-  border-color: #007bff;
-}
-
-.btn-primary:hover {
-  background-color: #0056b3;
-  border-color: #0056b3;
-}
-
-.btn-danger {
-  background-color: #dc3545;
-  color: #fff;
-  border-color: #dc3545;
-}
-
-.btn-danger:hover {
-  background-color: #a71d2a;
-  border-color: #a71d2a;
-}
-
-/* Estilos para el botón "Limpiar" */
-#iconoClear {
-  background-color: #6c757d;
-  color: #fff;
-  border-color: #6c757d;
-}
-
-#iconoClear:hover {
-  background-color: #4e555a;
-  border-color: #4e555a;
 }
 
 @media (max-width: 800px) {

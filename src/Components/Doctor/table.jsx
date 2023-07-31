@@ -182,7 +182,7 @@ export function TablaGeneric({ title, data }) {
                         overlay={<Tooltip id="tooltip-clear">Editar</Tooltip>}
                       >
                         <Button
-                          size={16}
+                          size={13}
                           id="btnTables"
                           className="ms-2 me-2 mb-2 mt-2"
                           variant="primary"
@@ -213,6 +213,7 @@ export function TablaGeneric({ title, data }) {
                           }}
                         >
                           <MdDeleteForever
+                            size={13}
                             onClick={() => {
                               setDataUserDoctor(item);
                             }}

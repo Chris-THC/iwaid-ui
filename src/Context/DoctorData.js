@@ -12,7 +12,6 @@ export const getAllDoctorsDataFunction = async (setGetAllDoctors) => {
     const response = await axios.get(doctorURL, {
       params: dataGetAll,
     });
-    console.log(response.data);
     setGetAllDoctors(response.data);
   } catch (error) {
     console.error("Error al enviar la solicitud:", error);
@@ -22,7 +21,6 @@ export const getAllDoctorsDataFunction = async (setGetAllDoctors) => {
 export const createDoctorFunction = async (arrayData) => {
   try {
     const response = await axios.post(doctorURL, arrayData);
-    console.log(response.data);
     return response.data;
   } catch (error) {
     console.error("Error al enviar la solicitud:", error);

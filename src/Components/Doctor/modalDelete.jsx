@@ -4,13 +4,14 @@ import { useContext } from "react";
 
 export const MyModalDelete = ({ show, handleClose }) => {
   const {
-    idDoctor,
+    doctorId,
     deleteDoctorFunction,
     getAllDoctorsDataFunction,
     setGetDataAllDoctors,
     setTextAlert,
     handleShowFloatAlter,
     setActionButtonModal,
+    dataUserDoctor,
   } = useContext(GetTheAppContext);
 
   const handleButtonClick = () => {
@@ -23,7 +24,7 @@ export const MyModalDelete = ({ show, handleClose }) => {
         <Modal.Title>Confirmar eliminación</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <p>¿Está seguro de que desea eliminar este usuario?</p>
+        <p>¿Está seguro de que desea eliminar este médico?</p>
       </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={handleClose}>
@@ -34,13 +35,13 @@ export const MyModalDelete = ({ show, handleClose }) => {
           onClick={async () => {
             setActionButtonModal("Eliminar");
             try {
-              await deleteDoctorFunction(idDoctor);
+              await deleteDoctorFunction(doctorId);
               await getAllDoctorsDataFunction(setGetDataAllDoctors);
               handleButtonClick();
-              setTextAlert(`Se eliminó al usuario con id ${idDoctor}`);
+              setTextAlert(`Se eliminó al médico ${dataUserDoctor.name}`);
               handleShowFloatAlter();
             } catch (error) {
-              console.error("Error al agregar el médico:", error);
+              setTextAlert("Error al agregar el médico");
             }
           }}
         >

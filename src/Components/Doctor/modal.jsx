@@ -17,7 +17,7 @@ export const ModalDoctor = ({ show, handleClose }) => {
       }}
     >
       <Modal.Header closeButton>
-        <Modal.Title>{actionButtonModal} Médico</Modal.Title>
+        <Modal.Title>{actionButtonModal} médico</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <FormDoctor isGetData={getDataFromTable} />

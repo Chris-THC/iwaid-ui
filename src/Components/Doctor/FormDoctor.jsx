@@ -14,7 +14,7 @@ export const FormDoctor = ({ isGetData = {} }) => {
     getAllDoctorsDataFunction,
     setGetDataAllDoctors,
     updateDoctorFunction,
-    idDoctor,
+    doctorId,
   } = useContext(GetTheAppContext);
 
   const {
@@ -28,22 +28,23 @@ export const FormDoctor = ({ isGetData = {} }) => {
       handleCloseModal();
 
       try {
-        await createDoctorFunction(data);
+        let info = await createDoctorFunction(data);
         await getAllDoctorsDataFunction(setGetDataAllDoctors);
-        setTextAlert("Se agregó un nuevo doctor");
+        setTextAlert("Se agregó un nuevo médico");
+        console.log(info);
         handleShowFloatAlter();
       } catch (error) {
-        console.error("Error al agregar el médico:", error);
+        setTextAlert("Error al agregar el médico");
       }
     } else if (actionButtonModal === "Editar") {
       handleCloseModal();
-      setTextAlert("Se editó un doctor");
+      setTextAlert(`Se actualizó los datos del médico ${data.name}`);
       try {
-        await updateDoctorFunction(data, idDoctor);
+        await updateDoctorFunction(data, doctorId);
         await getAllDoctorsDataFunction(setGetDataAllDoctors);
         handleShowFloatAlter();
       } catch (error) {
-        console.error("Error al agregar el médico:", error);
+        setTextAlert("Error al agregar el médico");
       }
     }
   };
@@ -51,16 +52,16 @@ export const FormDoctor = ({ isGetData = {} }) => {
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmitClick)}>
-        <div className="form-group">
+        <div className="form-group mb-3">
           <label>
-            Nombre Completo
+            Nombre completo
             <span className="text-danger">*</span>
           </label>
           <input
             defaultValue={isGetData.name}
             type="text"
             className="form-control"
-            placeholder="Nombre Completo"
+            placeholder="Nombre completo"
             autoComplete="off"
             {...register("name", {
               required: true,
@@ -70,13 +71,12 @@ export const FormDoctor = ({ isGetData = {} }) => {
           />
           {errors.name && (
             <span className="text-danger">
-              El dato es requerido y debe ser alfanumérico (máximo 100
-              caracteres)
+              Dato requerido y alfanúmerico (Max. 100 caracteres)
             </span>
           )}
         </div>
 
-        <div className="form-group col-md-4">
+        <div className="form-group col-md-4 mb-3">
           <label>
             Especialidad
             <span className="text-danger">*</span>
@@ -95,11 +95,11 @@ export const FormDoctor = ({ isGetData = {} }) => {
             <option value="Neurologia">Neurología</option>
           </select>
           {errors.specialty && (
-            <span className="text-danger">El dato es requerido</span>
+            <span className="text-danger">Dato requerido</span>
           )}
         </div>
 
-        <div className="form-group">
+        <div className="form-group mb-3">
           <label>
             Dirección
             <span className="text-danger">*</span>
@@ -117,21 +117,20 @@ export const FormDoctor = ({ isGetData = {} }) => {
           />
           {errors.address && (
             <span className="text-danger">
-              El dato es requerido y debe ser alfanumérico (máximo 500
-              caracteres)
+              Dato requerido y alfanúmerico (Max. 500 caracteres)
             </span>
           )}
         </div>
 
-        <div className="form-group">
+        <div className="form-group mb-3">
           <label>
-            Número Telefónico
+            Número telefónico
             <span className="text-danger">*</span>
           </label>
           <input
             type="tel"
             className="form-control"
-            placeholder="Número de teléfono"
+            placeholder="Número telefónico"
             autoComplete="off"
             {...register("phoneNumber", {
               required: true,
@@ -157,9 +156,9 @@ export const FormDoctor = ({ isGetData = {} }) => {
           )}
         </div>
 
-        <div className="form-group">
+        <div className="form-group mb-3">
           <label>
-            Correo Electrónico
+            Correo electrónico
             <span className="text-danger">*</span>
           </label>
           <input
@@ -180,8 +179,7 @@ export const FormDoctor = ({ isGetData = {} }) => {
           )}
           {errors.email?.type === "pattern" && (
             <span className="text-danger">
-              Ingrese un correo electrónico válido (ejemplo:
-              ejemplo@example.com)
+              Ingrese un correo electrónico válido
             </span>
           )}
         </div>

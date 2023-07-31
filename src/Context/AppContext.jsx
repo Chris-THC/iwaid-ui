@@ -19,7 +19,7 @@ export const AppContext = (props) => {
 
   const [textAlert, setTextAlert] = useState("");
 
-  const [idDoctor, setIdDoctor] = useState("");
+  const [doctorId, setDoctorId] = useState("");
 
   useEffect(() => {
     getAllDoctorsDataFunction(setGetDataAllDoctors);
@@ -67,8 +67,8 @@ export const AppContext = (props) => {
         getAllDoctorsDataFunction,
         createDoctorFunction,
         updateDoctorFunction,
-        idDoctor,
-        setIdDoctor,
+        doctorId,
+        setDoctorId,
         deleteDoctorFunction,
       }}
     >

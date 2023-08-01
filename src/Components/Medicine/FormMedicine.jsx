@@ -122,7 +122,7 @@ export const FormMedicine = ({ isGetData = {} }) => {
           placeholder="Dosis"
           autoComplete="off"
           {...register("dosis", { required: true })}
-          defaultValue={isGetData.dose}
+          defaultValue={isGetData.dosageForms}
         />
         {errors.dosis && (
           <span className="text-danger">*Dato requerido</span>

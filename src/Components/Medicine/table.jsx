@@ -37,7 +37,6 @@ export function TablaGeneric({ title, data  }) {
   const displayedFields = [
     "code",
     "name",
-    "dose",
     "dosageForms",
     "description",
     "quantity"

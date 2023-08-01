@@ -10,7 +10,7 @@ export const FormMedicine = ({ isGetData = {} }) => {
     handleCloseModal,
     actionButtonModal,
     setTextAlert,
-    setGetDataFromTable,
+    setDataFromTable,
     createMedicineFunction,
     getAllMedicineDataFunction,
     setAllDataMedicine,
@@ -195,7 +195,7 @@ export const FormMedicine = ({ isGetData = {} }) => {
       <Button
               type="submit"
               onClick={() => {
-                setGetDataFromTable({});
+                setDataFromTable({});
               }}
               disabled={!isValid}
             >

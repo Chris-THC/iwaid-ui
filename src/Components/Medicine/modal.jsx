@@ -4,7 +4,7 @@ import { FormMedicine } from "./FormMedicine";
 import { GetTheAppContext } from "../../Context/AppContext";
 
 export const ModalMedicine = ({ show, handleClose }) => {
-  const { setGetDataFromTable, getDataFromTable, actionButtonModal } =
+  const { setDataFromTable, getDataFromTable, actionButtonModal } =
   useContext(GetTheAppContext);
 
   return (
@@ -13,7 +13,7 @@ export const ModalMedicine = ({ show, handleClose }) => {
       show={show}
       onHide={() => {
         handleClose();
-        setGetDataFromTable({});
+        setDataFromTable({});
       }}
     >
       <Modal.Header closeButton>

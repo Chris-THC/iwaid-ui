@@ -12,6 +12,11 @@ export const FormPatient = ({ isGetData = {} }) => {
     setTextAlert,
     handleShowFloatAlter,
     setGetDataFromTable,
+    createPatientFunction,
+    getAllPatientDataFunction,
+    updatePatientFunction,
+    setGetDataAllPatients,
+    patientId,
   } = useContext(GetTheAppContext);
 
   const {
@@ -21,23 +26,41 @@ export const FormPatient = ({ isGetData = {} }) => {
     formState: { errors, isValid },
   } = useForm({ mode: "all" });
 
-  const onSubmitClick = (data) => {
-    setDataUserPatient(data);
-    console.log(data);
-    handleCloseModal();
-    setTextAlert("Datos Guardados");
-    handleShowFloatAlter();
+  const onSubmitClick = async (data) => {
+    if (actionButtonModal === "Agregar") {
+      handleCloseModal();
+
+      try {
+        await createPatientFunction(data);
+        await getAllPatientDataFunction(setGetDataAllPatients);
+        setTextAlert("Paciente agregado exitosamente");
+        handleShowFloatAlter();
+      } catch (error) {
+        setTextAlert("Error al agregar al paciente");
+      }
+    } else if (actionButtonModal === "Editar") {
+      handleCloseModal();
+      setTextAlert(`Paciente ${data.name} actualizado exitosamente`);
+      try {
+        await updatePatientFunction(data, patientId);
+        await getAllPatientDataFunction(setGetDataAllPatients);
+        handleShowFloatAlter();
+      } catch (error) {
+        setTextAlert("Error al agregar al paciente");
+      }
+    }
   };
+
   const [rfcValue, setRfcValue] = useState(isGetData.rfc || "");
   const [rfcError, setRfcError] = useState("");
 
   const handleInputChange = (event) => {
     const inputValue = event.target.value.toUpperCase();
-    setRfcValue(inputValue); // Actualiza el estado rfcValue con el valor en mayúsculas
-    setValue("rfc", inputValue); // Actualiza el valor del campo en el formulario en mayúsculas
+    setRfcValue(inputValue);
+    setValue("rfc", inputValue);
     const rfcPattern = /^[A-Z]{4}\d{6}[A-Z\d]{3}$/;
     if (!rfcPattern.test(inputValue)) {
-      setRfcError("El RFC debe tener un formato válido en mayúsculas.");
+      setRfcError("El RFC debe tener un formato válido");
     } else {
       setRfcError("");
     }
@@ -47,7 +70,7 @@ export const FormPatient = ({ isGetData = {} }) => {
     <div>
       <form onSubmit={handleSubmit(onSubmitClick)}>
         <div className="form-row">
-          <div className="form-group col-md-12">
+          <div className="form-group col-md-12 mb-3">
             <label>Nombre Completo</label>
             <span className="text-danger">*</span>
             <input
@@ -65,13 +88,12 @@ export const FormPatient = ({ isGetData = {} }) => {
             />
             {errors.name && (
               <span className="text-danger">
-                El campo es solicitado o el campo del nombre no debe de llevar
-                números
+                Dato requerido o el campo del nombre no debe de llevar números
               </span>
             )}
           </div>
 
-          <div className="form-group row">
+          <div className="form-group row mb-3">
             <div className="form-group col-md-8">
               <label>Fecha de Nacimiento</label>
               <span className="text-danger">*</span>
@@ -89,18 +111,16 @@ export const FormPatient = ({ isGetData = {} }) => {
               />
               {errors.dateOfBirth && (
                 <span className="text-danger">
-                  El dato es solicitado o la fecha no puede ser mayor a la fecha
-                  actual
+                  Dato requerido o la fecha no puede ser mayor a la fecha actual
                 </span>
               )}
             </div>
 
-            <div className="form-group col-md-4">
+            <div className="form-group col-md-4 mb-3">
               <label>Género</label>
               <span className="text-danger">*</span>
-              <span className="text-danger">*</span>
               <select
-                defaultValue={isGetData.gender} // Aquí se asigna el valor al select
+                defaultValue={isGetData.gender}
                 className="form-select"
                 autoComplete="off"
                 {...register("gender", { required: true })}
@@ -117,7 +137,7 @@ export const FormPatient = ({ isGetData = {} }) => {
           </div>
         </div>
 
-        <div className="form-group col-md-8">
+        <div className="form-group col-md-8 mb-3">
           <label>RFC</label>
           <span className="text-danger">*</span>
           <input
@@ -133,7 +153,7 @@ export const FormPatient = ({ isGetData = {} }) => {
           {rfcError && <span className="text-danger">{rfcError}</span>}
         </div>
 
-        <div className="form-group row">
+        <div className="form-group row mb-3">
           <div className="form-group col-md-8">
             <label>Dirección</label>
             <span className="text-danger">*</span>
@@ -146,11 +166,11 @@ export const FormPatient = ({ isGetData = {} }) => {
               {...register("address", { required: true })}
             />
             {errors.address && (
-              <span className="text-danger">El dato es requerido</span>
+              <span className="text-danger">Dato requerido</span>
             )}
           </div>
 
-          <div className="form-group col-md-4">
+          <div className="form-group col-md-4 mb-3">
             <label>Ciudad</label>
             <span className="text-danger">*</span>
             <input
@@ -168,14 +188,14 @@ export const FormPatient = ({ isGetData = {} }) => {
             />
             {errors.city && (
               <span className="text-danger">
-                El dato es requerido y no se aceptan números{" "}
+                Dato requerido y no se aceptan números{" "}
               </span>
             )}
           </div>
         </div>
 
         <div className="form-group row">
-          <div className="form-group col-md-6">
+          <div className="form-group col-md-6 mb-3">
             <label htmlFor="inputPhone">Teléfono</label>
             <span className="text-danger">*</span>
             <input
@@ -209,7 +229,7 @@ export const FormPatient = ({ isGetData = {} }) => {
             )}
           </div>
 
-          <div className="form-group col-md-6">
+          <div className="form-group col-md-6 mb-3">
             <label htmlFor="inputEmail">Correo</label>
             <span className="text-danger">*</span>
             <input

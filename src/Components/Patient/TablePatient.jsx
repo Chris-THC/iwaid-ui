@@ -4,9 +4,11 @@ import { GetTheAppContext } from "../../Context/AppContext";
 import "../../Css/TablePatients.css";
 import { MdDeleteForever } from "react-icons/md";
 import { BsPersonFillAdd, BsPencilFill } from "react-icons/bs";
-import { GiLargePaintBrush } from "react-icons/gi";
+import { LuFilterX } from "react-icons/lu";
 import { Button } from "react-bootstrap";
 import { MyModalDelete } from "./MyModalDelete";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
 
 export const TablePatient = ({ dataTable }) => {
   const [showModalDelete, setShowModalDelete] = useState(false);
@@ -24,9 +26,12 @@ export const TablePatient = ({ dataTable }) => {
     showModal,
     setGetDataFromTable,
     setActionButtonModal,
+    setDoctorId,
+    setDataUserPatient,
   } = useContext(GetTheAppContext);
 
   const displayedFields = ["name", "gender", "city", "dateOfBirth", "rfc"];
+
   const [searchByName, setSearchByName] = useState("");
   const [searchByGender, setSearchByGender] = useState("");
   const [searchByCity, setSearchByCity] = useState("");
@@ -76,17 +81,22 @@ export const TablePatient = ({ dataTable }) => {
           </div>
 
           <div className="col-4 d-flex flex-row-reverse ">
-            <Button
-              id="btnAdd"
-              className="ms-2 me-2 mb-1"
-              variant="primary"
-              onClick={() => {
-                handleShowModal();
-                setActionButtonModal("Agregar");
-              }}
+            <OverlayTrigger
+              placement="top"
+              overlay={<Tooltip id="tooltip-clear">Agregar</Tooltip>}
             >
-              <BsPersonFillAdd /> Agregar
-            </Button>
+              <Button
+                id="btnAdd"
+                className="ms-2 me-2 mb-1"
+                variant="primary"
+                onClick={() => {
+                  handleShowModal();
+                  setActionButtonModal("Agregar");
+                }}
+              >
+                <BsPersonFillAdd size={18} />
+              </Button>
+            </OverlayTrigger>
           </div>
         </div>
 
@@ -189,14 +199,21 @@ export const TablePatient = ({ dataTable }) => {
 
                     <div className="col-md-8 d-flex flex-row-reverse">
                       <div className=" w-auto p-4">
-                        <button
-                          id="btnClearTable"
-                          className="btn btn-secondary"
-                          type="button"
-                          onClick={handleClear}
+                        <OverlayTrigger
+                          placement="top"
+                          overlay={
+                            <Tooltip id="tooltip-clear">Limpiar</Tooltip>
+                          }
                         >
-                          <GiLargePaintBrush /> Borrar
-                        </button>
+                          <button
+                            id="btnClearTable"
+                            className="btn btn-secondary"
+                            type="button"
+                            onClick={handleClear}
+                          >
+                            <LuFilterX color="white" />
+                          </button>
+                        </OverlayTrigger>
                       </div>
                     </div>
                   </div>
@@ -239,33 +256,48 @@ export const TablePatient = ({ dataTable }) => {
                       }
                     })}
                     <td>
-                      <Button
-                        id="btnTables"
-                        className="ms-2 me-2 mb-1"
-                        variant="primary"
-                        onClick={() => {
-                          handleShowModal();
-                          setGetDataFromTable(item);
-                          setActionButtonModal("Editar");
-                        }}
+                      <OverlayTrigger
+                        placement="top"
+                        overlay={<Tooltip id="tooltip-clear">Editar</Tooltip>}
                       >
-                        <BsPencilFill className="btn-icon-lg" /> Editar
-                      </Button>
-                      <Button
-                        id="btnTables"
-                        className="ms-2 me-2 mb-1 d-inline"
-                        variant="danger"
-                        onClick={() => {
-                          console.log(item.nombre);
-                          handleShowModalDelete();
-                        }}
+                        <Button
+                          id="btnTables"
+                          className="ms-2 me-2 mb-1"
+                          variant="primary"
+                          onClick={() => {
+                            handleShowModal();
+                            setGetDataFromTable(item);
+                            setActionButtonModal("Editar");
+                          }}
+                        >
+                          <BsPencilFill className="btn-icon-lg" />
+                        </Button>
+                      </OverlayTrigger>
+
+                      <OverlayTrigger
+                        placement="top"
+                        overlay={<Tooltip id="tooltip-clear">Eliminar</Tooltip>}
                       >
-                        <MdDeleteForever
-                          id="btnDeletePatient"
-                          className="btn-icon-lg"
-                        />{" "}
-                        Eliminar
-                      </Button>
+                        <Button
+                          size={16}
+                          id="btnTables"
+                          className="ms-2 me-2 mb-1 d-inline"
+                          variant="danger"
+                          onClick={() => {
+                            console.log(item.nombre);
+                            handleShowModalDelete();
+                          }}
+                        >
+                          <MdDeleteForever
+                            size={13}
+                            onClick={() => {
+                              setDataUserPatient(item);
+                            }}
+                            id="btnDeletePatient"
+                            className="btn-icon-lg"
+                          />
+                        </Button>
+                      </OverlayTrigger>
                     </td>
                   </tr>
                 ))}

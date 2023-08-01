@@ -4,16 +4,15 @@
   width: 85px;
 }
 #btnClearTable {
-  font-size: 12px;
-  height: 35px;
-  width: 90px;
+  background-color: #0d6efd;
+  border: solid 1px #bcbcbc;
+  width: 60px;
 }
 
 #btnAdd {
   font-size: 12px;
-}
-#btnClearTable {
-  font-size: 14px;
+  height: 40px;
+  width: 45px;
 }
 
 .custom-table td,
@@ -69,7 +68,7 @@
 
   #btnTables {
     font-size: 9px;
-    height: 25px;
-    width: 70px;
+    height: 30px;
+    width: 35px;
   }
 }

@@ -1,8 +1,9 @@
 import axios from "axios";
 
-const doctorURL = "http://localhost:8081/iwaid/doctors/";
+const doctorURL = "http://localhost:8081/iwaid/patients/";
+// TODO: This code cannot be tested yet because the backend is not finished yet.  
 
-export const getAllPatientDataFunction = async (setGetAllDoctors) => {
+export const getAllPatientDataFunction = async (setGetAllPatients) => {
   try {
     const dataGetAll = {
       name: null,
@@ -12,7 +13,7 @@ export const getAllPatientDataFunction = async (setGetAllDoctors) => {
     const response = await axios.get(doctorURL, {
       params: dataGetAll,
     });
-    setGetAllDoctors(response.data);
+    setGetAllPatients(response.data);
   } catch (error) {
     console.error("Error al enviar la solicitud:", error);
   }

@@ -6,7 +6,6 @@ export const FormPatient = ({ isGetData = {} }) => {
   const currentDate = new Date().toISOString().split("T")[0];
 
   const {
-    setDataUserPatient,
     handleCloseModal,
     actionButtonModal,
     setTextAlert,
@@ -15,7 +14,7 @@ export const FormPatient = ({ isGetData = {} }) => {
     createPatientFunction,
     getAllPatientDataFunction,
     updatePatientFunction,
-    setGetDataAllPatients,
+    setGetAllPatientsData,
     patientId,
   } = useContext(GetTheAppContext);
 
@@ -32,7 +31,7 @@ export const FormPatient = ({ isGetData = {} }) => {
 
       try {
         await createPatientFunction(data);
-        await getAllPatientDataFunction(setGetDataAllPatients);
+        await getAllPatientDataFunction(setGetAllPatientsData);
         setTextAlert("Paciente agregado exitosamente");
         handleShowFloatAlter();
       } catch (error) {
@@ -43,7 +42,7 @@ export const FormPatient = ({ isGetData = {} }) => {
       setTextAlert(`Paciente ${data.name} actualizado exitosamente`);
       try {
         await updatePatientFunction(data, patientId);
-        await getAllPatientDataFunction(setGetDataAllPatients);
+        await getAllPatientDataFunction(setGetAllPatientsData);
         handleShowFloatAlter();
       } catch (error) {
         setTextAlert("Error al agregar al paciente");

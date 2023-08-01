@@ -8,7 +8,9 @@ import {
 export const GetTheAppContext = createContext();
 
 export const AppContext = (props) => {
-  const [getDataAllPatients, setGetDataAllPatients] = useState([]);
+  const [getAllPatientsData, setGetAllPatientsData] = useState([]);
+  
+  //TODO: This data is for testing purposes, it should be removed when the app is ready.
   const [dataTest, setDataTest] = useState([
     {
       id: 1,
@@ -57,7 +59,7 @@ export const AppContext = (props) => {
   ]);
 
   useEffect(() => {
-    getAllPatientDataFunction(setGetDataAllPatients);
+    getAllPatientDataFunction(setGetAllPatientsData);
   }, []);
 
   const [dataUserPatient, setDataUserPatient] = useState({});
@@ -111,11 +113,12 @@ export const AppContext = (props) => {
         deletePatientFunction,
         getAllPatientDataFunction,
         updatePatientFunction,
-        getDataAllPatients,
-        setGetDataAllPatients,
+        getAllPatientsData,
+        setGetAllPatientsData,
         patientId,
         setPatientId,
-        dataTest
+        dataTest,
+        setDataTest
       }}
     >
       {props.children}

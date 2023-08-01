@@ -3,13 +3,17 @@ import '../../Css/CssTable.css';
 import { GetTheAppContext } from "../../Context/AppContext";
 import { ModalMedicine } from './modal';
 import { MyModalDelete } from './modalDelete';
-import { BsPersonFillAdd } from "react-icons/bs";
-import { MdChangeCircle, MdDeleteForever } from 'react-icons/md';
+import { BsPersonFillAdd, BsPencilFill  } from "react-icons/bs";
+import { MdDeleteForever } from 'react-icons/md';
+import { LuFilterX } from "react-icons/lu";
 import { Button } from "react-bootstrap";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
 
-export function TablaGeneric({ title, data,  }) {
+export function TablaGeneric({ title, data  }) {
 
   const [showModalDelete, setShowModalDelete] = useState(false);
+  
   // const[id, setid] = useState(null);
   const handleShowModalDelete = () => {
     setShowModalDelete(true);
@@ -26,24 +30,28 @@ export function TablaGeneric({ title, data,  }) {
     showModal,
     setGetDataFromTable,
     setActionButtonModal,
+    setIdMedicine,
+    setDataUserMedicine,
   } = useContext(GetTheAppContext);
 
   const displayedFields = [
+    "key",
     "name",
-    "dosis",
-    "presentation",
+    "dose",
+    "packaging",
     "description",
+    "quantity"
   ];
   
-
+const allPackaging = data ? [...new Set(data.map((item) => item.packaging))] : [];
   const [searchName, setSearchName] = useState("");
   const [searchDosis, setSearchDosis] = useState("");
-  const [searchDescription, setSearchDescription] = useState("");
+  const [searchPackaging, setSearchPackaging] = useState("");
 
   const handleClear = () => {
     setSearchName("");
     setSearchDosis("");
-    setSearchDescription("");
+    setSearchPackaging("");
   };
 
   const filteredData = data.filter((item) => {
@@ -51,13 +59,13 @@ export function TablaGeneric({ title, data,  }) {
       .toLowerCase()
       .includes(searchName.toLowerCase());
 
-    const dosisMatches = item.dosis.includes(searchDosis);
+    const dosisMatches = item.dose.includes(searchDosis);
 
-    const descriptionMatches = item.description
-      .toLowerCase()
-      .includes(searchDescription.toLowerCase());
+    const packagingMatches = searchPackaging
+      ? item.packaging.toLowerCase() === searchPackaging.toLowerCase()
+      : true;
 
-    return nombreMatches && dosisMatches && descriptionMatches;
+    return nombreMatches && dosisMatches && packagingMatches;
   });
   return (
     <div className="container mt-5">
@@ -68,17 +76,22 @@ export function TablaGeneric({ title, data,  }) {
           </div>
 
           <div className="col-4 d-flex flex-row-reverse ">
-          <Button
-              id="btnAdd"
-              className="ms-2 me-2 mb-1"
-              variant="primary"
-              onClick={() => {
-                handleShowModal();
-                setActionButtonModal("Agregar");
-              }}
+            <OverlayTrigger
+              placement="top"
+              overlay={<Tooltip id="tooltip-clear">Agregar</Tooltip>}
             >
-              <BsPersonFillAdd /> Agregar
-            </Button>
+              <Button
+                id="btnAdd"
+                className="ms-2 me-2 mb-1"
+                variant="primary"
+                onClick={() => {
+                  handleShowModal();
+                  setActionButtonModal("Agregar");
+                }}
+              >
+                <BsPersonFillAdd size={18} />
+              </Button>
+            </OverlayTrigger>
           </div>
         </div>
 
@@ -89,74 +102,83 @@ export function TablaGeneric({ title, data,  }) {
                 <h4>Buscar</h4>
               </div>
               <div className="row">
-                <div className="container mb-3">
-                  <div className="row">
-                    <div className="col-md-4 mb-3">
-                      <label>Nombre</label>
-                      <input
-                        autoComplete="off"
-                        type="text"
-                        className="form-control"
-                        value={searchName}
-                        onChange={(e) => {
-                          setSearchName(e.target.value);
-                          setSearchDosis("");
-                          setSearchDescription("");
-                        }}
-                        placeholder="Buscar por nombre..."
-                        pattern="^[A-Za-z\s]+$"
-                      />
-                    </div>
-                    <div className="col-md-4 mb-3">
-                      <label>Dosis</label>
-                      <input
-                        type="number"
-                        className="form-control"
-                        value={searchDosis}
-                        onChange={(e) => {
-                          setSearchDosis(e.target.value);
-                          setSearchName("");
-                          setSearchDescription("");
-                        }}
-                        placeholder="Buscar por dosis..."
-                      />
-                    </div>
-                    <div className="col-md-4 mb-3">
-                      <label>Descripción</label>
-                      <input
-                        type="text"
-                        className="form-control"
-                        value={searchDescription}
-                        onChange={(e) => {
-                          setSearchDescription(e.target.value);
-                          setSearchName("");
-                          setSearchDosis("");
-                        }}
-                        placeholder="Buscar por descripción..."
-                      />
-                    </div>
-                    
-                    <div className="col-md-12 d-flex flex-row-reverse ">
-                      <button
-                        className="btn btn-secondary"
-                        type="button"
-                        onClick={handleClear}
-                      >
-                        Limpiar
-                      </button>
-                    </div>
-                  </div>
-                </div>
+              <div className="container mb-4">
+  <div className="row">
+    <div className="col mb-4">
+      <label>Nombre</label>
+      <input
+        autoComplete="off"
+        type="text"
+        className="form-control"
+        value={searchName}
+        onChange={(e) => {
+          setSearchName(e.target.value);
+          setSearchDosis("");
+          setSearchPackaging("");
+        }}
+        placeholder="Buscar por nombre..."
+        pattern="^[A-Za-z\s]+$"
+      />
+    </div>
+    <div className="col mb-4">
+      <label>Dosis</label>
+      <input
+        type="number"
+        className="form-control"
+        value={searchDosis}
+        onChange={(e) => {
+          setSearchDosis(e.target.value);
+          setSearchName("");
+          setSearchPackaging("");
+        }}
+        placeholder="Buscar por dosis..."
+      />
+    </div>
+    <div className="col mb-4">
+      <label>Presentación</label>
+      <select
+        className="form-select"
+        value={searchPackaging}
+        onChange={(e) => setSearchPackaging(e.target.value)}
+      >
+        <option value="">Todas las presentaciones</option>
+        {allPackaging.map((packaging, index) => (
+          <option key={index} value={packaging}>
+            {packaging}
+          </option>
+        ))}
+      </select>
+    </div>
+    <div className="col mb-4 d-flex justify-content align-items-center">
+      <OverlayTrigger
+        placement="top"
+        overlay={<Tooltip id="tooltip-clear">Limpiar</Tooltip>}
+      >
+        <button
+          id="iconoClear"
+          className="btn"
+          type="button"
+          onClick={handleClear}
+        >
+          <LuFilterX color="white" />
+        </button>
+      </OverlayTrigger>
+    </div>
+  </div>
+</div>
+
               </div>
             </div>
             <table className="table table-bordered custom-table text-center">
               <thead>
                 <tr>
+                  <th>Clave</th>
                   <th>Nombre</th>
                   <th>Dosis</th>
                   <th>Presentación</th>
                   <th>Descripción</th>
-                  <th>Acción</th>
+                  <th> Cantidad</th>
+                  <th>Acciones</th>
                 </tr>
               </thead>
               <tbody>
@@ -169,37 +191,53 @@ export function TablaGeneric({ title, data,  }) {
                         </div>
                       </td>
                     ))}
-                    <td className='Buttons'>
-                    <Button
-                        id="btnTables"
-                        className="ms-2 me-2 mb-1"
-                        variant="primary"
-                        onClick={() => {
-                          handleShowModal();
-                          setGetDataFromTable(item);
-                          setActionButtonModal("Editar");
-                        }}
+                    <td className="Buttons">
+                      <OverlayTrigger
+                        placement="top"
+                        overlay={<Tooltip id="tooltip-clear">Editar</Tooltip>}
                       >
-                        <MdChangeCircle className="btn-icon-lg" /> Editar
-                      </Button>
-                    <Button
-                        id="btnTables"
-                        className="ms-2 me-2 mb-1 d-inline"
-                        variant="danger"
-                        onClick={() => {
-                          console.log(item.nombre);
-                          
-                          handleShowModalDelete()
-                        }}
+                        <Button
+                          size={13}
+                          id="btnTables"
+                          className="ms-2 me-2 mb-2 mt-2"
+                          variant="primary"
+                          onClick={() => {
+                            handleShowModal();
+                            setIdMedicine(item.id);
+                            setGetDataFromTable(item);
+                            setActionButtonModal("Editar");
+                          }}
+                        >
+                          <BsPencilFill className="btn-icon-lg" />
+                        </Button>
+                      </OverlayTrigger>
+
+                      <OverlayTrigger
+                        placement="top"
+                        overlay={<Tooltip id="tooltip-clear">Eliminar</Tooltip>}
                       >
-                        <MdDeleteForever
-                          id="btnDeletePatient"
-                          className="btn-icon-lg"
-                        />{" "}
-                        Eliminar
-                      </Button>
-                      
-    </td>
+                        <Button
+                          size={16}
+                          id="btnTables"
+                          className="ms-2 me-2 mb-2 mt-2 d-inline "
+                          variant="danger"
+                          onClick={() => {
+                            setIdMedicine(item.id);
+                            setDataUserMedicine(item);
+                            handleShowModalDelete();
+                          }}
+                        >
+                          <MdDeleteForever
+                            size={13}
+                            onClick={() => {
+                              setDataUserMedicine(item);
+                            }}
+                            id="btnDeletePatient"
+                            className="btn-icon-lg"
+                          />
+                        </Button>
+                      </OverlayTrigger>
+                    </td>
                   </tr>
                 ))}
               </tbody>

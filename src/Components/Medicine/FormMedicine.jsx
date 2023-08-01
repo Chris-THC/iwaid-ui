@@ -6,12 +6,16 @@ import { GetTheAppContext } from "../../Context/AppContext";
 export const FormMedicine = ({ isGetData = {} }) => {
 
   const {
-    setDataUserMedicine,
+    handleShowFloatAlter,
     handleCloseModal,
     actionButtonModal,
-    handleShowFloatAlter,
     setTextAlert,
     setGetDataFromTable,
+    createMedicineFunction,
+    getAllMedicineDataFunction,
+    setGetDataAllMedicine,
+    updateMedicineFunction,
+    idMedicine,
   } = useContext(GetTheAppContext);
 
   const {
@@ -22,22 +26,36 @@ export const FormMedicine = ({ isGetData = {} }) => {
 
  
 
-  const onSubmitClick = (data) => {
-    setDataUserMedicine(data);
-    console.log(data);
-    handleCloseModal();
-    setTextAlert("Datos Guardados");
-    handleShowFloatAlter();
+  const onSubmitClick = async (data) => {
+    if (actionButtonModal === "Agregar") {
+      handleCloseModal();
+
+      try {
+        await createMedicineFunction(data);
+        await getAllMedicineDataFunction(setGetDataAllMedicine);
+        setTextAlert("Medicamento agregado exitosamente");
+        handleShowFloatAlter();
+      } catch (error) {
+        console.error("Error al agregar el medicamento:", error);
+      }
+    } else if (actionButtonModal === "Editar") {
+      handleCloseModal();
+      setTextAlert(`Medicamento  ${data.name} actualizado exitosamente`);
+      try {
+        await updateMedicineFunction(data, idMedicine);
+        await getAllMedicineDataFunction(setGetDataAllMedicine);
+        handleShowFloatAlter();
+      } catch (error) {
+        console.error("Error al agregar el medicamento:", error);
+      }
+    }
   };
-  
-  
-  
     return (
       
       <div>
       <form onSubmit={handleSubmit(onSubmitClick)}>
 
-            <div className="form-group">
+            <div className="form-group mb-3">
         <label>Clave
         <span className="text-danger">*</span>
         </label>
@@ -51,7 +69,7 @@ export const FormMedicine = ({ isGetData = {} }) => {
             maxLength: 5,
             pattern: /^[a-zA-Z0-9]+$/,
           })}
-          defaultValue={isGetData.clave}
+          defaultValue={isGetData.key}
         />
         {errors.clave?.type === "required" && (
           <span className="text-danger">*El dato es requerido</span>
@@ -64,7 +82,7 @@ export const FormMedicine = ({ isGetData = {} }) => {
         )}
       </div>
 
-            <div className="form-group">
+            <div className="form-group mb-3">
         <label>Nombre del medicamento
         <span className="text-danger">*</span>
         </label>
@@ -94,7 +112,7 @@ export const FormMedicine = ({ isGetData = {} }) => {
       </div>
 
 
-      <div className="form-group">
+      <div className="form-group mb-3">
         <label>Dosis
         <span className="text-danger">*</span>
         </label>
@@ -104,37 +122,37 @@ export const FormMedicine = ({ isGetData = {} }) => {
           placeholder="Dosis"
           autoComplete="off"
           {...register("dosis", { required: true })}
-          defaultValue={isGetData.dosis}
+          defaultValue={isGetData.dose}
         />
         {errors.dosis && (
-          <span className="text-danger">*El dato es requerido</span>
+          <span className="text-danger">*Dato requerido</span>
         )}
       </div>
 
-      <div className="form-group col-md-4">
+      <div className="form-group col-md-4 mb-3">
                     <label>Presentación
                     <span className="text-danger">*</span>
                     </label>
                     <select
-                      defaultValue={isGetData.presentation} // Aquí se asigna el valor al select
+                      defaultValue={isGetData.packaging} 
                       className="form-select"
                       autoComplete="off"
-                      {...register("presentation", { required: true })}
+                      {...register("packaging", { required: true })}
                     >
                       <option value="">Seleccione una opción</option>
-                      <option value="Sólidos">Sólidos</option>
-                      <option value="Soluciones">Soluciones</option>
-                      <option value="Suspensiones">Suspensiones</option>
-                      <option value="Emulsiones">Emulsiones</option>
-                      <option value="Otro">Otro</option>
+                      <option value="Liquida">Liquida</option>
+                      <option value="Pastilla">Pastilla</option>
+                      <option value="Gel">Gel</option>
+                      <option value="Crema">Crema</option>
+                      <option value="Supositorio">Supositorio</option>
                     </select>
-                    {errors.presentation && (
-          <span className="text-danger">El dato es requerido</span>
+                    {errors.packaging && (
+          <span className="text-danger">Dato requerido</span>
         )}
                   </div>
                 
 
-                  <div className="form-group">
+                  <div className="form-group mb-3">
         <label>Descripción
         </label>
         <textarea
@@ -145,11 +163,32 @@ export const FormMedicine = ({ isGetData = {} }) => {
           defaultValue={isGetData.description}
         ></textarea>
         {errors.description && (
-          <span className="text-danger">*El dato es requerido</span>
+          <span className="text-danger">*Dato requerido</span>
         )}
       </div>
 
-
+      <div className="form-group mb-3">
+      <label>Cantidad</label>
+      <input
+        type="number"
+        className="form-control"
+        placeholder="Cantidad"
+        {...register("quantity", {
+          required: true,
+          min: 1, 
+          max: 2147483647, 
+          valueAsNumber: true, 
+          pattern: /^\d+$/,
+        })}
+        defaultValue={isGetData.quantity}
+      />
+      {errors.quantity && (
+        <span className="text-danger">*Dato requerido</span>
+      )}
+      {errors.name?.type === "maxLength" && (
+          <span className="text-danger">Límite superado</span>
+        )}
+    </div>
       
     <div>
       <Modal.Footer>

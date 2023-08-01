@@ -9,11 +9,11 @@ export const GetTheAppContext = createContext();
 
 
 export const AppContext = (props) => {
-  const [dataGetAllMedicine, setGetDataAllMedicine] = useState([]);
+  const [dataGetAllMedicine, setAllDataMedicine] = useState([]);
 
   const [dataUserMedicine, setDataUserMedicine] = useState({});
 
-  const [getDataFromTable, setGetDataFromTable] = useState({});
+  const [getDataFromTable, setDataFromTable] = useState({});
 
   const [actionButtonModal, setActionButtonModal] = useState("Agregar");
 
@@ -22,7 +22,7 @@ export const AppContext = (props) => {
   const [idMedicine, setIdMedicine] = useState("");
 
   useEffect(() => {
-    getAllMedicineDataFunction(setGetDataAllMedicine);
+    getAllMedicineDataFunction(setAllDataMedicine);
   }, []);
 
   const [showModal, setShowModal] = useState(false);
@@ -54,7 +54,7 @@ export const AppContext = (props) => {
         dataUserMedicine,
         setDataUserMedicine,
         getDataFromTable,
-        setGetDataFromTable,
+        setDataFromTable,
         actionButtonModal,
         setActionButtonModal,
         handleShowFloatAlter,
@@ -63,7 +63,7 @@ export const AppContext = (props) => {
         textAlert,
         setTextAlert,
         dataGetAllMedicine,
-        setGetDataAllMedicine,
+        setAllDataMedicine,
         getAllMedicineDataFunction,
         createMedicineFunction,
         updateMedicineFunction,

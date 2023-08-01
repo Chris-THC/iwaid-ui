@@ -28,7 +28,7 @@ export function TablaGeneric({ title, data  }) {
     handleShowModal,
     handleCloseModal,
     showModal,
-    setGetDataFromTable,
+    setDataFromTable,
     setActionButtonModal,
     setIdMedicine,
     setDataUserMedicine,
@@ -177,7 +177,7 @@ const allPackaging = data ? [...new Set(data.map((item) => item.packaging))] : [
                   <th>Dosis</th>
                   <th>Presentación</th>
                   <th>Descripción</th>
-                  <th> Cantidad</th>
+                  <th>Cantidad</th>
                   <th>Acciones</th>
                 </tr>
               </thead>
@@ -204,7 +204,7 @@ const allPackaging = data ? [...new Set(data.map((item) => item.packaging))] : [
                           onClick={() => {
                             handleShowModal();
                             setIdMedicine(item.id);
-                            setGetDataFromTable(item);
+                            setDataFromTable(item);
                             setActionButtonModal("Editar");
                           }}
                         >

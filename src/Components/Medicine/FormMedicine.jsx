@@ -13,7 +13,7 @@ export const FormMedicine = ({ isGetData = {} }) => {
     setGetDataFromTable,
     createMedicineFunction,
     getAllMedicineDataFunction,
-    setGetDataAllMedicine,
+    setAllDataMedicine,
     updateMedicineFunction,
     idMedicine,
   } = useContext(GetTheAppContext);
@@ -32,7 +32,7 @@ export const FormMedicine = ({ isGetData = {} }) => {
 
       try {
         await createMedicineFunction(data);
-        await getAllMedicineDataFunction(setGetDataAllMedicine);
+        await getAllMedicineDataFunction(setAllDataMedicine);
         setTextAlert("Medicamento agregado exitosamente");
         handleShowFloatAlter();
       } catch (error) {
@@ -43,7 +43,7 @@ export const FormMedicine = ({ isGetData = {} }) => {
       setTextAlert(`Medicamento  ${data.name} actualizado exitosamente`);
       try {
         await updateMedicineFunction(data, idMedicine);
-        await getAllMedicineDataFunction(setGetDataAllMedicine);
+        await getAllMedicineDataFunction(setAllDataMedicine);
         handleShowFloatAlter();
       } catch (error) {
         console.error("Error al agregar el medicamento:", error);

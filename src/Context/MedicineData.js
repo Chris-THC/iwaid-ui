@@ -1,35 +1,25 @@
 import axios from "axios";
 
-//const MedicineURL = "http://localhost:8081/iwaid/doctors/";
+const MedicineURL = "http://localhost:8081/iwaid/medicines/";
 
 export const getAllMedicineDataFunction = async (setGetAllMedicine) => {
-//  { try {
-//     const dataGetAll = {
- //      key: null, 
-//       name: null,
-//       dose: null,
-//     };
-
-//     const response = await axios.get(MedicineURL, {
-//       params: dataGetAll,
-//     });
-//     console.log(response.data);
-//     setGetAllMedicine(response.data);
-//   } catch (error) {
-//     console.error("Error al enviar la solicitud:", error);
-//   }}
-const response = [
   {
-    id: "1",
-    key: "123",
-    name: "paracetamol",
-    dose: "500",
-    packaging: "Pastilla",
-    description: "Dolor general",
-    quantity: 99
-  }];
+    try {
+      const dataGetAll = {
+        code: null,
+        name: null,
+        dosageForms: null,
+      };
 
-setGetAllMedicine(response);
+      const response = await axios.get(MedicineURL, {
+        params: dataGetAll,
+      });
+      console.log(response.data);
+      setGetAllMedicine(response.data);
+    } catch (error) {
+      console.error("Error al enviar la solicitud:", error);
+    }
+  }
 };
 
 export const createMedicineFunction = async (arrayData) => {

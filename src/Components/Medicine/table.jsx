@@ -35,10 +35,10 @@ export function TablaGeneric({ title, data  }) {
   } = useContext(GetTheAppContext);
 
   const displayedFields = [
-    "key",
+    "code",
     "name",
     "dose",
-    "packaging",
+    "dosageForms",
     "description",
     "quantity"
   ];

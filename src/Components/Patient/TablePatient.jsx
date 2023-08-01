@@ -26,7 +26,6 @@ export const TablePatient = ({ dataTable }) => {
     showModal,
     setGetDataFromTable,
     setActionButtonModal,
-    setDoctorId,
     setDataUserPatient,
   } = useContext(GetTheAppContext);
 
@@ -197,7 +196,7 @@ export const TablePatient = ({ dataTable }) => {
                       />
                     </div>
 
-                    <div className="col-md-8 d-flex flex-row-reverse">
+                    <div className="col-md-9 d-flex flex-row-reverse">
                       <div className=" w-auto p-4">
                         <OverlayTrigger
                           placement="top"
@@ -206,7 +205,7 @@ export const TablePatient = ({ dataTable }) => {
                           }
                         >
                           <button
-                            id="btnClearTable"
+                            id="iconoClear"
                             className="btn btn-secondary"
                             type="button"
                             onClick={handleClear}

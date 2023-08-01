@@ -3,10 +3,10 @@ import { TablePatient } from "./TablePatient";
 import { GetTheAppContext } from "../../Context/AppContext";
 
 export const CrudPatient = () => {
-  const { getDataAllPatients } = useContext(GetTheAppContext);
+  const { getDataAllPatients, dataTest } = useContext(GetTheAppContext);
   return (
     <div>
-      <TablePatient dataTable={getDataAllPatients || []} />
+      <TablePatient dataTable={dataTest || []} />
     </div>
   );
 };

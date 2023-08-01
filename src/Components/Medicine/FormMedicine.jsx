@@ -69,7 +69,7 @@ export const FormMedicine = ({ isGetData = {} }) => {
             maxLength: 5,
             pattern: /^[a-zA-Z0-9]+$/,
           })}
-          defaultValue={isGetData.key}
+          defaultValue={isGetData.code}
         />
         {errors.clave?.type === "required" && (
           <span className="text-danger">*Dato requerido</span>

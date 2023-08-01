@@ -14,10 +14,10 @@ export function TablaGeneric({ title, data  }) {
 
   const [showModalDelete, setShowModalDelete] = useState(false);
   
-  // const[id, setid] = useState(null);
+  
   const handleShowModalDelete = () => {
     setShowModalDelete(true);
-    // setid(Id);
+    
   };
 
   const handleCloseModalDelete = () => {
@@ -45,27 +45,27 @@ export function TablaGeneric({ title, data  }) {
   
 const allPackaging = data ? [...new Set(data.map((item) => item.packaging))] : [];
   const [searchName, setSearchName] = useState("");
-  const [searchDosis, setSearchDosis] = useState("");
+  const [searchDoses, setSearchDoses] = useState("");
   const [searchPackaging, setSearchPackaging] = useState("");
 
   const handleClear = () => {
     setSearchName("");
-    setSearchDosis("");
+    setSearchDoses("");
     setSearchPackaging("");
   };
 
   const filteredData = data.filter((item) => {
-    const nombreMatches = item.name
+    const nameMatches = item.name
       .toLowerCase()
       .includes(searchName.toLowerCase());
 
-    const dosisMatches = item.dose.includes(searchDosis);
+    const doseMatches = item.dose.includes(searchDoses);
 
     const packagingMatches = searchPackaging
       ? item.packaging.toLowerCase() === searchPackaging.toLowerCase()
       : true;
 
-    return nombreMatches && dosisMatches && packagingMatches;
+    return nameMatches && doseMatches && packagingMatches;
   });
   return (
     <div className="container mt-5">
@@ -113,7 +113,7 @@ const allPackaging = data ? [...new Set(data.map((item) => item.packaging))] : [
         value={searchName}
         onChange={(e) => {
           setSearchName(e.target.value);
-          setSearchDosis("");
+          setSearchDoses("");
           setSearchPackaging("");
         }}
         placeholder="Buscar por nombre..."
@@ -125,9 +125,9 @@ const allPackaging = data ? [...new Set(data.map((item) => item.packaging))] : [
       <input
         type="number"
         className="form-control"
-        value={searchDosis}
+        value={searchDoses}
         onChange={(e) => {
-          setSearchDosis(e.target.value);
+          setSearchDoses(e.target.value);
           setSearchName("");
           setSearchPackaging("");
         }}

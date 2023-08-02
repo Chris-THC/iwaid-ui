@@ -4,7 +4,7 @@ import { FormMedicine } from "./FormMedicine";
 import { GetTheAppContext } from "../../Context/AppContext";
 
 export const ModalMedicine = ({ show, handleClose }) => {
-  const { setDataFromTable, getDataFromTable, actionButtonModal } =
+  const { setDataMedicineFromTable, dataMedicineFromTable, actionButtonModal } =
   useContext(GetTheAppContext);
 
   return (
@@ -13,14 +13,14 @@ export const ModalMedicine = ({ show, handleClose }) => {
       show={show}
       onHide={() => {
         handleClose();
-        setDataFromTable({});
+        setDataMedicineFromTable({});
       }}
     >
       <Modal.Header closeButton>
         <Modal.Title>{actionButtonModal} medicamento</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <FormMedicine isGetData={getDataFromTable} />
+        <FormMedicine isGetData={dataMedicineFromTable} />
       </Modal.Body>
     </Modal>
   );

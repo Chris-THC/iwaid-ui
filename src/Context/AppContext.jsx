@@ -14,10 +14,10 @@ import {
 } from "./DoctorData.js";
 
 import {
-    getAllMedicineDataFunction,
-    createMedicineFunction,
-    updateMedicineFunction,
-    deleteMedicineFunction,
+  getAllMedicineDataFunction,
+  createMedicineFunction,
+  updateMedicineFunction,
+  deleteMedicineFunction,
 } from "./MedicineData.js";
 
 export const GetTheAppContext = createContext();
@@ -26,6 +26,8 @@ export const AppContext = (props) => {
   const [dataGetAllDoctors, setGetDataAllDoctors] = useState([]);
   const [dataUserDoctor, setDataUserDoctor] = useState({});
   const [getDataFromTable, setGetDataFromTable] = useState({});
+
+  const [dataMedicineFromTable, setDataMedicineFromTable] = useState({});
 
   const [actionButtonModal, setActionButtonModal] = useState("Agregar");
 
@@ -37,12 +39,13 @@ export const AppContext = (props) => {
   const [dataUserPatient, setDataUserPatient] = useState({});
   const [patientId, setPatientId] = useState("");
 
-
   const [dataGetAllMedicine, setAllDataMedicine] = useState([]);
   const [dataUserMedicine, setDataUserMedicine] = useState({});
   const [idMedicine, setIdMedicine] = useState("");
 
   const [showModal, setShowModal] = useState(false);
+
+  const [nameMedicine, setNameMedicine] = useState(false);
 
   useEffect(() => {
     getAllDoctorsDataFunction(setGetDataAllDoctors);
@@ -82,7 +85,6 @@ export const AppContext = (props) => {
         setDataUserMedicine,
         getDataFromTable,
         setGetDataFromTable,
-        setDataFromTable,
         actionButtonModal,
         setActionButtonModal,
         handleShowFloatAlter,
@@ -114,6 +116,10 @@ export const AppContext = (props) => {
         idMedicine,
         setIdMedicine,
         deleteMedicineFunction,
+        dataMedicineFromTable,
+        setDataMedicineFromTable,
+        nameMedicine,
+        setNameMedicine,
       }}
     >
       {props.children}

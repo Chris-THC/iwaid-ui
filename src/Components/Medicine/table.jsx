@@ -1,37 +1,35 @@
-import React, {useState, useContext} from 'react';
-import '../../Css/CssTable.css';
+import React, { useState, useContext } from "react";
+import "../../Css/CssTable.css";
 import { GetTheAppContext } from "../../Context/AppContext";
-import { ModalMedicine } from './modal';
-import { MyModalDelete } from './modalDelete';
-import { BsPersonFillAdd, BsPencilFill  } from "react-icons/bs";
-import { MdDeleteForever } from 'react-icons/md';
+import { ModalMedicine } from "./modal";
+import { MyModalDelete } from "./modalDelete";
+import { BsPersonFillAdd, BsPencilFill } from "react-icons/bs";
+import { MdDeleteForever } from "react-icons/md";
 import { LuFilterX } from "react-icons/lu";
 import { Button } from "react-bootstrap";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 
-export function TablaGeneric({ title, data  }) {
-
+export function TablaGeneric({ title, data }) {
   const [showModalDelete, setShowModalDelete] = useState(false);
-  
-  
+
   const handleShowModalDelete = () => {
     setShowModalDelete(true);
-    
   };
 
   const handleCloseModalDelete = () => {
     setShowModalDelete(false);
   };
-  
+
   const {
     handleShowModal,
     handleCloseModal,
     showModal,
-    setDataFromTable,
+    setDataMedicineFromTable,
     setActionButtonModal,
     setIdMedicine,
     setDataUserMedicine,
+    setNameMedicine,
   } = useContext(GetTheAppContext);
 
   const displayedFields = [
@@ -39,11 +37,13 @@ export function TablaGeneric({ title, data  }) {
     "name",
     "dose",
     "dosageForms",
-    "presentation",
-    "quantity"
+    "description",
+    "quantity",
   ];
-  
-const allPackaging = data ? [...new Set(data.map((item) => item.packaging))] : [];
+
+  const allPackaging = data
+    ? [...new Set(data.map((item) => item.dosageForms))]
+    : [];
   const [searchName, setSearchName] = useState("");
   const [searchDoses, setSearchDoses] = useState("");
   const [searchPackaging, setSearchPackaging] = useState("");
@@ -102,71 +102,70 @@ const allPackaging = data ? [...new Set(data.map((item) => item.packaging))] : [
                 <h4>Buscar</h4>
               </div>
               <div className="row">
-              <div className="container mb-4">
-  <div className="row">
-    <div className="col mb-4">
-      <label>Nombre</label>
-      <input
-        autoComplete="off"
-        type="text"
-        className="form-control"
-        value={searchName}
-        onChange={(e) => {
-          setSearchName(e.target.value);
-          setSearchDoses("");
-          setSearchPackaging("");
-        }}
-        placeholder="Buscar por nombre..."
-        pattern="^[A-Za-z\s]+$"
-      />
-    </div>
-    <div className="col mb-4">
-      <label>Dosis</label>
-      <input
-        type="number"
-        className="form-control"
-        value={searchDoses}
-        onChange={(e) => {
-          setSearchDoses(e.target.value);
-          setSearchName("");
-          setSearchPackaging("");
-        }}
-        placeholder="Buscar por dosis..."
-      />
-    </div>
-    <div className="col mb-4">
-      <label>Presentación</label>
-      <select
-        className="form-select"
-        value={searchPackaging}
-        onChange={(e) => setSearchPackaging(e.target.value)}
-      >
-        <option value="">Todas las presentaciones</option>
-        {allPackaging.map((packaging, index) => (
-          <option key={index} value={packaging}>
-            {packaging}
-          </option>
-        ))}
-      </select>
-    </div>
-    <div className="col mb-4 d-flex justify-content align-items-center">
-      <OverlayTrigger
-        placement="top"
-        overlay={<Tooltip id="tooltip-clear">Limpiar</Tooltip>}
-      >
-        <button
-          id="iconoClear"
-          className="btn"
-          type="button"
-          onClick={handleClear}
-        >
-          <LuFilterX color="white" />
-        </button>
-      </OverlayTrigger>
-    </div>
-  </div>
-</div>
-
+                <div className="container mb-4">
+                  <div className="row">
+                    <div className="col mb-4">
+                      <label>Nombre</label>
+                      <input
+                        autoComplete="off"
+                        type="text"
+                        className="form-control"
+                        value={searchName}
+                        onChange={(e) => {
+                          setSearchName(e.target.value);
+                          setSearchDoses("");
+                          setSearchPackaging("");
+                        }}
+                        placeholder="Buscar por nombre..."
+                        pattern="^[A-Za-z\s]+$"
+                      />
+                    </div>
+                    <div className="col mb-4">
+                      <label>Dosis</label>
+                      <input
+                        type="number"
+                        className="form-control"
+                        value={searchDoses}
+                        onChange={(e) => {
+                          setSearchDoses(e.target.value);
+                          setSearchName("");
+                          setSearchPackaging("");
+                        }}
+                        placeholder="Buscar por dosis..."
+                      />
+                    </div>
+                    <div className="col mb-4">
+                      <label>Presentación</label>
+                      <select
+                        className="form-select"
+                        value={searchPackaging}
+                        onChange={(e) => setSearchPackaging(e.target.value)}
+                      >
+                        <option value="">Todas las presentaciones</option>
+                        {allPackaging.map((packaging, index) => (
+                          <option key={index} value={packaging}>
+                            {packaging}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                    <div className="col mb-4 d-flex justify-content align-items-center">
+                      <OverlayTrigger
+                        placement="top"
+                        overlay={<Tooltip id="tooltip-clear">Limpiar</Tooltip>}
+                      >
+                        <button
+                          id="iconoClear"
+                          className="btn"
+                          type="button"
+                          onClick={handleClear}
+                        >
+                          <LuFilterX color="white" />
+                        </button>
+                      </OverlayTrigger>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
             <table className="table table-bordered custom-table text-center">
@@ -186,7 +185,7 @@ const allPackaging = data ? [...new Set(data.map((item) => item.packaging))] : [
                   <tr key={index}>
                     {displayedFields.map((field) => (
                       <td key={field}>
-                        <div id="idTextPatient" className="d-inline">
+                        <div id="idTextMedicine" className="d-inline">
                           {item[field]}
                         </div>
                       </td>
@@ -204,7 +203,7 @@ const allPackaging = data ? [...new Set(data.map((item) => item.packaging))] : [
                           onClick={() => {
                             handleShowModal();
                             setIdMedicine(item.id);
-                            setDataFromTable(item);
+                            setDataMedicineFromTable(item);
                             setActionButtonModal("Editar");
                           }}
                         >
@@ -224,6 +223,7 @@ const allPackaging = data ? [...new Set(data.map((item) => item.packaging))] : [
                           onClick={() => {
                             setIdMedicine(item.id);
                             setDataUserMedicine(item);
+                            setNameMedicine(item.name);
                             handleShowModalDelete();
                           }}
                         >
@@ -231,8 +231,9 @@ const allPackaging = data ? [...new Set(data.map((item) => item.packaging))] : [
                             size={13}
                             onClick={() => {
                               setDataUserMedicine(item);
+                              setNameMedicine(item.name);
                             }}
-                            id="btnDeletePatient"
+                            id="btnDeleteMedicine"
                             className="btn-icon-lg"
                           />
                         </Button>
@@ -244,10 +245,12 @@ const allPackaging = data ? [...new Set(data.map((item) => item.packaging))] : [
             </table>
           </div>
           <ModalMedicine show={showModal} handleClose={handleCloseModal} />
-          <MyModalDelete show={showModalDelete} handleClose={handleCloseModalDelete}  />
+          <MyModalDelete
+            show={showModalDelete}
+            handleClose={handleCloseModalDelete}
+          />
         </div>
       </div>
     </div>
-  
   );
 }

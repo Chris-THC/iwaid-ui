@@ -29,10 +29,10 @@
     font-size: 12px;
   }
 
-  #inputSearchPatient {
+  #inputSearchMedicine {
     font-size: 12px;
   }
-  #selectSearchPatient {
+  #btnDeleteMedicine {
     font-size: 12px;
   }
 }
@@ -46,7 +46,7 @@
     font-size: 9px;
   }
 
-  #idTextPatient {
+  #idTextMedicine {
     font-size: 9px;
   }
 
@@ -54,11 +54,11 @@
     font-size: 12px;
   }
 
-  #inputSearchPatient {
+  #inputSearchMedicine {
     font-size: 9px;
   }
 
-  #selectSearchPatient {
+  #selectSearchMedicine {
     font-size: 9px;
   }
 

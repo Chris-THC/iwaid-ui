@@ -37,8 +37,9 @@ export function TablaGeneric({ title, data  }) {
   const displayedFields = [
     "code",
     "name",
+    "dose",
     "dosageForms",
-    "description",
+    "presentation",
     "quantity"
   ];
   
@@ -61,7 +62,7 @@ const allPackaging = data ? [...new Set(data.map((item) => item.packaging))] : [
     const doseMatches = item.dose.includes(searchDoses);
 
     const packagingMatches = searchPackaging
-      ? item.packaging.toLowerCase() === searchPackaging.toLowerCase()
+      ? item.dosageForms.toLowerCase() === searchPackaging.toLowerCase()
       : true;
 
     return nameMatches && doseMatches && packagingMatches;

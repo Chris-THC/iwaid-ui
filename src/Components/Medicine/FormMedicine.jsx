@@ -122,7 +122,7 @@ export const FormMedicine = ({ isGetData = {} }) => {
           placeholder="Dosis"
           autoComplete="off"
           {...register("dosis", { required: true })}
-          defaultValue={isGetData.dosageForms}
+          defaultValue={isGetData.dose}
         />
         {errors.dosis && (
           <span className="text-danger">Dato requerido</span>
@@ -134,7 +134,7 @@ export const FormMedicine = ({ isGetData = {} }) => {
                     <span className="text-danger">*</span>
                     </label>
                     <select
-                      defaultValue={isGetData.packaging} 
+                      defaultValue={isGetData.dosageForms} 
                       className="form-select"
                       autoComplete="off"
                       {...register("packaging", { required: true })}
@@ -146,7 +146,7 @@ export const FormMedicine = ({ isGetData = {} }) => {
                       <option value="Crema">Crema</option>
                       <option value="Supositorio">Supositorio</option>
                     </select>
-                    {errors.packaging && (
+                    {errors.dosageForms && (
           <span className="text-danger">Dato requerido</span>
         )}
                   </div>

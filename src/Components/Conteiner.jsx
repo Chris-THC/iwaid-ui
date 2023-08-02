@@ -13,7 +13,7 @@ export function Conteiner() {
     return (
       <div className=" container alert alert-danger">
         <h1 className="text-center">
-          Lo sentimos, la página que estás buscando no se encuentra.
+          Lo sentimos, la página que estás buscando no se encuentra disponible.
         </h1>
       </div>
     );

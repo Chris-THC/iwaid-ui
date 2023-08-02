@@ -72,13 +72,13 @@ export const FormMedicine = ({ isGetData = {} }) => {
           defaultValue={isGetData.code}
         />
         {errors.clave?.type === "required" && (
-          <span className="text-danger">*Dato requerido</span>
+          <span className="text-danger">Dato requerido</span>
         )}
         {errors.clave?.type === "maxLength" && (
-          <span className="text-danger">*Máximo 5 caracteres</span>
+          <span className="text-danger">Máximo 5 caracteres</span>
         )}
         {errors.clave?.type === "pattern" && (
-          <span className="text-danger">*Solo caracteres alfanuméricos</span>
+          <span className="text-danger">Solo caracteres alfanuméricos</span>
         )}
       </div>
 
@@ -99,10 +99,10 @@ export const FormMedicine = ({ isGetData = {} }) => {
           defaultValue={isGetData.name}
         />
         {errors.name?.type === "required" && (
-          <span className="text-danger">*El dato es requerido</span>
+          <span className="text-danger">El dato es requerido</span>
         )}
         {errors.name?.type === "maxLength" && (
-          <span className="text-danger">*Máximo 100 caracteres</span>
+          <span className="text-danger">Máximo 100 caracteres</span>
         )}
         {errors.name?.type === "pattern" && (
           <span className="text-danger">
@@ -125,7 +125,7 @@ export const FormMedicine = ({ isGetData = {} }) => {
           defaultValue={isGetData.dosageForms}
         />
         {errors.dosis && (
-          <span className="text-danger">*Dato requerido</span>
+          <span className="text-danger">Dato requerido</span>
         )}
       </div>
 
@@ -140,7 +140,7 @@ export const FormMedicine = ({ isGetData = {} }) => {
                       {...register("packaging", { required: true })}
                     >
                       <option value="">Seleccione una opción</option>
-                      <option value="Liquida">Liquida</option>
+                      <option value="Líquida">Liquida</option>
                       <option value="Pastilla">Pastilla</option>
                       <option value="Gel">Gel</option>
                       <option value="Crema">Crema</option>
@@ -163,12 +163,14 @@ export const FormMedicine = ({ isGetData = {} }) => {
           defaultValue={isGetData.description}
         ></textarea>
         {errors.description && (
-          <span className="text-danger">*Dato requerido</span>
+          <span className="text-danger">Dato requerido</span>
         )}
       </div>
 
       <div className="form-group mb-3">
-      <label>Cantidad</label>
+      <label>Cantidad
+      <span className="text-danger">*</span>
+      </label>
       <input
         type="number"
         className="form-control"
@@ -183,10 +185,10 @@ export const FormMedicine = ({ isGetData = {} }) => {
         defaultValue={isGetData.quantity}
       />
       {errors.quantity && (
-        <span className="text-danger">*Dato requerido</span>
+        <span className="text-danger">Dato requerido</span>
       )}
       {errors.name?.type === "maxLength" && (
-          <span className="text-danger">Límite superado</span>
+          <span className="text-danger">El valor ingresado excede el límite máximo de 2147483647.</span>
         )}
     </div>
       

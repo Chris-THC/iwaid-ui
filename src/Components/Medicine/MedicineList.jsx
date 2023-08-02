@@ -6,7 +6,6 @@ const MedicineList = () => {
  
   const { dataGetAllMedicine } = useContext(GetTheAppContext);
   
-   //return <TablaGeneric  title='MEDICAMENTOS' data={dataTestMedicine}  />
    return <TablaGeneric title="MEDICAMENTOS" data={dataGetAllMedicine || []} />;
 };
 

@@ -1,4 +1,11 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useState, useEffect } from "react";
+import {
+  createPatientFunction,
+  deletePatientFunction,
+  getAllPatientDataFunction,
+  updatePatientFunction,
+} from "./PatientData.js";
+
 import {
   getAllDoctorsDataFunction,
   createDoctorFunction,
@@ -10,9 +17,7 @@ export const GetTheAppContext = createContext();
 
 export const AppContext = (props) => {
   const [dataGetAllDoctors, setGetDataAllDoctors] = useState([]);
-
   const [dataUserDoctor, setDataUserDoctor] = useState({});
-
   const [getDataFromTable, setGetDataFromTable] = useState({});
 
   const [actionButtonModal, setActionButtonModal] = useState("Agregar");
@@ -21,11 +26,16 @@ export const AppContext = (props) => {
 
   const [doctorId, setDoctorId] = useState("");
 
-  useEffect(() => {
-    getAllDoctorsDataFunction(setGetDataAllDoctors);
-  }, []);
+  const [getAllPatientsData, setGetAllPatientsData] = useState([]);
+  const [dataUserPatient, setDataUserPatient] = useState({});
+  const [patientId, setPatientId] = useState("");
 
   const [showModal, setShowModal] = useState(false);
+
+  useEffect(() => {
+    getAllDoctorsDataFunction(setGetDataAllDoctors);
+    getAllPatientDataFunction(setGetAllPatientsData);
+  }, []);
 
   const handleShowModal = () => {
     setShowModal(true);
@@ -53,6 +63,8 @@ export const AppContext = (props) => {
         showModal,
         dataUserDoctor,
         setDataUserDoctor,
+        dataUserPatient,
+        setDataUserPatient,
         getDataFromTable,
         setGetDataFromTable,
         actionButtonModal,
@@ -70,6 +82,14 @@ export const AppContext = (props) => {
         doctorId,
         setDoctorId,
         deleteDoctorFunction,
+        createPatientFunction,
+        deletePatientFunction,
+        getAllPatientDataFunction,
+        updatePatientFunction,
+        getAllPatientsData,
+        setGetAllPatientsData,
+        patientId,
+        setPatientId,
       }}
     >
       {props.children}

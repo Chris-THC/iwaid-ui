@@ -109,7 +109,7 @@ export const TablePatient = ({ dataTable }) => {
               <div className="row">
                 <div className="container mb-1">
                   <div className="row">
-                    <div className="col-md-3 mb-1">
+                    <div className="col-md-2 mb-1">
                       <label>Nombre</label>
                       <input
                         autoComplete="off"
@@ -140,13 +140,13 @@ export const TablePatient = ({ dataTable }) => {
                           setSearchByRfc("");
                         }}
                       >
-                        <option value="">Selecciona un género...</option>
+                        <option value="">Seleccionar género...</option>
                         <option value="Masculino">Masculino</option>
                         <option value="Femenino">Femenino</option>
                         <option value="Otro">Otro</option>
                       </select>
                     </div>
-                    <div className="col-md-3 mb-1">
+                    <div className="col-md-2 mb-1">
                       <label>Ciudad</label>
                       <input
                         type="text"
@@ -163,7 +163,7 @@ export const TablePatient = ({ dataTable }) => {
                       />
                     </div>
 
-                    <div className="col-md-3 mb-1">
+                    <div className="col-md-2 mb-1">
                       <label>RFC</label>
                       <input
                         type="text"
@@ -176,11 +176,11 @@ export const TablePatient = ({ dataTable }) => {
                           setSearchByGender("");
                           setSearchByCity("");
                         }}
-                        placeholder="Buscar por fecha de nacimiento..."
+                        placeholder="Buscar por RFC..."
                       />
                     </div>
 
-                    <div className="col-md-3 mb-1">
+                    <div className="col-md-2 mb-1">
                       <label>Rango año de nacimiento</label>
                       <input
                         type="number"
@@ -193,11 +193,11 @@ export const TablePatient = ({ dataTable }) => {
                           setSearchByCity("");
                           setSearchByRfc("");
                         }}
-                        placeholder="Buscar por año de nacimiento..."
+                        placeholder="Buscar por fecha de nacimiento..."
                       />
                     </div>
 
-                    <div className="col-md-9 d-flex flex-row-reverse">
+                    <div className="col-md-2 d-flex flex-row-reverse">
                       <div className=" w-auto p-4">
                         <OverlayTrigger
                           placement="top"

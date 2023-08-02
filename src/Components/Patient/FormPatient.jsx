@@ -98,7 +98,7 @@ export const FormPatient = ({ isGetData = {} }) => {
             )}
           </div>
 
-          <div className="form-group row mb-3">
+          <div className="form-group row">
             <div className="form-group col-md-8">
               <label>Fecha de Nacimiento</label>
               <span className="text-danger">*</span>
@@ -142,24 +142,24 @@ export const FormPatient = ({ isGetData = {} }) => {
           </div>
         </div>
 
-        <div className="form-group col-md-8 mb-3">
-          <label>RFC</label>
-          <span className="text-danger">*</span>
-          <input
-            defaultValue={rfcValue || isGetData.rfc}
-            type="text"
-            className="form-control"
-            placeholder="RFC"
-            autoComplete="off"
-            {...register("rfc", { required: true })}
-            onChange={handleInputChange}
-            style={{ textTransform: "uppercase" }}
-          />
-          {rfcError && <span className="text-danger">{rfcError}</span>}
-        </div>
+        <div className="form-group row ">
+          <div className="form-group col-md-8 mb-3">
+            <label>RFC</label>
+            <span className="text-danger">*</span>
+            <input
+              defaultValue={rfcValue || isGetData.rfc}
+              type="text"
+              className="form-control"
+              placeholder="RFC"
+              autoComplete="off"
+              {...register("rfc", { required: true })}
+              onChange={handleInputChange}
+              style={{ textTransform: "uppercase" }}
+            />
+            {rfcError && <span className="text-danger">{rfcError}</span>}
+          </div>
 
-        <div className="form-group row mb-3">
-          <div className="form-group col-md-8">
+          <div className="form-group col-md-8 mb-3">
             <label>Dirección</label>
             <span className="text-danger">*</span>
             <input
@@ -217,9 +217,7 @@ export const FormPatient = ({ isGetData = {} }) => {
               defaultValue={isGetData.phoneNumber}
             />
             {errors.phoneNumber?.type === "required" && (
-              <span className="text-danger">
-                Dato requerido
-              </span>
+              <span className="text-danger">Dato requerido</span>
             )}
             {errors.phoneNumber?.type === "pattern" && (
               <span className="text-danger">Ingrese solo números</span>

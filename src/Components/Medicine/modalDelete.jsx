@@ -38,10 +38,10 @@ export const MyModalDelete = ({ show, handleClose }) => {
               await deleteMedicineFunction(idMedicine);
               await getAllMedicineDataFunction(setGetDataAllMedicine);
               handleButtonClick();
-              setTextAlert(`Se eliminó al usuario con id ${idMedicine}`);
+              setTextAlert(`Se eliminó medicamento con id ${idMedicine}`);
               handleShowFloatAlter();
             } catch (error) {
-              console.error("Error al agregar el médico:", error);
+              console.error("Error al eliminar medicamento:", error);
             }
           }}
         >

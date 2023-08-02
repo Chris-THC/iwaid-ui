@@ -46,7 +46,7 @@ export const FormMedicine = ({ isGetData = {} }) => {
         await getAllMedicineDataFunction(setAllDataMedicine);
         handleShowFloatAlter();
       } catch (error) {
-        console.error("Error al agregar el medicamento:", error);
+        console.error("Error al actualizar medicamento:", error);
       }
     }
   };

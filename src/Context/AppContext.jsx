@@ -5,28 +5,41 @@ import {
   getAllPatientDataFunction,
   updatePatientFunction,
 } from "./PatientData.js";
+
+import {
+    getAllDoctorsDataFunction,
+    createDoctorFunction,
+    updateDoctorFunction,
+    deleteDoctorFunction,
+} from "./DoctorData.js";
+
 export const GetTheAppContext = createContext();
 
 export const AppContext = (props) => {
-  const [getAllPatientsData, setGetAllPatientsData] = useState([]);
+    const [dataGetAllDoctors, setGetDataAllDoctors] = useState([]);
+    const [dataUserDoctor, setDataUserDoctor] = useState({});
+    const [getDataFromTable, setGetDataFromTable] = useState({});
 
-  useEffect(() => {
-    getAllPatientDataFunction(setGetAllPatientsData);
-  }, []);
+    const [actionButtonModal, setActionButtonModal] = useState("Agregar");
 
-  const [dataUserPatient, setDataUserPatient] = useState({});
+    const [textAlert, setTextAlert] = useState("");
 
-  const [getDataFromTable, setGetDataFromTable] = useState({});
+    const [doctorId, setDoctorId] = useState("");
 
-  const [actionButtonModal, setActionButtonModal] = useState("Agregar");
-
-  const [textAlert, setTextAlert] = useState("");
-
+    const [getAllPatientsData, setGetAllPatientsData] = useState([]);
+    const [dataUserPatient, setDataUserPatient] = useState({});
   const [patientId, setPatientId] = useState("");
 
   const [showModal, setShowModal] = useState(false);
 
-  const handleShowModal = () => {
+    useEffect(() => {
+        getAllDoctorsDataFunction(setGetDataAllDoctors);
+        getAllPatientDataFunction(setGetAllPatientsData);
+    }, []);
+
+
+
+    const handleShowModal = () => {
     setShowModal(true);
   };
 
@@ -50,6 +63,8 @@ export const AppContext = (props) => {
         handleCloseModal,
         handleShowModal,
         showModal,
+        dataUserDoctor,
+        setDataUserDoctor,
         dataUserPatient,
         setDataUserPatient,
         getDataFromTable,
@@ -61,6 +76,14 @@ export const AppContext = (props) => {
         showFloatingAlert,
         textAlert,
         setTextAlert,
+        dataGetAllDoctors,
+        setGetDataAllDoctors,
+        getAllDoctorsDataFunction,
+        createDoctorFunction,
+        updateDoctorFunction,
+        doctorId,
+        setDoctorId,
+        deleteDoctorFunction,
         createPatientFunction,
         deletePatientFunction,
         getAllPatientDataFunction,

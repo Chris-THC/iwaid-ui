@@ -180,6 +180,7 @@ export const TablePatient = ({ dataTable }) => {
                       />
                     </div>
 
+                    {/* Fix the date reset input so that you can only receive 2 years and return all patients who are within range.   */}
                     <div className="col-md-2 mb-1">
                       <label>Rango año de nacimiento</label>
                       <input
@@ -262,12 +263,12 @@ export const TablePatient = ({ dataTable }) => {
                       >
                         <Button
                           id="btnTables"
-                          className="ms-2 me-2 mb-1"
+                          className="ms-2 me-2 mb-2 mt-2"
                           variant="primary"
                           onClick={() => {
                             handleShowModal();
                             setGetDataFromTable(item);
-                            setPatientId(item.id)
+                            setPatientId(item.id);
                             setActionButtonModal("Editar");
                           }}
                         >
@@ -282,7 +283,7 @@ export const TablePatient = ({ dataTable }) => {
                         <Button
                           size={16}
                           id="btnTables"
-                          className="ms-2 me-2 mb-1 d-inline"
+                          className="ms-2 me-2 mb-2 mt-2"
                           variant="danger"
                           onClick={() => {
                             setPatientId(item.id);

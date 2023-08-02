@@ -106,7 +106,7 @@ export const FormMedicine = ({ isGetData = {} }) => {
         )}
         {errors.name?.type === "pattern" && (
           <span className="text-danger">
-            *Solo caracteres alfanuméricos y espacios
+            Solo caracteres alfanuméricos y espacios
           </span>
         )}
       </div>
@@ -140,7 +140,7 @@ export const FormMedicine = ({ isGetData = {} }) => {
                       {...register("packaging", { required: true })}
                     >
                       <option value="">Seleccione una opción</option>
-                      <option value="Líquida">Liquida</option>
+                      <option value="Liquida">Líquida</option>
                       <option value="Pastilla">Pastilla</option>
                       <option value="Gel">Gel</option>
                       <option value="Crema">Crema</option>

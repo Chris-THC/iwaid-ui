@@ -35,6 +35,10 @@
   #selectSearchPatient {
     font-size: 12px;
   }
+
+  #input-table{
+    font-size: 12px;
+  }
 }
 
 @media (max-width: 550px) {
@@ -60,6 +64,15 @@
 
   #selectSearchPatient {
     font-size: 9px;
+  }
+  #input-table input{
+    font-size: 9px;
+    height: auto;
+  }
+
+  #input-table select{
+    font-size: 9px;
+    height: auto;
   }
 
   #btnTables {

@@ -106,7 +106,7 @@ export const TablePatient = ({ dataTable }) => {
               <div className="col-md-4 mb-3">
                 <h4>Buscar</h4>
               </div>
-              <div className="row">
+              <div id="input-table" className="row">
                 <div className="container mb-1">
                   <div className="row">
                     <div className="col-md-2 mb-1">

@@ -267,6 +267,7 @@ export const TablePatient = ({ dataTable }) => {
                           onClick={() => {
                             handleShowModal();
                             setGetDataFromTable(item);
+                            setPatientId(item.id)
                             setActionButtonModal("Editar");
                           }}
                         >

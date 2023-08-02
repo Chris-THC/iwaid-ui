@@ -7,39 +7,37 @@ import {
 } from "./PatientData.js";
 
 import {
-    getAllDoctorsDataFunction,
-    createDoctorFunction,
-    updateDoctorFunction,
-    deleteDoctorFunction,
+  getAllDoctorsDataFunction,
+  createDoctorFunction,
+  updateDoctorFunction,
+  deleteDoctorFunction,
 } from "./DoctorData.js";
 
 export const GetTheAppContext = createContext();
 
 export const AppContext = (props) => {
-    const [dataGetAllDoctors, setGetDataAllDoctors] = useState([]);
-    const [dataUserDoctor, setDataUserDoctor] = useState({});
-    const [getDataFromTable, setGetDataFromTable] = useState({});
+  const [dataGetAllDoctors, setGetDataAllDoctors] = useState([]);
+  const [dataUserDoctor, setDataUserDoctor] = useState({});
+  const [getDataFromTable, setGetDataFromTable] = useState({});
 
-    const [actionButtonModal, setActionButtonModal] = useState("Agregar");
+  const [actionButtonModal, setActionButtonModal] = useState("Agregar");
 
-    const [textAlert, setTextAlert] = useState("");
+  const [textAlert, setTextAlert] = useState("");
 
-    const [doctorId, setDoctorId] = useState("");
+  const [doctorId, setDoctorId] = useState("");
 
-    const [getAllPatientsData, setGetAllPatientsData] = useState([]);
-    const [dataUserPatient, setDataUserPatient] = useState({});
+  const [getAllPatientsData, setGetAllPatientsData] = useState([]);
+  const [dataUserPatient, setDataUserPatient] = useState({});
   const [patientId, setPatientId] = useState("");
 
   const [showModal, setShowModal] = useState(false);
 
-    useEffect(() => {
-        getAllDoctorsDataFunction(setGetDataAllDoctors);
-        getAllPatientDataFunction(setGetAllPatientsData);
-    }, []);
+  useEffect(() => {
+    getAllDoctorsDataFunction(setGetDataAllDoctors);
+    getAllPatientDataFunction(setGetAllPatientsData);
+  }, []);
 
-
-
-    const handleShowModal = () => {
+  const handleShowModal = () => {
     setShowModal(true);
   };
 

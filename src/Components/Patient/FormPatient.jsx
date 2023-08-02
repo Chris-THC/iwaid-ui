@@ -30,7 +30,7 @@ export const FormPatient = ({ isGetData = {} }) => {
       handleCloseModal();
       const CreatePatientResponse = await createPatientFunction(data);
 
-      if (CreatePatientResponse === 200) {
+      if (CreatePatientResponse.status === 201) {
         await getAllPatientDataFunction(setGetAllPatientsData);
         setTextAlert("Paciente agregado exitosamente");
         handleShowFloatAlter();
@@ -45,7 +45,7 @@ export const FormPatient = ({ isGetData = {} }) => {
         patientId
       );
 
-      if (updatePatientResponse === 200) {
+      if (updatePatientResponse.status === 201) {
         setTextAlert(`Paciente ${data.name} actualizado exitosamente`);
         await getAllPatientDataFunction(setGetAllPatientsData);
         handleShowFloatAlter();

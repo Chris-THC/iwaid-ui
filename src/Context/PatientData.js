@@ -22,9 +22,8 @@ export const createPatientFunction = async (arrayData) => {
 };
 
 export const updatePatientFunction = async (arrayData, idPatient) => {
-  const urlUpdate = `${patientURL}${idPatientF}`;
+  const urlUpdate = `${patientURL}${idPatient}`;
   try {
-    console.log(urlUpdate);
     const response = await axios.patch(urlUpdate, arrayData);
     return response;
   } catch (error) {

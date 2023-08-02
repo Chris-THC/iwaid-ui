@@ -41,7 +41,7 @@ export function TablaGeneric({ title, data }) {
     "quantity",
   ];
 
-  const allPackaging = data
+  const filters = data
     ? [...new Set(data.map((item) => item.dosageForms))]
     : [];
   const [searchName, setSearchName] = useState("");
@@ -140,14 +140,16 @@ export function TablaGeneric({ title, data }) {
                       <select
                         className="form-select"
                         value={searchDosageFormsMatches}
-                        onChange={(e) =>
-                          SetSearchDosageFormsMatches(e.target.value)
-                        }
+                        onChange={(e) => {
+                          SetSearchDosageFormsMatches(e.target.value);
+                          setSearchDoses("");
+                          setSearchName("");
+                        }}
                       >
                         <option value="">Todas las presentaciones</option>
-                        {allPackaging.map((packaging, index) => (
-                          <option key={index} value={packaging}>
-                            {packaging}
+                        {filters.map((iteratorTable, index) => (
+                          <option key={index} value={iteratorTable}>
+                            {iteratorTable}
                           </option>
                         ))}
                       </select>

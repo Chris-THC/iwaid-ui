@@ -20,9 +20,7 @@ export const getAllMedicineDataFunction = async (setAllDataMedicine) => {
 
 export const createMedicineFunction = async (arrayData) => {
   try {
-    console.log(arrayData);
     const response = await axios.post(MedicineURL, arrayData);
-    console.log(response);
     return response;
   } catch (error) {
     console.error("Error al enviar la solicitud:", error);

@@ -3,6 +3,8 @@ import { useForm } from "react-hook-form";
 import React, { useContext } from "react";
 import { GetTheAppContext } from "../../Context/AppContext";
 
+import { statusCreated, statusUpdated } from "./BackendVariables.js";
+
 export const FormMedicine = ({ isGetData = {} }) => {
   const {
     handleShowFloatAlter,
@@ -28,7 +30,7 @@ export const FormMedicine = ({ isGetData = {} }) => {
       handleCloseModal();
       const responseCreateMedicine = await createMedicineFunction(data);
 
-      if (responseCreateMedicine.status === 201) {
+      if (responseCreateMedicine.status === statusCreated) {
         await getAllMedicineDataFunction(setAllDataMedicine);
         setTextAlert("Medicamento agregado exitosamente");
         handleShowFloatAlter();
@@ -44,7 +46,7 @@ export const FormMedicine = ({ isGetData = {} }) => {
         idMedicine
       );
 
-      if (responseUpdateMedicine.status === 200) {
+      if (responseUpdateMedicine.status === statusUpdated) {
         setTextAlert(`Medicamento  ${data.name} actualizado exitosamente`);
         await getAllMedicineDataFunction(setAllDataMedicine);
         handleShowFloatAlter();
@@ -109,9 +111,7 @@ export const FormMedicine = ({ isGetData = {} }) => {
             <span className="text-danger">Máximo 100 caracteres</span>
           )}
           {errors.name?.type === "pattern" && (
-            <span className="text-danger">
-              Solo caracteres alfanuméricos
-            </span>
+            <span className="text-danger">Solo caracteres alfanuméricos</span>
           )}
         </div>
 

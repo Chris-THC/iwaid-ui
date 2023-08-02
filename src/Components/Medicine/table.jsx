@@ -46,12 +46,12 @@ export function TablaGeneric({ title, data }) {
     : [];
   const [searchName, setSearchName] = useState("");
   const [searchDoses, setSearchDoses] = useState("");
-  const [searchPackaging, setSearchPackaging] = useState("");
+  const [searchDosageFormsMatches, SetSearchDosageFormsMatches] = useState("");
 
   const handleClear = () => {
     setSearchName("");
     setSearchDoses("");
-    setSearchPackaging("");
+    SetSearchDosageFormsMatches("");
   };
 
   const filteredData = data.filter((item) => {
@@ -61,11 +61,12 @@ export function TablaGeneric({ title, data }) {
 
     const doseMatches = item.dose.includes(searchDoses);
 
-    const packagingMatches = searchPackaging
-      ? item.dosageForms.toLowerCase() === searchPackaging.toLowerCase()
+    const dosageFormsMatches = searchDosageFormsMatches
+      ? item.dosageForms.toLowerCase() ===
+        searchDosageFormsMatches.toLowerCase()
       : true;
 
-    return nameMatches && doseMatches && packagingMatches;
+    return nameMatches && doseMatches && dosageFormsMatches;
   });
   return (
     <div className="container mt-5">
@@ -114,7 +115,7 @@ export function TablaGeneric({ title, data }) {
                         onChange={(e) => {
                           setSearchName(e.target.value);
                           setSearchDoses("");
-                          setSearchPackaging("");
+                          SetSearchDosageFormsMatches("");
                         }}
                         placeholder="Buscar por nombre..."
                         pattern="^[A-Za-z\s]+$"
@@ -129,7 +130,7 @@ export function TablaGeneric({ title, data }) {
                         onChange={(e) => {
                           setSearchDoses(e.target.value);
                           setSearchName("");
-                          setSearchPackaging("");
+                          SetSearchDosageFormsMatches("");
                         }}
                         placeholder="Buscar por dosis..."
                       />
@@ -138,8 +139,10 @@ export function TablaGeneric({ title, data }) {
                       <label>Presentación</label>
                       <select
                         className="form-select"
-                        value={searchPackaging}
-                        onChange={(e) => setSearchPackaging(e.target.value)}
+                        value={searchDosageFormsMatches}
+                        onChange={(e) =>
+                          SetSearchDosageFormsMatches(e.target.value)
+                        }
                       >
                         <option value="">Todas las presentaciones</option>
                         {allPackaging.map((packaging, index) => (

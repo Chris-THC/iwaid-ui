@@ -1,6 +1,7 @@
 import { Modal, Button } from "react-bootstrap";
 import { GetTheAppContext } from "../../Context/AppContext";
 import { useContext } from "react";
+import { statusDeleted } from "./BackendVariables.js";
 
 export const MyModalDelete = ({ show, handleClose }) => {
   const {
@@ -38,7 +39,7 @@ export const MyModalDelete = ({ show, handleClose }) => {
               idMedicine
             );
 
-            if (responseModalDelete.status === 200) {
+            if (responseModalDelete.status === statusDeleted) {
               await getAllMedicineDataFunction(setAllDataMedicine);
               setTextAlert(`Se eliminó ${nameMedicine}`);
               handleButtonClick();

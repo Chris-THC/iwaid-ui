@@ -136,7 +136,7 @@ export const FormPatient = ({ isGetData = {} }) => {
                 <option value="Otro">Otro</option>
               </select>
               {errors.gender && (
-                <span className="text-danger">Dato es requerido</span>
+                <span className="text-danger">Dato requerido</span>
               )}
             </div>
           </div>
@@ -228,7 +228,7 @@ export const FormPatient = ({ isGetData = {} }) => {
               </span>
             )}
             {errors.phoneNumber?.type === "maxLength" && (
-              <span className="text-danger">Debe tener 10 dígitos</span>
+              <span className="text-danger">Máximo 10 dígitos</span>
             )}
           </div>
 
@@ -240,7 +240,7 @@ export const FormPatient = ({ isGetData = {} }) => {
               type="email"
               className="form-control"
               autoComplete="off"
-              placeholder="Agregar su email"
+              placeholder="example@ex.com"
               {...register("email", {
                 required: true,
                 pattern: {

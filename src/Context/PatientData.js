@@ -1,20 +1,19 @@
 import axios from "axios";
 
-const doctorURL = "http://localhost:8081/iwaid/patients/";
+const patientURL = "http://localhost:8081/iwaid/patients/";
 
 export const getAllPatientDataFunction = async (setGetAllPatients) => {
   try {
-    const response = await axios.get(doctorURL);
+    const response = await axios.get(patientURL);
     setGetAllPatients(response.data);
   } catch (error) {
     console.error("Error al enviar la solicitud:", error);
   }
 };
 
-
 export const createPatientFunction = async (arrayData) => {
   try {
-    const response = await axios.post(doctorURL, arrayData);
+    const response = await axios.post(patientURL, arrayData);
     return response;
   } catch (error) {
     console.error("Error al enviar la solicitud:", error);
@@ -22,8 +21,8 @@ export const createPatientFunction = async (arrayData) => {
   }
 };
 
-export const updatePatientFunction = async (arrayData, idDoctor) => {
-  const urlUpdate = `${doctorURL}${idDoctor}`;
+export const updatePatientFunction = async (arrayData, idPatient) => {
+  const urlUpdate = `${patientURL}${idPatientF}`;
   try {
     console.log(urlUpdate);
     const response = await axios.patch(urlUpdate, arrayData);
@@ -34,10 +33,9 @@ export const updatePatientFunction = async (arrayData, idDoctor) => {
   }
 };
 
-export const deletePatientFunction = async (idDoctor) => {
-  console.log(idDoctor);
+export const deletePatientFunction = async (idPatient) => {
   try {
-    const urlDelete = `${doctorURL}${idDoctor}`;
+    const urlDelete = `${patientURL}${idPatient}`;
     const response = await axios.delete(urlDelete);
     return response;
   } catch (error) {

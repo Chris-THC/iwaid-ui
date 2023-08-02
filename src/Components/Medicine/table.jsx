@@ -149,7 +149,7 @@ export function TablaGeneric({ title, data }) {
                         ))}
                       </select>
                     </div>
-                    <div className="col mb-4 d-flex justify-content align-items-center">
+                    <div className="col mb-4 pt-4 d-flex justify-content align-items-center">
                       <OverlayTrigger
                         placement="top"
                         overlay={<Tooltip id="tooltip-clear">Limpiar</Tooltip>}

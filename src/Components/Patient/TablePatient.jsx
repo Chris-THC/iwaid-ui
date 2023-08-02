@@ -27,6 +27,7 @@ export const TablePatient = ({ dataTable }) => {
     setGetDataFromTable,
     setActionButtonModal,
     setDataUserPatient,
+    setPatientId,
   } = useContext(GetTheAppContext);
 
   const displayedFields = ["name", "gender", "city", "dateOfBirth", "rfc"];
@@ -283,7 +284,8 @@ export const TablePatient = ({ dataTable }) => {
                           className="ms-2 me-2 mb-1 d-inline"
                           variant="danger"
                           onClick={() => {
-                            console.log(item.nombre);
+                            setPatientId(item.id);
+                            setDataUserPatient(item);
                             handleShowModalDelete();
                           }}
                         >

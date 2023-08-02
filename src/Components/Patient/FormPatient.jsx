@@ -28,24 +28,30 @@ export const FormPatient = ({ isGetData = {} }) => {
   const onSubmitClick = async (data) => {
     if (actionButtonModal === "Agregar") {
       handleCloseModal();
+      const CreatePatientResponse = await createPatientFunction(data);
 
-      try {
-        await createPatientFunction(data);
+      if (CreatePatientResponse === 200) {
         await getAllPatientDataFunction(setGetAllPatientsData);
         setTextAlert("Paciente agregado exitosamente");
         handleShowFloatAlter();
-      } catch (error) {
+      } else {
         setTextAlert("Error al agregar al paciente");
+        handleShowFloatAlter();
       }
     } else if (actionButtonModal === "Editar") {
       handleCloseModal();
-      setTextAlert(`Paciente ${data.name} actualizado exitosamente`);
-      try {
-        await updatePatientFunction(data, patientId);
+      const updatePatientResponse = await updatePatientFunction(
+        data,
+        patientId
+      );
+
+      if (updatePatientResponse === 200) {
+        setTextAlert(`Paciente ${data.name} actualizado exitosamente`);
         await getAllPatientDataFunction(setGetAllPatientsData);
         handleShowFloatAlter();
-      } catch (error) {
-        setTextAlert("Error al agregar al paciente");
+      } else {
+        setTextAlert("Error al actualizar al paciente");
+        handleShowFloatAlter();
       }
     }
   };
@@ -87,7 +93,7 @@ export const FormPatient = ({ isGetData = {} }) => {
             />
             {errors.name && (
               <span className="text-danger">
-                Dato requerido o el campo del nombre no debe de llevar números
+                Dato requerido o solo acepta letras
               </span>
             )}
           </div>
@@ -130,7 +136,7 @@ export const FormPatient = ({ isGetData = {} }) => {
                 <option value="Otro">Otro</option>
               </select>
               {errors.gender && (
-                <span className="text-danger">El dato es requerido</span>
+                <span className="text-danger">Dato es requerido</span>
               )}
             </div>
           </div>
@@ -212,7 +218,7 @@ export const FormPatient = ({ isGetData = {} }) => {
             />
             {errors.phoneNumber?.type === "required" && (
               <span className="text-danger">
-                El número de teléfono es requerido
+                Dato requerido
               </span>
             )}
             {errors.phoneNumber?.type === "pattern" && (

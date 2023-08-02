@@ -6,7 +6,7 @@ export const MyModalDelete = ({ show, handleClose }) => {
   const {
     deletePatientFunction,
     getAllPatientDataFunction,
-    setGetDataAllPatients,
+    setGetAllPatientsData,
     patientId,
     setActionButtonModal,
     setTextAlert,
@@ -33,14 +33,17 @@ export const MyModalDelete = ({ show, handleClose }) => {
           variant="danger"
           onClick={async () => {
             setActionButtonModal("Eliminar");
-            try {
-              await deletePatientFunction(patientId);
-              await getAllPatientDataFunction(setGetDataAllPatients);
+            const response = await deletePatientFunction(patientId);
+
+            if (response.status === 200) {
+              await getAllPatientDataFunction(setGetAllPatientsData);
               handleButtonClick();
-              setTextAlert(`Se eliminó al médico ${dataUserPatient.name}`);
+              setTextAlert(`Se eliminó al paciente ${dataUserPatient.name}`);
               handleShowFloatAlter();
-            } catch (error) {
-              setTextAlert("Error al eliminar el médico");
+            } else {
+              handleButtonClick();
+              setTextAlert("Error al eliminar el paciente");
+              handleShowFloatAlter();
             }
           }}
         >

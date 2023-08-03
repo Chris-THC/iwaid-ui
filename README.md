@@ -2,10 +2,14 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+First install Node JS, if you don't already have it, to be able to execute the following commands 
+
 ## Available Scripts
 
-In the project directory, you can run:
+Then you have to execute the command 
+### `npm install`
 
+In the project directory, you can run:
 ### `npm start`
 
 Runs the app in the development mode.\

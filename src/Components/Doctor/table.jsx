@@ -1,7 +1,8 @@
-import React, { useContext, useState } from "react";
-import { ModalMedicalPrescriptions } from "./ModalMedicalPrescriptions";
+import React, { useState, useContext } from "react";
+import "../../Css/CssTable.css";
 import { GetTheAppContext } from "../../Context/AppContext";
-import "../../Css/TableMedicalPrescriptions.css";
+import { ModalDoctor } from "./modal";
+import { MyModalDelete } from "./modalDelete";
 import { MdDeleteForever } from "react-icons/md";
 import { BsPersonFillAdd, BsPencilFill } from "react-icons/bs";
 import { LuFilterX } from "react-icons/lu";
@@ -9,57 +10,68 @@ import { Button } from "react-bootstrap";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 
-export const TableMedicalPrescriptions = ({ dataTable }) => {
+export function TablaGeneric({ title, data }) {
+  const [showModalDelete, setShowModalDelete] = useState(false);
+
+  const handleShowModalDelete = () => {
+    setShowModalDelete(true);
+  };
+
+  const handleCloseModalDelete = () => {
+    setShowModalDelete(false);
+  };
+
   const {
     handleShowModal,
     handleCloseModal,
     showModal,
     setGetDataFromTable,
     setActionButtonModal,
-    handleShowFloatAlter,
-    setTextAlert,
+    setDoctorId,
+    setDataUserDoctor,
   } = useContext(GetTheAppContext);
 
   const displayedFields = [
-    "nombre",
-    "medico",
-    "fecha",
-    "medicamentos",
-    "descripcion",
+    "name",
+    "specialty",
+    "phoneNumber",
+    "address",
+    "email",
   ];
 
-  const [searchByName, setSearchByName] = useState("");
-  const [searchByDoctor, setSearchByDoctor] = useState("");
-  const [searchByDate, setSearchByDate] = useState("");
+  const allSpecializations = [...new Set(data.map((item) => item.specialty))];
+
+  const [searchName, setSearchName] = useState("");
+
+  const [searchEmail, setSearchEmail] = useState("");
+  const [searchSpecialization, setSearchSpecialization] = useState("");
 
   const handleClear = () => {
-    setSearchByName("");
-    setSearchByDoctor("");
-    setSearchByDate("");
+    setSearchName("");
+    setSearchEmail("");
+    setSearchSpecialization("");
   };
 
-  const filteredData = dataTable.filter((item) => {
-    const nombreMatches = item.nombre
+  const filteredData = data.filter((item) => {
+    const nameMatches = item.name
       .toLowerCase()
-      .includes(searchByName.toLowerCase());
-
-    const doctorMatches = item.medico
+      .includes(searchName.toLowerCase());
+    const emailMatches = item.email
       .toLowerCase()
-      .includes(searchByDoctor.toLowerCase());
+      .includes(searchEmail.toLowerCase());
+    const specializationMatches = searchSpecialization
+      ? item.specialty.toLowerCase() === searchSpecialization.toLowerCase()
+      : true;
 
-    const dateMatches = item.fecha
-      .toLowerCase()
-      .includes(searchByDate.toLowerCase());
-
-    return nombreMatches && doctorMatches && dateMatches;
+    return nameMatches && emailMatches && specializationMatches;
   });
 
   return (
     <div className="container mt-5">
-      <div className=" card mt-4 row ">
+      <div className=" card mt-4 row">
         <div className="card-header d-flex">
           <div className="col-8">
-            <h2 className="card-title">Prescripciones Médicas</h2>
+            <h2 className="card-title">{title}</h2>
           </div>
 
           <div className="col-4 d-flex flex-row-reverse ">
@@ -91,71 +103,52 @@ export const TableMedicalPrescriptions = ({ dataTable }) => {
               <div className="row">
                 <div className="container mb-3">
                   <div className="row">
-                    <div className="col-md-3 mb-3">
-                      <label>Paciente</label>
+                    <div className="col-md-4 mb-3">
+                      <label>Nombre</label>
                       <input
                         autoComplete="off"
                         type="text"
                         className="form-control"
-                        value={searchByName}
+                        value={searchName}
                         onChange={(e) => {
-                          setSearchByName(e.target.value);
-                          setSearchByDoctor("");
-                          setSearchByDate("");
+                          setSearchName(e.target.value);
+                          setSearchEmail("");
                         }}
                         placeholder="Buscar por nombre..."
                         pattern="^[A-Za-z\s]+$"
                       />
                     </div>
-                    <div className="col-md-3 mb-3">
-                      <label>Medico</label>
-                      <input
-                        autoComplete="off"
-                        type="text"
-                        className="form-control"
-                        value={searchByDoctor}
-                        onChange={(e) => {
-                          setSearchByDoctor(e.target.value);
-                          setSearchByName("");
-                          setSearchByDate("");
-                        }}
-                        placeholder="Buscar por nombre..."
-                        pattern="^[A-Za-z\s]+$"
-                      />
+                    <div className="col-md-4 mb-3">
+                      <label>Especialidad</label>
+                      <select
+                        className="form-select"
+                        value={searchSpecialization}
+                        onChange={(e) =>
+                          setSearchSpecialization(e.target.value)
+                        }
+                      >
+                        <option value="">Todas las especialidades</option>
+                        {allSpecializations.map((specialty, index) => (
+                          <option key={index} value={specialty}>
+                            {specialty}
+                          </option>
+                        ))}
+                      </select>
                     </div>
-                    <div className="col-md-2 mb-3">
-                      <label>Fecha</label>
-                      <input
-                        type="date"
-                        className="form-control"
-                        value={searchByDate}
-                        onChange={(e) => {
-                          setSearchByDate(e.target.value);
-                          setSearchByName("");
-                          setSearchByDoctor("");
-                        }}
-                        placeholder="Buscar por fecha de nacimiento..."
-                      />
-                    </div>
-
-                    <div className="col-md-2 d-flex flex-row-reverse">
-                      <div className="w-auto p-4">
-                        <OverlayTrigger
-                          placement="top"
-                          overlay={
-                            <Tooltip id="tooltip-clear">Limpiar</Tooltip>
-                          }
+                    <div className="col-md-4 d-flex justify-content align-items-center">
+                      <OverlayTrigger
+                        placement="top"
+                        overlay={<Tooltip id="tooltip-clear">Limpiar</Tooltip>}
+                      >
+                        <button
+                          id="iconoClear"
+                          className="btn"
+                          type="button"
+                          onClick={handleClear}
                         >
-                          <button
-                            id="iconoClear"
-                            className="btn btn-secondary"
-                            type="button"
-                            onClick={handleClear}
-                          >
-                            <LuFilterX color="white" />
-                          </button>
-                        </OverlayTrigger>
-                      </div>
+                          <LuFilterX color="white" />
+                        </button>
+                      </OverlayTrigger>
                     </div>
                   </div>
                 </div>
@@ -165,11 +158,11 @@ export const TableMedicalPrescriptions = ({ dataTable }) => {
             <table className="table table-bordered custom-table text-center">
               <thead>
                 <tr>
-                  <th>Paciente</th>
-                  <th>Medico</th>
-                  <th>Fecha de Asignación</th>
-                  <th>Medicamentos Prescritos</th>
-                  <th>Descripción</th>
+                  <th>Nombre</th>
+                  <th>Especialidad</th>
+                  <th>Teléfono</th>
+                  <th>Dirección</th>
+                  <th>Correo</th>
                   <th>Acciones</th>
                 </tr>
               </thead>
@@ -183,17 +176,19 @@ export const TableMedicalPrescriptions = ({ dataTable }) => {
                         </div>
                       </td>
                     ))}
-                    <td>
+                    <td className="Buttons">
                       <OverlayTrigger
                         placement="top"
                         overlay={<Tooltip id="tooltip-clear">Editar</Tooltip>}
                       >
                         <Button
+                          size={13}
                           id="btnTables"
                           className="ms-2 me-2 mb-2 mt-2"
                           variant="primary"
                           onClick={() => {
                             handleShowModal();
+                            setDoctorId(item.id);
                             setGetDataFromTable(item);
                             setActionButtonModal("Editar");
                           }}
@@ -209,16 +204,19 @@ export const TableMedicalPrescriptions = ({ dataTable }) => {
                         <Button
                           size={16}
                           id="btnTables"
-                          className="ms-2 me-2 mb-2 mt-2"
+                          className="ms-2 me-2 mb-2 mt-2 d-inline "
                           variant="danger"
                           onClick={() => {
-                            setTextAlert(`Se ha eliminado: ${item.nombre}`);
-                            handleShowFloatAlter();
+                            setDoctorId(item.id);
+                            setDataUserDoctor(item);
+                            handleShowModalDelete();
                           }}
                         >
                           <MdDeleteForever
                             size={13}
-                            onClick={() => {}}
+                            onClick={() => {
+                              setDataUserDoctor(item);
+                            }}
                             id="btnDeletePatient"
                             className="btn-icon-lg"
                           />
@@ -230,12 +228,13 @@ export const TableMedicalPrescriptions = ({ dataTable }) => {
               </tbody>
             </table>
           </div>
-          <ModalMedicalPrescriptions
-            show={showModal}
-            handleClose={handleCloseModal}
+          <ModalDoctor show={showModal} handleClose={handleCloseModal} />
+          <MyModalDelete
+            show={showModalDelete}
+            handleClose={handleCloseModalDelete}
           />
         </div>
       </div>
     </div>
   );
-};
+}

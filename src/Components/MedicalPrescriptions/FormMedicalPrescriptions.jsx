@@ -2,6 +2,9 @@ import React, { useContext } from "react";
 import { Modal, Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { GetTheAppContext } from "../../Context/AppContext";
+import { TypeaheadPatient } from "./PrescriptionTypeahead/TypeaheadPatient";
+import { TypeaheadDoctor } from "./PrescriptionTypeahead/TypeaheadDoctor";
+import { TypeaheadMedicine } from "./PrescriptionTypeahead/TypeaheadMedicine";
 export const FormMedicalPrescriptions = ({ isGetData = {} }) => {
   const currentDate = new Date().toISOString().split("T")[0];
 
@@ -12,6 +15,10 @@ export const FormMedicalPrescriptions = ({ isGetData = {} }) => {
     handleShowFloatAlter,
     setTextAlert,
     setGetDataFromTable,
+    getAllPatientsData,
+    dataGetAllDoctors,
+    dataGetAllMedicine,
+    prescriptionPatientId,
   } = useContext(GetTheAppContext);
 
   const {
@@ -21,6 +28,7 @@ export const FormMedicalPrescriptions = ({ isGetData = {} }) => {
   } = useForm();
 
   const onSubmitClick = (data) => {
+    data.id = prescriptionPatientId;
     setDataMedicalPrescription(data);
     console.log(data);
     handleCloseModal();
@@ -33,39 +41,33 @@ export const FormMedicalPrescriptions = ({ isGetData = {} }) => {
       <form onSubmit={handleSubmit(onSubmitClick)}>
         <div className="form-row">
           <div className="row">
-            <div className="form-group col-md-6">
-              <label>Nombre Completo</label>
-              <input
-                defaultValue={isGetData.nombre}
-                type="text"
-                className="form-control"
-                placeholder="Nombre Completo"
-                autoComplete="off"
-                {...register("nombre", { required: true })}
+            <div className="form-group col-md-4 mb-2">
+              <label>Paciente</label>
+              <TypeaheadPatient
+                infoPatients={getAllPatientsData}
+                patientUpdate={isGetData.nombre}
               />
-              {errors.nombre && (
-                <span className="text-danger">El dato es requerido</span>
-              )}
             </div>
-            <div className="form-group col-md-6">
+            <div className="form-group col-md-4 mb-2">
               <label>Medico</label>
-              <input
-                defaultValue={isGetData.medico}
-                type="text"
-                className="form-control"
-                placeholder="Nombre del Medico"
-                autoComplete="off"
-                {...register("medico", { required: true })}
+              <TypeaheadDoctor
+                infoDoctors={dataGetAllDoctors}
+                doctorUpdate={isGetData.doctor}
               />
-              {errors.medico && (
-                <span className="text-danger">El dato es requerido</span>
-              )}
+            </div>
+
+            <div className="form-group col-md-4 mb-2">
+              <label>Medicamentos</label>
+              <TypeaheadMedicine
+                infoMedicine={dataGetAllMedicine}
+                medicineUpdate={isGetData.medicamentos}
+              />
             </div>
           </div>
         </div>
 
         <div className="form-group row">
-          <div className="form-group col-md-4">
+          <div className="form-group col-md-4 mb-2">
             <label>Fecha de Asignación</label>
             <input
               defaultValue={isGetData.fecha}
@@ -86,10 +88,25 @@ export const FormMedicalPrescriptions = ({ isGetData = {} }) => {
               </span>
             )}
           </div>
+
+          <div className="form-group col-md-4 mb-2">
+            <label>Cantidad</label>
+            <input
+              defaultValue={isGetData.cantidad}
+              type="text"
+              className="form-control"
+              placeholder="Cantidad"
+              autoComplete="off"
+              {...register("cantidad", { required: true })}
+            />
+            {errors.cantidad && (
+              <span className="text-danger">Dato requerido</span>
+            )}
+          </div>
         </div>
 
         <div className="form-group row">
-          <div className="form-group col-md-12">
+          <div className="form-group col-md-12 mb-2 ">
             <label>Medicamentos Prescritos</label>
             <textarea
               defaultValue={isGetData.medicamentos}

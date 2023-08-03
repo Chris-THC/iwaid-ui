@@ -23,7 +23,7 @@ import {
 export const GetTheAppContext = createContext();
 
 export const AppContext = (props) => {
-  // TODO: This array data is for testing and I'll delete this one.
+  // TODO: This array data is for testing and I'll delete this one, when the API is ready.
   const [dataTest, setDataTest] = useState([
     {
       nombre: "Juan Pérez",
@@ -67,6 +67,8 @@ export const AppContext = (props) => {
   ]);
 
   const [dataMedicalPrescription, setDataMedicalPrescription] = useState({});
+
+  const [prescriptionPatientId, setPrescriptionPatientId] = useState("");
 
   const [getDataFromTable, setGetDataFromTable] = useState({});
   const [actionButtonModal, setActionButtonModal] = useState("Agregar");
@@ -165,6 +167,8 @@ export const AppContext = (props) => {
         setDataMedicineFromTable,
         nameMedicine,
         setNameMedicine,
+        setPrescriptionPatientId,
+        prescriptionPatientId,
       }}
     >
       {props.children}

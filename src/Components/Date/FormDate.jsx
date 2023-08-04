@@ -40,8 +40,10 @@ export const FormCitas = ({ isGetData = {} }) => {
 
   const handleOnChangeDoctor = (selected) => {
     if (selected.length > 0) {
-      console.log("Seleccionaste el id:", doctorDataName.find((objeto) => objeto.name === selected[0]).id);
+      
       setDoctorSelected(selected);
+      register("doctorId", { value: (doctorDataName.find((objeto) => objeto.name === selected[0]).id) });
+
     } else {
       setDoctorSelected([]);
     }
@@ -52,8 +54,9 @@ export const FormCitas = ({ isGetData = {} }) => {
 
   const handleOnChangePatient = (selected) => {
     if (selected.length > 0) {
-      console.log("Seleccionaste el id:", patientDataName.find((objeto) => objeto.name === selected[0]).id);
+      
       setPatientSelected(selected);
+      register("patientId", { value: (doctorDataName.find((objeto) => objeto.name === selected[0]).id) });
     } else {
       setPatientSelected([]);
     }
@@ -63,6 +66,7 @@ export const FormCitas = ({ isGetData = {} }) => {
   // Función para manejar la selección del médico
 
   const onSubmitClick = async (data) => {
+    console.log(data);
     if (actionButtonModal === "Agregar") {
       handleCloseModal();
       const CreateDateResponse = await createDateFunction(data);
@@ -114,6 +118,7 @@ export const FormCitas = ({ isGetData = {} }) => {
         selected={doctorSelected}
         placeholder="Escribe el nombre de un médico..."
         defaultInputValue={isGetData.nameDoctor}
+        
         
       />
     </div>

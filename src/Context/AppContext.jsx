@@ -1,4 +1,10 @@
 import { createContext, useState, useEffect } from "react";
+import{
+  getAllDateDataFunction,
+  getNameDoctorsDataFunction,
+  getNamePatientDataFunction
+ 
+ } from "./DateData";
 import {
   createPatientFunction,
   deletePatientFunction,
@@ -32,9 +38,20 @@ export const AppContext = (props) => {
 
   const [showModal, setShowModal] = useState(false);
 
+  const [dataGetAllDate, setAllDataDate] = useState([]);
+  const [dataUserDate, setDataUserDate] = useState({});
+  const [idDate, setIdDate] = useState("");
+
+  const [doctorDataName, setDataDoctorNames] = useState([]);
+  const [doctorSelected, setDoctorSelected] = useState([]);
+  const [patientDataName, setDatapatientNames] = useState([]);
+  const [patientSelected, setPatientSelected] = useState([]);
   useEffect(() => {
     getAllDoctorsDataFunction(setGetDataAllDoctors);
     getAllPatientDataFunction(setGetAllPatientsData);
+    getAllDateDataFunction(setAllDataDate);
+    getNameDoctorsDataFunction(setDataDoctorNames);
+    getNamePatientDataFunction(setDatapatientNames);
   }, []);
 
   const handleShowModal = () => {
@@ -90,6 +107,20 @@ export const AppContext = (props) => {
         setGetAllPatientsData,
         patientId,
         setPatientId,
+        dataGetAllDate, 
+        setAllDataDate,
+        dataUserDate,
+       setDataUserDate,
+       idDate, 
+       setIdDate,
+       doctorDataName,
+        setDataDoctorNames,
+        doctorSelected, 
+        setDoctorSelected,
+        patientDataName, 
+        setDatapatientNames,
+        patientSelected, 
+        setPatientSelected
       }}
     >
       {props.children}

@@ -34,14 +34,7 @@ export function TablaGeneric({ title, data }) {
     setDataUserDate,
   } = useContext(GetTheAppContext);
 
-  const displayedFields = [
-    "nameDoctor",
-    "namePatient",
-    "date",
-    "time",
-    "notes"
-  ];
-  
+  const displayedFields = ["nameDoctor", "namePatient", "date", "time", "notes"];
 
   const [searchNameDoctor, setSearchNameDoctor] = useState("");
   const [searchNamePatient, setSearchNamePatient] = useState("");
@@ -167,30 +160,33 @@ export function TablaGeneric({ title, data }) {
                 </tr>
               </thead>
               <tbody>
-                {filteredData.map((item, index) => (
+              {filteredData.map((item, index) => (
                   <tr key={index}>
-                    {displayedFields.map((field) => {
-                      if (field === "date") {
-                        return (
-                          <td key={field}>
-                            <div id="idTextDate" className="d-inline">
-                              {new Date(item[field]).toLocaleDateString(
-                                "es-ES"
-                              )}
-                            </div>
-                          </td>
-                        );
-                      } else {
-                        return (
-                          <td key={field}>
-                            <div id="idTextPatient" className="d-inline">
-                              {item[field]}
-                            </div>
-                          </td>
-                        );
-                      }
-                    }
-                    )}
+                    <td>
+                      <div id="idTextPatient" className="d-inline">
+                        {item.patientDTO.name}
+                      </div>
+                    </td>
+                    <td>
+                      <div id="idTextDoctor" className="d-inline">
+                        {item.doctorDTO.name}
+                      </div>
+                    </td>
+                    <td>
+                      <div id="idTextDate" className="d-inline">
+                        {new Date(item.date).toLocaleDateString("es-ES")}
+                      </div>
+                    </td>
+                    <td>
+                      <div id="idTextHour" className="d-inline">
+                        {item.hour}
+                      </div>
+                    </td>
+                    <td>
+                      <div id="idTextNotes" className="d-inline">
+                        {item.notes}
+                      </div>
+                    </td>
                     <td className="Buttons">
                       <OverlayTrigger
                         placement="top"
@@ -240,6 +236,7 @@ export function TablaGeneric({ title, data }) {
                     </td>
                   </tr>
                 ))}
+
               </tbody>
             </table>
           </div>

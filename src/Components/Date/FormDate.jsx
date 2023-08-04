@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, {  useContext } from "react";
 import { Modal, Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { GetTheAppContext } from "../../Context/AppContext";
@@ -63,7 +63,6 @@ export const FormCitas = ({ isGetData = {} }) => {
   };
 
 
-  // Función para manejar la selección del médico
 
   const onSubmitClick = async (data) => {
     console.log(data);
@@ -117,7 +116,7 @@ export const FormCitas = ({ isGetData = {} }) => {
         options={options}
         selected={doctorSelected}
         placeholder="Escribe el nombre de un médico..."
-        defaultInputValue={isGetData.nameDoctor}
+        defaultInputValue={isGetData.doctorDTO.name}
         
         
       />
@@ -136,7 +135,7 @@ export const FormCitas = ({ isGetData = {} }) => {
         options={optionsPatient}
         selected={patientSelected}
         placeholder="Escribe el nombre de un paciente..."
-        defaultInputValue={isGetData.namePatient}
+        defaultInputValue={isGetData.patientDTO.name}
         
       />
       

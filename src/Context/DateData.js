@@ -1,7 +1,7 @@
 import axios from "axios";
 
  const doctorURL = "http://localhost:8081/iwaid/doctors/";
-const dateURL = "http://localhost:8081/iwaid/dates/";
+const dateURL = "http://localhost:8081/iwaid/appointments/";
 const patientURL = "http://localhost:8081/iwaid/patients/";
 
 export const getAllDateDataFunction = async(setAllDataDate)=>{
@@ -43,10 +43,40 @@ export const getNamePatientDataFunction = async (setDataPatientNames) => {
 }
 
 
-export const createDateFunctio= async()=>{
+export const createDateFunctio= async(arrayData)=>{
+  try {
+    const response = await axios.post(dateURL, arrayData);
+    return response.data;
+  } catch (error) {
+    console.error("Error al enviar la solicitud:", error);
+    return error;
+  }
+};
 
-}
+export const updateDateFunction =async(arrayData, idDate)=>{
+  const urlUpdate = `${dateURL}${idDate}`;
+  try {
+    console.log(urlUpdate);
+    const response = await axios.patch(urlUpdate, arrayData);
+    console.log(response.data);
+    return response.data;
+  } catch (error) {
+    console.error("Error al enviar la solicitud:", error);
+    return error;
+  }
+};
 
-export const updateDateFunction =async()=>{
-    
-}
+export const deleteDateFunction = async (idDate) => {
+  console.log(idDate);
+  try {
+    const urlDelete = `${doctorURL}${idDate}`;
+    console.log(urlDelete);
+    const response = await axios.delete(urlDelete);
+    console.log(response.data);
+    return response.data;
+  } catch (error) {
+    console.error("Error al enviar la solicitud:", error);
+    return error;
+  }
+};
+

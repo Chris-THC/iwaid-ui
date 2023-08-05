@@ -37,15 +37,36 @@ export function TablaGeneric({ title, data }) {
 
   const [searchNameDoctor, setSearchNameDoctor] = useState("");
   const [searchNamePatient, setSearchNamePatient] = useState("");
-  const [searchDate, setSearchDate] = useState("");
+  //const [searchDate, setSearchDate] = useState("");
 
   const handleClear = () => {
     setSearchNameDoctor("");
     setSearchNamePatient("");
-    setSearchDate("");
+    //setSearchDate("");
   };
 
- 
+  const hourMappings = {
+    EIGHT_AM: "8:00-8:59 AM",
+    NINE_AM: "9:00-9:59 AM",
+    TEN_AM: "10:00-10:59 AM",
+    ELEVEN_AM: "11:00-11:59 AM",
+    TWELVE_PM: "12:00-12:59 PM",
+    ONE_PM: "1:00-1:59 PM",
+    TWO_PM: "2:00-2:59 PM",
+    THREE_PM: "3:00-3:59 PM",
+    FOUR_PM: "4:00-4:59 PM",
+    FIVE_PM: "5:00-5:59 PM",
+    SIX_PM: "6:00-6:59 PM",
+    SEVEN_PM: "7:00-7:59 PM",
+    EIGHT_PM: "8:00-8:59 PM",
+  };
+  
+  const formatDate = (dateString) => {
+    const options = { year: "numeric", month: "2-digit", day: "2-digit" };
+    const date = new Date(dateString);
+    return date.toLocaleDateString("es-ES", options);
+  };
+
   return (
     <div className="container mt-5">
       <div className=" card mt-4 row">
@@ -92,7 +113,7 @@ export function TablaGeneric({ title, data }) {
             value={searchNameDoctor}
             onChange={(e) => {
               setSearchNameDoctor(e.target.value);
-              setSearchDate("");
+             // setSearchDate("");
             }}
             placeholder="Buscar por nombre..."
             pattern="^[A-Za-z\s]+$"
@@ -107,7 +128,7 @@ export function TablaGeneric({ title, data }) {
             value={searchNamePatient}
             onChange={(e) => {
               setSearchNamePatient(e.target.value);
-              setSearchDate("");
+             // setSearchDate("");
             }}
             placeholder="Buscar por nombre..."
             pattern="^[A-Za-z\s]+$"
@@ -161,9 +182,8 @@ export function TablaGeneric({ title, data }) {
                 <tr key={field.id}>
                  <td>{field.patientdto.name}</td>
                   <td>{field.doctordto.name}</td>
-              
-                  <td>{field.date}</td>
-                  <td>{field.hour}</td>
+                   <td>{formatDate(field.date)}</td>
+                  <td>{hourMappings[field.hour]}</td>
                   <td>{field.notes}</td>
                     <td className="Buttons">
                       <OverlayTrigger

@@ -4,4 +4,6 @@ const statusUpdated = 200;
 
 const statusDeleted = 200;
 
-export { statusCreated, statusUpdated, statusDeleted };
+const statusBeforeToday = 400;
+
+export { statusCreated, statusUpdated, statusDeleted, statusBeforeToday };

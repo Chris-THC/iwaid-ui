@@ -3,7 +3,8 @@ import { Modal, Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { GetTheAppContext } from "../../Context/AppContext";
 import { Typeahead } from "react-bootstrap-typeahead";
-import { statusCreated, statusUpdated } from "./HTTPStatus.js";
+import { statusCreated, statusUpdated, statusBeforeToday
+} from "./HTTPStatus.js";
 
 export const FormCitas = ({ isGetData = {} }) => {
   const currentDate = new Date().toISOString().split("T")[0];
@@ -69,10 +70,13 @@ export const FormCitas = ({ isGetData = {} }) => {
     if (actionButtonModal === "Agregar") {
       handleCloseModal();
       const responseCreateDate = await createDateFunction(data);
-        console.log(responseCreateDate.status );
+      console.log(responseCreateDate);
       if (responseCreateDate.status === statusCreated) {
         await getAllDateDataFunction(setAllDataDate);
         setTextAlert("Cita agregada exitosamente");
+        handleShowFloatAlter();  
+      }else if(responseCreateDate.status === statusBeforeToday){
+        setTextAlert("No se puede crear una cita antes de la fecha y hora actual");
         handleShowFloatAlter();
       } else {
         setTextAlert("Error al agregar una cita");
@@ -85,8 +89,7 @@ export const FormCitas = ({ isGetData = {} }) => {
         data,
         idDate
       );
-          console.log(responseUpdateDate.status );
-      if (responseUpdateDate.status === 200) {
+      if (responseUpdateDate.status === statusUpdated ) {
         setTextAlert(`Cita con fecha ${data.date} actualizada exitosamente`);
         await getAllDateDataFunction(setAllDataDate);
         handleShowFloatAlter();
@@ -177,8 +180,20 @@ export const FormCitas = ({ isGetData = {} }) => {
             {...register("hour", { required: true })}
           >
             <option value="">Seleccione una opción</option>
-            <option value="EIGHT_AM">8:00-9:00 AM</option>
-            {/* Resto de opciones */}
+            <option value="EIGHT_AM">8:00-8:59 AM</option>
+            <option value="NINE_AM">9:00-9:59 AM</option>
+            <option value="TEN_AM">10:00-10:59 AM</option>
+            <option value="ELEVEN_AM">11:00-11:59 AM</option>
+            <option value="TWELVE_PM">12:00-12:59 PM</option>
+            <option value="ONE_PM">1:00-1:59 PM</option>
+            <option value="TWO_PM">2:00-2:59 PM</option>
+            <option value="THREE_PM">3:00-3:59 PM</option>
+            <option value="FOUR_PM">4:00-4:59 PM</option>
+            <option value="FIVE_PM">5:00-5:59 PM</option>
+            <option value="SIX_PM">6:00-6:59 PM</option>
+            <option value="SEVEN_PM">7:00-7:59 PM</option>
+            <option value="EIGHT_PM">8:00-8:59 PM</option>
+
           </select>
           {errors.time && <span className="text-danger">Dato requerido</span>}
         </div>

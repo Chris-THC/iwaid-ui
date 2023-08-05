@@ -40,13 +40,13 @@ export const getNamePatientDataFunction = async (setDataPatientNames) => {
         console.error("Error al enviar la solicitud:", error);
       }
   
-}
+};
 
 
-export const createDateFunctio= async(arrayData)=>{
+export const createDateFunction = async (arrayData) => {
   try {
     const response = await axios.post(dateURL, arrayData);
-    return response.data;
+    return response;
   } catch (error) {
     console.error("Error al enviar la solicitud:", error);
     return error;
@@ -56,10 +56,9 @@ export const createDateFunctio= async(arrayData)=>{
 export const updateDateFunction =async(arrayData, idDate)=>{
   const urlUpdate = `${dateURL}${idDate}`;
   try {
-    console.log(urlUpdate);
     const response = await axios.patch(urlUpdate, arrayData);
-    console.log(response.data);
-    return response.data;
+    console.log(response);
+    return response;
   } catch (error) {
     console.error("Error al enviar la solicitud:", error);
     return error;
@@ -67,13 +66,11 @@ export const updateDateFunction =async(arrayData, idDate)=>{
 };
 
 export const deleteDateFunction = async (idDate) => {
-  console.log(idDate);
   try {
-    const urlDelete = `${doctorURL}${idDate}`;
-    console.log(urlDelete);
+    const urlDelete = `${dateURL}${idDate}`;
     const response = await axios.delete(urlDelete);
-    console.log(response.data);
-    return response.data;
+    console.log(response);
+    return response;
   } catch (error) {
     console.error("Error al enviar la solicitud:", error);
     return error;

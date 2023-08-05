@@ -34,7 +34,6 @@ export function TablaGeneric({ title, data }) {
     setDataUserDate,
   } = useContext(GetTheAppContext);
 
-  const displayedFields = ["nameDoctor", "namePatient", "date", "time", "notes"];
 
   const [searchNameDoctor, setSearchNameDoctor] = useState("");
   const [searchNamePatient, setSearchNamePatient] = useState("");
@@ -46,21 +45,7 @@ export function TablaGeneric({ title, data }) {
     setSearchDate("");
   };
 
-  const filteredData = data.filter((item) => {
-    const nameDoctorMatches = item.nameDoctor
-      .toLowerCase()
-      .includes(searchNameDoctor.toLowerCase());
-
-    const namePatientMatches = item.namePatient
-          .toLowerCase()
-          .includes(searchNamePatient.toLowerCase());  
-
-   //const DateMatches = item.date.includes(searchDate);
-
-
-
-    return namePatientMatches && nameDoctorMatches; // && DateMatches
- });
+ 
   return (
     <div className="container mt-5">
       <div className=" card mt-4 row">
@@ -151,8 +136,8 @@ export function TablaGeneric({ title, data }) {
             <table className="table table-bordered custom-table text-center">
               <thead>
                 <tr>
-                  <th>Medico</th>
                   <th>Paciente</th>
+                  <th>Medico</th>
                   <th>Fecha</th>
                   <th>Hora</th>
                   <th>Notas</th>
@@ -160,33 +145,26 @@ export function TablaGeneric({ title, data }) {
                 </tr>
               </thead>
               <tbody>
-              {filteredData.map((item, index) => (
-                  <tr key={index}>
-                    <td>
-                      <div id="idTextPatient" className="d-inline">
-                        {item.patientDTO.name}
-                      </div>
-                    </td>
-                    <td>
-                      <div id="idTextDoctor" className="d-inline">
-                        {item.doctorDTO.name}
-                      </div>
-                    </td>
-                    <td>
-                      <div id="idTextDate" className="d-inline">
-                        {new Date(item.date).toLocaleDateString("es-ES")}
-                      </div>
-                    </td>
-                    <td>
-                      <div id="idTextHour" className="d-inline">
-                        {item.hour}
-                      </div>
-                    </td>
-                    <td>
-                      <div id="idTextNotes" className="d-inline">
-                        {item.notes}
-                      </div>
-                    </td>
+                {data
+                .filter((field)=>{
+                  const patienNameMatches = field.patientdto.name
+                  .toLowerCase()
+                  .includes(searchNamePatient.toLowerCase());
+                  
+                  const doctorNameMatches = field.doctordto.name
+                  .toLowerCase()
+                  .includes(searchNameDoctor.toLowerCase());
+
+                  return patienNameMatches&&doctorNameMatches;
+                })
+              .map((field)=>(
+                <tr key={field.id}>
+                 <td>{field.patientdto.name}</td>
+                  <td>{field.doctordto.name}</td>
+              
+                  <td>{field.date}</td>
+                  <td>{field.hour}</td>
+                  <td>{field.notes}</td>
                     <td className="Buttons">
                       <OverlayTrigger
                         placement="top"
@@ -199,8 +177,8 @@ export function TablaGeneric({ title, data }) {
                           variant="primary"
                           onClick={() => {
                             handleShowModal();
-                            setIdDate(item.id);
-                            setGetDataFromTable(item);
+                            setIdDate(field.id);
+                            setGetDataFromTable(field);
                             setActionButtonModal("Editar");
                           }}
                         >
@@ -218,15 +196,15 @@ export function TablaGeneric({ title, data }) {
                           className="ms-2 me-2 mb-2 mt-2 d-inline "
                           variant="danger"
                           onClick={() => {
-                            setIdDate(item.id);
-                            setDataUserDate(item);
+                            setIdDate(field.id);
+                            setDataUserDate(field);
                             handleShowModalDelete();
                           }}
                         >
                           <MdDeleteForever
                             size={13}
                             onClick={() => {
-                              setDataUserDate(item);
+                              setDataUserDate(field);
                             }}
                             id="btnDeletePatient"
                             className="btn-icon-lg"

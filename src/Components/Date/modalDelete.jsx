@@ -2,6 +2,7 @@
 import { Modal, Button } from "react-bootstrap";
 import { GetTheAppContext } from "../../Context/AppContext";
 import { useContext } from "react";
+import { statusDeleted } from "./HTTPStatus.js";
 
 export const MyModalDelete = ({ show, handleClose }) => {
   const {
@@ -34,15 +35,21 @@ export const MyModalDelete = ({ show, handleClose }) => {
           variant="danger"
           onClick={async () => {
             setActionButtonModal("Eliminar");
-            try {
-              await deleteDateFunction(idDate);
+            const responseModalDelete = await deleteDateFunction(
+              idDate
+            );
+            if (responseModalDelete.status === statusDeleted) {
               await getAllDateDataFunction(setAllDataDate);
+              setTextAlert(`Se eliminó la cita`);
               handleButtonClick();
-              setTextAlert(`Se eliminó medicamento con id ${idDate}`);
               handleShowFloatAlter();
-            } catch (error) {
-              console.error("Error al eliminar medicamento:", error);
+            } else {
+              handleButtonClick();
+              setTextAlert(`Error al eliminar la cita`);
+
+              handleShowFloatAlter();
             }
+            
           }}
         >
           Eliminar

@@ -3,7 +3,7 @@ import { Modal, Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { GetTheAppContext } from "../../Context/AppContext";
 import { Typeahead } from "react-bootstrap-typeahead";
-
+import { statusCreated, statusUpdated } from "./HTTPStatus.js";
 
 export const FormCitas = ({ isGetData = {} }) => {
   const currentDate = new Date().toISOString().split("T")[0];
@@ -65,32 +65,33 @@ export const FormCitas = ({ isGetData = {} }) => {
 
 
   const onSubmitClick = async (data) => {
-    console.log(data);
+    
     if (actionButtonModal === "Agregar") {
       handleCloseModal();
-      const CreateDateResponse = await createDateFunction(data);
-
-      if (CreateDateResponse.status === 201) {
+      const responseCreateDate = await createDateFunction(data);
+        console.log(responseCreateDate.status );
+      if (responseCreateDate.status === statusCreated) {
         await getAllDateDataFunction(setAllDataDate);
-        setTextAlert("Paciente agregado exitosamente");
+        setTextAlert("Cita agregada exitosamente");
         handleShowFloatAlter();
       } else {
-        setTextAlert("Error al agregar al paciente");
+        setTextAlert("Error al agregar una cita");
         handleShowFloatAlter();
       }
     } else if (actionButtonModal === "Editar") {
       handleCloseModal();
-      const updateDateResponse = await updateDateFunction(
+
+      const responseUpdateDate = await updateDateFunction(
         data,
         idDate
       );
-
-      if (updateDateResponse.status === 201) {
-        setTextAlert(`Paciente ${data.name} actualizado exitosamente`);
+          console.log(responseUpdateDate.status );
+      if (responseUpdateDate.status === 200) {
+        setTextAlert(`Cita con fecha ${data.date} actualizada exitosamente`);
         await getAllDateDataFunction(setAllDataDate);
         handleShowFloatAlter();
       } else {
-        setTextAlert("Error al actualizar al paciente");
+        setTextAlert("Error al actualizar cita");
         handleShowFloatAlter();
       }
     }
@@ -116,7 +117,7 @@ export const FormCitas = ({ isGetData = {} }) => {
         options={options}
         selected={doctorSelected}
         placeholder="Escribe el nombre de un médico..."
-        defaultInputValue={isGetData.doctorDTO.name}
+        defaultInputValue={isGetData.name}
         
         
       />
@@ -135,7 +136,7 @@ export const FormCitas = ({ isGetData = {} }) => {
         options={optionsPatient}
         selected={patientSelected}
         placeholder="Escribe el nombre de un paciente..."
-        defaultInputValue={isGetData.patientDTO.name}
+        defaultInputValue={isGetData.name}
         
       />
       
@@ -170,13 +171,13 @@ export const FormCitas = ({ isGetData = {} }) => {
           <label>Seleccione horario</label>
           <span className="text-danger">*</span>
           <select
-            defaultValue={isGetData.time}
+            defaultValue={isGetData.hour}
             className="form-select"
             autoComplete="off"
-            {...register("time", { required: true })}
+            {...register("hour", { required: true })}
           >
             <option value="">Seleccione una opción</option>
-            <option value="8:00 AM">8:00-9:00 AM</option>
+            <option value="EIGHT_AM">8:00-9:00 AM</option>
             {/* Resto de opciones */}
           </select>
           {errors.time && <span className="text-danger">Dato requerido</span>}

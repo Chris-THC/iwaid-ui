@@ -2,7 +2,10 @@ import { createContext, useState, useEffect } from "react";
 import{
   getAllDateDataFunction,
   getNameDoctorsDataFunction,
-  getNamePatientDataFunction
+  getNamePatientDataFunction,
+  createDateFunction,
+  deleteDateFunction,
+  updateDateFunction
  
  } from "./DateData";
 import {
@@ -108,6 +111,7 @@ export const AppContext = (props) => {
         patientId,
         setPatientId,
         dataGetAllDate, 
+        getAllDateDataFunction,
         setAllDataDate,
         dataUserDate,
        setDataUserDate,
@@ -120,7 +124,10 @@ export const AppContext = (props) => {
         patientDataName, 
         setDatapatientNames,
         patientSelected, 
-        setPatientSelected
+        setPatientSelected,
+        createDateFunction,
+        updateDateFunction,
+        deleteDateFunction
       }}
     >
       {props.children}

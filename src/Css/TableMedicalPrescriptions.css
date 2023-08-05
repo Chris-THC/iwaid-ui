@@ -20,6 +20,9 @@
 .custom-table th {
   padding: 0;
 }
+.size-colTable {
+  width: "20%";
+}
 
 @media (max-width: 800px) {
   td {

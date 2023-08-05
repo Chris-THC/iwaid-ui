@@ -20,39 +20,17 @@ export const TableMedicalPrescriptions = ({ dataTable }) => {
     setTextAlert,
   } = useContext(GetTheAppContext);
 
-  const displayedFields = [
-    "nombre",
-    "medico",
-    "fecha",
-    "medicamentos",
-    "descripcion",
-  ];
-
   const [searchByName, setSearchByName] = useState("");
   const [searchByDoctor, setSearchByDoctor] = useState("");
-  const [searchByDate, setSearchByDate] = useState("");
+  const [searchByStartDate, setSearchByStartDate] = useState("");
+  const [searchByFinalDate, setSearchByFinalDate] = useState("");
 
   const handleClear = () => {
     setSearchByName("");
     setSearchByDoctor("");
-    setSearchByDate("");
+    setSearchByStartDate("");
+    setSearchByFinalDate("");
   };
-
-  const filteredData = dataTable.filter((item) => {
-    const nombreMatches = item.nombre
-      .toLowerCase()
-      .includes(searchByName.toLowerCase());
-
-    const doctorMatches = item.medico
-      .toLowerCase()
-      .includes(searchByDoctor.toLowerCase());
-
-    const dateMatches = item.fecha
-      .toLowerCase()
-      .includes(searchByDate.toLowerCase());
-
-    return nombreMatches && doctorMatches && dateMatches;
-  });
 
   return (
     <div className="container mt-5">
@@ -101,7 +79,8 @@ export const TableMedicalPrescriptions = ({ dataTable }) => {
                         onChange={(e) => {
                           setSearchByName(e.target.value);
                           setSearchByDoctor("");
-                          setSearchByDate("");
+                          setSearchByStartDate("");
+                          setSearchByFinalDate("");
                         }}
                         placeholder="Buscar por nombre..."
                         pattern="^[A-Za-z\s]+$"
@@ -117,25 +96,46 @@ export const TableMedicalPrescriptions = ({ dataTable }) => {
                         onChange={(e) => {
                           setSearchByDoctor(e.target.value);
                           setSearchByName("");
-                          setSearchByDate("");
+                          setSearchByStartDate("");
+                          setSearchByFinalDate("");
                         }}
-                        placeholder="Buscar por nombre..."
+                        placeholder="Buscar por medico..."
                         pattern="^[A-Za-z\s]+$"
                       />
                     </div>
+
                     <div className="col-md-2 mb-3">
-                      <label>Fecha</label>
-                      <input
-                        type="date"
-                        className="form-control"
-                        value={searchByDate}
-                        onChange={(e) => {
-                          setSearchByDate(e.target.value);
-                          setSearchByName("");
-                          setSearchByDoctor("");
-                        }}
-                        placeholder="Buscar por fecha de nacimiento..."
-                      />
+                      <label>Fecha inicial</label>
+                      <div>
+                        <input
+                          type="date"
+                          className="form-control"
+                          value={searchByStartDate}
+                          onChange={(e) => {
+                            setSearchByStartDate(e.target.value);
+                            setSearchByDoctor("");
+                            setSearchByName("");
+                          }}
+                          placeholder="Buscar por fecha inicial..."
+                        />
+                      </div>
+                    </div>
+
+                    <div className="col-md-2 mb-3">
+                      <label>Fecha final</label>
+                      <div>
+                        <input
+                          type="date"
+                          className="form-control"
+                          value={searchByFinalDate}
+                          onChange={(e) => {
+                            setSearchByFinalDate(e.target.value);
+                            setSearchByDoctor("");
+                            setSearchByName("");
+                          }}
+                          placeholder="Buscar por fecha final..."
+                        />
+                      </div>
                     </div>
 
                     <div className="col-md-2 d-flex flex-row-reverse">
@@ -167,66 +167,91 @@ export const TableMedicalPrescriptions = ({ dataTable }) => {
                 <tr>
                   <th>Paciente</th>
                   <th>Medico</th>
-                  <th>Fecha de Asignación</th>
-                  <th>Medicamentos Prescritos</th>
-                  <th>Descripción</th>
-                  <th>Acciones</th>
+                  <th style={{ width: "10%" }}>Fecha de Asignación</th>
+                  <th style={{ width: "35%" }}>Descripción</th>
+                  <th style={{ width: "20%" }}>Acciones</th>
                 </tr>
               </thead>
               <tbody>
-                {filteredData.map((item, index) => (
-                  <tr key={index}>
-                    {displayedFields.map((field) => (
-                      <td key={field}>
-                        <div id="idTextPatient" className="d-inline">
-                          {item[field]}
-                        </div>
-                      </td>
-                    ))}
-                    <td>
-                      <OverlayTrigger
-                        placement="top"
-                        overlay={<Tooltip id="tooltip-clear">Editar</Tooltip>}
-                      >
-                        <Button
-                          id="btnTables"
-                          className="ms-2 me-2 mb-2 mt-2"
-                          variant="primary"
-                          onClick={() => {
-                            handleShowModal();
-                            setGetDataFromTable(item);
-                            setActionButtonModal("Editar");
-                          }}
-                        >
-                          <BsPencilFill className="btn-icon-lg" />
-                        </Button>
-                      </OverlayTrigger>
+                {dataTable
+                  .filter((field) => {
+                    const patientNameMatches = field.patient.name
+                      .toLowerCase()
+                      .includes(searchByName.toLowerCase());
 
-                      <OverlayTrigger
-                        placement="top"
-                        overlay={<Tooltip id="tooltip-clear">Eliminar</Tooltip>}
-                      >
-                        <Button
-                          size={16}
-                          id="btnTables"
-                          className="ms-2 me-2 mb-2 mt-2"
-                          variant="danger"
-                          onClick={() => {
-                            setTextAlert(`Se ha eliminado: ${item.nombre}`);
-                            handleShowFloatAlter();
-                          }}
+                    const doctorNameMatches = field.doctor.name
+                      .toLowerCase()
+                      .includes(searchByDoctor.toLowerCase());
+
+                    const startDateMatch =
+                      !searchByStartDate ||
+                      new Date(field.date) >= new Date(searchByStartDate);
+
+                    const finalDateMatch =
+                      !searchByFinalDate ||
+                      new Date(field.date) <= new Date(searchByFinalDate);
+
+                    return (
+                      patientNameMatches &&
+                      doctorNameMatches &&
+                      startDateMatch &&
+                      finalDateMatch
+                    );
+                  })
+                  .map((field) => (
+                    <tr key={field.id}>
+                      <td>{field.patient.name}</td>
+                      <td>{field.doctor.name}</td>
+                      <td>{field.date}</td>
+                      <td>{field.description}</td>
+                      <td>
+                        <OverlayTrigger
+                          placement="top"
+                          overlay={<Tooltip id="tooltip-clear">Editar</Tooltip>}
                         >
-                          <MdDeleteForever
-                            size={13}
-                            onClick={() => {}}
-                            id="btnDeletePatient"
-                            className="btn-icon-lg"
-                          />
-                        </Button>
-                      </OverlayTrigger>
-                    </td>
-                  </tr>
-                ))}
+                          <Button
+                            id="btnTables"
+                            className="ms-2 me-2 mb-2 mt-2"
+                            variant="primary"
+                            onClick={() => {
+                              handleShowModal();
+                              setGetDataFromTable(field);
+                              setActionButtonModal("Editar");
+                            }}
+                          >
+                            <BsPencilFill className="btn-icon-lg" />
+                          </Button>
+                        </OverlayTrigger>
+
+                        <OverlayTrigger
+                          placement="top"
+                          overlay={
+                            <Tooltip id="tooltip-clear">Eliminar</Tooltip>
+                          }
+                        >
+                          <Button
+                            size={16}
+                            id="btnTables"
+                            className="ms-2 me-2 mb-2 mt-2"
+                            variant="danger"
+                            onClick={() => {
+                              setTextAlert(
+                                `Se ha eliminado: ${field.patient.name}`
+                              );
+                              handleShowFloatAlter();
+                            }}
+                          >
+                            <MdDeleteForever
+                              size={13}
+                              onClick={() => {}}
+                              id="btnDeletePatient"
+                              className="btn-icon-lg"
+                            />
+                          </Button>
+                        </OverlayTrigger>
+                      </td>
+                    </tr>
+                  ))}
               </tbody>
             </table>
           </div>

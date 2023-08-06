@@ -8,7 +8,7 @@ export const FormMedicalPrescriptions = ({ isGetData = {} }) => {
   const currentDate = new Date().toISOString().split("T")[0];
 
   const {
-    setDataMedicalPrescription,
+    setMedicalPrescriptionData,
     handleCloseModal,
     actionButtonModal,
     handleShowFloatAlter,
@@ -29,7 +29,7 @@ export const FormMedicalPrescriptions = ({ isGetData = {} }) => {
   const onSubmitClick = (data) => {
     data.patientId = prescriptionPatientId;
     data.doctorId = prescriptionDoctorId;
-    setDataMedicalPrescription(data);
+    setMedicalPrescriptionData(data);
     console.log(data);
     handleCloseModal();
     setTextAlert("Datos Guardados");

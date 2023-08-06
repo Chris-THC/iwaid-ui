@@ -41,6 +41,11 @@ export const TableMedicalPrescriptions = ({ dataTable }) => {
     setSearchByFinalDate("");
   };
 
+  const changeDateFormat = (originalDate) => {
+    let piecesDate = originalDate.split("-");
+    return piecesDate[2] + "/" + piecesDate[1] + "/" + piecesDate[0];
+  };
+
   return (
     <div className="container mt-5">
       <div className=" card mt-4 row ">
@@ -212,7 +217,7 @@ export const TableMedicalPrescriptions = ({ dataTable }) => {
                     <tr key={field.id}>
                       <td>{field.patient.name}</td>
                       <td>{field.doctor.name}</td>
-                      <td>{field.date}</td>
+                      <td>{changeDateFormat(field.date)}</td>
                       <td>{field.description}</td>
                       <td>
                         <OverlayTrigger

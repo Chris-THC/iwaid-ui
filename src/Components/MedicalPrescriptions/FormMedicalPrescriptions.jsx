@@ -108,7 +108,7 @@ export const FormMedicalPrescriptions = ({ isGetData = {} }) => {
                   },
                 })}
               />
-              {errors.fecha && (
+              {errors.date && (
                 <span className="text-danger">
                   Dato requerido o la fecha no puede ser posterior a la fecha
                   actual

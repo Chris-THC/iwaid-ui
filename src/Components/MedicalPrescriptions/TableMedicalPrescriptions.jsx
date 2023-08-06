@@ -8,16 +8,25 @@ import { LuFilterX } from "react-icons/lu";
 import { Button } from "react-bootstrap";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
+import { ModalDelete } from "./ModalDelete";
 
 export const TableMedicalPrescriptions = ({ dataTable }) => {
+  const [showModalDelete, setShowModalDelete] = useState(false);
+
+  const handleShowModalDelete = () => {
+    setShowModalDelete(true);
+  };
+
+  const handleCloseModalDelete = () => {
+    setShowModalDelete(false);
+  };
   const {
     handleShowModal,
     handleCloseModal,
     showModal,
     setGetDataFromTable,
     setActionButtonModal,
-    handleShowFloatAlter,
-    setTextAlert,
+    setPrescription,
   } = useContext(GetTheAppContext);
 
   const [searchByName, setSearchByName] = useState("");
@@ -235,10 +244,8 @@ export const TableMedicalPrescriptions = ({ dataTable }) => {
                             className="ms-2 me-2 mb-2 mt-2"
                             variant="danger"
                             onClick={() => {
-                              setTextAlert(
-                                `Se ha eliminado: ${field.patient.name}`
-                              );
-                              handleShowFloatAlter();
+                              setPrescription(field);
+                              handleShowModalDelete();
                             }}
                           >
                             <MdDeleteForever
@@ -258,6 +265,11 @@ export const TableMedicalPrescriptions = ({ dataTable }) => {
           <ModalMedicalPrescriptions
             show={showModal}
             handleClose={handleCloseModal}
+          />
+
+          <ModalDelete
+            show={showModalDelete}
+            handleClose={handleCloseModalDelete}
           />
         </div>
       </div>

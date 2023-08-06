@@ -4,11 +4,11 @@ import { useForm } from "react-hook-form";
 import { GetTheAppContext } from "../../Context/AppContext";
 import { TypeaheadPatient } from "./PrescriptionTypeahead/TypeaheadPatient";
 import { TypeaheadDoctor } from "./PrescriptionTypeahead/TypeaheadDoctor";
+import { statusCreated } from "./HTTPstatus.js";
 export const FormMedicalPrescriptions = ({ isGetData = {} }) => {
   const currentDate = new Date().toISOString().split("T")[0];
 
   const {
-    setMedicalPrescriptionData,
     handleCloseModal,
     actionButtonModal,
     handleShowFloatAlter,
@@ -18,22 +18,38 @@ export const FormMedicalPrescriptions = ({ isGetData = {} }) => {
     dataGetAllDoctors,
     prescriptionPatientId,
     prescriptionDoctorId,
+    createPrescriptionFunction,
+    setAllPrescriptionsData,
+    allPrescriptionsData,
+    allPrescriptionsFromApiFunction,
   } = useContext(GetTheAppContext);
 
   const {
     register,
     handleSubmit,
     formState: { errors, isValid },
-  } = useForm();
+  } = useForm({ mode: "all" });
 
-  const onSubmitClick = (data) => {
+  const onSubmitClick = async (data) => {
     data.patientId = prescriptionPatientId;
     data.doctorId = prescriptionDoctorId;
-    setMedicalPrescriptionData(data);
-    console.log(data);
-    handleCloseModal();
-    setTextAlert("Datos Guardados");
-    handleShowFloatAlter();
+
+    if (actionButtonModal === "Agregar") {
+      handleCloseModal();
+      const createNewPrescription = await createPrescriptionFunction(data);
+
+      if (createNewPrescription.status === statusCreated) {
+        allPrescriptionsFromApiFunction(setAllPrescriptionsData);
+
+        console.log(allPrescriptionsData);
+        setTextAlert("Preinscripción medica agregada exitosamente");
+        handleShowFloatAlter();
+      } else {
+        setTextAlert("Error al agregar la preinscripción medica");
+        handleShowFloatAlter();
+      }
+    } else if (actionButtonModal === "Editar") {
+    }
   };
 
   return (

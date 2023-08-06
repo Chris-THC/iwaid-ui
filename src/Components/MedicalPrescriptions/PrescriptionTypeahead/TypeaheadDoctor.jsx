@@ -4,8 +4,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "react-bootstrap-typeahead/css/Typeahead.css";
 import { GetTheAppContext } from "../../../Context/AppContext";
 
-export const TypeaheadDoctor = ({ infoDoctors, doctorUpdate }) => {
-  const { setPrescriptionDoctorId } = useContext(GetTheAppContext);
+export const TypeaheadDoctor = ({ infoDoctors }) => {
+  const { setPrescriptionDoctorId, dataPrescription } =
+    useContext(GetTheAppContext);
 
   const [selectedDoctor, setSelectedDoctor] = useState([]);
   const [doctor, setDoctor] = useState([]);
@@ -32,12 +33,22 @@ export const TypeaheadDoctor = ({ infoDoctors, doctorUpdate }) => {
     }
   };
 
+  const valueTypeHeadDoctor = () => {
+    if (Object.keys(dataPrescription).length === 0) {
+      return "";
+    } else if (dataPrescription.doctor && dataPrescription.doctor.name) {
+      return dataPrescription.doctor.name;
+    } else {
+      return "";
+    }
+  };
+
   return (
     <div>
       <Typeahead
         id="pacientes-autocompletado"
         labelKey="name"
-        defaultInputValue={doctorUpdate || ""}
+        defaultInputValue={valueTypeHeadDoctor()}
         minLength={3}
         onChange={handleDoctorSelection}
         options={doctor}

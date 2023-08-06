@@ -24,6 +24,7 @@ import {
   allPrescriptionsFromApiFunction,
   createPrescriptionFunction,
   deletePrescriptionFunction,
+  updatePrescriptionFunction,
 } from "./Prescription.js";
 
 export const GetTheAppContext = createContext();
@@ -37,7 +38,7 @@ export const AppContext = (props) => {
   const [prescriptionPatientId, setPrescriptionPatientId] = useState("");
   const [prescriptionDoctorId, setPrescriptionDoctorId] = useState("");
   const [allPrescriptionsData, setAllPrescriptionsData] = useState([]);
-  const [dataPrescription, setPrescription] = useState({});
+  const [dataPrescription, setDataPrescription] = useState({});
 
   const [doctorId, setDoctorId] = useState("");
   const [dataGetAllDoctors, setGetDataAllDoctors] = useState([]);
@@ -141,8 +142,9 @@ export const AppContext = (props) => {
         createPrescriptionFunction,
         allPrescriptionsFromApiFunction,
         dataPrescription,
-        setPrescription,
+        setDataPrescription,
         deletePrescriptionFunction,
+        updatePrescriptionFunction,
       }}
     >
       {props.children}

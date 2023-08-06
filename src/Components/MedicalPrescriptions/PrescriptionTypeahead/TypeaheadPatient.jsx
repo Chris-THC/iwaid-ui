@@ -4,8 +4,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "react-bootstrap-typeahead/css/Typeahead.css";
 import { GetTheAppContext } from "../../../Context/AppContext";
 
-export const TypeaheadPatient = ({ infoPatients, patientUpdate }) => {
-  const { setPrescriptionPatientId } = useContext(GetTheAppContext);
+export const TypeaheadPatient = ({ infoPatients }) => {
+  const { setPrescriptionPatientId, dataPrescription } =
+    useContext(GetTheAppContext);
 
   const [selectedPatient, setSelectedPatient] = useState([]);
   const [patient, setPatient] = useState([]);
@@ -31,6 +32,20 @@ export const TypeaheadPatient = ({ infoPatients, patientUpdate }) => {
     }
   };
 
+
+
+
+  
+  const valueTypeHeadPatient = () => {
+    if (Object.keys(dataPrescription).length === 0) {
+      return "";
+    } else if (dataPrescription.patient && dataPrescription.patient.name) {
+      return dataPrescription.patient.name;
+    } else {
+      return "";
+    }
+  };
+
   return (
     <div>
       <Typeahead
@@ -40,7 +55,7 @@ export const TypeaheadPatient = ({ infoPatients, patientUpdate }) => {
         onChange={handlePatientSelection}
         options={patient}
         selected={selectedPatient}
-        defaultInputValue={patientUpdate || ""}
+        defaultInputValue={valueTypeHeadPatient()}
         onInputChange={handleInputChange}
         placeholder="Paciente..."
       />

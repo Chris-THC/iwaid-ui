@@ -5,6 +5,8 @@ import { GetTheAppContext } from "../../Context/AppContext";
 import { TypeaheadPatient } from "./PrescriptionTypeahead/TypeaheadPatient";
 import { TypeaheadDoctor } from "./PrescriptionTypeahead/TypeaheadDoctor";
 import { statusCreated } from "./HTTPstatus.js";
+import { statusDeleted } from "./HTTPstatus.js";
+
 export const FormMedicalPrescriptions = ({ isGetData = {} }) => {
   const currentDate = new Date().toISOString().split("T")[0];
 
@@ -22,6 +24,8 @@ export const FormMedicalPrescriptions = ({ isGetData = {} }) => {
     setAllPrescriptionsData,
     allPrescriptionsData,
     allPrescriptionsFromApiFunction,
+    updatePrescriptionFunction,
+    dataPrescription,
   } = useContext(GetTheAppContext);
 
   const {
@@ -39,7 +43,7 @@ export const FormMedicalPrescriptions = ({ isGetData = {} }) => {
       const createNewPrescription = await createPrescriptionFunction(data);
 
       if (createNewPrescription.status === statusCreated) {
-        allPrescriptionsFromApiFunction(setAllPrescriptionsData);
+        await allPrescriptionsFromApiFunction(setAllPrescriptionsData);
 
         console.log(allPrescriptionsData);
         setTextAlert("Preinscripción medica agregada exitosamente");
@@ -49,6 +53,30 @@ export const FormMedicalPrescriptions = ({ isGetData = {} }) => {
         handleShowFloatAlter();
       }
     } else if (actionButtonModal === "Editar") {
+      handleCloseModal();
+      if (data.patientId === "" || data.doctorId === "") {
+        data.patientId = dataPrescription.patientId;
+        data.doctorId = dataPrescription.doctorId;
+      } else {
+        data.patientId = prescriptionPatientId;
+        data.doctorId = prescriptionDoctorId;
+      }
+
+      const responseUpdatePrescription = await updatePrescriptionFunction(
+        data,
+        dataPrescription.id
+      );
+
+      if (responseUpdatePrescription.status === statusDeleted) {
+        setTextAlert(
+          `Preinscripción de ${dataPrescription.patient.name} se ha actualizado exitosamente`
+        );
+        await allPrescriptionsFromApiFunction(setAllPrescriptionsData);
+        handleShowFloatAlter();
+      } else {
+        setTextAlert("Error al actualizar la preinscripción");
+        handleShowFloatAlter();
+      }
     }
   };
 
@@ -59,17 +87,11 @@ export const FormMedicalPrescriptions = ({ isGetData = {} }) => {
           <div className="row">
             <div className="form-group col-md-4 mb-2">
               <label>Paciente</label>
-              <TypeaheadPatient
-                infoPatients={getAllPatientsData}
-                // patientUpdate={isGetData.patient.name}
-              />
+              <TypeaheadPatient infoPatients={getAllPatientsData} />
             </div>
             <div className="form-group col-md-4 mb-2">
               <label>Médico</label>
-              <TypeaheadDoctor
-                infoDoctors={dataGetAllDoctors}
-                // doctorUpdate={isGetData.doctor.name}
-              />
+              <TypeaheadDoctor infoDoctors={dataGetAllDoctors} />
             </div>
 
             <div className="form-group col-md-3 mb-2">

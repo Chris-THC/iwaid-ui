@@ -26,7 +26,7 @@ export const TableMedicalPrescriptions = ({ dataTable }) => {
     showModal,
     setGetDataFromTable,
     setActionButtonModal,
-    setPrescription,
+    setDataPrescription,
   } = useContext(GetTheAppContext);
 
   const [searchByName, setSearchByName] = useState("");
@@ -59,6 +59,7 @@ export const TableMedicalPrescriptions = ({ dataTable }) => {
                 className="ms-2 me-2 mb-1"
                 variant="primary"
                 onClick={() => {
+                  setDataPrescription({});
                   handleShowModal();
                   setActionButtonModal("Agregar");
                 }}
@@ -226,6 +227,7 @@ export const TableMedicalPrescriptions = ({ dataTable }) => {
                               handleShowModal();
                               setGetDataFromTable(field);
                               setActionButtonModal("Editar");
+                              setDataPrescription(field);
                             }}
                           >
                             <BsPencilFill className="btn-icon-lg" />
@@ -244,13 +246,12 @@ export const TableMedicalPrescriptions = ({ dataTable }) => {
                             className="ms-2 me-2 mb-2 mt-2"
                             variant="danger"
                             onClick={() => {
-                              setPrescription(field);
+                              setDataPrescription(field);
                               handleShowModalDelete();
                             }}
                           >
                             <MdDeleteForever
                               size={13}
-                              onClick={() => {}}
                               id="btnDeletePatient"
                               className="btn-icon-lg"
                             />

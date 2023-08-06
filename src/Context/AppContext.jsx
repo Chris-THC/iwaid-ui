@@ -110,7 +110,7 @@ export const AppContext = (props) => {
   const [actionButtonModal, setActionButtonModal] = useState("Agregar");
   const [textAlert, setTextAlert] = useState("");
 
-  const [dataMedicalPrescription, setDataMedicalPrescription] = useState({});
+  const [medicalPrescriptionData, setMedicalPrescriptionData] = useState({});
   const [prescriptionPatientId, setPrescriptionPatientId] = useState("");
   const [prescriptionDoctorId, setPrescriptionDoctorId] = useState("");
 
@@ -160,8 +160,8 @@ export const AppContext = (props) => {
         handleCloseModal,
         handleShowModal,
         showModal,
-        dataMedicalPrescription,
-        setDataMedicalPrescription,
+        medicalPrescriptionData,
+        setMedicalPrescriptionData,
         dataTest,
         setDataTest,
         dataUserDoctor,

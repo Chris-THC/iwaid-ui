@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { Modal, Button } from "react-bootstrap";
 import { GetTheAppContext } from "../../Context/AppContext";
-import { statusDeleted } from "./HttpStatus";
+import { statusDeleted } from "./HTTPstatus";
 
 export const ModalDelete = ({ show, handleClose }) => {
   const {

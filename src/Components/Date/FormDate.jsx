@@ -7,6 +7,7 @@ import { statusCreated, statusUpdated, statusBeforeToday
 } from "./HTTPStatus.js";
 
 export const FormCitas = ({ isGetData = {} }) => {
+  console.log(isGetData);
   const currentDate = new Date().toISOString().split("T")[0];
   const {
     handleShowFloatAlter,
@@ -57,7 +58,7 @@ export const FormCitas = ({ isGetData = {} }) => {
     if (selected.length > 0) {
       
       setPatientSelected(selected);
-      register("patientId", { value: (doctorDataName.find((objeto) => objeto.name === selected[0]).id) });
+      register("patientId", { value: (patientDataName.find((objeto) => objeto.name === selected[0]).id) });
     } else {
       setPatientSelected([]);
     }
@@ -120,7 +121,7 @@ export const FormCitas = ({ isGetData = {} }) => {
         options={options}
         selected={doctorSelected}
         placeholder="Escribe el nombre de un médico..."
-        defaultInputValue={isGetData.name}
+        defaultInputValue={isGetData.doctorDTO?.name || ""}
         
         
       />
@@ -139,7 +140,7 @@ export const FormCitas = ({ isGetData = {} }) => {
         options={optionsPatient}
         selected={patientSelected}
         placeholder="Escribe el nombre de un paciente..."
-        defaultInputValue={isGetData.name}
+        defaultInputValue={isGetData.patientDTO?.name || ""}
         
       />
       

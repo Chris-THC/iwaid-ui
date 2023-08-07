@@ -61,10 +61,9 @@ export function TablaGeneric({ title, data }) {
     EIGHT_PM: "8:00-8:59 PM",
   };
   
-  const formatDate = (dateString) => {
-    const options = { year: "numeric", month: "2-digit", day: "2-digit" };
-    const date = new Date(dateString);
-    return date.toLocaleDateString("es-ES", options);
+  const formatDate = (originalDate) => {
+   let piecesDate=originalDate.split("-");
+   return piecesDate[2]+"/"+piecesDate[1]+"/"+piecesDate[0]
   };
 
   return (
@@ -168,11 +167,11 @@ export function TablaGeneric({ title, data }) {
               <tbody>
                 {data
                 .filter((field)=>{
-                  const patienNameMatches = field.patientdto.name
+                  const patienNameMatches = field.patientDTO.name
                   .toLowerCase()
                   .includes(searchNamePatient.toLowerCase());
                   
-                  const doctorNameMatches = field.doctordto.name
+                  const doctorNameMatches = field.doctorDTO.name
                   .toLowerCase()
                   .includes(searchNameDoctor.toLowerCase());
 
@@ -180,8 +179,8 @@ export function TablaGeneric({ title, data }) {
                 })
               .map((field)=>(
                 <tr key={field.id}>
-                 <td>{field.patientdto.name}</td>
-                  <td>{field.doctordto.name}</td>
+                 <td>{field.patientDTO.name}</td>
+                  <td>{field.doctorDTO.name}</td>
                    <td>{formatDate(field.date)}</td>
                   <td>{hourMappings[field.hour]}</td>
                   <td>{field.notes}</td>

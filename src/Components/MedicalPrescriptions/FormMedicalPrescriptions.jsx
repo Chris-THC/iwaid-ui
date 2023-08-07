@@ -97,11 +97,11 @@ export const FormMedicalPrescriptions = ({ isGetData = {} }) => {
             <div className="form-group col-md-3 mb-2">
               <label>Fecha de Asignación</label>
               <input
-                defaultValue={isGetData.date}
+                defaultValue={isGetData.registerDate}
                 type="date"
                 className="form-control"
                 autoComplete="off"
-                {...register("date", {
+                {...register("registerDate", {
                   required: true,
                   max: {
                     value: currentDate,

@@ -217,7 +217,7 @@ export const TableMedicalPrescriptions = ({ dataTable }) => {
                     <tr key={field.id}>
                       <td>{field.patient.name}</td>
                       <td>{field.doctor.name}</td>
-                      <td>{changeDateFormat(field.date)}</td>
+                      <td>{changeDateFormat(field.registerDate)}</td>
                       <td>{field.description}</td>
                       <td>
                         <OverlayTrigger

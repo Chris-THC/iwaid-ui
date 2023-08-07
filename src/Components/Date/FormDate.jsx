@@ -1,4 +1,4 @@
-import React, {  useContext } from "react";
+import React, { useState, useContext } from "react";
 import { Modal, Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { GetTheAppContext } from "../../Context/AppContext";
@@ -20,10 +20,10 @@ export const FormCitas = ({ isGetData = {} }) => {
     setAllDataDate,
     updateDateFunction,
     idDate,
-    doctorName,
+    getAllPatientsData,
+    dataGetAllDoctors,
     doctorSelected, 
     setDoctorSelected,
-    patientName,
     patientSelected, 
     setPatientSelected
        
@@ -45,27 +45,29 @@ export const FormCitas = ({ isGetData = {} }) => {
 { value: "EIGHT_PM", label: "8:00-8:59 PM" },
 ];
 
+
   const {
     register,
     handleSubmit,
     formState: { errors, isValid },
   } = useForm({ mode: "all" });
 
-  const options = doctorName
+  const options = dataGetAllDoctors
   .filter((objeto) => objeto.hasOwnProperty("name"))
   .map((objeto) => objeto.name);
 
   const handleOnChangeDoctor = (selected) => {
     if (selected.length > 0) {
       
+      
       setDoctorSelected(selected);
-      register("doctorId", { value: (doctorName.find((objeto) => objeto.name === selected[0]).id) });
+      register("doctorId", { value: (dataGetAllDoctors.find((objeto) => objeto.name === selected[0]).id) });
 
     } else {
       setDoctorSelected([]);
     }
   };
-  const optionsPatient = patientName
+  const optionsPatient = getAllPatientsData
   .filter((objeto) => objeto.hasOwnProperty("name"))
   .map((objeto) => objeto.name);
 
@@ -73,12 +75,26 @@ export const FormCitas = ({ isGetData = {} }) => {
     if (selected.length > 0) {
       
       setPatientSelected(selected);
-      register("patientId", { value: (patientName.find((objeto) => objeto.name === selected[0]).id) });
+      register("patientId", { value: (getAllPatientsData.find((objeto) => objeto.name === selected[0]).id) });
     } else {
       setPatientSelected([]);
     }
   };
 
+  const getDefaultValueDoctor = () => {
+    if (isGetData.doctorDTO) {
+      register("doctorId", { value: isGetData.doctorDTO.id });
+      return isGetData.doctorDTO.name;
+    }
+    return "";
+  };
+  const getDefaultValuePatient = () => {
+    if (isGetData.patientDTO) {
+      register("patientId", { value: isGetData.patientDTO.id });
+      return isGetData.patientDTO.name;
+    }
+    return "";
+  };
 
 
   const onSubmitClick = async (data) => {
@@ -137,8 +153,8 @@ export const FormCitas = ({ isGetData = {} }) => {
         options={options}
         selected={doctorSelected}
         placeholder="Escribe el nombre de un médico..."
-        defaultInputValue={isGetData.doctorDTO?.name || ""}
-        
+        defaultInputValue={getDefaultValueDoctor()}
+
         
       />
     </div>
@@ -157,8 +173,7 @@ export const FormCitas = ({ isGetData = {} }) => {
         options={optionsPatient}
         selected={patientSelected}
         placeholder="Escribe el nombre de un paciente..."
-        defaultInputValue={isGetData.patientDTO?.name || ""}
-        
+        defaultInputValue={getDefaultValuePatient()}
       />
       
     </div>

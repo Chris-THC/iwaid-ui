@@ -14,34 +14,6 @@ export const getAllDateDataFunction = async(setAllDataDate)=>{
     
 };
 
-export const getNameDoctorsDataFunction = async (setDataDoctorNames) => {
-  try {
-    const dataGetAll = {
-      name:  null, 
-      specialty: null,
-    };
-
-    const response = await axios.get(doctorURL, {
-      params: dataGetAll,
-    });
-    setDataDoctorNames(response.data);
-  } catch (error) {
-    console.error("Error al enviar la solicitud:", error);
-  }
-
-};
-
-export const getNamePatientDataFunction = async (setDataPatientNames) => {
-
-    try {
-        const response = await axios.get(patientURL);
-        setDataPatientNames(response.data);
-      } catch (error) {
-        console.error("Error al enviar la solicitud:", error);
-      }
-  
-};
-
 
 export const createDateFunction = async (arrayData) => {
   try {
@@ -54,6 +26,8 @@ export const createDateFunction = async (arrayData) => {
 };
 
 export const updateDateFunction =async(arrayData, idDate)=>{
+  console.log(idDate);
+  console.log(arrayData);
   const urlUpdate = `${dateURL}${idDate}`;
   try {
     const response = await axios.patch(urlUpdate, arrayData);

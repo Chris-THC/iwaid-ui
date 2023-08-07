@@ -1,8 +1,9 @@
 import React, { useContext, useState } from "react";
 import { ModalMedicalHistory } from "./ModalMedicalHistory";
 import { GetTheAppContext } from "../../Context/AppContext";
-import "../../Css/TableMedicalPrescriptions.css";
+import "../../Css/TableMedicalHistory.css";
 import { MdDeleteForever } from "react-icons/md";
+import { FcCheckmark, FcMinus } from "react-icons/fc";
 import { BsPersonFillAdd, BsPencilFill } from "react-icons/bs";
 import { LuFilterX } from "react-icons/lu";
 import { Button } from "react-bootstrap";
@@ -51,7 +52,7 @@ export const Table = ({ dataTable }) => {
       <div className=" card mt-4 row ">
         <div className="card-header d-flex">
           <div className="col-8">
-            <h2 className="card-title">Prescripciones Médicas</h2>
+            <h2 className="card-title">Historial Médico</h2>
           </div>
 
           <div className="col-4 d-flex flex-row-reverse ">
@@ -101,57 +102,6 @@ export const Table = ({ dataTable }) => {
                         pattern="^[A-Za-z\s]+$"
                       />
                     </div>
-                    <div className="col-md-3 mb-3">
-                      <label>Medico</label>
-                      <input
-                        autoComplete="off"
-                        type="text"
-                        className="form-control"
-                        value={searchByDoctor}
-                        onChange={(e) => {
-                          setSearchByDoctor(e.target.value);
-                          setSearchByName("");
-                          setSearchByStartDate("");
-                          setSearchByFinalDate("");
-                        }}
-                        placeholder="Buscar por medico..."
-                        pattern="^[A-Za-z\s]+$"
-                      />
-                    </div>
-
-                    <div className="col-md-2 mb-3">
-                      <label>Fecha inicial</label>
-                      <div>
-                        <input
-                          type="date"
-                          className="form-control"
-                          value={searchByStartDate}
-                          onChange={(e) => {
-                            setSearchByStartDate(e.target.value);
-                            setSearchByDoctor("");
-                            setSearchByName("");
-                          }}
-                          placeholder="Buscar por fecha inicial..."
-                        />
-                      </div>
-                    </div>
-
-                    <div className="col-md-2 mb-3">
-                      <label>Fecha final</label>
-                      <div>
-                        <input
-                          type="date"
-                          className="form-control"
-                          value={searchByFinalDate}
-                          onChange={(e) => {
-                            setSearchByFinalDate(e.target.value);
-                            setSearchByDoctor("");
-                            setSearchByName("");
-                          }}
-                          placeholder="Buscar por fecha final..."
-                        />
-                      </div>
-                    </div>
 
                     <div className="col-md-2 d-flex flex-row-reverse">
                       <div className="w-auto p-4">
@@ -181,44 +131,60 @@ export const Table = ({ dataTable }) => {
               <thead>
                 <tr>
                   <th>Paciente</th>
-                  <th>Medico</th>
-                  <th style={{ width: "10%" }}>Fecha de Asignación</th>
-                  <th style={{ width: "35%" }}>Descripción</th>
+                  <th style={{ width: "20%" }}>Antecedentes patologicos</th>
+                  <th style={{ width: "20%" }}>Antecedentes no patologicos</th>
+                  <th style={{ width: "20%" }}>
+                    Antecedentes heredofamiliares
+                  </th>
                   <th style={{ width: "20%" }}>Acciones</th>
                 </tr>
               </thead>
               <tbody>
                 {dataTable
-                  // .filter((field) => {
-                  //   const patientNameMatches = field.patient.name
-                  //     .toLowerCase()
-                  //     .includes(searchByName.toLowerCase());
+                  .filter((field) => {
+                    const patientNameMatches = field.patient.name
+                      .toLowerCase()
+                      .includes(searchByName.toLowerCase());
 
-                  //   const doctorNameMatches = field.doctor.name
-                  //     .toLowerCase()
-                  //     .includes(searchByDoctor.toLowerCase());
-
-                  //   const startDateMatch =
-                  //     !searchByStartDate ||
-                  //     new Date(field.date) >= new Date(searchByStartDate);
-
-                  //   const finalDateMatch =
-                  //     !searchByFinalDate ||
-                  //     new Date(field.date) <= new Date(searchByFinalDate);
-
-                  //   return (
-                  //     patientNameMatches &&
-                  //     doctorNameMatches &&
-                  //     startDateMatch &&
-                  //     finalDateMatch
-                  //   );
-                  // })
+                    return patientNameMatches;
+                  })
                   .map((field) => (
                     <tr key={field.id}>
-                      <td>{field.patient.name}</td>
-                      <td>{field.doctor.name}</td>
-                      <td>{changeDateFormat(field.date)}</td>
-                      <td>{field.description}</td>
+                      <td className="pt-2">{field.patient.name}</td>
+                      <td className="pt-2">
+                        {field.pathologicalHistory === true ? (
+                          <p className="text-success">
+                            <FcCheckmark />
+                          </p>
+                        ) : (
+                          <p className="text-secondary">
+                            {" "}
+                            <FcMinus />
+                          </p>
+                        )}
+                      </td>
+                      <td className="pt-2">
+                        {field.nonPathologicalHistory === true ? (
+                          <p className="text-success">
+                            <FcCheckmark />
+                          </p>
+                        ) : (
+                          <p className="text-secondary">
+                            <FcMinus />
+                          </p>
+                        )}
+                      </td>
+                      <td className="pt-2">
+                        {field.familyMedicalHistory === true ? (
+                          <p className="text-success">
+                            <FcCheckmark />
+                          </p>
+                        ) : (
+                          <p className="text-secondary">
+                            <FcMinus />
+                          </p>
+                        )}
+                      </td>
                       <td>
                         <OverlayTrigger
                           placement="top"

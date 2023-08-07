@@ -115,9 +115,10 @@ export const FormCitas = ({ isGetData = {} }) => {
           </label>
           <div style={{ width: '300px', margin: '0 auto', paddingTop: '20px' }}>
       <Typeahead
-        id="Doctor-typehead"
+        id="typehead"
         labelKey="doctor"
         onChange={handleOnChangeDoctor}
+        minLength={3}
         options={options}
         selected={doctorSelected}
         placeholder="Escribe el nombre de un médico..."
@@ -134,9 +135,10 @@ export const FormCitas = ({ isGetData = {} }) => {
         </label>
         <div style={{ width: '300px', margin: '0 auto', paddingTop: '20px' }}>
       <Typeahead
-        id="patient-typehead"
+        id="typehead"
         labelKey="patient"
         onChange={handleOnChangePatient}
+        minLength={3}
         options={optionsPatient}
         selected={patientSelected}
         placeholder="Escribe el nombre de un paciente..."

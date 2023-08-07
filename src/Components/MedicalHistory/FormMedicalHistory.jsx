@@ -1,31 +1,30 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Modal, Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { GetTheAppContext } from "../../Context/AppContext";
 import { TypeaheadPatient } from "./Typeahead/TypeaheadPatient";
-import { TypeaheadDoctor } from "./Typeahead/TypeaheadDoctor";
-// import { statusCreated } from "./HTTPstatus.js";
-// import { statusDeleted } from "./HTTPstatus.js";
 
 export const FormMedicalHistory = ({ isGetData = {} }) => {
-  const currentDate = new Date().toISOString().split("T")[0];
+  const [
+    isSiSelectedFamilyMedicalHistory,
+    setIsSiSelectedFamilyMedicalHistory,
+  ] = useState(false);
+
+  const [isSiSelectedPathologicalHistory, setIsSiSelectedPathologicalHistory] =
+    useState(false);
+
+  const [
+    isSiSelectedNoPathologicalHistory,
+    setIsSiSelectedNoPathologicalHistory,
+  ] = useState(false);
 
   const {
-    handleCloseModal,
+    // handleCloseModal,
     actionButtonModal,
-    handleShowFloatAlter,
-    setTextAlert,
+    // handleShowFloatAlter,
+    // setTextAlert,
     setGetDataFromTable,
     getAllPatientsData,
-    dataGetAllDoctors,
-    prescriptionPatientId,
-    prescriptionDoctorId,
-    createPrescriptionFunction,
-    setAllPrescriptionsData,
-    allPrescriptionsData,
-    allPrescriptionsFromApiFunction,
-    updatePrescriptionFunction,
-    dataPrescription,
   } = useContext(GetTheAppContext);
 
   const {
@@ -92,7 +91,7 @@ export const FormMedicalHistory = ({ isGetData = {} }) => {
               <TypeaheadPatient infoPatients={getAllPatientsData} />
             </div>
 
-            <div className="form-group col-md-6 mb-3">
+            <div className="form-group col-md-4 mb-3">
               <label htmlFor="inputPhone">Altura (cm)</label>
               <span className="text-danger">*</span>
               <input
@@ -124,7 +123,7 @@ export const FormMedicalHistory = ({ isGetData = {} }) => {
               )}
             </div>
 
-            <div className="form-group col-md-6 mb-3">
+            <div className="form-group col-md-4 mb-3">
               <label htmlFor="inputPhone">Peso (kg)</label>
               <span className="text-danger">*</span>
               <input
@@ -134,7 +133,7 @@ export const FormMedicalHistory = ({ isGetData = {} }) => {
                 autoComplete="off"
                 {...register("weight", {
                   required: true,
-                  pattern: /^(?!.*\..*\..*)(?:\d{1,3}(?:\.\d{0,2})?)?$/, // Expresión regular ajustada
+                  pattern: /^(?!.*\..*\..*)(?:\d{1,3}(?:\.\d{0,2})?)?$/,
                 })}
                 defaultValue={isGetData.weight}
               />
@@ -150,14 +149,15 @@ export const FormMedicalHistory = ({ isGetData = {} }) => {
 
         <div className="form-group row">
           <div className="form-group">
-            <label>Antecedentes heredofamiliares</label>
+            <label>¿Tiene antecedentes heredofamiliares?</label>
             <div className="form-check">
               <input
                 type="radio"
                 className="form-check-input"
                 id="si"
-                value="Si"
-                {...register("antecedentes", { required: true })}
+                value={true}
+                {...register("familyMedicalHistory")}
+                onChange={() => setIsSiSelectedFamilyMedicalHistory(true)}
               />
               <label className="form-check-label" htmlFor="si">
                 Si
@@ -168,29 +168,136 @@ export const FormMedicalHistory = ({ isGetData = {} }) => {
                 type="radio"
                 className="form-check-input"
                 id="no"
-                value="No"
-                {...register("antecedentes", { required: true })}
+                value={false}
+                {...register("familyMedicalHistory")}
+                onChange={() => setIsSiSelectedFamilyMedicalHistory(false)}
               />
               <label className="form-check-label" htmlFor="no">
                 No
               </label>
             </div>
-            {errors.antecedentes && (
-              <div className="text-danger">Este campo es requerido</div>
+            {errors.familyMedicalHistory && (
+              <div className="text-danger">Dato requerido</div>
             )}
           </div>
           <div className="form-group col-md-12 mb-2 ">
-            <label>Medicamentos Prescritos</label>
+            <label>Especificación de antecedentes heredofamiliares</label>
             <textarea
-              defaultValue={isGetData.description}
+              defaultValue={isGetData.specificFamilyMedicalHistory}
               type="text"
-              rows={5}
+              rows={2}
               className="form-control"
-              placeholder="Detalles de los medicamentos prescritos"
+              placeholder="Especificación de antecedentes heredofamiliares"
               autoComplete="off"
-              {...register("description", { required: true })}
+              {...register("specificFamilyMedicalHistory", { required: false })}
+              disabled={!isSiSelectedFamilyMedicalHistory}
             />
-            {errors.description && (
+            {errors.specificFamilyMedicalHistory && (
+              <span className="text-danger">Dato requerido</span>
+            )}
+          </div>
+        </div>
+
+        <div className="form-group row">
+          <div className="form-group">
+            <label>¿Tiene antecedentes patológicos?</label>
+            <div className="form-check">
+              <input
+                type="radio"
+                className="form-check-input"
+                id="si"
+                value={true}
+                {...register("pathologicalHistory", { required: true })}
+                onChange={() => setIsSiSelectedPathologicalHistory(true)}
+              />
+              <label className="form-check-label" htmlFor="si">
+                Si
+              </label>
+            </div>
+            <div className="form-check">
+              <input
+                type="radio"
+                className="form-check-input"
+                id="no"
+                value={false}
+                {...register("pathologicalHistory", { required: true })}
+                onChange={() => setIsSiSelectedPathologicalHistory(false)}
+              />
+              <label className="form-check-label" htmlFor="no">
+                No
+              </label>
+            </div>
+            {errors.pathologicalHistory && (
+              <div className="text-danger">Dato requerido</div>
+            )}
+          </div>
+          <div className="form-group col-md-12 mb-2 ">
+            <label>Especificación de antecedentes patológicos</label>
+            <textarea
+              defaultValue={isGetData.specificPathologicalHistory}
+              type="text"
+              rows={2}
+              className="form-control"
+              placeholder="Especificación de antecedentes patológicos"
+              autoComplete="off"
+              {...register("specificPathologicalHistory", { required: false })}
+              disabled={!isSiSelectedPathologicalHistory}
+            />
+            {errors.specificPathologicalHistory && (
+              <span className="text-danger">Dato requerido</span>
+            )}
+          </div>
+        </div>
+
+        <div className="form-group row">
+          <div className="form-group">
+            <label>¿Tiene antecedentes no patológicos?</label>
+            <div className="form-check">
+              <input
+                type="radio"
+                className="form-check-input"
+                id="si"
+                value={true}
+                {...register("nonPathologicalHistory", { required: true })}
+                onChange={() => setIsSiSelectedNoPathologicalHistory(true)}
+              />
+              <label className="form-check-label" htmlFor="si">
+                Si
+              </label>
+            </div>
+            <div className="form-check">
+              <input
+                type="radio"
+                className="form-check-input"
+                id="no"
+                value={false}
+                {...register("nonPathologicalHistory", { required: true })}
+                onChange={() => setIsSiSelectedNoPathologicalHistory(false)}
+              />
+              <label className="form-check-label" htmlFor="no">
+                No
+              </label>
+            </div>
+            {errors.nonPathologicalHistory && (
+              <div className="text-danger">Dato requerido</div>
+            )}
+          </div>
+
+          <div className="form-group col-md-12 mb-2 ">
+            <label>Especificación de antecedentes no patológicos</label>
+            <textarea
+              defaultValue={isGetData.specificNonPathologicalHistory}
+              type="text"
+              rows={2}
+              className="form-control"
+              placeholder="Especificación de antecedentes no patológicos"
+              autoComplete="off"
+              {...register("specificNonPathologicalHistory", {
+                required: false,
+              })}
+              disabled={!isSiSelectedNoPathologicalHistory}
+            />
+            {errors.specificNonPathologicalHistory && (
               <span className="text-danger">Dato requerido</span>
             )}
           </div>

@@ -23,17 +23,14 @@ import {
 export const GetTheAppContext = createContext();
 
 export const AppContext = (props) => {
+  const [dataMedicineFromTable, setDataMedicineFromTable] = useState({});
+  const [actionButtonModal, setActionButtonModal] = useState("Agregar");
+  const [textAlert, setTextAlert] = useState("");
+  const [doctorId, setDoctorId] = useState("");
+
   const [dataGetAllDoctors, setGetDataAllDoctors] = useState([]);
   const [dataUserDoctor, setDataUserDoctor] = useState({});
   const [getDataFromTable, setGetDataFromTable] = useState({});
-
-  const [dataMedicineFromTable, setDataMedicineFromTable] = useState({});
-
-  const [actionButtonModal, setActionButtonModal] = useState("Agregar");
-
-  const [textAlert, setTextAlert] = useState("");
-
-  const [doctorId, setDoctorId] = useState("");
 
   const [getAllPatientsData, setGetAllPatientsData] = useState([]);
   const [dataUserPatient, setDataUserPatient] = useState({});
@@ -44,6 +41,7 @@ export const AppContext = (props) => {
   const [idMedicine, setIdMedicine] = useState("");
 
   const [dataMedicalHistory, setDataMedicalHistory] = useState({});
+  const [patientHistoryId, setPatientHistoryId] = useState("");
 
   const [showModal, setShowModal] = useState(false);
 
@@ -125,6 +123,9 @@ export const AppContext = (props) => {
 
         dataMedicalHistory,
         setDataMedicalHistory,
+
+        patientHistoryId,
+        setPatientHistoryId,
       }}
     >
       {props.children}

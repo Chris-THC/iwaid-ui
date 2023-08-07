@@ -4,9 +4,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "react-bootstrap-typeahead/css/Typeahead.css";
 import { GetTheAppContext } from "../../../Context/AppContext";
 
+// dataPrescription
 export const TypeaheadPatient = ({ infoPatients }) => {
-  const { setPrescriptionPatientId, dataPrescription } =
-    useContext(GetTheAppContext);
+  const { setPatientHistoryId } = useContext(GetTheAppContext);
 
   const [selectedPatient, setSelectedPatient] = useState([]);
   const [patient, setPatient] = useState([]);
@@ -28,14 +28,10 @@ export const TypeaheadPatient = ({ infoPatients }) => {
   const handlePatientSelection = (selectedPatients) => {
     setSelectedPatient(selectedPatients);
     if (selectedPatients.length > 0) {
-      setPrescriptionPatientId(selectedPatients[0].id);
+      setPatientHistoryId(selectedPatients[0].id);
     }
   };
 
-
-
-
-  
   // const valueTypeHeadPatient = () => {
   //   if (Object.keys(dataPrescription).length === 0) {
   //     return "";

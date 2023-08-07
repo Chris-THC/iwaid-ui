@@ -45,9 +45,9 @@ export const AppContext = (props) => {
   const [dataUserDate, setDataUserDate] = useState({});
   const [idDate, setIdDate] = useState("");
 
-  const [doctorDataName, setDataDoctorNames] = useState([]);
+  const [doctorName, setDataDoctorNames] = useState([]);
   const [doctorSelected, setDoctorSelected] = useState([]);
-  const [patientDataName, setDatapatientNames] = useState([]);
+  const [patientName, setDatapatientNames] = useState([]);
   const [patientSelected, setPatientSelected] = useState([]);
   useEffect(() => {
     getAllDoctorsDataFunction(setGetDataAllDoctors);
@@ -117,11 +117,11 @@ export const AppContext = (props) => {
        setDataUserDate,
        idDate, 
        setIdDate,
-       doctorDataName,
+       doctorName,
         setDataDoctorNames,
         doctorSelected, 
         setDoctorSelected,
-        patientDataName, 
+        patientName, 
         setDatapatientNames,
         patientSelected, 
         setPatientSelected,

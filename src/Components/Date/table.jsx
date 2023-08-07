@@ -37,12 +37,10 @@ export function TablaGeneric({ title, data }) {
 
   const [searchNameDoctor, setSearchNameDoctor] = useState("");
   const [searchNamePatient, setSearchNamePatient] = useState("");
-  //const [searchDate, setSearchDate] = useState("");
 
   const handleClear = () => {
     setSearchNameDoctor("");
     setSearchNamePatient("");
-    //setSearchDate("");
   };
 
   const hourMappings = {
@@ -112,7 +110,6 @@ export function TablaGeneric({ title, data }) {
             value={searchNameDoctor}
             onChange={(e) => {
               setSearchNameDoctor(e.target.value);
-             // setSearchDate("");
             }}
             placeholder="Buscar por nombre..."
             pattern="^[A-Za-z\s]+$"
@@ -127,7 +124,6 @@ export function TablaGeneric({ title, data }) {
             value={searchNamePatient}
             onChange={(e) => {
               setSearchNamePatient(e.target.value);
-             // setSearchDate("");
             }}
             placeholder="Buscar por nombre..."
             pattern="^[A-Za-z\s]+$"
@@ -157,7 +153,7 @@ export function TablaGeneric({ title, data }) {
               <thead>
                 <tr>
                   <th>Paciente</th>
-                  <th>Medico</th>
+                  <th>Médico</th>
                   <th>Fecha</th>
                   <th>Hora</th>
                   <th>Notas</th>

@@ -7,7 +7,7 @@ import { statusCreated, statusUpdated, statusBeforeToday
 } from "./HTTPStatus.js";
 
 export const FormCitas = ({ isGetData = {} }) => {
-  console.log(isGetData);
+
   const currentDate = new Date().toISOString().split("T")[0];
   const {
     handleShowFloatAlter,
@@ -20,15 +20,30 @@ export const FormCitas = ({ isGetData = {} }) => {
     setAllDataDate,
     updateDateFunction,
     idDate,
-    doctorDataName,
+    doctorName,
     doctorSelected, 
     setDoctorSelected,
-    patientDataName,
+    patientName,
     patientSelected, 
     setPatientSelected
        
    
   } = useContext(GetTheAppContext);
+  const timeOptions = [
+{ value: "EIGHT_AM", label: "8:00-8:59 AM" },
+{ value: "NINE_AM", label: "9:00-9:59 AM" },
+{ value: "TEN_AM", label: "10:00-10:59 AM" },
+{ value: "ELEVEN_AM", label: "11:00-11:59 AM" },
+{ value: "TWELVE_PM", label: "12:00-12:59 PM" },
+{ value: "ONE_PM", label: "1:00-1:59 PM" },
+{ value: "TWO_PM", label: "2:00-2:59 PM" },
+{ value: "THREE_PM", label: "3:00-3:59 PM" },
+{ value: "FOUR_PM", label: "4:00-4:59 PM" },
+{ value: "FIVE_PM", label: "5:00-5:59 PM" },
+{ value: "SIX_PM", label: "6:00-6:59 PM" },
+{ value: "SEVEN_PM", label: "7:00-7:59 PM" },
+{ value: "EIGHT_PM", label: "8:00-8:59 PM" },
+];
 
   const {
     register,
@@ -36,7 +51,7 @@ export const FormCitas = ({ isGetData = {} }) => {
     formState: { errors, isValid },
   } = useForm({ mode: "all" });
 
-  const options = doctorDataName
+  const options = doctorName
   .filter((objeto) => objeto.hasOwnProperty("name"))
   .map((objeto) => objeto.name);
 
@@ -44,13 +59,13 @@ export const FormCitas = ({ isGetData = {} }) => {
     if (selected.length > 0) {
       
       setDoctorSelected(selected);
-      register("doctorId", { value: (doctorDataName.find((objeto) => objeto.name === selected[0]).id) });
+      register("doctorId", { value: (doctorName.find((objeto) => objeto.name === selected[0]).id) });
 
     } else {
       setDoctorSelected([]);
     }
   };
-  const optionsPatient = patientDataName
+  const optionsPatient = patientName
   .filter((objeto) => objeto.hasOwnProperty("name"))
   .map((objeto) => objeto.name);
 
@@ -58,7 +73,7 @@ export const FormCitas = ({ isGetData = {} }) => {
     if (selected.length > 0) {
       
       setPatientSelected(selected);
-      register("patientId", { value: (patientDataName.find((objeto) => objeto.name === selected[0]).id) });
+      register("patientId", { value: (patientName.find((objeto) => objeto.name === selected[0]).id) });
     } else {
       setPatientSelected([]);
     }
@@ -77,7 +92,7 @@ export const FormCitas = ({ isGetData = {} }) => {
         setTextAlert("Cita agregada exitosamente");
         handleShowFloatAlter();  
       }else if(responseCreateDate.status === statusBeforeToday){
-        setTextAlert("No se puede crear una cita antes de la fecha y hora actual");
+        setTextAlert("No es posible crear una cita antes de la fecha y hora actual");
         handleShowFloatAlter();
       } else {
         setTextAlert("Error al agregar una cita");
@@ -91,7 +106,7 @@ export const FormCitas = ({ isGetData = {} }) => {
         idDate
       );
       if (responseUpdateDate.status === statusUpdated ) {
-        setTextAlert(`Cita con fecha ${data.date} actualizada exitosamente`);
+        setTextAlert(`Cita actualizada exitosamente`);
         await getAllDateDataFunction(setAllDataDate);
         handleShowFloatAlter();
       } else {
@@ -172,8 +187,7 @@ export const FormCitas = ({ isGetData = {} }) => {
           </div>
         </div>
 
-
-        <div className="form-group col-md-4 mb-3">
+                <div className="form-group col-md-4 mb-3">
           <label>Seleccione horario</label>
           <span className="text-danger">*</span>
           <select
@@ -183,20 +197,11 @@ export const FormCitas = ({ isGetData = {} }) => {
             {...register("hour", { required: true })}
           >
             <option value="">Seleccione una opción</option>
-            <option value="EIGHT_AM">8:00-8:59 AM</option>
-            <option value="NINE_AM">9:00-9:59 AM</option>
-            <option value="TEN_AM">10:00-10:59 AM</option>
-            <option value="ELEVEN_AM">11:00-11:59 AM</option>
-            <option value="TWELVE_PM">12:00-12:59 PM</option>
-            <option value="ONE_PM">1:00-1:59 PM</option>
-            <option value="TWO_PM">2:00-2:59 PM</option>
-            <option value="THREE_PM">3:00-3:59 PM</option>
-            <option value="FOUR_PM">4:00-4:59 PM</option>
-            <option value="FIVE_PM">5:00-5:59 PM</option>
-            <option value="SIX_PM">6:00-6:59 PM</option>
-            <option value="SEVEN_PM">7:00-7:59 PM</option>
-            <option value="EIGHT_PM">8:00-8:59 PM</option>
-
+            {timeOptions.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
           </select>
           {errors.time && <span className="text-danger">Dato requerido</span>}
         </div>

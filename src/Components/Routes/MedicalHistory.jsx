@@ -1,9 +1,19 @@
-import React from "react";
+import { useContext } from "react";
+import { CrudMedicalHistory } from "../MedicalHistory/CrudMedicalHistory";
+import { FloatingAlert } from "../MedicalHistory/FloatingAlert";
+import { GetTheAppContext } from "../../Context/AppContext";
 
 export const MedicalHistory = () => {
+  const { showFloatingAlert, handleCloseFloatAlert, textAlert } =
+    useContext(GetTheAppContext);
   return (
     <div>
-      <h1>Historial Médico</h1>
+      <CrudMedicalHistory />
+      <FloatingAlert
+        show={showFloatingAlert}
+        message={`¡${textAlert}!`}
+        onClose={handleCloseFloatAlert}
+      />
     </div>
   );
 };

@@ -19,7 +19,7 @@ export const FormMedicalHistory = ({ isGetData = {} }) => {
   ] = useState(false);
 
   const {
-    // handleCloseModal,
+    handleCloseModal,
     actionButtonModal,
     // handleShowFloatAlter,
     // setTextAlert,
@@ -35,6 +35,7 @@ export const FormMedicalHistory = ({ isGetData = {} }) => {
 
   const onSubmitClick = async (data) => {
     console.log(data);
+    handleCloseModal();
     // data.patientId = prescriptionPatientId;
     // data.doctorId = prescriptionDoctorId;
 

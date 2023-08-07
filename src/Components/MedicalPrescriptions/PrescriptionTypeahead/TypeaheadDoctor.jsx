@@ -57,7 +57,7 @@ export const TypeaheadDoctor = ({ infoDoctors }) => {
         placeholder="Nombre del paciente..."
       />
       {doctorNotFound && (
-        <p className="text-danger">El doctor que buscas no se encuentra</p>
+        <p className="text-danger">El doctor no existe</p>
       )}
     </div>
   );

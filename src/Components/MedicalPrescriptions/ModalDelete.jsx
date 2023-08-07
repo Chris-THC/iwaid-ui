@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { Modal, Button } from "react-bootstrap";
 import { GetTheAppContext } from "../../Context/AppContext";
-import { statusDeleted } from "./HTTPstatus.js";
+import { statusDeleted } from "./HttpStatus";
 
 export const ModalDelete = ({ show, handleClose }) => {
   const {
@@ -23,7 +23,7 @@ export const ModalDelete = ({ show, handleClose }) => {
         <Modal.Title>Confirmar eliminación</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <p>¿Está seguro de que desea eliminar esta preinscripción?</p>
+        <p>¿Está seguro de que desea eliminar esta prescripción?</p>
       </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={handleClose}>
@@ -42,12 +42,12 @@ export const ModalDelete = ({ show, handleClose }) => {
               await allPrescriptionsFromApiFunction(setAllPrescriptionsData);
               handleButtonClick();
               setTextAlert(
-                `Se eliminó la preinscripción del paciente ${dataPrescription.patient.name}`
+                `Se eliminó la prescripción del paciente ${dataPrescription.patient.name}`
               );
               handleShowFloatAlter();
             } else {
               handleButtonClick();
-              setTextAlert("Error al eliminar la preinscripción");
+              setTextAlert("Error al eliminar la prescripción");
               handleShowFloatAlter();
             }
           }}

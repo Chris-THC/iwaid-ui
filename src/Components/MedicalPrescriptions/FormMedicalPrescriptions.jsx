@@ -4,8 +4,8 @@ import { useForm } from "react-hook-form";
 import { GetTheAppContext } from "../../Context/AppContext";
 import { TypeaheadPatient } from "./PrescriptionTypeahead/TypeaheadPatient";
 import { TypeaheadDoctor } from "./PrescriptionTypeahead/TypeaheadDoctor";
-import { statusCreated } from "./HTTPstatus.js";
-import { statusDeleted } from "./HTTPstatus.js";
+import { statusCreated } from "./HttpStatus.js";
+import { statusDeleted } from "./HttpStatus.js";
 
 export const FormMedicalPrescriptions = ({ isGetData = {} }) => {
   const currentDate = new Date().toISOString().split("T")[0];
@@ -46,10 +46,10 @@ export const FormMedicalPrescriptions = ({ isGetData = {} }) => {
         await allPrescriptionsFromApiFunction(setAllPrescriptionsData);
 
         console.log(allPrescriptionsData);
-        setTextAlert("Preinscripción medica agregada exitosamente");
+        setTextAlert("Prescripción médica agregada exitosamente");
         handleShowFloatAlter();
       } else {
-        setTextAlert("Error al agregar la preinscripción medica");
+        setTextAlert("Error al agregar la prescripción médica");
         handleShowFloatAlter();
       }
     } else if (actionButtonModal === "Editar") {
@@ -69,12 +69,12 @@ export const FormMedicalPrescriptions = ({ isGetData = {} }) => {
 
       if (responseUpdatePrescription.status === statusDeleted) {
         setTextAlert(
-          `Preinscripción de ${dataPrescription.patient.name} se ha actualizado exitosamente`
+          `Prescripción de ${dataPrescription.patient.name} se ha actualizado exitosamente`
         );
         await allPrescriptionsFromApiFunction(setAllPrescriptionsData);
         handleShowFloatAlter();
       } else {
-        setTextAlert("Error al actualizar la preinscripción");
+        setTextAlert("Error al actualizar la prescripción");
         handleShowFloatAlter();
       }
     }

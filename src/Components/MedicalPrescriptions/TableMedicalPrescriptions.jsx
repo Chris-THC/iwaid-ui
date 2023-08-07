@@ -29,13 +29,13 @@ export const TableMedicalPrescriptions = ({ dataTable }) => {
     setDataPrescription,
   } = useContext(GetTheAppContext);
 
-  const [searchByName, setSearchByName] = useState("");
+  const [searchByNamePatient, setSearchByNamePatient] = useState("");
   const [searchByDoctor, setSearchByDoctor] = useState("");
   const [searchByStartDate, setSearchByStartDate] = useState("");
   const [searchByFinalDate, setSearchByFinalDate] = useState("");
 
   const handleClear = () => {
-    setSearchByName("");
+    setSearchByNamePatient("");
     setSearchByDoctor("");
     setSearchByStartDate("");
     setSearchByFinalDate("");
@@ -90,9 +90,9 @@ export const TableMedicalPrescriptions = ({ dataTable }) => {
                         autoComplete="off"
                         type="text"
                         className="form-control"
-                        value={searchByName}
+                        value={searchByNamePatient}
                         onChange={(e) => {
-                          setSearchByName(e.target.value);
+                          setSearchByNamePatient(e.target.value);
                           setSearchByDoctor("");
                           setSearchByStartDate("");
                           setSearchByFinalDate("");
@@ -110,11 +110,11 @@ export const TableMedicalPrescriptions = ({ dataTable }) => {
                         value={searchByDoctor}
                         onChange={(e) => {
                           setSearchByDoctor(e.target.value);
-                          setSearchByName("");
+                          setSearchByNamePatient("");
                           setSearchByStartDate("");
                           setSearchByFinalDate("");
                         }}
-                        placeholder="Buscar por medico..."
+                        placeholder="Buscar por médico..."
                         pattern="^[A-Za-z\s]+$"
                       />
                     </div>
@@ -129,7 +129,7 @@ export const TableMedicalPrescriptions = ({ dataTable }) => {
                           onChange={(e) => {
                             setSearchByStartDate(e.target.value);
                             setSearchByDoctor("");
-                            setSearchByName("");
+                            setSearchByNamePatient("");
                           }}
                           placeholder="Buscar por fecha inicial..."
                         />
@@ -146,7 +146,7 @@ export const TableMedicalPrescriptions = ({ dataTable }) => {
                           onChange={(e) => {
                             setSearchByFinalDate(e.target.value);
                             setSearchByDoctor("");
-                            setSearchByName("");
+                            setSearchByNamePatient("");
                           }}
                           placeholder="Buscar por fecha final..."
                         />
@@ -181,7 +181,7 @@ export const TableMedicalPrescriptions = ({ dataTable }) => {
               <thead>
                 <tr>
                   <th>Paciente</th>
-                  <th>Medico</th>
+                  <th>Médico</th>
                   <th style={{ width: "10%" }}>Fecha de Asignación</th>
                   <th style={{ width: "35%" }}>Descripción</th>
                   <th style={{ width: "20%" }}>Acciones</th>
@@ -192,7 +192,7 @@ export const TableMedicalPrescriptions = ({ dataTable }) => {
                   .filter((field) => {
                     const patientNameMatches = field.patient.name
                       .toLowerCase()
-                      .includes(searchByName.toLowerCase());
+                      .includes(searchByNamePatient.toLowerCase());
 
                     const doctorNameMatches = field.doctor.name
                       .toLowerCase()

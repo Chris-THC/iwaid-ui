@@ -32,10 +32,6 @@ export const TypeaheadPatient = ({ infoPatients }) => {
     }
   };
 
-
-
-
-  
   const valueTypeHeadPatient = () => {
     if (Object.keys(dataPrescription).length === 0) {
       return "";
@@ -61,7 +57,7 @@ export const TypeaheadPatient = ({ infoPatients }) => {
       />
 
       {patientNotFound && (
-        <p className="text-danger">El paciente que buscas no se encuentra</p>
+        <p className="text-danger">El paciente no existe</p>
       )}
     </div>
   );

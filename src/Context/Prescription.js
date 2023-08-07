@@ -24,9 +24,9 @@ export const createPrescriptionFunction = async (arrayData) => {
   }
 };
 
-export const deletePrescriptionFunction = async (idPrescription) => {
+export const deletePrescriptionFunction = async (prescriptionId) => {
   try {
-    const urlDelete = `${prescriptions_URL}/${idPrescription}`;
+    const urlDelete = `${prescriptions_URL}/${prescriptionId}`;
     const response = await axios.delete(urlDelete);
     return response;
   } catch (error) {
@@ -35,8 +35,8 @@ export const deletePrescriptionFunction = async (idPrescription) => {
   }
 };
 
-export const updatePrescriptionFunction = async (arrayData, idPrescription) => {
-  const urlUpdate = `${prescriptions_URL}/${idPrescription}`;
+export const updatePrescriptionFunction = async (arrayData, prescriptionId) => {
+  const urlUpdate = `${prescriptions_URL}/${prescriptionId}`;
   try {
     const response = await axios.patch(urlUpdate, arrayData);
     return response;

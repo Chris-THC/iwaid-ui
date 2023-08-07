@@ -102,7 +102,7 @@ export const TableMedicalPrescriptions = ({ dataTable }) => {
                       />
                     </div>
                     <div className="col-md-3 mb-3">
-                      <label>Medico</label>
+                      <label>Médico</label>
                       <input
                         autoComplete="off"
                         type="text"

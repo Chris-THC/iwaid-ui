@@ -221,7 +221,7 @@ export function TablaGeneric({ title, data }) {
                             onClick={() => {
                               setDataUserDate(field);
                             }}
-                            id="btnDeletePatient"
+                            id="btnDelete"
                             className="btn-icon-lg"
                           />
                         </Button>

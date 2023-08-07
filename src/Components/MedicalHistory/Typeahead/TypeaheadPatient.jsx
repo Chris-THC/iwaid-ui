@@ -36,15 +36,15 @@ export const TypeaheadPatient = ({ infoPatients }) => {
 
 
   
-  const valueTypeHeadPatient = () => {
-    if (Object.keys(dataPrescription).length === 0) {
-      return "";
-    } else if (dataPrescription.patient && dataPrescription.patient.name) {
-      return dataPrescription.patient.name;
-    } else {
-      return "";
-    }
-  };
+  // const valueTypeHeadPatient = () => {
+  //   if (Object.keys(dataPrescription).length === 0) {
+  //     return "";
+  //   } else if (dataPrescription.patient && dataPrescription.patient.name) {
+  //     return dataPrescription.patient.name;
+  //   } else {
+  //     return "";
+  //   }
+  // };
 
   return (
     <div>
@@ -55,7 +55,7 @@ export const TypeaheadPatient = ({ infoPatients }) => {
         onChange={handlePatientSelection}
         options={patient}
         selected={selectedPatient}
-        defaultInputValue={valueTypeHeadPatient()}
+        defaultInputValue={""}
         onInputChange={handleInputChange}
         placeholder="Paciente..."
       />

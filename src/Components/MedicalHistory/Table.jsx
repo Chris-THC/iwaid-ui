@@ -27,7 +27,7 @@ export const Table = ({ dataTable }) => {
     showModal,
     setGetDataFromTable,
     setActionButtonModal,
-    setDataPrescription,
+    setDataMedicalHistory,
   } = useContext(GetTheAppContext);
 
   const [searchByName, setSearchByName] = useState("");
@@ -65,7 +65,7 @@ export const Table = ({ dataTable }) => {
                 className="ms-2 me-2 mb-1"
                 variant="primary"
                 onClick={() => {
-                  setDataPrescription({});
+                  setDataMedicalHistory({});
                   handleShowModal();
                   setActionButtonModal("Agregar");
                 }}
@@ -196,9 +196,9 @@ export const Table = ({ dataTable }) => {
                             variant="primary"
                             onClick={() => {
                               handleShowModal();
-                              setGetDataFromTable(field);
-                              setActionButtonModal("Editar");
-                              setDataPrescription(field);
+                              // setGetDataFromTable(field);
+                              // setActionButtonModal("Editar");
+                              setDataMedicalHistory(field);
                             }}
                           >
                             <BsPencilFill className="btn-icon-lg" />
@@ -217,7 +217,7 @@ export const Table = ({ dataTable }) => {
                             className="ms-2 me-2 mb-2 mt-2"
                             variant="danger"
                             onClick={() => {
-                              setDataPrescription(field);
+                              setDataMedicalHistory(field);
                               handleShowModalDelete();
                             }}
                           >

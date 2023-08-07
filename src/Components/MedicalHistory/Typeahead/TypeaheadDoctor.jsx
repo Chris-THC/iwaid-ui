@@ -33,22 +33,22 @@ export const TypeaheadDoctor = ({ infoDoctors }) => {
     }
   };
 
-  const valueTypeHeadDoctor = () => {
-    if (Object.keys(dataPrescription).length === 0) {
-      return "";
-    } else if (dataPrescription.doctor && dataPrescription.doctor.name) {
-      return dataPrescription.doctor.name;
-    } else {
-      return "";
-    }
-  };
+  // const valueTypeHeadDoctor = () => {
+  //   if (Object.keys(dataPrescription).length === 0) {
+  //     return "";
+  //   } else if (dataPrescription.doctor && dataPrescription.doctor.name) {
+  //     return dataPrescription.doctor.name;
+  //   } else {
+  //     return "";
+  //   }
+  // };
 
   return (
     <div>
       <Typeahead
         id="pacientes-autocompletado"
         labelKey="name"
-        defaultInputValue={valueTypeHeadDoctor()}
+        defaultInputValue={""}
         minLength={3}
         onChange={handleDoctorSelection}
         options={doctor}

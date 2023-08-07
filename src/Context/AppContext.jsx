@@ -43,6 +43,8 @@ export const AppContext = (props) => {
   const [dataUserMedicine, setDataUserMedicine] = useState({});
   const [idMedicine, setIdMedicine] = useState("");
 
+  const [dataMedicalHistory, setDataMedicalHistory] = useState({});
+
   const [showModal, setShowModal] = useState(false);
 
   const [nameMedicine, setNameMedicine] = useState(false);
@@ -120,6 +122,9 @@ export const AppContext = (props) => {
         setDataMedicineFromTable,
         nameMedicine,
         setNameMedicine,
+
+        dataMedicalHistory,
+        setDataMedicalHistory,
       }}
     >
       {props.children}

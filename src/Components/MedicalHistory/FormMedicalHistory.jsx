@@ -88,38 +88,97 @@ export const FormMedicalHistory = ({ isGetData = {} }) => {
           <div className="row">
             <div className="form-group col-md-4 mb-2">
               <label>Paciente</label>
+              <span className="text-danger">*</span>
               <TypeaheadPatient infoPatients={getAllPatientsData} />
             </div>
-            <div className="form-group col-md-4 mb-2">
-              <label>Médico</label>
-              <TypeaheadDoctor infoDoctors={dataGetAllDoctors} />
+
+            <div className="form-group col-md-6 mb-3">
+              <label htmlFor="inputPhone">Altura (cm)</label>
+              <span className="text-danger">*</span>
+              <input
+                type="tel"
+                className="form-control"
+                placeholder="Altura en (cm)"
+                autoComplete="off"
+                {...register("height", {
+                  required: true,
+                  pattern: /^[0-9]+$/,
+                  minLength: 3,
+                  maxLength: 3,
+                })}
+                defaultValue={isGetData.height}
+              />
+              {errors.height?.type === "required" && (
+                <span className="text-danger">Dato requerido</span>
+              )}
+              {errors.height?.type === "pattern" && (
+                <span className="text-danger">Ingrese solo números</span>
+              )}
+              {errors.height?.type === "minLength" && (
+                <span className="text-danger">
+                  Debe tener al menos 3 dígitos
+                </span>
+              )}
+              {errors.height?.type === "maxLength" && (
+                <span className="text-danger">Máximo 3 dígitos</span>
+              )}
             </div>
 
-            <div className="form-group col-md-3 mb-2">
-              <label>Fecha de Asignación</label>
+            <div className="form-group col-md-6 mb-3">
+              <label htmlFor="inputPhone">Peso (kg)</label>
+              <span className="text-danger">*</span>
               <input
-                defaultValue={isGetData.date}
-                type="date"
+                type="text"
                 className="form-control"
+                placeholder="Peso en (kg)"
                 autoComplete="off"
-                {...register("date", {
+                {...register("weight", {
                   required: true,
-                  max: {
-                    value: currentDate,
-                  },
+                  pattern: /^(?!.*\..*\..*)(?:\d{1,3}(?:\.\d{0,2})?)?$/, // Expresión regular ajustada
                 })}
+                defaultValue={isGetData.weight}
               />
-              {errors.date && (
-                <span className="text-danger">
-                  Dato requerido o la fecha no puede ser posterior a la fecha
-                  actual
-                </span>
+              {errors.weight?.type === "required" && (
+                <span className="text-danger">Dato requerido</span>
+              )}
+              {errors.weight?.type === "pattern" && (
+                <span className="text-danger">Ingrese un número válido</span>
               )}
             </div>
           </div>
         </div>
 
         <div className="form-group row">
+          <div className="form-group">
+            <label>Antecedentes heredofamiliares</label>
+            <div className="form-check">
+              <input
+                type="radio"
+                className="form-check-input"
+                id="si"
+                value="Si"
+                {...register("antecedentes", { required: true })}
+              />
+              <label className="form-check-label" htmlFor="si">
+                Si
+              </label>
+            </div>
+            <div className="form-check">
+              <input
+                type="radio"
+                className="form-check-input"
+                id="no"
+                value="No"
+                {...register("antecedentes", { required: true })}
+              />
+              <label className="form-check-label" htmlFor="no">
+                No
+              </label>
+            </div>
+            {errors.antecedentes && (
+              <div className="text-danger">Este campo es requerido</div>
+            )}
+          </div>
           <div className="form-group col-md-12 mb-2 ">
             <label>Medicamentos Prescritos</label>
             <textarea

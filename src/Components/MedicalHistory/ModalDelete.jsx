@@ -1,18 +1,10 @@
 import { useContext } from "react";
 import { Modal, Button } from "react-bootstrap";
 import { GetTheAppContext } from "../../Context/AppContext";
-import { statusDeleted } from "./HTTPstatus.js";
+// import { statusDeleted } from "./HTTPstatus.js";
 
 export const ModalDelete = ({ show, handleClose }) => {
-  const {
-    allPrescriptionsFromApiFunction,
-    deletePrescriptionFunction,
-    setAllPrescriptionsData,
-    setActionButtonModal,
-    setTextAlert,
-    handleShowFloatAlter,
-    dataPrescription,
-  } = useContext(GetTheAppContext);
+  const { setTextAlert, handleShowFloatAlter } = useContext(GetTheAppContext);
   const handleButtonClick = () => {
     handleClose();
   };
@@ -31,25 +23,27 @@ export const ModalDelete = ({ show, handleClose }) => {
         </Button>
         <Button
           variant="danger"
-          onClick={async () => {
-            setActionButtonModal("Eliminar");
-            console.log(dataPrescription.id);
-            const response = await deletePrescriptionFunction(
-              dataPrescription.id
-            );
+          onClick={() => {
+            handleButtonClick();
+            setTextAlert("Se elimino");
+            handleShowFloatAlter();
+            // console.log(dataPrescription.id);
+            // const response = await deletePrescriptionFunction(
+            //   dataPrescription.id
+            // );
 
-            if (response.status === statusDeleted) {
-              await allPrescriptionsFromApiFunction(setAllPrescriptionsData);
-              handleButtonClick();
-              setTextAlert(
-                `Se eliminó la preinscripción del paciente ${dataPrescription.patient.name}`
-              );
-              handleShowFloatAlter();
-            } else {
-              handleButtonClick();
-              setTextAlert("Error al eliminar la preinscripción");
-              handleShowFloatAlter();
-            }
+            // if (response.status === statusDeleted) {
+            //   await allPrescriptionsFromApiFunction(setAllPrescriptionsData);
+            //   handleButtonClick();
+            //   setTextAlert(
+            //     `Se eliminó la preinscripción del paciente ${dataPrescription.patient.name}`
+            //   );
+            //   handleShowFloatAlter();
+            // } else {
+            //   handleButtonClick();
+            //   setTextAlert("Error al eliminar la preinscripción");
+            //   handleShowFloatAlter();
+            // }
           }}
         >
           Eliminar

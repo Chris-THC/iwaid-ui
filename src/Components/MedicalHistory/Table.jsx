@@ -21,6 +21,7 @@ export const Table = ({ dataTable }) => {
   const handleCloseModalDelete = () => {
     setShowModalDelete(false);
   };
+  
   const {
     handleShowModal,
     handleCloseModal,
@@ -31,20 +32,9 @@ export const Table = ({ dataTable }) => {
   } = useContext(GetTheAppContext);
 
   const [searchByName, setSearchByName] = useState("");
-  const [searchByDoctor, setSearchByDoctor] = useState("");
-  const [searchByStartDate, setSearchByStartDate] = useState("");
-  const [searchByFinalDate, setSearchByFinalDate] = useState("");
 
   const handleClear = () => {
     setSearchByName("");
-    setSearchByDoctor("");
-    setSearchByStartDate("");
-    setSearchByFinalDate("");
-  };
-
-  const changeDateFormat = (originalDate) => {
-    let piecesDate = originalDate.split("-");
-    return piecesDate[2] + "/" + piecesDate[1] + "/" + piecesDate[0];
   };
 
   return (
@@ -94,9 +84,6 @@ export const Table = ({ dataTable }) => {
                         value={searchByName}
                         onChange={(e) => {
                           setSearchByName(e.target.value);
-                          setSearchByDoctor("");
-                          setSearchByStartDate("");
-                          setSearchByFinalDate("");
                         }}
                         placeholder="Buscar por nombre..."
                         pattern="^[A-Za-z\s]+$"
@@ -131,11 +118,15 @@ export const Table = ({ dataTable }) => {
               <thead>
                 <tr>
                   <th>Paciente</th>
-                  <th style={{ width: "20%" }}>Antecedentes patologicos</th>
-                  <th style={{ width: "20%" }}>Antecedentes no patologicos</th>
+
                   <th style={{ width: "20%" }}>
                     Antecedentes heredofamiliares
                   </th>
+
+                  <th style={{ width: "20%" }}>Antecedentes patologicos</th>
+
+                  <th style={{ width: "20%" }}>Antecedentes no patologicos</th>
+
                   <th style={{ width: "20%" }}>Acciones</th>
                 </tr>
               </thead>
@@ -151,6 +142,18 @@ export const Table = ({ dataTable }) => {
                   .map((field) => (
                     <tr key={field.id}>
                       <td className="pt-2">{field.patient.name}</td>
+                      <td className="pt-2">
+                        {field.familyMedicalHistory === true ? (
+                          <p className="text-success">
+                            <FcCheckmark />
+                          </p>
+                        ) : (
+                          <p className="text-secondary">
+                            <FcMinus />
+                          </p>
+                        )}
+                      </td>
+
                       <td className="pt-2">
                         {field.pathologicalHistory === true ? (
                           <p className="text-success">
@@ -174,17 +177,7 @@ export const Table = ({ dataTable }) => {
                           </p>
                         )}
                       </td>
-                      <td className="pt-2">
-                        {field.familyMedicalHistory === true ? (
-                          <p className="text-success">
-                            <FcCheckmark />
-                          </p>
-                        ) : (
-                          <p className="text-secondary">
-                            <FcMinus />
-                          </p>
-                        )}
-                      </td>
+
                       <td>
                         <OverlayTrigger
                           placement="top"
@@ -196,8 +189,9 @@ export const Table = ({ dataTable }) => {
                             variant="primary"
                             onClick={() => {
                               handleShowModal();
-                              // setGetDataFromTable(field);
-                              // setActionButtonModal("Editar");
+                              setGetDataFromTable(field);
+                              console.log(field);
+                              setActionButtonModal("Editar");
                               setDataMedicalHistory(field);
                             }}
                           >

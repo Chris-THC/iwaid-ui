@@ -1,22 +1,18 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Modal, Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { GetTheAppContext } from "../../Context/AppContext";
 import { TypeaheadPatient } from "./Typeahead/TypeaheadPatient";
 
 export const FormMedicalHistory = ({ isGetData = {} }) => {
-  const [
-    isSiSelectedFamilyMedicalHistory,
-    setIsSiSelectedFamilyMedicalHistory,
-  ] = useState(false);
-
-  const [isSiSelectedPathologicalHistory, setIsSiSelectedPathologicalHistory] =
+  const [isSelectedFamilyMedicalHistory, setIsSelectedFamilyMedicalHistory] =
     useState(false);
 
-  const [
-    isSiSelectedNoPathologicalHistory,
-    setIsSiSelectedNoPathologicalHistory,
-  ] = useState(false);
+  const [isSelectedPathologicalHistory, setIsSelectedPathologicalHistory] =
+    useState(false);
+
+  const [isSelectedNoPathologicalHistory, setIsSelectedNoPathologicalHistory] =
+    useState(false);
 
   const {
     handleCloseModal,
@@ -24,6 +20,7 @@ export const FormMedicalHistory = ({ isGetData = {} }) => {
     // handleShowFloatAlter,
     // setTextAlert,
     setGetDataFromTable,
+    dataMedicalHistory,
     getAllPatientsData,
   } = useContext(GetTheAppContext);
 
@@ -33,52 +30,105 @@ export const FormMedicalHistory = ({ isGetData = {} }) => {
     formState: { errors, isValid },
   } = useForm({ mode: "all" });
 
+  const deselectFamilyMedicalHistory = () => {
+    if (isGetData.familyMedicalHistory === true) {
+      setIsSelectedFamilyMedicalHistory(true);
+    } else if (isGetData.familyMedicalHistory === false) {
+      setIsSelectedFamilyMedicalHistory(false);
+    }
+  };
+  const deselectPathologicalHistory = () => {
+    if (isGetData.pathologicalHistory === true) {
+      setIsSelectedPathologicalHistory(true);
+    } else if (isGetData.pathologicalHistory === false) {
+      setIsSelectedPathologicalHistory(false);
+    }
+  };
+  const deselectNonPathologicalHistory = () => {
+    if (isGetData.nonPathologicalHistory === true) {
+      setIsSelectedNoPathologicalHistory(true);
+    } else if (isGetData.nonPathologicalHistory === false) {
+      setIsSelectedNoPathologicalHistory(false);
+    }
+  };
+
+  useEffect(() => {
+    deselectFamilyMedicalHistory();
+    deselectPathologicalHistory();
+    deselectNonPathologicalHistory();
+  }, []);
+
   const onSubmitClick = async (data) => {
+    data.patientsId = dataMedicalHistory.patient.id;
+
+    if (typeof data.specificFamilyMedicalHistory === "undefined") {
+      data.specificFamilyMedicalHistory =
+        dataMedicalHistory.specificFamilyMedicalHistory;
+    }
+    if (typeof data.specificPathologicalHistory === "undefined") {
+      data.specificPathologicalHistory =
+        dataMedicalHistory.specificPathologicalHistory;
+    }
+    if (typeof data.specificNonPathologicalHistory === "undefined") {
+      data.specificNonPathologicalHistory =
+        dataMedicalHistory.specificNonPathologicalHistory;
+    }
+
+    if (actionButtonModal === "Agregar") {
+      if (typeof data.specificFamilyMedicalHistory === "undefined") {
+        data.specificFamilyMedicalHistory =
+          dataMedicalHistory.specificFamilyMedicalHistory = "";
+      }
+      if (typeof data.specificPathologicalHistory === "undefined") {
+        data.specificPathologicalHistory =
+          dataMedicalHistory.specificPathologicalHistory = "";
+      }
+      if (typeof data.specificNonPathologicalHistory === "undefined") {
+        data.specificNonPathologicalHistory =
+          dataMedicalHistory.specificNonPathologicalHistory = "";
+      }
+
+      handleCloseModal();
+      // const createNewPrescription = await createPrescriptionFunction(data);
+
+      // if (createNewPrescription.status === statusCreated) {
+      //   await allPrescriptionsFromApiFunction(setAllPrescriptionsData);
+
+      //   console.log(allPrescriptionsData);
+      //   setTextAlert("Preinscripción medica agregada exitosamente");
+      //   handleShowFloatAlter();
+      // } else {
+      //   setTextAlert("Error al agregar la preinscripción medica");
+      //   handleShowFloatAlter();
+      // }
+    } else if (actionButtonModal === "Editar") {
+      handleCloseModal();
+      // if (data.patientId === "" || data.doctorId === "") {
+      //   data.patientId = dataPrescription.patientId;
+      //   data.doctorId = dataPrescription.doctorId;
+      // } else {
+      //   data.patientId = prescriptionPatientId;
+      //   data.doctorId = prescriptionDoctorId;
+      // }
+
+      // const responseUpdatePrescription = await updatePrescriptionFunction(
+      //   data,
+      //   dataPrescription.id
+      // );
+
+      // if (responseUpdatePrescription.status === statusDeleted) {
+      //   setTextAlert(
+      //     `Preinscripción de ${dataPrescription.patient.name} se ha actualizado exitosamente`
+      //   );
+      //   await allPrescriptionsFromApiFunction(setAllPrescriptionsData);
+      //   handleShowFloatAlter();
+      // } else {
+      //   setTextAlert("Error al actualizar la preinscripción");
+      //   handleShowFloatAlter();
+      // }
+    }
+
     console.log(data);
-    handleCloseModal();
-    // data.patientId = prescriptionPatientId;
-    // data.doctorId = prescriptionDoctorId;
-
-    // if (actionButtonModal === "Agregar") {
-    //   handleCloseModal();
-    //   const createNewPrescription = await createPrescriptionFunction(data);
-
-    //   if (createNewPrescription.status === statusCreated) {
-    //     await allPrescriptionsFromApiFunction(setAllPrescriptionsData);
-
-    //     console.log(allPrescriptionsData);
-    //     setTextAlert("Preinscripción medica agregada exitosamente");
-    //     handleShowFloatAlter();
-    //   } else {
-    //     setTextAlert("Error al agregar la preinscripción medica");
-    //     handleShowFloatAlter();
-    //   }
-    // } else if (actionButtonModal === "Editar") {
-    //   handleCloseModal();
-    //   if (data.patientId === "" || data.doctorId === "") {
-    //     data.patientId = dataPrescription.patientId;
-    //     data.doctorId = dataPrescription.doctorId;
-    //   } else {
-    //     data.patientId = prescriptionPatientId;
-    //     data.doctorId = prescriptionDoctorId;
-    //   }
-
-    //   const responseUpdatePrescription = await updatePrescriptionFunction(
-    //     data,
-    //     dataPrescription.id
-    //   );
-
-    //   if (responseUpdatePrescription.status === statusDeleted) {
-    //     setTextAlert(
-    //       `Preinscripción de ${dataPrescription.patient.name} se ha actualizado exitosamente`
-    //     );
-    //     await allPrescriptionsFromApiFunction(setAllPrescriptionsData);
-    //     handleShowFloatAlter();
-    //   } else {
-    //     setTextAlert("Error al actualizar la preinscripción");
-    //     handleShowFloatAlter();
-    //   }
-    // }
   };
 
   return (
@@ -153,12 +203,13 @@ export const FormMedicalHistory = ({ isGetData = {} }) => {
             <label>¿Tiene antecedentes heredofamiliares?</label>
             <div className="form-check">
               <input
+                defaultChecked={isGetData.familyMedicalHistory}
                 type="radio"
                 className="form-check-input"
                 id="si"
                 value={true}
                 {...register("familyMedicalHistory")}
-                onChange={() => setIsSiSelectedFamilyMedicalHistory(true)}
+                onChange={() => setIsSelectedFamilyMedicalHistory(true)}
               />
               <label className="form-check-label" htmlFor="si">
                 Si
@@ -166,12 +217,16 @@ export const FormMedicalHistory = ({ isGetData = {} }) => {
             </div>
             <div className="form-check">
               <input
+                defaultChecked={!isGetData.familyMedicalHistory}
                 type="radio"
                 className="form-check-input"
                 id="no"
                 value={false}
                 {...register("familyMedicalHistory")}
-                onChange={() => setIsSiSelectedFamilyMedicalHistory(false)}
+                onChange={() => {
+                  setIsSelectedFamilyMedicalHistory(false);
+                  dataMedicalHistory.specificFamilyMedicalHistory = "";
+                }}
               />
               <label className="form-check-label" htmlFor="no">
                 No
@@ -182,16 +237,16 @@ export const FormMedicalHistory = ({ isGetData = {} }) => {
             )}
           </div>
           <div className="form-group col-md-12 mb-2 ">
-            <label>Especificación de antecedentes heredofamiliares</label>
+            <label>Especificación</label>
             <textarea
-              defaultValue={isGetData.specificFamilyMedicalHistory}
+              defaultValue={dataMedicalHistory.specificFamilyMedicalHistory}
               type="text"
               rows={2}
               className="form-control"
               placeholder="Especificación de antecedentes heredofamiliares"
               autoComplete="off"
               {...register("specificFamilyMedicalHistory", { required: false })}
-              disabled={!isSiSelectedFamilyMedicalHistory}
+              disabled={!isSelectedFamilyMedicalHistory}
             />
             {errors.specificFamilyMedicalHistory && (
               <span className="text-danger">Dato requerido</span>
@@ -204,12 +259,13 @@ export const FormMedicalHistory = ({ isGetData = {} }) => {
             <label>¿Tiene antecedentes patológicos?</label>
             <div className="form-check">
               <input
+                defaultChecked={isGetData.pathologicalHistory}
                 type="radio"
                 className="form-check-input"
                 id="si"
                 value={true}
-                {...register("pathologicalHistory", { required: true })}
-                onChange={() => setIsSiSelectedPathologicalHistory(true)}
+                {...register("pathologicalHistory")}
+                onChange={() => setIsSelectedPathologicalHistory(true)}
               />
               <label className="form-check-label" htmlFor="si">
                 Si
@@ -217,12 +273,16 @@ export const FormMedicalHistory = ({ isGetData = {} }) => {
             </div>
             <div className="form-check">
               <input
+                defaultChecked={!isGetData.pathologicalHistory}
                 type="radio"
                 className="form-check-input"
                 id="no"
                 value={false}
-                {...register("pathologicalHistory", { required: true })}
-                onChange={() => setIsSiSelectedPathologicalHistory(false)}
+                {...register("pathologicalHistory")}
+                onChange={() => {
+                  dataMedicalHistory.specificPathologicalHistory = "";
+                  setIsSelectedPathologicalHistory(false);
+                }}
               />
               <label className="form-check-label" htmlFor="no">
                 No
@@ -233,18 +293,18 @@ export const FormMedicalHistory = ({ isGetData = {} }) => {
             )}
           </div>
           <div className="form-group col-md-12 mb-2 ">
-            <label>Especificación de antecedentes patológicos</label>
+            <label>Especificación</label>
             <textarea
               defaultValue={isGetData.specificPathologicalHistory}
               type="text"
               rows={2}
               className="form-control"
-              placeholder="Especificación de antecedentes patológicos"
+              placeholder="Especificación"
               autoComplete="off"
               {...register("specificPathologicalHistory", { required: false })}
-              disabled={!isSiSelectedPathologicalHistory}
+              disabled={!isSelectedPathologicalHistory}
             />
-            {errors.specificPathologicalHistory && (
+            {errors.specificFamilyMedicalHistory && (
               <span className="text-danger">Dato requerido</span>
             )}
           </div>
@@ -255,12 +315,13 @@ export const FormMedicalHistory = ({ isGetData = {} }) => {
             <label>¿Tiene antecedentes no patológicos?</label>
             <div className="form-check">
               <input
+                defaultChecked={isGetData.nonPathologicalHistory}
                 type="radio"
                 className="form-check-input"
                 id="si"
                 value={true}
-                {...register("nonPathologicalHistory", { required: true })}
-                onChange={() => setIsSiSelectedNoPathologicalHistory(true)}
+                {...register("nonPathologicalHistory")}
+                onChange={() => setIsSelectedNoPathologicalHistory(true)}
               />
               <label className="form-check-label" htmlFor="si">
                 Si
@@ -268,12 +329,16 @@ export const FormMedicalHistory = ({ isGetData = {} }) => {
             </div>
             <div className="form-check">
               <input
+                defaultChecked={!isGetData.nonPathologicalHistory}
                 type="radio"
                 className="form-check-input"
                 id="no"
                 value={false}
-                {...register("nonPathologicalHistory", { required: true })}
-                onChange={() => setIsSiSelectedNoPathologicalHistory(false)}
+                {...register("nonPathologicalHistory")}
+                onChange={() => {
+                  dataMedicalHistory.specificNonPathologicalHistory = "";
+                  setIsSelectedNoPathologicalHistory(false);
+                }}
               />
               <label className="form-check-label" htmlFor="no">
                 No
@@ -283,20 +348,19 @@ export const FormMedicalHistory = ({ isGetData = {} }) => {
               <div className="text-danger">Dato requerido</div>
             )}
           </div>
-
           <div className="form-group col-md-12 mb-2 ">
-            <label>Especificación de antecedentes no patológicos</label>
+            <label>Especificación</label>
             <textarea
               defaultValue={isGetData.specificNonPathologicalHistory}
               type="text"
               rows={2}
               className="form-control"
-              placeholder="Especificación de antecedentes no patológicos"
+              placeholder="Especificación"
               autoComplete="off"
               {...register("specificNonPathologicalHistory", {
                 required: false,
               })}
-              disabled={!isSiSelectedNoPathologicalHistory}
+              disabled={!isSelectedNoPathologicalHistory}
             />
             {errors.specificNonPathologicalHistory && (
               <span className="text-danger">Dato requerido</span>

@@ -6,7 +6,8 @@ import { GetTheAppContext } from "../../../Context/AppContext";
 
 // dataPrescription
 export const TypeaheadPatient = ({ infoPatients }) => {
-  const { setPatientHistoryId } = useContext(GetTheAppContext);
+  const { setPatientHistoryId, dataMedicalHistory } =
+    useContext(GetTheAppContext);
 
   const [selectedPatient, setSelectedPatient] = useState([]);
   const [patient, setPatient] = useState([]);
@@ -32,15 +33,15 @@ export const TypeaheadPatient = ({ infoPatients }) => {
     }
   };
 
-  // const valueTypeHeadPatient = () => {
-  //   if (Object.keys(dataPrescription).length === 0) {
-  //     return "";
-  //   } else if (dataPrescription.patient && dataPrescription.patient.name) {
-  //     return dataPrescription.patient.name;
-  //   } else {
-  //     return "";
-  //   }
-  // };
+  const valueTypeHeadPatient = () => {
+    if (Object.keys(dataMedicalHistory).length === 0) {
+      return "";
+    } else if (dataMedicalHistory.patient && dataMedicalHistory.patient.name) {
+      return dataMedicalHistory.patient.name;
+    } else {
+      return "";
+    }
+  };
 
   return (
     <div>
@@ -48,10 +49,10 @@ export const TypeaheadPatient = ({ infoPatients }) => {
         id="pacientes-autocompletado"
         labelKey="name"
         minLength={3}
+        defaultInputValue={valueTypeHeadPatient()}
         onChange={handlePatientSelection}
         options={patient}
         selected={selectedPatient}
-        defaultInputValue={""}
         onInputChange={handleInputChange}
         placeholder="Paciente..."
       />

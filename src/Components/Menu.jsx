@@ -136,7 +136,7 @@ export const Menu = () => {
                     onClick={toggleDates}
                     aria-expanded={isDatesOpen}
                   >
-                    Historial Medico
+                    Historial Médico
                   </Link>
                 </li>
               </ul>

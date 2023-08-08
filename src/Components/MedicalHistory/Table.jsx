@@ -122,7 +122,7 @@ export const Table = ({ dataTable }) => {
 
                     <div className="form-check form-switch col-md-3 mt-4">
                       <label id="lableMedicalHistory" className="mb-2">
-                        Patologicos
+                        Patológicos
                       </label>
 
                       <input
@@ -140,7 +140,7 @@ export const Table = ({ dataTable }) => {
 
                     <div className="form-check form-switch col-md-3 mt-4">
                       <label id="lableMedicalHistory" className="mb-2">
-                        No patologicos
+                        No Patológicos
                       </label>
 
                       <input
@@ -191,9 +191,9 @@ export const Table = ({ dataTable }) => {
                     Antecedentes heredofamiliares
                   </th>
 
-                  <th style={{ width: "20%" }}>Antecedentes patologicos</th>
+                  <th style={{ width: "20%" }}>Antecedentes patológicos</th>
 
-                  <th style={{ width: "20%" }}>Antecedentes no patologicos</th>
+                  <th style={{ width: "20%" }}>Antecedentes no patológicos</th>
 
                   <th style={{ width: "20%" }}>Acciones</th>
                 </tr>

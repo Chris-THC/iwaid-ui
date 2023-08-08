@@ -13,6 +13,10 @@ import { ModalDelete } from "./ModalDelete";
 
 export const Table = ({ dataTable }) => {
   const [showModalDelete, setShowModalDelete] = useState(false);
+  const [showFamilyHistory, setShowFamilyHistory] = useState(false);
+  const [showPathologicalHistory, setShowPathologicalHistory] = useState(false);
+  const [showNonPathologicalHistory, setShowNonPathologicalHistory] =
+    useState(false);
 
   const handleShowModalDelete = () => {
     setShowModalDelete(true);
@@ -35,6 +39,9 @@ export const Table = ({ dataTable }) => {
 
   const handleClear = () => {
     setSearchByName("");
+    setShowFamilyHistory(false);
+    setShowPathologicalHistory(false);
+    setShowNonPathologicalHistory(false);
   };
 
   return (
@@ -69,15 +76,20 @@ export const Table = ({ dataTable }) => {
         <div className="card-header col-md-12">
           <div className=" card-body table-responsive">
             <div className="container mb-3">
-              <div className="col-md-4 mb-3">
-                <h4>Buscar</h4>
+              <div className="row">
+                <h4 className="col-md-6">Buscar</h4>
+                <h4 id="titleMedicalHistoriId" className="col-md-6">
+                  Antecedentes
+                </h4>
               </div>
+
               <div className="row">
                 <div className="container mb-3">
                   <div className="row">
-                    <div className="col-md-3 mb-3">
-                      <label>Paciente</label>
+                    <div className="col-md-2 mb-2">
+                      <label id="lableMedicalHistory">Paciente</label>
                       <input
+                        id="lableMedicalHistory"
                         autoComplete="off"
                         type="text"
                         className="form-control"
@@ -90,8 +102,64 @@ export const Table = ({ dataTable }) => {
                       />
                     </div>
 
-                    <div className="col-md-2 d-flex flex-row-reverse">
-                      <div className="w-auto p-4">
+                    <div className="form-check form-switch col-md-3 mt-4">
+                      <label id="lableMedicalHistory" className="mb-2">
+                        Heredofamiliares
+                      </label>
+
+                      <input
+                        className="form-check-input"
+                        type="checkbox"
+                        checked={showFamilyHistory}
+                        onChange={() => {
+                          setShowFamilyHistory(!showFamilyHistory);
+                          setShowPathologicalHistory(false);
+                          setShowNonPathologicalHistory(false);
+                          setSearchByName("");
+                        }}
+                      />
+                    </div>
+
+                    <div className="form-check form-switch col-md-3 mt-4">
+                      <label id="lableMedicalHistory" className="mb-2">
+                        Patologicos
+                      </label>
+
+                      <input
+                        className="form-check-input"
+                        type="checkbox"
+                        checked={showPathologicalHistory}
+                        onChange={() => {
+                          setShowPathologicalHistory(!showPathologicalHistory);
+                          setShowFamilyHistory(false);
+                          setShowNonPathologicalHistory(false);
+                          setSearchByName("");
+                        }}
+                      />
+                    </div>
+
+                    <div className="form-check form-switch col-md-3 mt-4">
+                      <label id="lableMedicalHistory" className="mb-2">
+                        No patologicos
+                      </label>
+
+                      <input
+                        className="form-check-input"
+                        type="checkbox"
+                        checked={showNonPathologicalHistory}
+                        onChange={() => {
+                          setShowNonPathologicalHistory(
+                            !showNonPathologicalHistory
+                          );
+                          setShowFamilyHistory(false);
+                          setShowPathologicalHistory(false);
+                          setSearchByName("");
+                        }}
+                      />
+                    </div>
+
+                    <div className="col-md-1 d-flex flex-row-reverse ">
+                      <div className="w-auto p-3">
                         <OverlayTrigger
                           placement="top"
                           overlay={
@@ -137,7 +205,29 @@ export const Table = ({ dataTable }) => {
                       .toLowerCase()
                       .includes(searchByName.toLowerCase());
 
-                    return patientNameMatches;
+                    const familyHistoryMatches =
+                      showFamilyHistory && field.familyMedicalHistory;
+                    const pathologicalHistoryMatches =
+                      showPathologicalHistory && field.pathologicalHistory;
+                    const nonPathologicalHistoryMatches =
+                      showNonPathologicalHistory &&
+                      field.nonPathologicalHistory;
+
+                    // Si no se selecciona ningún filtro, mostrar todos los usuarios
+                    if (
+                      !showFamilyHistory &&
+                      !showPathologicalHistory &&
+                      !showNonPathologicalHistory
+                    ) {
+                      return patientNameMatches;
+                    }
+
+                    return (
+                      patientNameMatches &&
+                      (familyHistoryMatches ||
+                        pathologicalHistoryMatches ||
+                        nonPathologicalHistoryMatches)
+                    );
                   })
                   .map((field) => (
                     <tr key={field.id}>

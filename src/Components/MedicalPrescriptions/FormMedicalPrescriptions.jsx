@@ -22,7 +22,6 @@ export const FormMedicalPrescriptions = ({ isGetData = {} }) => {
     prescriptionDoctorId,
     createPrescriptionFunction,
     setAllPrescriptionsData,
-    allPrescriptionsData,
     allPrescriptionsFromApiFunction,
     updatePrescriptionFunction,
     dataPrescription,
@@ -56,11 +55,12 @@ export const FormMedicalPrescriptions = ({ isGetData = {} }) => {
       if (createNewPrescription.status === statusCreated) {
         await allPrescriptionsFromApiFunction(setAllPrescriptionsData);
 
-        console.log(allPrescriptionsData);
         getMessageForAlert();
+
         handleShowFloatAlter();
       } else {
         setTextAlert("Error al agregar la prescripción médica");
+
         handleShowFloatAlter();
       }
     } else if (actionButtonModal === "Editar") {
@@ -80,7 +80,9 @@ export const FormMedicalPrescriptions = ({ isGetData = {} }) => {
 
       if (responseUpdatePrescription.status === statusDeleted) {
         getMessageForAlert();
+
         await allPrescriptionsFromApiFunction(setAllPrescriptionsData);
+
         handleShowFloatAlter();
       } else {
         setTextAlert("Error al actualizar la prescripción");

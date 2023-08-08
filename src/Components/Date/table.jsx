@@ -2,7 +2,7 @@ import React, {useState, useContext} from 'react';
 import '../../Css/CssTable.css';
 import { GetTheAppContext } from "../../Context/AppContext";
 import { ModalMedicine } from './modal';
-import { MyModalDelete } from './modalDelete';
+import { ModalDelete } from './modalDelete';
 import { BsPersonFillAdd, BsPencilFill  } from "react-icons/bs";
 import { MdDeleteForever } from 'react-icons/md';
 import { LuFilterX } from "react-icons/lu";
@@ -13,16 +13,8 @@ import Tooltip from "react-bootstrap/Tooltip";
 export function TablaGeneric({ title, data }) {
 
   const [showModalDelete, setShowModalDelete] = useState(false);
-  
-  
-  const handleShowModalDelete = () => {
-    setShowModalDelete(true);
-    
-  };
-
-  const handleCloseModalDelete = () => {
-    setShowModalDelete(false);
-  };
+  const [searchNameDoctor, setSearchNameDoctor] = useState("");
+  const [searchNamePatient, setSearchNamePatient] = useState("");
   
   const {
     handleShowModal,
@@ -35,12 +27,18 @@ export function TablaGeneric({ title, data }) {
   } = useContext(GetTheAppContext);
 
 
-  const [searchNameDoctor, setSearchNameDoctor] = useState("");
-  const [searchNamePatient, setSearchNamePatient] = useState("");
-
   const handleClear = () => {
     setSearchNameDoctor("");
     setSearchNamePatient("");
+  };
+
+  const handleShowModalDelete = () => {
+    setShowModalDelete(true);
+    
+  };
+
+  const handleCloseModalDelete = () => {
+    setShowModalDelete(false);
   };
 
   const hourMappings = {
@@ -234,7 +232,7 @@ export function TablaGeneric({ title, data }) {
             </table>
           </div>
           <ModalMedicine show={showModal} handleClose={handleCloseModal} />
-          <MyModalDelete show={showModalDelete} handleClose={handleCloseModalDelete}  />
+          <ModalDelete show={showModalDelete} handleClose={handleCloseModalDelete}  />
         </div>
       </div>
     </div>

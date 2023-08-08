@@ -9,6 +9,7 @@ import { statusCreated, statusUpdated, statusBeforeToday
 export const FormCitas = ({ isGetData = {} }) => {
 
   const currentDate = new Date().toISOString().split("T")[0];
+
   const {
     handleShowFloatAlter,
     handleCloseModal,
@@ -26,9 +27,8 @@ export const FormCitas = ({ isGetData = {} }) => {
     setDoctorSelected,
     patientSelected, 
     setPatientSelected
-       
-   
   } = useContext(GetTheAppContext);
+
   const timeOptions = [
 { value: "EIGHT_AM", label: "8:00-8:59 AM" },
 { value: "NINE_AM", label: "9:00-9:59 AM" },
@@ -45,7 +45,6 @@ export const FormCitas = ({ isGetData = {} }) => {
 { value: "EIGHT_PM", label: "8:00-8:59 PM" },
 ];
 
-
   const {
     register,
     handleSubmit,
@@ -58,15 +57,13 @@ export const FormCitas = ({ isGetData = {} }) => {
 
   const handleOnChangeDoctor = (selected) => {
     if (selected.length > 0) {
-      
-      
       setDoctorSelected(selected);
       register("doctorId", { value: (dataGetAllDoctors.find((objeto) => objeto.name === selected[0]).id) });
-
     } else {
       setDoctorSelected([]);
     }
   };
+
   const optionsPatient = getAllPatientsData
   .filter((objeto) => objeto.hasOwnProperty("name"))
   .map((objeto) => objeto.name);
@@ -88,6 +85,7 @@ export const FormCitas = ({ isGetData = {} }) => {
     }
     return "";
   };
+
   const getDefaultValuePatient = () => {
     if (isGetData.patientDTO) {
       register("patientId", { value: isGetData.patientDTO.id });
@@ -153,9 +151,7 @@ export const FormCitas = ({ isGetData = {} }) => {
         options={options}
         selected={doctorSelected}
         placeholder="Escribe el nombre de un médico..."
-        defaultInputValue={getDefaultValueDoctor()}
-
-        
+        defaultInputValue={getDefaultValueDoctor()} 
       />
     </div>
         </div>

@@ -4,7 +4,7 @@ import { GetTheAppContext } from "../../Context/AppContext";
 import { useContext } from "react";
 import { statusDeleted } from "./HTTPStatus.js";
 
-export const MyModalDelete = ({ show, handleClose }) => {
+export const ModalDelete = ({ show, handleClose }) => {
   const {
     idDate,
     deleteDateFunction,

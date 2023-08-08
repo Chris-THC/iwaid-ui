@@ -35,7 +35,7 @@ export const FloatingAlert = ({ show, message, onClose }) => {
     }
   };
 
-  const AlertMsn = () => {
+  const AlertMessage = () => {
     let alertStyle = getAlertStyle();
     return (
       <>
@@ -50,7 +50,7 @@ export const FloatingAlert = ({ show, message, onClose }) => {
 
   return (
     <Modal show={show} onHide={onClose} centered>
-      <AlertMsn />
+      <AlertMessage />
     </Modal>
   );
 };

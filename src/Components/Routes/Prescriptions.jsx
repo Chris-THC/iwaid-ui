@@ -1,15 +1,15 @@
 import React, { useContext } from "react";
-import { CrudMedicalPrescriptions } from "../MedicalPrescriptions/CrudMedicalPrescriptions";
+import { MedicalPrescriptions } from "../MedicalPrescriptions/MedicalPrescriptions";
 import { FloatingAlert } from "../MedicalPrescriptions/FloatingAlert";
 import { GetTheAppContext } from "../../Context/AppContext";
 
 export const Prescriptions = () => {
   const { showFloatingAlert, handleCloseFloatAlert, textAlert } =
     useContext(GetTheAppContext);
-  // TODO: The implementation will be worked on the following ticket IWAID-14
+
   return (
     <div>
-      <CrudMedicalPrescriptions />
+      <MedicalPrescriptions />
       <FloatingAlert
         show={showFloatingAlert}
         message={`¡${textAlert}!`}

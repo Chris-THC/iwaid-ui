@@ -34,6 +34,17 @@ export const FormMedicalPrescriptions = ({ isGetData = {} }) => {
     formState: { errors, isValid },
   } = useForm({ mode: "all" });
 
+  const getMessageForAlert = () => {
+    if (actionButtonModal === "Agregar") {
+      return setTextAlert("Prescripción médica agregada exitosamente");
+    } else if (actionButtonModal === "Editar") {
+      return setTextAlert(
+        `Prescripción de ${dataPrescription.patient.name} se ha actualizado exitosamente`
+      );
+    }
+    return "";
+  };
+
   const onSubmitClick = async (data) => {
     data.patientId = prescriptionPatientId;
     data.doctorId = prescriptionDoctorId;
@@ -46,7 +57,7 @@ export const FormMedicalPrescriptions = ({ isGetData = {} }) => {
         await allPrescriptionsFromApiFunction(setAllPrescriptionsData);
 
         console.log(allPrescriptionsData);
-        setTextAlert("Prescripción médica agregada exitosamente");
+        getMessageForAlert();
         handleShowFloatAlter();
       } else {
         setTextAlert("Error al agregar la prescripción médica");
@@ -68,9 +79,7 @@ export const FormMedicalPrescriptions = ({ isGetData = {} }) => {
       );
 
       if (responseUpdatePrescription.status === statusDeleted) {
-        setTextAlert(
-          `Prescripción de ${dataPrescription.patient.name} se ha actualizado exitosamente`
-        );
+        getMessageForAlert();
         await allPrescriptionsFromApiFunction(setAllPrescriptionsData);
         handleShowFloatAlter();
       } else {

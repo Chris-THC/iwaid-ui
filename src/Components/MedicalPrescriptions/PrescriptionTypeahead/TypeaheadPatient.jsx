@@ -5,11 +5,14 @@ import "react-bootstrap-typeahead/css/Typeahead.css";
 import { GetTheAppContext } from "../../../Context/AppContext";
 
 export const TypeaheadPatient = ({ infoPatients }) => {
+
   const { setPrescriptionPatientId, dataPrescription } =
     useContext(GetTheAppContext);
 
   const [selectedPatient, setSelectedPatient] = useState([]);
+
   const [patient, setPatient] = useState([]);
+
   const [patientNotFound, setPatientNotFound] = useState(false);
 
   const handleInputChange = (input) => {
@@ -25,14 +28,14 @@ export const TypeaheadPatient = ({ infoPatients }) => {
     }
   };
 
-  const handlePatientSelection = (selectedPatients) => {
-    setSelectedPatient(selectedPatients);
-    if (selectedPatients.length > 0) {
-      setPrescriptionPatientId(selectedPatients[0].id);
+  const handlePatientSelection = (selectedPatient) => {
+    setSelectedPatient(selectedPatient);
+    if (selectedPatient.length > 0) {
+      setPrescriptionPatientId(selectedPatient[0].id);
     }
   };
 
-  const valueTypeHeadPatient = () => {
+  const getTypeHeadPatientValue = () => {
     if (Object.keys(dataPrescription).length === 0) {
       return "";
     } else if (dataPrescription.patient && dataPrescription.patient.name) {
@@ -51,7 +54,7 @@ export const TypeaheadPatient = ({ infoPatients }) => {
         onChange={handlePatientSelection}
         options={patient}
         selected={selectedPatient}
-        defaultInputValue={valueTypeHeadPatient()}
+        defaultInputValue={getTypeHeadPatientValue()}
         onInputChange={handleInputChange}
         placeholder="Paciente..."
       />

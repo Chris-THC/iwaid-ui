@@ -44,50 +44,58 @@ export const FormMedicalPrescriptions = ({ isGetData = {} }) => {
     return "";
   };
 
+  const handleCreatePrescription = async (data) => {
+    handleCloseModal();
+    const createNewPrescription = await createPrescriptionFunction(data);
+
+    if (createNewPrescription.status === statusCreated) {
+      await allPrescriptionsFromApiFunction(setAllPrescriptionsData);
+
+      getMessageForAlert();
+
+      handleShowFloatAlter();
+    } else {
+      setTextAlert("Error al agregar la prescripción médica");
+
+      handleShowFloatAlter();
+    }
+  };
+
+  const handleUpdatePrescription = async (data) => {
+    handleCloseModal();
+    if (data.patientId === "" || data.doctorId === "") {
+      data.patientId = dataPrescription.patientId;
+      data.doctorId = dataPrescription.doctorId;
+    } else {
+      data.patientId = prescriptionPatientId;
+      data.doctorId = prescriptionDoctorId;
+    }
+
+    const responseUpdatePrescription = await updatePrescriptionFunction(
+      data,
+      dataPrescription.id
+    );
+
+    if (responseUpdatePrescription.status === statusDeleted) {
+      getMessageForAlert();
+
+      await allPrescriptionsFromApiFunction(setAllPrescriptionsData);
+
+      handleShowFloatAlter();
+    } else {
+      setTextAlert("Error al actualizar la prescripción");
+      handleShowFloatAlter();
+    }
+  };
+
   const onSubmitClick = async (data) => {
     data.patientId = prescriptionPatientId;
     data.doctorId = prescriptionDoctorId;
 
     if (actionButtonModal === "Agregar") {
-      handleCloseModal();
-      const createNewPrescription = await createPrescriptionFunction(data);
-
-      if (createNewPrescription.status === statusCreated) {
-        await allPrescriptionsFromApiFunction(setAllPrescriptionsData);
-
-        getMessageForAlert();
-
-        handleShowFloatAlter();
-      } else {
-        setTextAlert("Error al agregar la prescripción médica");
-
-        handleShowFloatAlter();
-      }
+      handleCreatePrescription(data);
     } else if (actionButtonModal === "Editar") {
-      handleCloseModal();
-      if (data.patientId === "" || data.doctorId === "") {
-        data.patientId = dataPrescription.patientId;
-        data.doctorId = dataPrescription.doctorId;
-      } else {
-        data.patientId = prescriptionPatientId;
-        data.doctorId = prescriptionDoctorId;
-      }
-
-      const responseUpdatePrescription = await updatePrescriptionFunction(
-        data,
-        dataPrescription.id
-      );
-
-      if (responseUpdatePrescription.status === statusDeleted) {
-        getMessageForAlert();
-
-        await allPrescriptionsFromApiFunction(setAllPrescriptionsData);
-
-        handleShowFloatAlter();
-      } else {
-        setTextAlert("Error al actualizar la prescripción");
-        handleShowFloatAlter();
-      }
+      handleUpdatePrescription(data);
     }
   };
 

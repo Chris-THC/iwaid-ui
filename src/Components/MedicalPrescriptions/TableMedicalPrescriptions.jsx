@@ -200,11 +200,15 @@ export const TableMedicalPrescriptions = ({ dataTable }) => {
 
                     const startDateMatch =
                       !searchByStartDate ||
-                      new Date(field.date) >= new Date(searchByStartDate);
+                      (searchByStartDate &&
+                        new Date(field.registerDate) >=
+                          new Date(searchByStartDate));
 
                     const finalDateMatch =
                       !searchByFinalDate ||
-                      new Date(field.date) <= new Date(searchByFinalDate);
+                      (searchByFinalDate &&
+                        new Date(field.registerDate) <=
+                          new Date(searchByFinalDate));
 
                     return (
                       patientNameMatches &&

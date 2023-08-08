@@ -17,11 +17,12 @@ export const FormMedicalHistory = ({ isGetData = {} }) => {
   const {
     handleCloseModal,
     actionButtonModal,
-    // handleShowFloatAlter,
-    // setTextAlert,
+    handleShowFloatAlter,
+    setTextAlert,
     setGetDataFromTable,
     dataMedicalHistory,
     getAllPatientsData,
+    patientHistoryId,
   } = useContext(GetTheAppContext);
 
   const {
@@ -59,7 +60,7 @@ export const FormMedicalHistory = ({ isGetData = {} }) => {
   }, []);
 
   const onSubmitClick = async (data) => {
-    data.patientsId = dataMedicalHistory.patient.id;
+    data.patientsId = patientHistoryId;
 
     if (typeof data.specificFamilyMedicalHistory === "undefined") {
       data.specificFamilyMedicalHistory =
@@ -89,6 +90,8 @@ export const FormMedicalHistory = ({ isGetData = {} }) => {
       }
 
       handleCloseModal();
+      // TODO: This code is a guide that will be removed when the API is ready and the correct code is implemented.
+
       // const createNewPrescription = await createPrescriptionFunction(data);
 
       // if (createNewPrescription.status === statusCreated) {
@@ -103,6 +106,7 @@ export const FormMedicalHistory = ({ isGetData = {} }) => {
       // }
     } else if (actionButtonModal === "Editar") {
       handleCloseModal();
+      // TODO: This code is a guide that will be removed when the API is ready and the correct code is implemented.
       // if (data.patientId === "" || data.doctorId === "") {
       //   data.patientId = dataPrescription.patientId;
       //   data.doctorId = dataPrescription.doctorId;
@@ -225,7 +229,6 @@ export const FormMedicalHistory = ({ isGetData = {} }) => {
                 {...register("familyMedicalHistory")}
                 onChange={() => {
                   setIsSelectedFamilyMedicalHistory(false);
-                  dataMedicalHistory.specificFamilyMedicalHistory = "";
                 }}
               />
               <label className="form-check-label" htmlFor="no">
@@ -237,13 +240,13 @@ export const FormMedicalHistory = ({ isGetData = {} }) => {
             )}
           </div>
           <div className="form-group col-md-12 mb-2 ">
-            <label>Especificación</label>
+            <label>Especificación de antecedentes heredofamiliares</label>
             <textarea
               defaultValue={dataMedicalHistory.specificFamilyMedicalHistory}
               type="text"
               rows={2}
               className="form-control"
-              placeholder="Especificación de antecedentes heredofamiliares"
+              placeholder="Especificación"
               autoComplete="off"
               {...register("specificFamilyMedicalHistory", { required: false })}
               disabled={!isSelectedFamilyMedicalHistory}
@@ -280,7 +283,6 @@ export const FormMedicalHistory = ({ isGetData = {} }) => {
                 value={false}
                 {...register("pathologicalHistory")}
                 onChange={() => {
-                  dataMedicalHistory.specificPathologicalHistory = "";
                   setIsSelectedPathologicalHistory(false);
                 }}
               />
@@ -293,7 +295,7 @@ export const FormMedicalHistory = ({ isGetData = {} }) => {
             )}
           </div>
           <div className="form-group col-md-12 mb-2 ">
-            <label>Especificación</label>
+            <label>Especificación de antecedentes patológicos</label>
             <textarea
               defaultValue={isGetData.specificPathologicalHistory}
               type="text"
@@ -336,7 +338,6 @@ export const FormMedicalHistory = ({ isGetData = {} }) => {
                 value={false}
                 {...register("nonPathologicalHistory")}
                 onChange={() => {
-                  dataMedicalHistory.specificNonPathologicalHistory = "";
                   setIsSelectedNoPathologicalHistory(false);
                 }}
               />
@@ -349,7 +350,7 @@ export const FormMedicalHistory = ({ isGetData = {} }) => {
             )}
           </div>
           <div className="form-group col-md-12 mb-2 ">
-            <label>Especificación</label>
+            <label>Especificación de antecedentes no patológicos </label>
             <textarea
               defaultValue={isGetData.specificNonPathologicalHistory}
               type="text"

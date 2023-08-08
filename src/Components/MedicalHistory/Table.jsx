@@ -21,7 +21,7 @@ export const Table = ({ dataTable }) => {
   const handleCloseModalDelete = () => {
     setShowModalDelete(false);
   };
-  
+
   const {
     handleShowModal,
     handleCloseModal,

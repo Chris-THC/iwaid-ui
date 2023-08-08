@@ -4,7 +4,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "react-bootstrap-typeahead/css/Typeahead.css";
 import { GetTheAppContext } from "../../../Context/AppContext";
 
-// dataPrescription
 export const TypeaheadPatient = ({ infoPatients }) => {
   const { setPatientHistoryId, dataMedicalHistory } =
     useContext(GetTheAppContext);
@@ -57,9 +56,7 @@ export const TypeaheadPatient = ({ infoPatients }) => {
         placeholder="Paciente..."
       />
 
-      {patientNotFound && (
-        <p className="text-danger">El paciente que buscas no se encuentra</p>
-      )}
+      {patientNotFound && <p className="text-danger">El paciente no existe</p>}
     </div>
   );
 };

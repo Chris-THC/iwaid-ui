@@ -31,32 +31,20 @@ export const FormMedicalHistory = ({ isGetData = {} }) => {
     formState: { errors, isValid },
   } = useForm({ mode: "all" });
 
-  const deselectFamilyMedicalHistory = () => {
-    if (isGetData.familyMedicalHistory === true) {
-      setIsSelectedFamilyMedicalHistory(true);
-    } else if (isGetData.familyMedicalHistory === false) {
-      setIsSelectedFamilyMedicalHistory(false);
-    }
-  };
-  const deselectPathologicalHistory = () => {
-    if (isGetData.pathologicalHistory === true) {
-      setIsSelectedPathologicalHistory(true);
-    } else if (isGetData.pathologicalHistory === false) {
-      setIsSelectedPathologicalHistory(false);
-    }
-  };
-  const deselectNonPathologicalHistory = () => {
-    if (isGetData.nonPathologicalHistory === true) {
-      setIsSelectedNoPathologicalHistory(true);
-    } else if (isGetData.nonPathologicalHistory === false) {
-      setIsSelectedNoPathologicalHistory(false);
+  const deselectHistory = (key, setIsSelected) => {
+    if (key === true) {
+      setIsSelected(true);
+    } else if (key === false) {
+      setIsSelected(false);
     }
   };
 
   useEffect(() => {
-    deselectFamilyMedicalHistory();
-    deselectPathologicalHistory();
-    deselectNonPathologicalHistory();
+    deselectHistory(isGetData.familyMedicalHistory, setIsSelectedFamilyMedicalHistory);
+
+    deselectHistory(isGetData.pathologicalHistory, setIsSelectedPathologicalHistory);
+
+    deselectHistory(isGetData.nonPathologicalHistory, setIsSelectedNoPathologicalHistory);
   }, []);
 
   const onSubmitClick = async (data) => {
@@ -131,7 +119,6 @@ export const FormMedicalHistory = ({ isGetData = {} }) => {
       //   handleShowFloatAlter();
       // }
     }
-
     console.log(data);
   };
 

@@ -3,7 +3,7 @@ import { Modal } from "react-bootstrap";
 import { FormMedicalHistory } from "./FormMedicalHistory";
 import { GetTheAppContext } from "../../Context/AppContext";
 
-export const ModalMedicalHistory = ({ show, handleClose }) => {
+export const ModalMedicalHistory = ({ show, closeAction }) => {
   const { setGetDataFromTable, getDataFromTable, actionButtonModal } =
     useContext(GetTheAppContext);
 
@@ -12,7 +12,7 @@ export const ModalMedicalHistory = ({ show, handleClose }) => {
       size="lg"
       show={show}
       onHide={() => {
-        handleClose();
+        closeAction();
         setGetDataFromTable({});
       }}
     >

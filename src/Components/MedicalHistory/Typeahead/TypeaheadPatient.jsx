@@ -12,7 +12,7 @@ export const TypeaheadPatient = ({ infoPatients }) => {
   const [patient, setPatient] = useState([]);
   const [patientNotFound, setPatientNotFound] = useState(false);
 
-  const handleInputChange = (input) => {
+  const inputChange = (input) => {
     if (input.length >= 3) {
       const filteredPatients = infoPatients.filter((itemPatient) =>
         itemPatient.name.toLowerCase().includes(input.toLowerCase())
@@ -25,7 +25,7 @@ export const TypeaheadPatient = ({ infoPatients }) => {
     }
   };
 
-  const handlePatientSelection = (selectedPatients) => {
+  const patientSelection = (selectedPatients) => {
     setSelectedPatient(selectedPatients);
     if (selectedPatients.length > 0) {
       setPatientHistoryId(selectedPatients[0].id);
@@ -49,10 +49,10 @@ export const TypeaheadPatient = ({ infoPatients }) => {
         labelKey="name"
         minLength={3}
         defaultInputValue={valueTypeHeadPatient()}
-        onChange={handlePatientSelection}
+        onChange={patientSelection}
         options={patient}
         selected={selectedPatient}
-        onInputChange={handleInputChange}
+        onInputChange={inputChange}
         placeholder="Paciente..."
       />
 

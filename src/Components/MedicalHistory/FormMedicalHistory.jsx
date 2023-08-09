@@ -59,7 +59,7 @@ export const FormMedicalHistory = ({ isGetData = {} }) => {
   const objectHasData = (key) => {};
 
   const onSubmitClick = async (data) => {
-    data.patientsId = patientHistoryId;
+    data.patientId = patientHistoryId;
 
     const properties = [
       "specificFamilyMedicalHistory",
@@ -69,90 +69,14 @@ export const FormMedicalHistory = ({ isGetData = {} }) => {
 
     for (const prop of properties) {
       if (typeof data[prop] === "undefined") {
-        data[prop] = dataMedicalHistory[prop];
+        data[prop] = dataMedicalHistory[prop] = "";
       }
     }
 
-    // if (typeof data.specificFamilyMedicalHistory === "undefined") {
-    //   data.specificFamilyMedicalHistory =
-    //     dataMedicalHistory.specificFamilyMedicalHistory;
-    // }
-    // if (typeof data.specificPathologicalHistory === "undefined") {
-    //   data.specificPathologicalHistory =
-    //     dataMedicalHistory.specificPathologicalHistory;
-    // }
-    // if (typeof data.specificNonPathologicalHistory === "undefined") {
-    //   data.specificNonPathologicalHistory =
-    //     dataMedicalHistory.specificNonPathologicalHistory;
-    // }
-
     if (actionButtonModal === "Agregar") {
-      const properties = [
-        "specificFamilyMedicalHistory",
-        "specificPathologicalHistory",
-        "specificNonPathologicalHistory",
-      ];
-
-      for (const prop of properties) {
-        if (typeof data[prop] === "undefined") {
-          data[prop] = dataMedicalHistory[prop] = "";
-        }
-      }
-
-      // if (typeof data.specificFamilyMedicalHistory === "undefined") {
-      //   data.specificFamilyMedicalHistory =
-      //     dataMedicalHistory.specificFamilyMedicalHistory = "";
-      // }
-      // if (typeof data.specificPathologicalHistory === "undefined") {
-      //   data.specificPathologicalHistory =
-      //     dataMedicalHistory.specificPathologicalHistory = "";
-      // }
-      // if (typeof data.specificNonPathologicalHistory === "undefined") {
-      //   data.specificNonPathologicalHistory =
-      //     dataMedicalHistory.specificNonPathologicalHistory = "";
-      // }
-
       handleCloseModal();
-      // TODO: This code is a guide that will be removed when the API is ready and the correct code is implemented.
-
-      // const createNewPrescription = await createPrescriptionFunction(data);
-
-      // if (createNewPrescription.status === statusCreated) {
-      //   await allPrescriptionsFromApiFunction(setAllPrescriptionsData);
-
-      //   console.log(allPrescriptionsData);
-      //   setTextAlert("Preinscripción medica agregada exitosamente");
-      //   handleShowFloatAlter();
-      // } else {
-      //   setTextAlert("Error al agregar la preinscripción medica");
-      //   handleShowFloatAlter();
-      // }
     } else if (actionButtonModal === "Editar") {
       handleCloseModal();
-      // TODO: This code is a guide that will be removed when the API is ready and the correct code is implemented.
-      // if (data.patientId === "" || data.doctorId === "") {
-      //   data.patientId = dataPrescription.patientId;
-      //   data.doctorId = dataPrescription.doctorId;
-      // } else {
-      //   data.patientId = prescriptionPatientId;
-      //   data.doctorId = prescriptionDoctorId;
-      // }
-
-      // const responseUpdatePrescription = await updatePrescriptionFunction(
-      //   data,
-      //   dataPrescription.id
-      // );
-
-      // if (responseUpdatePrescription.status === statusDeleted) {
-      //   setTextAlert(
-      //     `Preinscripción de ${dataPrescription.patient.name} se ha actualizado exitosamente`
-      //   );
-      //   await allPrescriptionsFromApiFunction(setAllPrescriptionsData);
-      //   handleShowFloatAlter();
-      // } else {
-      //   setTextAlert("Error al actualizar la preinscripción");
-      //   handleShowFloatAlter();
-      // }
     }
     console.log(data);
   };
@@ -264,7 +188,11 @@ export const FormMedicalHistory = ({ isGetData = {} }) => {
           <div className="form-group col-md-12 mb-2 ">
             <label>Especificación de antecedentes heredofamiliares</label>
             <textarea
-              defaultValue={dataMedicalHistory.specificFamilyMedicalHistory}
+              defaultValue={
+                isSelectedFamilyMedicalHistory === true
+                  ? dataMedicalHistory.specificFamilyMedicalHistory
+                  : ""
+              }
               type="text"
               rows={2}
               className="form-control"
@@ -319,7 +247,11 @@ export const FormMedicalHistory = ({ isGetData = {} }) => {
           <div className="form-group col-md-12 mb-2 ">
             <label>Especificación de antecedentes patológicos</label>
             <textarea
-              defaultValue={isGetData.specificPathologicalHistory}
+              defaultValue={
+                isSelectedPathologicalHistory === true
+                  ? dataMedicalHistory.specificPathologicalHistory
+                  : ""
+              }
               type="text"
               rows={2}
               className="form-control"
@@ -374,7 +306,11 @@ export const FormMedicalHistory = ({ isGetData = {} }) => {
           <div className="form-group col-md-12 mb-2 ">
             <label>Especificación de antecedentes no patológicos </label>
             <textarea
-              defaultValue={isGetData.specificNonPathologicalHistory}
+              defaultValue={
+                isSelectedNoPathologicalHistory === true
+                  ? dataMedicalHistory.specificNonPathologicalHistory
+                  : ""
+              }
               type="text"
               rows={2}
               className="form-control"

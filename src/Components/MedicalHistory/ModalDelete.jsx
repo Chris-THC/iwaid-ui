@@ -3,14 +3,15 @@ import { Modal, Button } from "react-bootstrap";
 import { GetTheAppContext } from "../../Context/AppContext";
 import { statusDeleted } from "./HTTPstatus.js";
 
-export const ModalDelete = ({ show, handleClose }) => {
+export const ModalDelete = ({ show, closeAction }) => {
   const { setTextAlert, handleShowFloatAlter } = useContext(GetTheAppContext);
-  const handleButtonClick = () => {
-    handleClose();
+
+  const buttonClick = () => {
+    closeAction();
   };
 
   return (
-    <Modal show={show} onHide={handleClose}>
+    <Modal show={show} onHide={closeAction}>
       <Modal.Header closeButton>
         <Modal.Title>Confirmar eliminación</Modal.Title>
       </Modal.Header>
@@ -18,13 +19,13 @@ export const ModalDelete = ({ show, handleClose }) => {
         <p>¿Está seguro de que desea eliminar este historial?</p>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="secondary" onClick={handleClose}>
+        <Button variant="secondary" onClick={closeAction}>
           Cancelar
         </Button>
         <Button
           variant="danger"
           onClick={() => {
-            handleButtonClick();
+            buttonClick();
             setTextAlert("Se elimino");
             handleShowFloatAlter();
 
@@ -37,13 +38,13 @@ export const ModalDelete = ({ show, handleClose }) => {
 
             // if (response.status === statusDeleted) {
             //   await allPrescriptionsFromApiFunction(setAllPrescriptionsData);
-            //   handleButtonClick();
+            //   buttonClick();
             //   setTextAlert(
             //     `Se eliminó la preinscripción del paciente ${dataPrescription.patient.name}`
             //   );
             //   handleShowFloatAlter();
             // } else {
-            //   handleButtonClick();
+            //   buttonClick();
             //   setTextAlert("Error al eliminar la preinscripción");
             //   handleShowFloatAlter();
             // }

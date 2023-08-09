@@ -6,7 +6,7 @@ export const CrudMedicalHistory = () => {
   const [dataTest, setDataTest] = useState([
     {
       id: 2,
-      patientsId: 2,
+      patientId: 2,
       patient: {
         id: 2,
         name: "Juan Perez Hernandez",
@@ -30,7 +30,7 @@ export const CrudMedicalHistory = () => {
     },
     {
       id: 3,
-      patientsId: 3,
+      patientId: 3,
       patient: {
         id: 3,
         name: "Luis Salas Martinez",

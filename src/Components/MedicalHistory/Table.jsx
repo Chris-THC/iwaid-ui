@@ -18,11 +18,11 @@ export const Table = ({ dataTable }) => {
   const [showNonPathologicalHistory, setShowNonPathologicalHistory] =
     useState(false);
 
-  const handleShowModalDelete = () => {
+  const showModalDeleteFuntion = () => {
     setShowModalDelete(true);
   };
 
-  const handleCloseModalDelete = () => {
+  const closeModalDeleteFuntion = () => {
     setShowModalDelete(false);
   };
 
@@ -37,7 +37,7 @@ export const Table = ({ dataTable }) => {
 
   const [searchByName, setSearchByName] = useState("");
 
-  const handleClear = () => {
+  const clear = () => {
     setSearchByName("");
     setShowFamilyHistory(false);
     setShowPathologicalHistory(false);
@@ -170,7 +170,7 @@ export const Table = ({ dataTable }) => {
                             id="iconoClear"
                             className="btn btn-secondary"
                             type="button"
-                            onClick={handleClear}
+                            onClick={clear}
                           >
                             <LuFilterX color="white" />
                           </button>
@@ -302,7 +302,7 @@ export const Table = ({ dataTable }) => {
                             variant="danger"
                             onClick={() => {
                               setDataMedicalHistory(field);
-                              handleShowModalDelete();
+                              showModalDeleteFuntion();
                             }}
                           >
                             <MdDeleteForever
@@ -325,7 +325,7 @@ export const Table = ({ dataTable }) => {
 
           <ModalDelete
             show={showModalDelete}
-            handleClose={handleCloseModalDelete}
+            handleClose={closeModalDeleteFuntion}
           />
         </div>
       </div>

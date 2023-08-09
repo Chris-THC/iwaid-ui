@@ -1,0 +1,71 @@
+
+.img{
+  max-width: 100px;
+  max-height: 50%; 
+}
+
+.imgI{
+  width: 100%;
+  max-height: 500px;
+  
+}
+
+#iwa-menu{
+  background-color: #2D7EF7;
+  box-shadow: 0px 20px 20px rgba(0, 0, 0, 0.1); /* Sombra inferior */
+  border: white;
+}
+#Dropdown{
+  color: white;
+}
+
+.nav-link:hover {
+  background-color: #39a0ff/* Tu color azul personalizado */
+}
+.nav-item.dropdown:hover .dropdown-menu {
+  background-color: #66a3ff;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.b1, .b2 {
+  height: 170px;
+  width: 35%;
+  background-color: white;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+}
+
+.b1{
+  margin-left: 100px;
+}
+.b2{
+  margin-right: 100px;
+}
+p{
+  background-color: #008eea;
+}
+
+.slide{
+  width: 100%;
+  height: 100%;
+}
+
+.slide> img{
+  width: 100%;
+}
+@media (max-width: 768px) {
+  .imgI {
+    /* Ajusta los estilos según tus necesidades para pantallas más pequeñas */
+    max-height: 200px; /* Ejemplo de ajuste para pantallas más pequeñas */
+    margin-bottom: 3px; /* Ejemplo de ajuste para pantallas más pequeñas */
+  }
+}
+

@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { IMG } from "./Initation/Initation";
+import '../Css/imagesCss.css';
 
 export const Menu = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
   const [isDataMasterOpen, setIsDataMasterOpen] = useState(false);
-
   const [isDatesOpen, setIsDatesOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -21,10 +21,16 @@ export const Menu = () => {
   };
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+    <nav 
+    id="iwa-menu"
+        className="navbar navbar-expand-lg">
       <div className="container-fluid">
         <p className="navbar-brand mr-2 ">
-          <h3 className="font-weight-bold">IWAID</h3>
+        <Link 
+        className="nav-link active" aria-current="page" to="/">
+          <IMG/>
+          
+          </Link>
         </p>
         <button
           className={`navbar-toggler ${isMenuOpen ? "" : "collapsed"}`}
@@ -41,17 +47,14 @@ export const Menu = () => {
           id="navbarSupportedContent"
         >
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-            <li className="nav-item">
-              <Link className="nav-link active" aria-current="page" to="/">
-                Inicio
-              </Link>
-            </li>
+            
             <li
               className={`nav-item dropdown ${isDataMasterOpen ? "show" : ""}`}
             >
               <p
+              
                 className="nav-link dropdown-toggle"
-                id="datosMaestrosDropdown"
+                id="Dropdown"
                 role="button"
                 onClick={toggleDataMaster}
                 aria-expanded={isDataMasterOpen}
@@ -61,9 +64,11 @@ export const Menu = () => {
               <ul
                 className={`dropdown-menu ${isDataMasterOpen ? "show" : ""}`}
                 aria-labelledby="datosMaestrosDropdown"
+                id="iwa-menu"
               >
                 <li>
                   <Link
+                    id="Dropdown"
                     className="dropdown-item"
                     to="/doctor"
                     onClick={toggleDataMaster}
@@ -74,6 +79,7 @@ export const Menu = () => {
                 </li>
                 <li>
                   <Link
+                  id="Dropdown"
                     className="dropdown-item"
                     to="/patient"
                     onClick={toggleDataMaster}
@@ -84,6 +90,7 @@ export const Menu = () => {
                 </li>
                 <li>
                   <Link
+                  id="Dropdown"
                     className="dropdown-item"
                     to="/medicine"
                     onClick={toggleDataMaster}
@@ -98,7 +105,7 @@ export const Menu = () => {
             <li className={`nav-item dropdown ${isDatesOpen ? "show" : ""}`}>
               <p
                 className="nav-link dropdown-toggle"
-                id="citasDropdown"
+                id="Dropdown"
                 role="button"
                 onClick={toggleDates}
                 aria-expanded={isDatesOpen}
@@ -108,9 +115,11 @@ export const Menu = () => {
               <ul
                 className={`dropdown-menu ${isDatesOpen ? "show" : ""}`}
                 aria-labelledby="citasDropdown"
+                id="iwa-menu"
               >
                 <li>
                   <Link
+                  id="Dropdown"
                     className="dropdown-item"
                     to="/calendar"
                     onClick={toggleDates}
@@ -121,6 +130,7 @@ export const Menu = () => {
                 </li>
                 <li>
                   <Link
+                  id="Dropdown"
                     className="dropdown-item"
                     to="/prescriptions"
                     onClick={toggleDates}

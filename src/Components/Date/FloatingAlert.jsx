@@ -3,7 +3,7 @@ import { Modal } from "react-bootstrap";
 import { GetTheAppContext } from "../../Context/AppContext";
 
 export const FloatingAlert = ({ show, message, onClose }) => {
-  const { actionButtonModal } = useContext(GetTheAppContext);
+  const { actionButtonModal, Error } = useContext(GetTheAppContext);
   useEffect(() => {
     if (show) {
       const timer = setTimeout(() => {
@@ -28,7 +28,20 @@ export const FloatingAlert = ({ show, message, onClose }) => {
           </Modal.Body>
         </>
       );
-    } else if (actionButtonModal === "Editar") {
+    }  else if (actionButtonModal === "Editar" && Error){
+      return (
+        <>
+          <Modal.Body
+            className="text-center"
+            style={{ backgroundColor: "#f8d7da" }}
+          >
+            <div className="alert alert-danger text-muted" role="alert">
+              {message}
+            </div>
+          </Modal.Body>
+        </>
+      );
+    }else if (actionButtonModal === "Editar") {
       return (
         <>
           <Modal.Body
@@ -41,7 +54,7 @@ export const FloatingAlert = ({ show, message, onClose }) => {
           </Modal.Body>
         </>
       );
-    } else if (actionButtonModal === "Eliminar") {
+    } else if (actionButtonModal === "Eliminar" ) {
       return (
         <>
           <Modal.Body

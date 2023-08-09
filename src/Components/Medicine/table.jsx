@@ -1,10 +1,10 @@
 import React, { useState, useContext } from "react";
 import "../../Css/CssTable.css";
 import { GetTheAppContext } from "../../Context/AppContext";
-import { ModalDoctor } from "./modal";
+import { ModalMedicine } from "./modal";
 import { MyModalDelete } from "./modalDelete";
-import { MdDeleteForever } from "react-icons/md";
 import { BsPersonFillAdd, BsPencilFill } from "react-icons/bs";
+import { MdDeleteForever } from "react-icons/md";
 import { LuFilterX } from "react-icons/lu";
 import { Button } from "react-bootstrap";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
@@ -25,47 +25,49 @@ export function TablaGeneric({ title, data }) {
     handleShowModal,
     handleCloseModal,
     showModal,
-    setGetDataFromTable,
+    setDataMedicineFromTable,
     setActionButtonModal,
-    setDoctorId,
-    setDataUserDoctor,
+    setIdMedicine,
+    setDataUserMedicine,
+    setNameMedicine,
   } = useContext(GetTheAppContext);
 
   const displayedFields = [
+    "code",
     "name",
-    "specialty",
-    "phoneNumber",
-    "address",
-    "email",
+    "dose",
+    "dosageForms",
+    "description",
+    "quantity",
   ];
 
-  const allSpecializations = [...new Set(data.map((item) => item.specialty))];
-
+  const filters = data
+    ? [...new Set(data.map((item) => item.dosageForms))]
+    : [];
   const [searchName, setSearchName] = useState("");
-
-  const [searchEmail, setSearchEmail] = useState("");
-  const [searchSpecialization, setSearchSpecialization] = useState("");
+  const [searchDoses, setSearchDoses] = useState("");
+  const [searchDosageFormsMatches, SetSearchDosageFormsMatches] = useState("");
 
   const handleClear = () => {
     setSearchName("");
-    setSearchEmail("");
-    setSearchSpecialization("");
+    setSearchDoses("");
+    SetSearchDosageFormsMatches("");
   };
 
   const filteredData = data.filter((item) => {
     const nameMatches = item.name
       .toLowerCase()
       .includes(searchName.toLowerCase());
-    const emailMatches = item.email
-      .toLowerCase()
-      .includes(searchEmail.toLowerCase());
-    const specializationMatches = searchSpecialization
-      ? item.specialty.toLowerCase() === searchSpecialization.toLowerCase()
+
+    const doseMatches = item.dose.includes(searchDoses);
+
+    const dosageFormsMatches = searchDosageFormsMatches
+      ? item.dosageForms.toLowerCase() ===
+        searchDosageFormsMatches.toLowerCase()
       : true;
 
-    return nameMatches && emailMatches && specializationMatches;
+    return nameMatches && doseMatches && dosageFormsMatches;
   });
-
   return (
     <div className="container mt-5">
       <div className=" card mt-4 row">
@@ -101,9 +103,9 @@ export function TablaGeneric({ title, data }) {
                 <h4>Buscar</h4>
               </div>
               <div className="row">
-                <div className="container mb-3">
+                <div className="container mb-4">
                   <div className="row">
-                    <div className="col-md-4 mb-3">
+                    <div className="col mb-4">
                       <label>Nombre</label>
                       <input
                         autoComplete="off"
@@ -112,30 +114,47 @@ export function TablaGeneric({ title, data }) {
                         value={searchName}
                         onChange={(e) => {
                           setSearchName(e.target.value);
-                          setSearchEmail("");
+                          setSearchDoses("");
+                          SetSearchDosageFormsMatches("");
                         }}
                         placeholder="Buscar por nombre..."
                         pattern="^[A-Za-z\s]+$"
                       />
                     </div>
-                    <div className="col-md-4 mb-3">
-                      <label>Especialidad</label>
+                    <div className="col mb-4">
+                      <label>Dosis</label>
+                      <input
+                        type="number"
+                        className="form-control"
+                        value={searchDoses}
+                        onChange={(e) => {
+                          setSearchDoses(e.target.value);
+                          setSearchName("");
+                          SetSearchDosageFormsMatches("");
+                        }}
+                        placeholder="Buscar por dosis..."
+                      />
+                    </div>
+                    <div className="col mb-4">
+                      <label>Presentación</label>
                       <select
                         className="form-select"
-                        value={searchSpecialization}
-                        onChange={(e) =>
-                          setSearchSpecialization(e.target.value)
-                        }
+                        value={searchDosageFormsMatches}
+                        onChange={(e) => {
+                          SetSearchDosageFormsMatches(e.target.value);
+                          setSearchDoses("");
+                          setSearchName("");
+                        }}
                       >
-                        <option value="">Todas las especialidades</option>
-                        {allSpecializations.map((specialty, index) => (
-                          <option key={index} value={specialty}>
-                            {specialty}
+                        <option value="">Todas las presentaciones</option>
+                        {filters.map((iteratorTable, index) => (
+                          <option key={index} value={iteratorTable}>
+                            {iteratorTable}
                           </option>
                         ))}
                       </select>
                     </div>
-                    <div className="mt-2 ml-4 col-md-4 d-flex justify-content align-items-center">
+                    <div className="col mb-4 pt-4 d-flex justify-content align-items-center">
                       <OverlayTrigger
                         placement="top"
                         overlay={<Tooltip id="tooltip-clear">Limpiar</Tooltip>}
@@ -154,15 +173,15 @@ export function TablaGeneric({ title, data }) {
                 </div>
               </div>
             </div>
-
             <table className="table table-bordered custom-table text-center">
               <thead>
                 <tr>
+                  <th>Clave</th>
                   <th>Nombre</th>
-                  <th>Especialidad</th>
-                  <th>Teléfono</th>
-                  <th>Dirección</th>
-                  <th>Correo</th>
+                  <th>Dosis</th>
+                  <th>Presentación</th>
+                  <th>Descripción</th>
+                  <th>Cantidad</th>
                   <th>Acciones</th>
                 </tr>
               </thead>
@@ -171,7 +190,7 @@ export function TablaGeneric({ title, data }) {
                   <tr key={index}>
                     {displayedFields.map((field) => (
                       <td key={field}>
-                        <div id="idTextPatient" className="d-inline">
+                        <div id="idTextMedicine" className="d-inline">
                           {item[field]}
                         </div>
                       </td>
@@ -188,8 +207,8 @@ export function TablaGeneric({ title, data }) {
                           variant="primary"
                           onClick={() => {
                             handleShowModal();
-                            setDoctorId(item.id);
-                            setGetDataFromTable(item);
+                            setIdMedicine(item.id);
+                            setDataMedicineFromTable(item);
                             setActionButtonModal("Editar");
                           }}
                         >
@@ -207,17 +226,19 @@ export function TablaGeneric({ title, data }) {
                           className="ms-2 me-2 mb-2 mt-2 d-inline "
                           variant="danger"
                           onClick={() => {
-                            setDoctorId(item.id);
-                            setDataUserDoctor(item);
+                            setIdMedicine(item.id);
+                            setDataUserMedicine(item);
+                            setNameMedicine(item.name);
                             handleShowModalDelete();
                           }}
                         >
                           <MdDeleteForever
                             size={13}
                             onClick={() => {
-                              setDataUserDoctor(item);
+                              setDataUserMedicine(item);
+                              setNameMedicine(item.name);
                             }}
-                            id="btnDeletePatient"
+                            id="btnDeleteMedicine"
                             className="btn-icon-lg"
                           />
                         </Button>
@@ -228,7 +249,7 @@ export function TablaGeneric({ title, data }) {
               </tbody>
             </table>
           </div>
-          <ModalDoctor show={showModal} handleClose={handleCloseModal} />
+          <ModalMedicine show={showModal} handleClose={handleCloseModal} />
           <MyModalDelete
             show={showModalDelete}
             handleClose={handleCloseModalDelete}

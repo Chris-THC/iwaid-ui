@@ -1,18 +1,18 @@
 import { Modal, Button } from "react-bootstrap";
 import { GetTheAppContext } from "../../Context/AppContext";
 import { useContext } from "react";
-import { statusDeleted } from "./HTTPstatus.js";
+import { statusDeleted } from "./HTTPStatus.js";
 
 export const MyModalDelete = ({ show, handleClose }) => {
   const {
-    doctorId,
-    deleteDoctorFunction,
-    getAllDoctorsDataFunction,
-    setGetDataAllDoctors,
+    idMedicine,
+    deleteMedicineFunction,
+    getAllMedicineDataFunction,
+    setAllDataMedicine,
     setTextAlert,
     handleShowFloatAlter,
     setActionButtonModal,
-    dataUserDoctor,
+    nameMedicine,
   } = useContext(GetTheAppContext);
 
   const handleButtonClick = () => {
@@ -25,7 +25,7 @@ export const MyModalDelete = ({ show, handleClose }) => {
         <Modal.Title>Confirmar eliminación</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <p>¿Está seguro que desea eliminar este médico?</p>
+        <p>¿Está seguro de que desea eliminar este medicamento?</p>
       </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={handleClose}>
@@ -35,15 +35,19 @@ export const MyModalDelete = ({ show, handleClose }) => {
           variant="danger"
           onClick={async () => {
             setActionButtonModal("Eliminar");
-            const response = await deleteDoctorFunction(doctorId);
-            if (response.status === statusDeleted) {
-              await getAllDoctorsDataFunction(setGetDataAllDoctors);
+            const responseModalDelete = await deleteMedicineFunction(
+              idMedicine
+            );
+
+            if (responseModalDelete.status === statusDeleted) {
+              await getAllMedicineDataFunction(setAllDataMedicine);
+              setTextAlert(`Se eliminó ${nameMedicine}`);
               handleButtonClick();
-              setTextAlert(`Se eliminó al médico ${dataUserDoctor.name}`);
               handleShowFloatAlter();
             } else {
               handleButtonClick();
-              setTextAlert("Error al eliminar el médico");
+              setTextAlert(`Error al eliminar medicamento`);
+
               handleShowFloatAlter();
             }
           }}

@@ -20,6 +20,21 @@
 .custom-table th {
   padding: 0;
 }
+.size-colTable {
+  width: "20%";
+}
+
+.success-alert {
+  background-color: #d4edda;
+}
+
+.primary-alert {
+  background-color: #cce5ff;
+}
+
+.danger-alert {
+  background-color: #f8d7da;
+}
 
 @media (max-width: 800px) {
   td {
@@ -29,10 +44,14 @@
     font-size: 12px;
   }
 
-  #inputSearchMedicine {
+  #inputSearchPatient {
     font-size: 12px;
   }
-  #btnDeleteMedicine {
+  #selectSearchPatient {
+    font-size: 12px;
+  }
+
+  #input-table {
     font-size: 12px;
   }
 }
@@ -46,7 +65,7 @@
     font-size: 9px;
   }
 
-  #idTextMedicine {
+  #idTextPatient {
     font-size: 9px;
   }
 
@@ -54,12 +73,21 @@
     font-size: 12px;
   }
 
-  #inputSearchMedicine {
+  #inputSearchPatient {
     font-size: 9px;
   }
 
-  #selectSearchMedicine {
+  #selectSearchPatient {
     font-size: 9px;
+  }
+  #input-table input {
+    font-size: 9px;
+    height: auto;
+  }
+
+  #input-table select {
+    font-size: 9px;
+    height: auto;
   }
 
   #btnTables {

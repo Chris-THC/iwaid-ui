@@ -3,6 +3,8 @@ import { useForm } from "react-hook-form";
 import React, { useContext } from "react";
 import { GetTheAppContext } from "../../Context/AppContext";
 
+import { statusCreated, statusUpdated } from "./HTTPstatus.js";
+
 export const FormDoctor = ({ isGetData = {} }) => {
   const {
     handleShowFloatAlter,
@@ -23,28 +25,38 @@ export const FormDoctor = ({ isGetData = {} }) => {
     formState: { errors, isValid },
   } = useForm({ mode: "all" });
 
+  const getMessageForAlert = (data) => {
+    if (actionButtonModal === "Agregar") {
+      return setTextAlert("Médico agregado exitosamente");
+    } else if (actionButtonModal === "Editar") {
+      return setTextAlert(`Médico ${data.name} actualizado exitosamente`);
+    }
+    return "";
+  };
+
   const onSubmitClick = async (data) => {
     if (actionButtonModal === "Agregar") {
       handleCloseModal();
+      const response = await createDoctorFunction(data);
 
-      try {
-        let info = await createDoctorFunction(data);
+      if (response.status === statusCreated) {
         await getAllDoctorsDataFunction(setGetDataAllDoctors);
-        setTextAlert("Médico agregado exitosamente");
-        console.log(info);
+        getMessageForAlert();
         handleShowFloatAlter();
-      } catch (error) {
-        setTextAlert("Error al agregar el médico");
+      } else {
+        setTextAlert("Error al agregar la prescripción médica");
+        handleShowFloatAlter();
       }
     } else if (actionButtonModal === "Editar") {
       handleCloseModal();
-      setTextAlert(`Médico ${data.name} actualizado exitosamente`);
-      try {
-        await updateDoctorFunction(data, doctorId);
+      const response = await updateDoctorFunction(data, doctorId);
+      if (response.status === statusUpdated) {
+        getMessageForAlert(data);
         await getAllDoctorsDataFunction(setGetDataAllDoctors);
         handleShowFloatAlter();
-      } catch (error) {
+      } else {
         setTextAlert("Error al agregar el médico");
+        handleShowFloatAlter();
       }
     }
   };

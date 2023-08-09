@@ -1,5 +1,5 @@
 import axios from "axios";
-const prescriptions_URL = "http://localhost:8081/iwaid/prescription";
+const prescriptions_URL = "http://localhost:8081/iwaid/prescription/";
 
 const handleRequest = async (urlClient, methodClient, dataClient = null) => {
   try {
@@ -26,13 +26,13 @@ export const createPrescriptionFunction = async (arrayData) => {
 };
 
 export const deletePrescriptionFunction = async (prescriptionId) => {
-  const urlDelete = `${prescriptions_URL}/${prescriptionId}`;
+  const urlDelete = `${prescriptions_URL}${prescriptionId}`;
   const response = await handleRequest(urlDelete, "delete");
   return response;
 };
 
 export const updatePrescriptionFunction = async (arrayData, prescriptionId) => {
-  const urlUpdate = `${prescriptions_URL}/${prescriptionId}`;
+  const urlUpdate = `${prescriptions_URL}${prescriptionId}`;
   const response = await handleRequest(urlUpdate, "patch", arrayData);
   return response;
 };

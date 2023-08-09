@@ -15,13 +15,23 @@ export const FloatingAlert = ({ show, message, onClose }) => {
     }
   }, [show, onClose]);
 
+  // const getAlertStyle = () => {
+  //   if (actionButtonModal === "Agregar") {
+  //     return { backgroundColor: "#d4edda" };
+  //   } else if (actionButtonModal === "Editar") {
+  //     return { backgroundColor: "#cce5ff" };
+  //   } else if (actionButtonModal === "Eliminar") {
+  //     return { backgroundColor: "#f8d7da" };
+  //   }
+  // };
+
   const getAlertStyle = () => {
     if (actionButtonModal === "Agregar") {
-      return { backgroundColor: "#d4edda" };
+      return "success-alert";
     } else if (actionButtonModal === "Editar") {
-      return { backgroundColor: "#cce5ff" };
+      return "primary-alert";
     } else if (actionButtonModal === "Eliminar") {
-      return { backgroundColor: "#f8d7da" };
+      return "danger-alert";
     }
   };
 
@@ -36,10 +46,9 @@ export const FloatingAlert = ({ show, message, onClose }) => {
   };
 
   const AlertMessage = () => {
-    let alertStyle = getAlertStyle();
     return (
       <>
-        <Modal.Body className="text-center" style={alertStyle}>
+        <Modal.Body className={`text-center ${getAlertStyle()}`}>
           <div className={`alert ${getAlertClass} text-muted`} role="alert">
             {message}
           </div>

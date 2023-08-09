@@ -24,6 +24,18 @@
   width: "20%";
 }
 
+.success-alert {
+  background-color: #d4edda;
+}
+
+.primary-alert {
+  background-color: #cce5ff;
+}
+
+.danger-alert {
+  background-color: #f8d7da;
+}
+
 @media (max-width: 800px) {
   td {
     font-size: 12px;

@@ -20,17 +20,38 @@ import {
   deleteMedicineFunction,
 } from "./MedicineData.js";
 
+import {
+  allPrescriptionsFromApiFunction,
+  createPrescriptionFunction,
+  deletePrescriptionFunction,
+  updatePrescriptionFunction,
+} from "./Prescription.js";
+
+import {
+  allHistoryFromApiFunction,
+  createHistoryFunction,
+  updateHistoryFunction,
+  deleteHistoryFunction,
+} from "./History.js";
+
 export const GetTheAppContext = createContext();
 
 export const AppContext = (props) => {
-  const [dataMedicineFromTable, setDataMedicineFromTable] = useState({});
+  const [allMedicalHistoryData, setAllMedicalHistoryData] = useState([]);
+
+  const [getDataFromTable, setGetDataFromTable] = useState({});
   const [actionButtonModal, setActionButtonModal] = useState("Agregar");
   const [textAlert, setTextAlert] = useState("");
-  const [doctorId, setDoctorId] = useState("");
 
+  const [medicalPrescriptionData, setMedicalPrescriptionData] = useState({});
+  const [prescriptionPatientId, setPrescriptionPatientId] = useState("");
+  const [prescriptionDoctorId, setPrescriptionDoctorId] = useState("");
+  const [allPrescriptionsData, setAllPrescriptionsData] = useState([]);
+  const [dataPrescription, setDataPrescription] = useState({});
+
+  const [doctorId, setDoctorId] = useState("");
   const [dataGetAllDoctors, setGetDataAllDoctors] = useState([]);
   const [dataUserDoctor, setDataUserDoctor] = useState({});
-  const [getDataFromTable, setGetDataFromTable] = useState({});
 
   const [getAllPatientsData, setGetAllPatientsData] = useState([]);
   const [dataUserPatient, setDataUserPatient] = useState({});
@@ -39,18 +60,20 @@ export const AppContext = (props) => {
   const [dataGetAllMedicine, setAllDataMedicine] = useState([]);
   const [dataUserMedicine, setDataUserMedicine] = useState({});
   const [idMedicine, setIdMedicine] = useState("");
+  const [dataMedicineFromTable, setDataMedicineFromTable] = useState({});
 
   const [dataMedicalHistory, setDataMedicalHistory] = useState({});
   const [patientHistoryId, setPatientHistoryId] = useState("");
 
   const [showModal, setShowModal] = useState(false);
-
   const [nameMedicine, setNameMedicine] = useState(false);
 
   useEffect(() => {
     getAllDoctorsDataFunction(setGetDataAllDoctors);
     getAllPatientDataFunction(setGetAllPatientsData);
     getAllMedicineDataFunction(setAllDataMedicine);
+    allPrescriptionsFromApiFunction(setAllPrescriptionsData);
+    allHistoryFromApiFunction(setAllMedicalHistoryData);
   }, []);
 
   const handleShowModal = () => {
@@ -77,6 +100,8 @@ export const AppContext = (props) => {
         handleCloseModal,
         handleShowModal,
         showModal,
+        medicalPrescriptionData,
+        setMedicalPrescriptionData,
         dataUserDoctor,
         setDataUserDoctor,
         dataUserPatient,
@@ -120,12 +145,32 @@ export const AppContext = (props) => {
         setDataMedicineFromTable,
         nameMedicine,
         setNameMedicine,
+        setPrescriptionPatientId,
+        prescriptionPatientId,
+        setPrescriptionDoctorId,
+        prescriptionDoctorId,
+
+        allPrescriptionsData,
+        setAllPrescriptionsData,
+        createPrescriptionFunction,
+        allPrescriptionsFromApiFunction,
+        dataPrescription,
+        setDataPrescription,
+        deletePrescriptionFunction,
+        updatePrescriptionFunction,
 
         dataMedicalHistory,
         setDataMedicalHistory,
 
         patientHistoryId,
         setPatientHistoryId,
+
+        allMedicalHistoryData,
+        setAllMedicalHistoryData,
+        createHistoryFunction,
+        allHistoryFromApiFunction,
+        updateHistoryFunction,
+        deleteHistoryFunction,
       }}
     >
       {props.children}

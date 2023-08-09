@@ -1,5 +1,5 @@
 import axios from "axios";
-const prescriptions_URL = "http://localhost:8081/iwaid/medicalhistory/";
+const prescriptions_URL = "http://localhost:8081/iwaid/prescription/";
 
 const handleRequest = async (urlClient, methodClient, dataClient = null) => {
   try {
@@ -10,29 +10,31 @@ const handleRequest = async (urlClient, methodClient, dataClient = null) => {
     });
     return response;
   } catch (error) {
-    return error;
+    throw error;
   }
 };
 
-export const allHistoryFromApiFunction = async (setAllMedicalHistoryData) => {
+export const allPrescriptionsFromApiFunction = async (
+  setAllPrescriptionsData
+) => {
   const response = await handleRequest(prescriptions_URL, "get");
-  await setAllMedicalHistoryData(response.data);
+  await setAllPrescriptionsData(response.data);
   return response;
 };
 
-export const createHistoryFunction = async (arrayData) => {
+export const createPrescriptionFunction = async (arrayData) => {
   const response = await handleRequest(prescriptions_URL, "post", arrayData);
   return response;
 };
 
-export const deleteHistoryFunction = async (historyId) => {
-  const urlDelete = `${prescriptions_URL}${historyId}`;
+export const deletePrescriptionFunction = async (prescriptionId) => {
+  const urlDelete = `${prescriptions_URL}${prescriptionId}`;
   const response = await handleRequest(urlDelete, "delete");
   return response;
 };
 
-export const updateHistoryFunction = async (arrayData, historyId) => {
-  const urlUpdate = `${prescriptions_URL}${historyId}`;
+export const updatePrescriptionFunction = async (arrayData, prescriptionId) => {
+  const urlUpdate = `${prescriptions_URL}${prescriptionId}`;
   const response = await handleRequest(urlUpdate, "patch", arrayData);
   return response;
 };

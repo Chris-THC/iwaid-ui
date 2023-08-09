@@ -3,6 +3,7 @@ import { Modal, Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { GetTheAppContext } from "../../Context/AppContext";
 import { TypeaheadPatient } from "./Typeahead/TypeaheadPatient";
+import { statusCreated, statusUpdatedHistiry } from "../../Context/HTTPStatus";
 
 export const FormMedicalHistory = ({ isGetData = {} }) => {
   const [isSelectedFamilyMedicalHistory, setIsSelectedFamilyMedicalHistory] =
@@ -23,6 +24,10 @@ export const FormMedicalHistory = ({ isGetData = {} }) => {
     dataMedicalHistory,
     getAllPatientsData,
     patientHistoryId,
+    createHistoryFunction,
+    setAllMedicalHistoryData,
+    allHistoryFromApiFunction,
+    updateHistoryFunction,
   } = useContext(GetTheAppContext);
 
   const {
@@ -56,7 +61,16 @@ export const FormMedicalHistory = ({ isGetData = {} }) => {
     );
   }, []);
 
-  const objectHasData = (key) => {};
+  const getMessageForAlert = () => {
+    if (actionButtonModal === "Agregar") {
+      return setTextAlert("Historial médico agregado exitosamente");
+    } else if (actionButtonModal === "Editar") {
+      return setTextAlert(
+        `El historial de ${dataMedicalHistory.patient.name} se ha actualizado exitosamente`
+      );
+    }
+    return "";
+  };
 
   const onSubmitClick = async (data) => {
     data.patientId = patientHistoryId;
@@ -75,9 +89,32 @@ export const FormMedicalHistory = ({ isGetData = {} }) => {
 
     if (actionButtonModal === "Agregar") {
       handleCloseModal();
+      const response = await createHistoryFunction(data);
+      if (response.status === statusCreated) {
+        await allHistoryFromApiFunction(setAllMedicalHistoryData);
+        getMessageForAlert();
+        handleShowFloatAlter();
+      } else {
+        setTextAlert("Error al agregar la prescripción médica");
+        handleShowFloatAlter();
+      }
     } else if (actionButtonModal === "Editar") {
+      data.patientId = dataMedicalHistory.patient.id;
+      console.log(data);
       handleCloseModal();
+      const response = await updateHistoryFunction(data, dataMedicalHistory.id);
+      console.log(response);
+      if (response.status === statusUpdatedHistiry) {
+        await allHistoryFromApiFunction(setAllMedicalHistoryData);
+        getMessageForAlert();
+        handleShowFloatAlter();
+      } else {
+        setTextAlert("Error al editar la prescripción médica");
+        handleShowFloatAlter();
+      }
     }
+
+    console.log(data);
   };
 
   return (

@@ -108,7 +108,12 @@ export const FormCitas = ({ isGetData = {} }) => {
       }else if(responseCreateDate.status === statusBeforeToday){
         setTextAlert("No es posible crear una cita antes de la fecha y hora actual");
         handleShowFloatAlter();
-      } else {
+      } 
+      else if(responseCreateDate.status === 500){
+        setTextAlert("No es posible crear una cita");
+        handleShowFloatAlter();
+      } 
+      else {
         setTextAlert("Error al agregar una cita");
         handleShowFloatAlter();
       }
@@ -122,6 +127,9 @@ export const FormCitas = ({ isGetData = {} }) => {
       if (responseUpdateDate.status === statusUpdated ) {
         setTextAlert(`Cita actualizada exitosamente`);
         await getAllDateDataFunction(setAllDataDate);
+        handleShowFloatAlter();
+      } else if(responseUpdateDate.status === 500){
+        setTextAlert("No es posible editar una cita");
         handleShowFloatAlter();
       } else {
         setTextAlert("Error al actualizar cita");

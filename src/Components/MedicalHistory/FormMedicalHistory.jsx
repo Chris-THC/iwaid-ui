@@ -40,42 +40,77 @@ export const FormMedicalHistory = ({ isGetData = {} }) => {
   };
 
   useEffect(() => {
-    deselectHistory(isGetData.familyMedicalHistory, setIsSelectedFamilyMedicalHistory);
+    deselectHistory(
+      isGetData.familyMedicalHistory,
+      setIsSelectedFamilyMedicalHistory
+    );
 
-    deselectHistory(isGetData.pathologicalHistory, setIsSelectedPathologicalHistory);
+    deselectHistory(
+      isGetData.pathologicalHistory,
+      setIsSelectedPathologicalHistory
+    );
 
-    deselectHistory(isGetData.nonPathologicalHistory, setIsSelectedNoPathologicalHistory);
+    deselectHistory(
+      isGetData.nonPathologicalHistory,
+      setIsSelectedNoPathologicalHistory
+    );
   }, []);
+
+  const objectHasData = (key) => {};
 
   const onSubmitClick = async (data) => {
     data.patientsId = patientHistoryId;
 
-    if (typeof data.specificFamilyMedicalHistory === "undefined") {
-      data.specificFamilyMedicalHistory =
-        dataMedicalHistory.specificFamilyMedicalHistory;
-    }
-    if (typeof data.specificPathologicalHistory === "undefined") {
-      data.specificPathologicalHistory =
-        dataMedicalHistory.specificPathologicalHistory;
-    }
-    if (typeof data.specificNonPathologicalHistory === "undefined") {
-      data.specificNonPathologicalHistory =
-        dataMedicalHistory.specificNonPathologicalHistory;
+    const properties = [
+      "specificFamilyMedicalHistory",
+      "specificPathologicalHistory",
+      "specificNonPathologicalHistory",
+    ];
+
+    for (const prop of properties) {
+      if (typeof data[prop] === "undefined") {
+        data[prop] = dataMedicalHistory[prop];
+      }
     }
 
+    // if (typeof data.specificFamilyMedicalHistory === "undefined") {
+    //   data.specificFamilyMedicalHistory =
+    //     dataMedicalHistory.specificFamilyMedicalHistory;
+    // }
+    // if (typeof data.specificPathologicalHistory === "undefined") {
+    //   data.specificPathologicalHistory =
+    //     dataMedicalHistory.specificPathologicalHistory;
+    // }
+    // if (typeof data.specificNonPathologicalHistory === "undefined") {
+    //   data.specificNonPathologicalHistory =
+    //     dataMedicalHistory.specificNonPathologicalHistory;
+    // }
+
     if (actionButtonModal === "Agregar") {
-      if (typeof data.specificFamilyMedicalHistory === "undefined") {
-        data.specificFamilyMedicalHistory =
-          dataMedicalHistory.specificFamilyMedicalHistory = "";
+      const properties = [
+        "specificFamilyMedicalHistory",
+        "specificPathologicalHistory",
+        "specificNonPathologicalHistory",
+      ];
+
+      for (const prop of properties) {
+        if (typeof data[prop] === "undefined") {
+          data[prop] = dataMedicalHistory[prop] = "";
+        }
       }
-      if (typeof data.specificPathologicalHistory === "undefined") {
-        data.specificPathologicalHistory =
-          dataMedicalHistory.specificPathologicalHistory = "";
-      }
-      if (typeof data.specificNonPathologicalHistory === "undefined") {
-        data.specificNonPathologicalHistory =
-          dataMedicalHistory.specificNonPathologicalHistory = "";
-      }
+
+      // if (typeof data.specificFamilyMedicalHistory === "undefined") {
+      //   data.specificFamilyMedicalHistory =
+      //     dataMedicalHistory.specificFamilyMedicalHistory = "";
+      // }
+      // if (typeof data.specificPathologicalHistory === "undefined") {
+      //   data.specificPathologicalHistory =
+      //     dataMedicalHistory.specificPathologicalHistory = "";
+      // }
+      // if (typeof data.specificNonPathologicalHistory === "undefined") {
+      //   data.specificNonPathologicalHistory =
+      //     dataMedicalHistory.specificNonPathologicalHistory = "";
+      // }
 
       handleCloseModal();
       // TODO: This code is a guide that will be removed when the API is ready and the correct code is implemented.

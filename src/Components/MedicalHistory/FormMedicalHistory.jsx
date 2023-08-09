@@ -186,7 +186,7 @@ export const FormMedicalHistory = ({ isGetData = {} }) => {
 
         <div className="form-group row">
           <div className="form-group">
-            <label>¿Tiene antecedentes heredofamiliares?</label>
+            <label>Antecedentes heredofamiliares</label>
             <div className="form-check">
               <input
                 defaultChecked={isGetData.familyMedicalHistory}
@@ -245,7 +245,7 @@ export const FormMedicalHistory = ({ isGetData = {} }) => {
 
         <div className="form-group row">
           <div className="form-group">
-            <label>¿Tiene antecedentes patológicos?</label>
+            <label>Antecedentes patológicos</label>
             <div className="form-check">
               <input
                 defaultChecked={isGetData.pathologicalHistory}
@@ -304,7 +304,7 @@ export const FormMedicalHistory = ({ isGetData = {} }) => {
 
         <div className="form-group row">
           <div className="form-group">
-            <label>¿Tiene antecedentes no patológicos?</label>
+            <label>Antecedentes no patológicos</label>
             <div className="form-check">
               <input
                 defaultChecked={isGetData.nonPathologicalHistory}

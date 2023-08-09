@@ -213,7 +213,6 @@ export const Table = ({ dataTable }) => {
                       showNonPathologicalHistory &&
                       field.nonPathologicalHistory;
 
-                    // Si no se selecciona ningún filtro, mostrar todos los usuarios
                     if (
                       !showFamilyHistory &&
                       !showPathologicalHistory &&

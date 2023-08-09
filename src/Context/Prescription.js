@@ -10,14 +10,16 @@ const handleRequest = async (urlClient, methodClient, dataClient = null) => {
     });
     return response;
   } catch (error) {
-    console.error("Error al enviar la solicitud:", error);
     throw error;
   }
 };
 
-export const allPrescriptionsFromApiFunction = async (setAllPrescriptionsData) => {
+export const allPrescriptionsFromApiFunction = async (
+  setAllPrescriptionsData
+) => {
   const response = await handleRequest(prescriptions_URL, "get");
   await setAllPrescriptionsData(response.data);
+  return response;
 };
 
 export const createPrescriptionFunction = async (arrayData) => {

@@ -14,7 +14,7 @@ export const getAllMedicineDataFunction = async (setAllDataMedicine) => {
     });
     setAllDataMedicine(response.data);
   } catch (error) {
-    console.error("Error al enviar la solicitud:", error);
+    return error;
   }
 };
 
@@ -23,7 +23,6 @@ export const createMedicineFunction = async (arrayData) => {
     const response = await axios.post(MedicineURL, arrayData);
     return response;
   } catch (error) {
-    console.error("Error al enviar la solicitud:", error);
     return error;
   }
 };
@@ -34,7 +33,6 @@ export const updateMedicineFunction = async (arrayData, idMedicine) => {
     const response = await axios.patch(urlUpdate, arrayData);
     return response;
   } catch (error) {
-    console.error("Error al enviar la solicitud:", error);
     return error;
   }
 };
@@ -45,7 +43,6 @@ export const deleteMedicineFunction = async (idMedicine) => {
     const response = await axios.delete(urlDelete);
     return response;
   } catch (error) {
-    console.error("Error al enviar la solicitud:", error);
     return error;
   }
 };

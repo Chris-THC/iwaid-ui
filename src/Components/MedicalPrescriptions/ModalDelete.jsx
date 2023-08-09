@@ -1,20 +1,18 @@
+import { useContext } from "react";
 import { Modal, Button } from "react-bootstrap";
 import { GetTheAppContext } from "../../Context/AppContext";
-import { useContext } from "react";
-import { statusDeleted } from "./HTTPstatus.js";
+import { statusDeleted } from "./HTTPstatus";
 
-export const MyModalDelete = ({ show, handleClose }) => {
+export const ModalDelete = ({ show, handleClose }) => {
   const {
-    doctorId,
-    deleteDoctorFunction,
-    getAllDoctorsDataFunction,
-    setGetDataAllDoctors,
+    allPrescriptionsFromApiFunction,
+    deletePrescriptionFunction,
+    setAllPrescriptionsData,
+    setActionButtonModal,
     setTextAlert,
     handleShowFloatAlter,
-    setActionButtonModal,
-    dataUserDoctor,
+    dataPrescription,
   } = useContext(GetTheAppContext);
-
   const handleButtonClick = () => {
     handleClose();
   };
@@ -25,7 +23,7 @@ export const MyModalDelete = ({ show, handleClose }) => {
         <Modal.Title>Confirmar eliminación</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <p>¿Está seguro que desea eliminar este médico?</p>
+        <p>¿Está seguro de que desea eliminar esta prescripción?</p>
       </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={handleClose}>
@@ -35,15 +33,20 @@ export const MyModalDelete = ({ show, handleClose }) => {
           variant="danger"
           onClick={async () => {
             setActionButtonModal("Eliminar");
-            const response = await deleteDoctorFunction(doctorId);
+            const response = await deletePrescriptionFunction(
+              dataPrescription.id
+            );
+
             if (response.status === statusDeleted) {
-              await getAllDoctorsDataFunction(setGetDataAllDoctors);
+              await allPrescriptionsFromApiFunction(setAllPrescriptionsData);
               handleButtonClick();
-              setTextAlert(`Se eliminó al médico ${dataUserDoctor.name}`);
+              setTextAlert(
+                `Se eliminó la prescripción del paciente ${dataPrescription.patient.name}`
+              );
               handleShowFloatAlter();
             } else {
               handleButtonClick();
-              setTextAlert("Error al eliminar el médico");
+              setTextAlert("Error al eliminar la prescripción");
               handleShowFloatAlter();
             }
           }}

@@ -1,0 +1,98 @@
+#btnTables {
+  font-size: 12px;
+  height: 40px;
+  width: 50px;
+}
+
+#btnAdd {
+  font-size: 12px;
+  height: 40px;
+  width: 45px;
+}
+
+#iconoClear {
+  background-color: #0d6efd;
+  border: solid 1px #bcbcbc;
+  width: 60px;
+}
+
+.custom-table td,
+.custom-table th {
+  padding: 0;
+}
+.size-colTable {
+  width: "20%";
+}
+
+.success-alert {
+  background-color: #d4edda;
+}
+
+.primary-alert {
+  background-color: #cce5ff;
+}
+
+.danger-alert {
+  background-color: #f8d7da;
+}
+
+@media (max-width: 800px) {
+  td {
+    font-size: 12px;
+  }
+  .custom-table {
+    font-size: 12px;
+  }
+
+  #inputSearchPatient {
+    font-size: 12px;
+  }
+  #selectSearchPatient {
+    font-size: 12px;
+  }
+
+  #input-table {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 550px) {
+  .custom-table {
+    font-size: 9px;
+  }
+
+  .btn-sm {
+    font-size: 9px;
+  }
+
+  #idTextPatient {
+    font-size: 9px;
+  }
+
+  #btnAdd {
+    font-size: 12px;
+  }
+
+  #inputSearchPatient {
+    font-size: 9px;
+  }
+
+  #selectSearchPatient {
+    font-size: 9px;
+  }
+  #input-table input {
+    font-size: 9px;
+    height: auto;
+  }
+
+  #input-table select {
+    font-size: 9px;
+    height: auto;
+  }
+
+  #btnTables {
+    font-size: 9px;
+    height: 30px;
+    width: 35px;
+  }
+}

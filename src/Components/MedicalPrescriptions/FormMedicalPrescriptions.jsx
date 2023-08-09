@@ -44,11 +44,11 @@ export const FormMedicalPrescriptions = ({ isGetData = {} }) => {
     return "";
   };
 
-  const handleCreatePrescription = async (data) => {
+  const createPrescription = async (data) => {
     handleCloseModal();
-    const createNewPrescription = await createPrescriptionFunction(data);
+    const newPrescription = await createPrescriptionFunction(data);
 
-    if (createNewPrescription.status === statusCreated) {
+    if (newPrescription.status === statusCreated) {
       await allPrescriptionsFromApiFunction(setAllPrescriptionsData);
 
       getMessageForAlert();
@@ -61,7 +61,7 @@ export const FormMedicalPrescriptions = ({ isGetData = {} }) => {
     }
   };
 
-  const handleUpdatePrescription = async (data) => {
+  const updatePrescription = async (data) => {
     handleCloseModal();
     if (data.patientId === "" || data.doctorId === "") {
       data.patientId = dataPrescription.patientId;
@@ -71,12 +71,12 @@ export const FormMedicalPrescriptions = ({ isGetData = {} }) => {
       data.doctorId = prescriptionDoctorId;
     }
 
-    const responseUpdatePrescription = await updatePrescriptionFunction(
+    const updatePrescription = await updatePrescriptionFunction(
       data,
       dataPrescription.id
     );
 
-    if (responseUpdatePrescription.status === statusDeleted) {
+    if (updatePrescription.status === statusDeleted) {
       getMessageForAlert();
 
       await allPrescriptionsFromApiFunction(setAllPrescriptionsData);
@@ -93,9 +93,9 @@ export const FormMedicalPrescriptions = ({ isGetData = {} }) => {
     data.doctorId = prescriptionDoctorId;
 
     if (actionButtonModal === "Agregar") {
-      handleCreatePrescription(data);
+      createPrescription(data);
     } else if (actionButtonModal === "Editar") {
-      handleUpdatePrescription(data);
+      updatePrescription(data);
     }
   };
 

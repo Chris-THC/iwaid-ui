@@ -5,7 +5,6 @@ import "react-bootstrap-typeahead/css/Typeahead.css";
 import { GetTheAppContext } from "../../../Context/AppContext";
 
 export const TypeaheadDoctor = ({ infoDoctors }) => {
-
   const { setPrescriptionDoctorId, dataPrescription } =
     useContext(GetTheAppContext);
 
@@ -16,17 +15,15 @@ export const TypeaheadDoctor = ({ infoDoctors }) => {
   const [doctorNotFound, setDoctorNotFound] = useState(false);
 
   const handleInputChange = (input) => {
-
     if (input.length >= 3) {
       const filteredDoctor = infoDoctors.filter((itemDoctor) =>
         itemDoctor.name.toLowerCase().includes(input.toLowerCase())
       );
       setDoctor(filteredDoctor);
       setDoctorNotFound(filteredDoctor.length === 0);
-
     } else {
       setDoctor([]);
-      setDoctorNotFound(false); 
+      setDoctorNotFound(false);
     }
   };
 
@@ -42,8 +39,6 @@ export const TypeaheadDoctor = ({ infoDoctors }) => {
       return "";
     } else if (dataPrescription.doctor && dataPrescription.doctor.name) {
       return dataPrescription.doctor.name;
-    } else {
-      return "";
     }
   };
 
@@ -60,9 +55,7 @@ export const TypeaheadDoctor = ({ infoDoctors }) => {
         onInputChange={handleInputChange}
         placeholder="Nombre del paciente..."
       />
-      {doctorNotFound && (
-        <p className="text-danger">El doctor no existe</p>
-      )}
+      {doctorNotFound && <p className="text-danger">El doctor no existe</p>}
     </div>
   );
 };

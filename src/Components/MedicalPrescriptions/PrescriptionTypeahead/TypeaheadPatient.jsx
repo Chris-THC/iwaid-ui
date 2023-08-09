@@ -5,7 +5,6 @@ import "react-bootstrap-typeahead/css/Typeahead.css";
 import { GetTheAppContext } from "../../../Context/AppContext";
 
 export const TypeaheadPatient = ({ infoPatients }) => {
-
   const { setPrescriptionPatientId, dataPrescription } =
     useContext(GetTheAppContext);
 
@@ -40,8 +39,6 @@ export const TypeaheadPatient = ({ infoPatients }) => {
       return "";
     } else if (dataPrescription.patient && dataPrescription.patient.name) {
       return dataPrescription.patient.name;
-    } else {
-      return "";
     }
   };
 
@@ -59,9 +56,7 @@ export const TypeaheadPatient = ({ infoPatients }) => {
         placeholder="Paciente..."
       />
 
-      {patientNotFound && (
-        <p className="text-danger">El paciente no existe</p>
-      )}
+      {patientNotFound && <p className="text-danger">El paciente no existe</p>}
     </div>
   );
 };

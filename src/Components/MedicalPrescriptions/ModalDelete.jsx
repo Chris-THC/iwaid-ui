@@ -33,7 +33,6 @@ export const ModalDelete = ({ show, handleClose }) => {
           variant="danger"
           onClick={async () => {
             setActionButtonModal("Eliminar");
-            console.log(dataPrescription.id);
             const response = await deletePrescriptionFunction(
               dataPrescription.id
             );

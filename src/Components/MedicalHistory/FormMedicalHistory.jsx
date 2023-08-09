@@ -78,7 +78,6 @@ export const FormMedicalHistory = ({ isGetData = {} }) => {
     } else if (actionButtonModal === "Editar") {
       handleCloseModal();
     }
-    console.log(data);
   };
 
   return (

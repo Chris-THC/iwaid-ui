@@ -46,10 +46,8 @@ export const ModalDelete = ({ show, handleClose }) => {
             } else {
               handleButtonClick();
               setTextAlert(`Error al eliminar la cita`);
-
               handleShowFloatAlter();
             }
-            
           }}
         >
           Eliminar

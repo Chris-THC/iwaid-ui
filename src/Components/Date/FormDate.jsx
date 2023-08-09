@@ -109,13 +109,7 @@ export const FormCitas = ({ isGetData = {} }) => {
       }else if(responseCreateDate.status === statusBeforeToday){
         setTextAlert("No es posible crear una cita antes de la fecha y hora actual");
         handleShowFloatAlter();
-      } 
-      else if(responseCreateDate.status === 500){
-        setError(true);
-        setTextAlert("No es posible crear una cita");
-        handleShowFloatAlter();
-      } 
-      else {
+      }else {
         setError(true);
         setTextAlert("Error al agregar una cita");
         handleShowFloatAlter();

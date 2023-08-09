@@ -12,7 +12,7 @@ const handleRequest = async (url, method, data = null) => {
     return response;
   } catch (error) {
     console.error("Error al enviar la solicitud:", error);
-    throw error;
+    return error;
   }
 };
 

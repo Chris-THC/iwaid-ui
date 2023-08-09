@@ -26,7 +26,8 @@ export const FormCitas = ({ isGetData = {} }) => {
     doctorSelected, 
     setDoctorSelected,
     patientSelected, 
-    setPatientSelected
+    setPatientSelected,
+    setError
   } = useContext(GetTheAppContext);
 
   const timeOptions = [
@@ -110,10 +111,12 @@ export const FormCitas = ({ isGetData = {} }) => {
         handleShowFloatAlter();
       } 
       else if(responseCreateDate.status === 500){
+        setError(true);
         setTextAlert("No es posible crear una cita");
         handleShowFloatAlter();
       } 
       else {
+        setError(true);
         setTextAlert("Error al agregar una cita");
         handleShowFloatAlter();
       }
@@ -124,18 +127,23 @@ export const FormCitas = ({ isGetData = {} }) => {
         data,
         idDate
       );
+      try{
       if (responseUpdateDate.status === statusUpdated ) {
         setTextAlert(`Cita actualizada exitosamente`);
         await getAllDateDataFunction(setAllDataDate);
         handleShowFloatAlter();
       } else if(responseUpdateDate.status === 500){
+        setError(true);
         setTextAlert("No es posible editar una cita");
         handleShowFloatAlter();
       } else {
+        setError(true);
         setTextAlert("Error al actualizar cita");
         handleShowFloatAlter();
       }
-    }
+    }catch(error){
+      console.error("Error al enviar la solicitud:", error);
+    }}
     
   };
 
@@ -235,7 +243,7 @@ export const FormCitas = ({ isGetData = {} }) => {
             defaultValue={isGetData.notes}
           ></textarea>
           {errors.notes && (
-            <span className="text-danger">*Dato requerido</span>
+            <span className="text-danger">Dato requerido</span>
           )}
         </div>
 

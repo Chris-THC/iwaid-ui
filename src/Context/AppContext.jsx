@@ -42,7 +42,7 @@ export const AppContext = (props) => {
   const [dataGetAllDate, setAllDataDate] = useState([]);
   const [dataUserDate, setDataUserDate] = useState({});
   const [idDate, setIdDate] = useState("");
-
+  const [Error, setError] = useState(false);
 
   const [doctorSelected, setDoctorSelected] = useState([]);
 
@@ -119,7 +119,9 @@ export const AppContext = (props) => {
         setPatientSelected,
         createDateFunction,
         updateDateFunction,
-        deleteDateFunction
+        deleteDateFunction,
+        Error, 
+        setError
       }}
     >
       {props.children}

@@ -8,7 +8,6 @@ import { statusCreated } from "./HTTPstatus";
 import { statusDeleted } from "./HTTPstatus";
 
 export const FormMedicalPrescriptions = ({ isGetData = {} }) => {
-  const currentDate = new Date().toISOString().split("T")[0];
 
   const {
     handleCloseModal,
@@ -65,7 +64,7 @@ export const FormMedicalPrescriptions = ({ isGetData = {} }) => {
     handleCloseModal();
     if (data.patientId === "" || data.doctorId === "") {
       data.patientId = dataPrescription.patientId;
-      data.doctorId = dataPrescription.doctorId;
+      data.doctorId = prescriptionDoctorId;
     } else {
       data.patientId = prescriptionPatientId;
       data.doctorId = prescriptionDoctorId;
@@ -122,9 +121,6 @@ export const FormMedicalPrescriptions = ({ isGetData = {} }) => {
                 autoComplete="off"
                 {...register("registerDate", {
                   required: true,
-                  max: {
-                    value: currentDate,
-                  },
                 })}
               />
               {errors.date && (

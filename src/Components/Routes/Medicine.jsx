@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import MedicineList from "../Medicine/MedicineList";
-import { FloatingAlert } from "../Medicine/FloatingAlert";
+import { FloatingAlert } from "../../Alert/FloatingAlert";
 import { GetTheAppContext } from "../../Context/AppContext";
 export const Medicine = () => {
   const { showFloatingAlert, handleCloseFloatAlert, textAlert } =

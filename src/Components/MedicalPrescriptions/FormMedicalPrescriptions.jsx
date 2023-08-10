@@ -64,7 +64,7 @@ export const FormMedicalPrescriptions = ({ isGetData = {} }) => {
     handleCloseModal();
     if (data.patientId === "" || data.doctorId === "") {
       data.patientId = dataPrescription.patientId;
-      data.doctorId = prescriptionDoctorId;
+      data.doctorId = dataPrescription.doctorId;
     } else {
       data.patientId = prescriptionPatientId;
       data.doctorId = prescriptionDoctorId;

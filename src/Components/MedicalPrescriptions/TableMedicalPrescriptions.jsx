@@ -34,6 +34,7 @@ export const TableMedicalPrescriptions = ({ dataTable }) => {
     setTextAlert,
     handleShowFloatAlter,
     dataPrescription,
+    setIdDate
   } = useContext(GetTheAppContext);
 
   const [searchByNamePatient, setSearchByNamePatient] = useState("");
@@ -262,6 +263,7 @@ export const TableMedicalPrescriptions = ({ dataTable }) => {
                               setGetDataFromTable(field);
                               setActionButtonModal("Editar");
                               setDataPrescription(field);
+                              setIdDate(field.id);
                             }}
                           >
                             <BsPencilFill className="btn-icon-lg" />

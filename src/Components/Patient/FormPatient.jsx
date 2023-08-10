@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { Modal, Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { GetTheAppContext } from "../../Context/AppContext";
-import { statusCreated, statusUpdated } from "../HttpStatus/HTTPStatusCode";
+import { statusCreated, statusOk  } from "../HttpStatus/HTTPStatusCode";
 export const FormPatient = ({ isGetData = {} }) => {
   const currentDate = new Date().toISOString().split("T")[0];
 
@@ -46,7 +46,7 @@ export const FormPatient = ({ isGetData = {} }) => {
         patientId
       );
 
-      if (updatePatientResponse.status === statusUpdated) {
+      if (updatePatientResponse.status === statusOk ) {
         setTextAlert(`Paciente ${data.name} actualizado exitosamente`);
         await getAllPatientDataFunction(setGetAllPatientsData);
         handleShowFloatAlter();

@@ -8,7 +8,8 @@ import { LuFilterX } from "react-icons/lu";
 import { Button } from "react-bootstrap";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
-import { ModalDelete } from "./ModalDelete";
+import { ModalDelete } from "../../ModalDelete/ModalDelete";
+import { statusDeleted } from "./HTTPstatus";
 
 export const TableMedicalPrescriptions = ({ dataTable }) => {
   const [showModalDelete, setShowModalDelete] = useState(false);
@@ -27,6 +28,12 @@ export const TableMedicalPrescriptions = ({ dataTable }) => {
     setGetDataFromTable,
     setActionButtonModal,
     setDataPrescription,
+    allPrescriptionsFromApiFunction,
+    deletePrescriptionFunction,
+    setAllPrescriptionsData,
+    setTextAlert,
+    handleShowFloatAlter,
+    dataPrescription,
   } = useContext(GetTheAppContext);
 
   const [searchByNamePatient, setSearchByNamePatient] = useState("");
@@ -44,6 +51,24 @@ export const TableMedicalPrescriptions = ({ dataTable }) => {
   const changeDateFormat = (originalDate) => {
     let piecesDate = originalDate.split("-");
     return piecesDate[2] + "/" + piecesDate[1] + "/" + piecesDate[0];
+  };
+
+  const funtionToDeleted = async () => {
+    setActionButtonModal("Eliminar");
+    const response = await deletePrescriptionFunction(dataPrescription.id);
+
+    if (response.status === statusDeleted) {
+      await allPrescriptionsFromApiFunction(setAllPrescriptionsData);
+      handleCloseModalDelete();
+      setTextAlert(
+        `Se eliminó la prescripción del paciente ${dataPrescription.patient.name}`
+      );
+      handleShowFloatAlter();
+    } else {
+      handleCloseModalDelete();
+      setTextAlert("Error al eliminar la prescripción");
+      handleShowFloatAlter();
+    }
   };
 
   return (
@@ -272,6 +297,7 @@ export const TableMedicalPrescriptions = ({ dataTable }) => {
               </tbody>
             </table>
           </div>
+
           <ModalMedicalPrescriptions
             show={showModal}
             handleClose={handleCloseModal}
@@ -280,6 +306,10 @@ export const TableMedicalPrescriptions = ({ dataTable }) => {
           <ModalDelete
             show={showModalDelete}
             handleClose={handleCloseModalDelete}
+            funtionToDeleted={funtionToDeleted}
+            messageToDelete={
+              "¿Está seguro de que desea eliminar esta prescripción?"
+            }
           />
         </div>
       </div>

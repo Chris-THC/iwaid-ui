@@ -2,13 +2,14 @@ import React, { useState, useContext } from "react";
 import "../../Css/CssTable.css";
 import { GetTheAppContext } from "../../Context/AppContext";
 import { ModalDoctor } from "./modal";
-import { MyModalDelete } from "./modalDelete";
+import { ModalDelete } from "../../ModalDelete/ModalDelete";
 import { MdDeleteForever } from "react-icons/md";
 import { BsPersonFillAdd, BsPencilFill } from "react-icons/bs";
 import { LuFilterX } from "react-icons/lu";
 import { Button } from "react-bootstrap";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
+import { statusDeleted } from "./HTTPstatus";
 
 export function TablaGeneric({ title, data }) {
   const [showModalDelete, setShowModalDelete] = useState(false);
@@ -29,6 +30,14 @@ export function TablaGeneric({ title, data }) {
     setActionButtonModal,
     setDoctorId,
     setDataUserDoctor,
+
+    doctorId,
+    deleteDoctorFunction,
+    getAllDoctorsDataFunction,
+    setGetDataAllDoctors,
+    setTextAlert,
+    handleShowFloatAlter,
+    dataUserDoctor,
   } = useContext(GetTheAppContext);
 
   const displayedFields = [
@@ -65,6 +74,21 @@ export function TablaGeneric({ title, data }) {
 
     return nameMatches && emailMatches && specializationMatches;
   });
+
+  const funtionToDeleted = async () => {
+    setActionButtonModal("Eliminar");
+    const response = await deleteDoctorFunction(doctorId);
+    if (response.status === statusDeleted) {
+      await getAllDoctorsDataFunction(setGetDataAllDoctors);
+      handleCloseModalDelete();
+      setTextAlert(`Se eliminó al médico ${dataUserDoctor.name}`);
+      handleShowFloatAlter();
+    } else {
+      handleCloseModalDelete();
+      setTextAlert("Error al eliminar el médico");
+      handleShowFloatAlter();
+    }
+  };
 
   return (
     <div className="container mt-5">
@@ -229,9 +253,11 @@ export function TablaGeneric({ title, data }) {
             </table>
           </div>
           <ModalDoctor show={showModal} handleClose={handleCloseModal} />
-          <MyModalDelete
+          <ModalDelete
             show={showModalDelete}
             handleClose={handleCloseModalDelete}
+            funtionToDeleted={funtionToDeleted}
+            messageToDelete={"¿Está seguro que desea eliminar este médico?"}
           />
         </div>
       </div>

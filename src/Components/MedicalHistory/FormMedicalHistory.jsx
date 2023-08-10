@@ -6,6 +6,7 @@ import { TypeaheadPatient } from "./Typeahead/TypeaheadPatient";
 import { statusCreated, statusUpdatedHistiry } from "../../Context/HTTPStatus";
 
 export const FormMedicalHistory = ({ isGetData = {} }) => {
+  
   const [isSelectedFamilyMedicalHistory, setIsSelectedFamilyMedicalHistory] =
     useState(false);
 
@@ -90,7 +91,9 @@ export const FormMedicalHistory = ({ isGetData = {} }) => {
     if (actionButtonModal === "Agregar") {
       handleCloseModal();
       const response = await createHistoryFunction(data);
+
       if (response.status === statusCreated) {
+
         await allHistoryFromApiFunction(setAllMedicalHistoryData);
         getMessageForAlert();
         handleShowFloatAlter();
@@ -98,23 +101,25 @@ export const FormMedicalHistory = ({ isGetData = {} }) => {
         setTextAlert("Error al agregar la prescripción médica");
         handleShowFloatAlter();
       }
+
     } else if (actionButtonModal === "Editar") {
+
       data.patientId = dataMedicalHistory.patient.id;
-      console.log(data);
       handleCloseModal();
       const response = await updateHistoryFunction(data, dataMedicalHistory.id);
-      console.log(response);
+
       if (response.status === statusUpdatedHistiry) {
+
         await allHistoryFromApiFunction(setAllMedicalHistoryData);
         getMessageForAlert();
         handleShowFloatAlter();
+
       } else {
+
         setTextAlert("Error al editar la prescripción médica");
         handleShowFloatAlter();
       }
     }
-
-    console.log(data);
   };
 
   return (

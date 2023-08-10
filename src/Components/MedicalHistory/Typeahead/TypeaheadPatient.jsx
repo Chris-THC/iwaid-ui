@@ -33,13 +33,8 @@ export const TypeaheadPatient = ({ infoPatients }) => {
   };
 
   const valueTypeHeadPatient = () => {
-    if (Object.keys(dataMedicalHistory).length === 0) {
-      return "";
-    } else if (dataMedicalHistory.patient && dataMedicalHistory.patient.name) {
-      return dataMedicalHistory.patient.name;
-    } else {
-      return "";
-    }
+    const patientName = dataMedicalHistory?.patient?.name || "";
+    return Object.keys(dataMedicalHistory).length !== 0 ? patientName : "";
   };
 
   return (

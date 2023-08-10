@@ -154,7 +154,7 @@ export const AppContext = (props) => {
         updateDateFunction,
         deleteDateFunction,
         Error, 
-        setError
+        setError,
 
         dataGetAllMedicine,
         setAllDataMedicine,

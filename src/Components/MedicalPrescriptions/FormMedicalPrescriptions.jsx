@@ -4,8 +4,7 @@ import { useForm } from "react-hook-form";
 import { GetTheAppContext } from "../../Context/AppContext";
 import { TypeaheadPatient } from "./PrescriptionTypeahead/TypeaheadPatient";
 import { TypeaheadDoctor } from "./PrescriptionTypeahead/TypeaheadDoctor";
-import { statusCreated } from "./HTTPstatus";
-import { statusDeleted } from "./HTTPstatus";
+import { statusCreated, statusUpdated} from "../HTTP/HTTPStatus";
 
 export const FormMedicalPrescriptions = ({ isGetData = {} }) => {
   const currentDate = new Date().toISOString().split("T")[0];
@@ -76,7 +75,7 @@ export const FormMedicalPrescriptions = ({ isGetData = {} }) => {
       dataPrescription.id
     );
 
-    if (updatePrescription.status === statusDeleted) {
+    if (updatePrescription.status === statusUpdated) {
       getMessageForAlert();
 
       await allPrescriptionsFromApiFunction(setAllPrescriptionsData);

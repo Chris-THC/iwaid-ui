@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { Modal, Button } from "react-bootstrap";
 import { GetTheAppContext } from "../../Context/AppContext";
+import { statusDeleted } from "../HTTP/HTTPStatus";
 
 export const MyModalDelete = ({ show, handleClose }) => {
   const {
@@ -35,7 +36,7 @@ export const MyModalDelete = ({ show, handleClose }) => {
             setActionButtonModal("Eliminar");
             const response = await deletePatientFunction(patientId);
 
-            if (response.status === 200) {
+            if (response.status === statusDeleted) {
               await getAllPatientDataFunction(setGetAllPatientsData);
               handleButtonClick();
               setTextAlert(`Se eliminó al paciente ${dataUserPatient.name}`);

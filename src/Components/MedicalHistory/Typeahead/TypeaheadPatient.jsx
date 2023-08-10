@@ -40,7 +40,6 @@ export const TypeaheadPatient = ({ infoPatients }) => {
   return (
     <div>
       <Typeahead
-        id="pacientes-autocompletado"
         labelKey="name"
         minLength={3}
         defaultInputValue={valueTypeHeadPatient()}

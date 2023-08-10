@@ -2,10 +2,10 @@ import { useContext } from "react";
 import { Table } from "./Table";
 import { GetTheAppContext } from "../../Context/AppContext";
 export const CrudMedicalHistory = () => {
-  const { allMedicalHistoryData } = useContext(GetTheAppContext);
+  const { MedicalHistoryData } = useContext(GetTheAppContext);
   return (
     <div>
-      <Table dataTable={allMedicalHistoryData || []} />
+      <Table dataTable={MedicalHistoryData || []} />
     </div>
   );
 };

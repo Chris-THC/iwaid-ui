@@ -144,7 +144,7 @@ export const FormMedicalHistory = ({ isGetData = {} }) => {
                 {...register("height", {
                   required: true,
                   pattern: /^[0-9]+$/,
-                  minLength: 3,
+                  minLength: 2,
                   maxLength: 3,
                 })}
                 defaultValue={isGetData.height}
@@ -157,7 +157,7 @@ export const FormMedicalHistory = ({ isGetData = {} }) => {
               )}
               {errors.height?.type === "minLength" && (
                 <span className="text-danger">
-                  Debe tener al menos 3 dígitos
+                  Debe tener al menos 2 dígitos
                 </span>
               )}
               {errors.height?.type === "maxLength" && (

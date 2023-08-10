@@ -37,7 +37,7 @@ import {
 export const GetTheAppContext = createContext();
 
 export const AppContext = (props) => {
-  const [allMedicalHistoryData, setAllMedicalHistoryData] = useState([]);
+  const [MedicalHistoryData, setAllMedicalHistoryData] = useState([]);
 
   const [getDataFromTable, setGetDataFromTable] = useState({});
   const [actionButtonModal, setActionButtonModal] = useState("Agregar");
@@ -165,7 +165,7 @@ export const AppContext = (props) => {
         patientHistoryId,
         setPatientHistoryId,
 
-        allMedicalHistoryData,
+        MedicalHistoryData,
         setAllMedicalHistoryData,
         createHistoryFunction,
         allHistoryFromApiFunction,

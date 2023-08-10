@@ -1,4 +1,11 @@
 import { createContext, useState, useEffect } from "react";
+import{
+  getAllDateDataFunction,
+  createDateFunction,
+  deleteDateFunction,
+  updateDateFunction
+ 
+ } from "./DateData";
 import {
   createPatientFunction,
   deletePatientFunction,
@@ -56,11 +63,23 @@ export const AppContext = (props) => {
   const [showModal, setShowModal] = useState(false);
   const [nameMedicine, setNameMedicine] = useState(false);
 
+  const [dataGetAllDate, setAllDataDate] = useState([]);
+  const [dataUserDate, setDataUserDate] = useState({});
+  const [idDate, setIdDate] = useState("");
+  const [Error, setError] = useState(false);
+
+  const [doctorSelected, setDoctorSelected] = useState([]);
+
+  const [patientSelected, setPatientSelected] = useState([]);
   useEffect(() => {
     getAllDoctorsDataFunction(setGetDataAllDoctors);
     getAllPatientDataFunction(setGetAllPatientsData);
+
+    getAllDateDataFunction(setAllDataDate);
+
     getAllMedicineDataFunction(setAllDataMedicine);
     allPrescriptionsFromApiFunction(setAllPrescriptionsData);
+
   }, []);
 
   const handleShowModal = () => {
@@ -120,6 +139,23 @@ export const AppContext = (props) => {
         setGetAllPatientsData,
         patientId,
         setPatientId,
+        dataGetAllDate, 
+        getAllDateDataFunction,
+        setAllDataDate,
+        dataUserDate,
+        setDataUserDate,
+        idDate, 
+        setIdDate,
+        doctorSelected, 
+        setDoctorSelected,
+        patientSelected, 
+        setPatientSelected,
+        createDateFunction,
+        updateDateFunction,
+        deleteDateFunction,
+        Error, 
+        setError,
+
         dataGetAllMedicine,
         setAllDataMedicine,
         getAllMedicineDataFunction,

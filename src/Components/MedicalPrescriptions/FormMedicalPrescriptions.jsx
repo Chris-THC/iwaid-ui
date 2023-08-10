@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { GetTheAppContext } from "../../Context/AppContext";
 import { TypeaheadPatient } from "./PrescriptionTypeahead/TypeaheadPatient";
 import { TypeaheadDoctor } from "./PrescriptionTypeahead/TypeaheadDoctor";
-import { statusCreated, statusUpdated} from "../HTTP/HTTPStatus";
+import { statusCreated, statusUpdated } from "../HttpStatus/HTTPStatusCode";
 
 export const FormMedicalPrescriptions = ({ isGetData = {} }) => {
   const currentDate = new Date().toISOString().split("T")[0];

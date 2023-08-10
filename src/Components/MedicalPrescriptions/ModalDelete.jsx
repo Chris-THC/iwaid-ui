@@ -1,7 +1,6 @@
 import { useContext } from "react";
 import { Modal, Button } from "react-bootstrap";
 import { GetTheAppContext } from "../../Context/AppContext";
-import { statusDeleted } from "../HTTP/HTTPStatus";
 
 
 export const ModalDelete = ({ show, handleClose }) => {
@@ -38,7 +37,7 @@ export const ModalDelete = ({ show, handleClose }) => {
               dataPrescription.id
             );
 
-            if (response.status === statusDeleted) {
+            if (response.status === 200) {
               await allPrescriptionsFromApiFunction(setAllPrescriptionsData);
               handleButtonClick();
               setTextAlert(

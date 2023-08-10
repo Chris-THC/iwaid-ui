@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import React, { useContext } from "react";
 import { GetTheAppContext } from "../../Context/AppContext";
 
-import { statusCreated, statusUpdated } from "../HTTP/HTTPStatus";
+import { statusCreated, statusUpdated } from "../HttpStatus/HTTPStatusCode";
 
 export const FormDoctor = ({ isGetData = {} }) => {
   const {

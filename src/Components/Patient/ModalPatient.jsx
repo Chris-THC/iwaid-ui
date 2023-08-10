@@ -16,7 +16,7 @@ export const ModalPatient = ({ show, handleClose }) => {
         setGetDataFromTable({});
       }}
     >
-      <Modal.Header closeButton>
+      <Modal.Header >
         <Modal.Title>{actionButtonModal} paciente</Modal.Title>
       </Modal.Header>
       <Modal.Body>

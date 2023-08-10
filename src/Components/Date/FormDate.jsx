@@ -3,8 +3,7 @@ import { Modal, Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { GetTheAppContext } from "../../Context/AppContext";
 import { Typeahead } from "react-bootstrap-typeahead";
-import { statusCreated, statusUpdated, statusBeforeToday
-} from "./HTTPStatus.js";
+import { statusCreated, statusOk } from "../HttpStatus/HTTPStatusCode";
 
 export const FormCitas = ({ isGetData = {} }) => {
 
@@ -106,9 +105,6 @@ export const FormCitas = ({ isGetData = {} }) => {
         await getAllDateDataFunction(setAllDataDate);
         setTextAlert("Cita agregada exitosamente");
         handleShowFloatAlter();  
-      }else if(responseCreateDate.status === statusBeforeToday){
-        setTextAlert("No es posible crear una cita antes de la fecha y hora actual");
-        handleShowFloatAlter();
       }else {
         setError(true);
         setTextAlert("Error al agregar una cita");
@@ -122,7 +118,7 @@ export const FormCitas = ({ isGetData = {} }) => {
         idDate
       );
       try{
-      if (responseUpdateDate.status === statusUpdated ) {
+      if (responseUpdateDate.status === statusOk ) {
         setTextAlert(`Cita actualizada exitosamente`);
         await getAllDateDataFunction(setAllDataDate);
         handleShowFloatAlter();

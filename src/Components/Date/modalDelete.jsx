@@ -2,7 +2,6 @@
 import { Modal, Button } from "react-bootstrap";
 import { GetTheAppContext } from "../../Context/AppContext";
 import { useContext } from "react";
-import { statusDeleted } from "./HTTPStatus.js";
 
 export const ModalDelete = ({ show, handleClose }) => {
   const {
@@ -38,7 +37,7 @@ export const ModalDelete = ({ show, handleClose }) => {
             const responseModalDelete = await deleteDateFunction(
               idDate
             );
-            if (responseModalDelete.status === statusDeleted) {
+            if (responseModalDelete.status === 200) {
               await getAllDateDataFunction(setAllDataDate);
               setTextAlert(`Se eliminó la cita`);
               handleButtonClick();

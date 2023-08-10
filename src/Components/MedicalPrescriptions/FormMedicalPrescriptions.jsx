@@ -8,7 +8,6 @@ import { statusCreated } from "./HTTPstatus";
 import { statusDeleted } from "./HTTPstatus";
 
 export const FormMedicalPrescriptions = ({ isGetData = {} }) => {
-  const currentDate = new Date().toISOString().split("T")[0];
 
   const {
     handleCloseModal,

@@ -21,9 +21,7 @@ export const Menu = () => {
   };
 
   return (
-    <nav 
-    id="iwa-menu"
-        className="navbar navbar-expand-lg">
+    <nav className="navbar navbar-light shadow p-3 mb-2  " style={{ backgroundColor: "#e3f2fd" }}>
       <div className="container-fluid">
         <p className="navbar-brand mr-2 ">
         <Link 
@@ -46,14 +44,15 @@ export const Menu = () => {
           className={`collapse navbar-collapse ${isMenuOpen ? "show" : ""}`}
           id="navbarSupportedContent"
         >
-          <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+          <ul className="navbar-nav me-auto mb-2 mb-lg-0"> 
             
             <li
               className={`nav-item dropdown ${isDataMasterOpen ? "show" : ""}`}
+              style={{ backgroundColor: "#e3f2fd" }}
             >
               <p
-              
-                className="nav-link dropdown-toggle"
+              style={{ backgroundColor: "#e3f2fd" }}
+                className="nav-link dropdown-toggle " 
                 id="Dropdown"
                 role="button"
                 onClick={toggleDataMaster}
@@ -63,6 +62,7 @@ export const Menu = () => {
               </p>
               <ul
                 className={`dropdown-menu ${isDataMasterOpen ? "show" : ""}`}
+                style={{ backgroundColor: "#e3f2fd" }}
                 aria-labelledby="datosMaestrosDropdown"
                 id="iwa-menu"
               >
@@ -105,6 +105,7 @@ export const Menu = () => {
             <li className={`nav-item dropdown ${isDatesOpen ? "show" : ""}`}>
               <p
                 className="nav-link dropdown-toggle"
+                style={{ backgroundColor: "#e3f2fd" }}
                 id="Dropdown"
                 role="button"
                 onClick={toggleDates}
@@ -114,6 +115,7 @@ export const Menu = () => {
               </p>
               <ul
                 className={`dropdown-menu ${isDatesOpen ? "show" : ""}`}
+                style={{ backgroundColor: "#e3f2fd" }}
                 aria-labelledby="citasDropdown"
                 id="iwa-menu"
               >

@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { Modal } from "react-bootstrap";
-import { GetTheAppContext } from "../../Context/AppContext";
+import { GetTheAppContext } from "../Context/AppContext";
 
 export const FloatingAlert = ({ show, message, onClose }) => {
   const { actionButtonModal } = useContext(GetTheAppContext);
@@ -38,7 +38,7 @@ export const FloatingAlert = ({ show, message, onClose }) => {
   const AlertMessage = () => {
     return (
       <>
-        <Modal.Body className={`text-center ${getAlertStyle()}`}>
+        <Modal.Body className={`text-center ${getAlertStyle()} rounded`}>
           <div className={`alert ${getAlertClass} text-muted`} role="alert">
             {message}
           </div>

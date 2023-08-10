@@ -256,7 +256,7 @@ export const FormPatient = ({ isGetData = {} }) => {
 
         <div>
           <Modal.Footer>
-          <button type="button" class="btn btn-secondary  text-light"
+          <button type="button" class="btn btn btn-light  btn-outline-danger"
           onClick={handleCloseModal}
           data-bs-dismiss="modal">Cancelar</button>
             <Button

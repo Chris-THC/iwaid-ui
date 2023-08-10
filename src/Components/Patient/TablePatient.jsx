@@ -6,7 +6,7 @@ import { MdDeleteForever } from "react-icons/md";
 import { BsPersonFillAdd, BsPencilFill } from "react-icons/bs";
 import { LuFilterX } from "react-icons/lu";
 import { Button } from "react-bootstrap";
-import { MyModalDelete } from "./MyModalDelete";
+import { ModalDelete } from "../../ModalDelete/ModalDelete";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 
@@ -28,6 +28,14 @@ export const TablePatient = ({ dataTable }) => {
     setActionButtonModal,
     setDataUserPatient,
     setPatientId,
+
+    deletePatientFunction,
+    getAllPatientDataFunction,
+    setGetAllPatientsData,
+    patientId,
+    setTextAlert,
+    dataUserPatient,
+    handleShowFloatAlter,
   } = useContext(GetTheAppContext);
 
   const displayedFields = ["name", "gender", "city", "dateOfBirth", "rfc"];
@@ -71,6 +79,22 @@ export const TablePatient = ({ dataTable }) => {
       nameMatches && genderMatches && cityMatches && dateMatches && rfcMatches
     );
   });
+
+  const funtionToDeleted = async () => {
+    setActionButtonModal("Eliminar");
+    const response = await deletePatientFunction(patientId);
+
+    if (response.status === 200) {
+      await getAllPatientDataFunction(setGetAllPatientsData);
+      handleCloseModalDelete();
+      setTextAlert(`Se eliminó al paciente ${dataUserPatient.name}`);
+      handleShowFloatAlter();
+    } else {
+      handleCloseModalDelete();
+      setTextAlert("Error al eliminar el paciente");
+      handleShowFloatAlter();
+    }
+  };
 
   return (
     <div className="container mt-5">
@@ -308,9 +332,13 @@ export const TablePatient = ({ dataTable }) => {
             </table>
           </div>
           <ModalPatient show={showModal} handleClose={handleCloseModal} />
-          <MyModalDelete
+          <ModalDelete
             show={showModalDelete}
             handleClose={handleCloseModalDelete}
+            funtionToDeleted={funtionToDeleted}
+            messageToDelete={
+              "¿Está seguro de que desea eliminar este paciente?"
+            }
           />
         </div>
       </div>

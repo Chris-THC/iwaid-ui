@@ -25,24 +25,24 @@ export const Menu = () => {
       <div className="container-fluid">
         <p className="navbar-brand mr-2 ">
         <Link 
-        className="nav-link active" aria-current="page" to="/">
+            className="nav-link active" aria-current="page" to="/">
           <IMG/>
           
-          </Link>
+        </Link>
         </p>
         <button
-          className={`navbar-toggler ${isMenuOpen ? "" : "collapsed"}`}
-          type="button"
-          onClick={toggleMenu}
-          aria-controls="navbarSupportedContent"
-          aria-expanded={isMenuOpen}
-          aria-label="Toggle navigation"
+            className={`navbar-toggler ${isMenuOpen ? "" : "collapsed"}`}
+            type="button"
+            onClick={toggleMenu}
+            aria-controls="navbarSupportedContent"
+            aria-expanded={isMenuOpen}
+            aria-label="Toggle navigation"
         >
           <span className="navbar-toggler-icon" />
         </button>
         <div
-          className={`collapse navbar-collapse ${isMenuOpen ? "show" : ""}`}
-          id="navbarSupportedContent"
+            className={`collapse navbar-collapse ${isMenuOpen ? "show" : ""}`}
+            id="navbarSupportedContent"
         >
           <ul className="navbar-nav me-auto mb-2 mb-lg-0"> 
             
@@ -51,7 +51,7 @@ export const Menu = () => {
               style={{ backgroundColor: "#e3f2fd" }}
             >
               <p
-              style={{ backgroundColor: "#e3f2fd" }}
+                style={{ backgroundColor: "#e3f2fd" }}
                 className="nav-link dropdown-toggle " 
                 id="Dropdown"
                 role="button"
@@ -79,7 +79,7 @@ export const Menu = () => {
                 </li>
                 <li>
                   <Link
-                  id="Dropdown"
+                    id="Dropdown"
                     className="dropdown-item"
                     to="/patient"
                     onClick={toggleDataMaster}
@@ -90,7 +90,7 @@ export const Menu = () => {
                 </li>
                 <li>
                   <Link
-                  id="Dropdown"
+                    id="Dropdown"
                     className="dropdown-item"
                     to="/medicine"
                     onClick={toggleDataMaster}

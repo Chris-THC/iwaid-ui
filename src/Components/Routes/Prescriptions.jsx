@@ -1,10 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
+import { MedicalPrescriptions } from "../MedicalPrescriptions/MedicalPrescriptions";
+import { FloatingAlert } from "../../Alert/FloatingAlert";
+import { GetTheAppContext } from "../../Context/AppContext";
 
 export const Prescriptions = () => {
-  // TODO: The implementation will be worked on the following ticket IWAID-14
+  const { showFloatingAlert, handleCloseFloatAlert, textAlert } =
+    useContext(GetTheAppContext);
+
   return (
     <div>
-      <h1>Prescripción Médica</h1>
+      <MedicalPrescriptions />
+      <FloatingAlert
+        show={showFloatingAlert}
+        message={`¡${textAlert}!`}
+        onClose={handleCloseFloatAlert}
+      />
     </div>
   );
 };

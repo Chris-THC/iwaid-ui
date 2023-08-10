@@ -6,8 +6,9 @@ export const getAllPatientDataFunction = async (setGetAllPatients) => {
   try {
     const response = await axios.get(patientURL);
     setGetAllPatients(response.data);
+    return response;
   } catch (error) {
-    console.error("Error al enviar la solicitud:", error);
+    return error;
   }
 };
 
@@ -16,7 +17,6 @@ export const createPatientFunction = async (arrayData) => {
     const response = await axios.post(patientURL, arrayData);
     return response;
   } catch (error) {
-    console.error("Error al enviar la solicitud:", error);
     return error;
   }
 };
@@ -27,7 +27,6 @@ export const updatePatientFunction = async (arrayData, idPatient) => {
     const response = await axios.patch(urlUpdate, arrayData);
     return response;
   } catch (error) {
-    console.error("Error al enviar la solicitud:", error);
     return error;
   }
 };
@@ -38,7 +37,6 @@ export const deletePatientFunction = async (idPatient) => {
     const response = await axios.delete(urlDelete);
     return response;
   } catch (error) {
-    console.error("Error al enviar la solicitud:", error);
     return error;
   }
 };

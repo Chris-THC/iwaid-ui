@@ -1,11 +1,21 @@
-import React from "react";
+import React, {useContext} from "react";
+import DateList from "../Date/DateList";
+import { GetTheAppContext } from "../../Context/AppContext";
+import { FloatingAlert } from "../../Alert/FloatingAlert";
 
 export const Calendar = () => {
-  // TODO: The implementation will be worked on the following ticket IWAID-9
+  const { showFloatingAlert, textAlert, handleCloseFloatAlert } =
+    useContext(GetTheAppContext);
 
   return (
     <div>
-      <h1>Citas</h1>
+      <DateList/>
+      <FloatingAlert
+        show={showFloatingAlert}
+        message={`¡${textAlert}!`}
+        onClose={handleCloseFloatAlert}
+      />
     </div>
   );
 };
+  

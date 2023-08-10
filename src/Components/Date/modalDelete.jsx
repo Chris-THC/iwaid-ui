@@ -1,18 +1,18 @@
+
 import { Modal, Button } from "react-bootstrap";
 import { GetTheAppContext } from "../../Context/AppContext";
 import { useContext } from "react";
-import { statusDeleted } from "./HTTPstatus.js";
+import { statusDeleted } from "./HTTPStatus.js";
 
-export const MyModalDelete = ({ show, handleClose }) => {
+export const ModalDelete = ({ show, handleClose }) => {
   const {
-    doctorId,
-    deleteDoctorFunction,
-    getAllDoctorsDataFunction,
-    setGetDataAllDoctors,
+    idDate,
+    deleteDateFunction,
+    getAllDateDataFunction,
+    setAllDataDate,
     setTextAlert,
     handleShowFloatAlter,
     setActionButtonModal,
-    dataUserDoctor,
   } = useContext(GetTheAppContext);
 
   const handleButtonClick = () => {
@@ -25,7 +25,7 @@ export const MyModalDelete = ({ show, handleClose }) => {
         <Modal.Title>Confirmar eliminación</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <p>¿Está seguro que desea eliminar este médico?</p>
+        <p>¿Está seguro de que desea eliminar esta cita?</p>
       </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={handleClose}>
@@ -35,15 +35,17 @@ export const MyModalDelete = ({ show, handleClose }) => {
           variant="danger"
           onClick={async () => {
             setActionButtonModal("Eliminar");
-            const response = await deleteDoctorFunction(doctorId);
-            if (response.status === statusDeleted) {
-              await getAllDoctorsDataFunction(setGetDataAllDoctors);
+            const responseModalDelete = await deleteDateFunction(
+              idDate
+            );
+            if (responseModalDelete.status === statusDeleted) {
+              await getAllDateDataFunction(setAllDataDate);
+              setTextAlert(`Se eliminó la cita`);
               handleButtonClick();
-              setTextAlert(`Se eliminó al médico ${dataUserDoctor.name}`);
               handleShowFloatAlter();
             } else {
               handleButtonClick();
-              setTextAlert("Error al eliminar el médico");
+              setTextAlert(`Error al eliminar la cita`);
               handleShowFloatAlter();
             }
           }}
@@ -54,3 +56,4 @@ export const MyModalDelete = ({ show, handleClose }) => {
     </Modal>
   );
 };
+

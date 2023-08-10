@@ -13,17 +13,17 @@ export const getAllDoctorsDataFunction = async (setGetAllDoctors) => {
       params: dataGetAll,
     });
     setGetAllDoctors(response.data);
+    return response;
   } catch (error) {
-    console.error("Error al enviar la solicitud:", error);
+    return error;
   }
 };
 
 export const createDoctorFunction = async (arrayData) => {
   try {
     const response = await axios.post(doctorURL, arrayData);
-    return response.data;
+    return response;
   } catch (error) {
-    console.error("Error al enviar la solicitud:", error);
     return error;
   }
 };
@@ -31,26 +31,19 @@ export const createDoctorFunction = async (arrayData) => {
 export const updateDoctorFunction = async (arrayData, idDoctor) => {
   const urlUpdate = `${doctorURL}${idDoctor}`;
   try {
-    console.log(urlUpdate);
     const response = await axios.patch(urlUpdate, arrayData);
-    console.log(response.data);
-    return response.data;
+    return response;
   } catch (error) {
-    console.error("Error al enviar la solicitud:", error);
     return error;
   }
 };
 
 export const deleteDoctorFunction = async (idDoctor) => {
-  console.log(idDoctor);
   try {
     const urlDelete = `${doctorURL}${idDoctor}`;
-    console.log(urlDelete);
     const response = await axios.delete(urlDelete);
-    console.log(response.data);
-    return response.data;
+    return response;
   } catch (error) {
-    console.error("Error al enviar la solicitud:", error);
     return error;
   }
 };

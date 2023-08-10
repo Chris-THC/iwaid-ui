@@ -10,7 +10,7 @@ const handleRequest = async (urlClient, methodClient, dataClient = null) => {
     });
     return response;
   } catch (error) {
-    throw error;
+    return error;
   }
 };
 

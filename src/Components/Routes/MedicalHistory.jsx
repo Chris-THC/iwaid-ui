@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { CrudMedicalHistory } from "../MedicalHistory/CrudMedicalHistory";
-import { FloatingAlert } from "../MedicalHistory/FloatingAlert";
+import { FloatingAlert } from "../../Alert/FloatingAlert";
 import { GetTheAppContext } from "../../Context/AppContext";
 
 export const MedicalHistory = () => {

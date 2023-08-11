@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { IMG } from "./Initation/Initation";
+import { showLogoImage } from "./Initation/Initation";
 import '../Css/imagesCss.css';
 
 export const Menu = () => {
@@ -26,7 +26,7 @@ export const Menu = () => {
         <p className="navbar-brand mr-2 ">
         <Link 
             className="nav-link active"  aria-current="page" to="/">
-          <IMG/>
+          {showLogoImage()}
         </Link>
         </p>
         <button

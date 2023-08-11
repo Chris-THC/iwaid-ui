@@ -1,15 +1,15 @@
 import React from "react";
-import logoImage from "../Images/IWALogo.jpg";
+import logoImage from "../Images/iwa_logo.jpg";
 import '../../Css/imagesCss.css';
-import consultorio from "../Images/consultorioimg.jpg";
-import exterior from "../Images/consultorio-exterior.jpg";
-import camilla from "../Images/c.jpg";
-import doc from "../Images/doctor2.jpg"
-import LogoFooter from"../Images/IWALogoFooter.jpg";
+import appointment from "../Images/appointment.jpg";
+import outside from "../Images/outside.jpg";
+import stretcher from "../Images/stretcher.jpg";
+import doctor from "../Images/doctor.jpg"
+import LogoFooter from"../Images/iwa_logo_footer.jpg";
 import { Carousel } from 'react-bootstrap';
 import { FaInstagram,FaWhatsapp, FaFacebook  } from 'react-icons/fa';
 
-export function IMG(){
+export function showLogoImage(){
     return(
         <div>
         <img className="imgLogo"  src={logoImage} alt="Imagen Logo"  width="150" height="50" />
@@ -17,33 +17,33 @@ export function IMG(){
     );
 }
 
-export const CarouselComponent = () => {
+export const showCarouselComponent = () => {
   return (
     <>
         <Carousel>
       <Carousel.Item>
-        <img className="d-block w-100 h-100" src={camilla} alt="img-strecher" />
+        <img className="d-block w-100 h-100" src={stretcher} alt="img-strecher" />
         <Carousel.Caption>
           <h5>Manos de Cuidado</h5>
           <p>Donde la experiencia y la empatía se unen. Confía en nuestros profesionales para un tratamiento excepcional.</p>
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item>
-        <img className="d-block w-100 h-100" src={exterior} alt="img-out" />
+        <img className="d-block w-100 h-100" src={outside} alt="img-out" />
         <Carousel.Caption>
           <h5>Refugio de Bienestar</h5>
           <p>Tu espacio de relajación y cuidado personal. Aquí encuentras un equilibrio entre cuerpo y mente.</p>
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item>
-        <img className="d-block w-100 h-100" src={doc} alt="img-doctor" />
+        <img className="d-block w-100 h-100" src={doctor} alt="img-doctor" />
         <Carousel.Caption>
           <h5>Caminos hacia la Salud</h5>
           <p>En nuestros consultorios, trazamos juntos la ruta hacia una vida más saludable. Tu salud, nuestra prioridad.</p>
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item>
-        <img className="d-block w-100 h-100" src={consultorio} alt="img-consult" />
+        <img className="d-block w-100 h-100" src={appointment} alt="img-appoint" />
         <Carousel.Caption>
           <h5>Salud Brillante</h5>
           <p>Nuestro compromiso es tu bienestar. Cuidamos de ti para que vivas cada día al máximo.</p>
@@ -54,12 +54,12 @@ export const CarouselComponent = () => {
   );
 };
 
-export const Footer =()=>{
+export const showFooter =()=>{
   return(
     <div class="card-group ">
   <div class="card " style={{ backgroundColor: "#374955" }}>
     <div class="card-body ">
-    <img className="imgLogo"  src={LogoFooter} alt="Imagen Logo" />
+    <img className="imgLogo"  src={LogoFooter} alt="Imagen Logo" width="150" height="50" />
       <h5 class="card-title " id= "text-footer">Valores que nos definen</h5>
       <p class="card-text "  id= "text-footer">En IWA Consultorio Médico, creemos en la dedicación incansable hacia tu bienestar. Nuestros valores de empatía, excelencia y compromiso nos impulsan a brindarte una atención médica integral que te mereces. Tu salud es nuestra prioridad y juntos construimos un camino hacia el bienestar duradero.</p>   
       <p class="card-text fw-bold"  id= "text-footer"><FaFacebook/> <FaWhatsapp/> <FaInstagram/> </p>

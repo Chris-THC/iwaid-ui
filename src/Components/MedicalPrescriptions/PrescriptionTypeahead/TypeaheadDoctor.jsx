@@ -36,7 +36,7 @@ export const TypeaheadDoctor = ({ infoDoctors }) => {
 
   const getTypeHeadDoctorValue = () => {
     if (Object.keys(dataPrescription).length === 0) {
-      return "XDXDX";
+      return "";
     } else if (dataPrescription.doctor && dataPrescription.doctor.name) {
       setPrescriptionDoctorId(prescriptionDoctorId);
       return dataPrescription.doctor.name;

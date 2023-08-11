@@ -21,7 +21,7 @@ export const Menu = () => {
   };
   
   return (
-    <nav className="navbar navbar-light shadow p-3 mb-2  " style={{ backgroundColor: "#e3f2fd" }}>
+    <nav className="navbar navbar-expand-lg navbar-light shadow p-3 mb-2  " style={{ backgroundColor: "#e3f2fd" }}>
       <div className="container-fluid">
         <p className="navbar-brand mr-2 ">
         <Link 

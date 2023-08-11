@@ -3,11 +3,7 @@ import { Modal, Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { GetTheAppContext } from "../../Context/AppContext";
 import { Typeahead } from "react-bootstrap-typeahead";
-import {
-  statusCreated,
-  statusUpdated,
-  statusBeforeToday,
-} from "./HTTPStatus.js";
+import { statusCreated, statusOk } from "../HttpStatus/HTTPStatusCode";
 
 export const FormCitas = ({ isGetData = {} }) => {
   const currentDate = new Date().toISOString().split("T")[0];
@@ -110,29 +106,19 @@ export const FormCitas = ({ isGetData = {} }) => {
       if (responseCreateDate.status === statusCreated) {
         await getAllDateDataFunction(setAllDataDate);
         setTextAlert("Cita agregada exitosamente");
-        handleShowFloatAlter();
-      } else if (responseCreateDate.status === statusBeforeToday) {
-        setTextAlert(
-          "No es posible crear una cita antes de la fecha y hora actual"
-        );
-        handleShowFloatAlter();
-      } else {
+        handleShowFloatAlter();  
+      }else {
         setError(true);
         setTextAlert("Error al agregar una cita");
         handleShowFloatAlter();
       }
     } else if (actionButtonModal === "Editar") {
       handleCloseModal();
-
       const responseUpdateDate = await updateDateFunction(data, idDate);
       try {
-        if (responseUpdateDate.status === statusUpdated) {
+        if (responseUpdateDate.status === statusOk) {
           setTextAlert(`Cita actualizada exitosamente`);
           await getAllDateDataFunction(setAllDataDate);
-          handleShowFloatAlter();
-        } else if (responseUpdateDate.status === 500) {
-          setError(true);
-          setTextAlert("No es posible editar una cita");
           handleShowFloatAlter();
         } else {
           setError(true);
@@ -141,6 +127,7 @@ export const FormCitas = ({ isGetData = {} }) => {
         }
       } catch (error) {
         console.error("Error al enviar la solicitud:", error);
+
       }
     }
   };
@@ -248,6 +235,9 @@ export const FormCitas = ({ isGetData = {} }) => {
 
         <div>
           <Modal.Footer>
+            <button type="button" class="btn btn btn-light  btn-outline-danger"
+          onClick={handleCloseModal}
+          data-bs-dismiss="modal">Cancelar</button>
             <Button
               type="submit"
               onClick={() => {

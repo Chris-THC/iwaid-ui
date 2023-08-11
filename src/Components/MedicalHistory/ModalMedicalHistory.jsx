@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import { Modal } from "react-bootstrap";
-import { FormPatient } from "./FormPatient";
+import { FormMedicalHistory } from "./FormMedicalHistory";
 import { GetTheAppContext } from "../../Context/AppContext";
 
-export const ModalPatient = ({ show, handleClose }) => {
+export const ModalMedicalHistory = ({ show, handleClose }) => {
   const { setGetDataFromTable, getDataFromTable, actionButtonModal } =
     useContext(GetTheAppContext);
 
@@ -16,11 +16,11 @@ export const ModalPatient = ({ show, handleClose }) => {
         setGetDataFromTable({});
       }}
     >
-      <Modal.Header >
-        <Modal.Title>{actionButtonModal} paciente</Modal.Title>
+      <Modal.Header closeButton>
+        <Modal.Title>{actionButtonModal} historial médico</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <FormPatient isGetData={getDataFromTable} />
+        <FormMedicalHistory isGetData={getDataFromTable} />
       </Modal.Body>
     </Modal>
   );

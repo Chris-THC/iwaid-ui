@@ -140,6 +140,16 @@ export const Menu = () => {
                     Prescripciones Médicas
                   </Link>
                 </li>
+                <li>
+                  <Link
+                    className="dropdown-item"
+                    to="/medical-history"
+                    onClick={toggleDates}
+                    aria-expanded={isDatesOpen}
+                  >
+                    Historial Médico
+                  </Link>
+                </li>
               </ul>
             </li>
           </ul>

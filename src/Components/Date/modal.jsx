@@ -16,7 +16,7 @@ export const ModalMedicine = ({ show, handleClose }) => {
         setGetDataFromTable({});
       }}
     >
-      <Modal.Header closeButton>
+      <Modal.Header >
         <Modal.Title>{actionButtonModal} cita médica</Modal.Title>
       </Modal.Header>
       <Modal.Body>

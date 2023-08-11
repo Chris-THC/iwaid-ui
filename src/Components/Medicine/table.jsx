@@ -2,13 +2,14 @@ import React, { useState, useContext } from "react";
 import "../../Css/CssTable.css";
 import { GetTheAppContext } from "../../Context/AppContext";
 import { ModalMedicine } from "./modal";
-import { MyModalDelete } from "./modalDelete";
+import { ModalDelete } from "../../ModalDelete/ModalDelete";
 import { BsPersonFillAdd, BsPencilFill } from "react-icons/bs";
 import { MdDeleteForever } from "react-icons/md";
 import { LuFilterX } from "react-icons/lu";
 import { Button } from "react-bootstrap";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
+import { statusOk } from "../HttpStatus/HTTPStatusCode";
 
 export function TablaGeneric({ title, data }) {
   const [showModalDelete, setShowModalDelete] = useState(false);
@@ -30,6 +31,13 @@ export function TablaGeneric({ title, data }) {
     setIdMedicine,
     setDataUserMedicine,
     setNameMedicine,
+    idMedicine,
+    deleteMedicineFunction,
+    getAllMedicineDataFunction,
+    setAllDataMedicine,
+    setTextAlert,
+    handleShowFloatAlter,
+    nameMedicine,
   } = useContext(GetTheAppContext);
 
   const displayedFields = [
@@ -68,6 +76,24 @@ export function TablaGeneric({ title, data }) {
 
     return nameMatches && doseMatches && dosageFormsMatches;
   });
+
+  const funtionToDeleted = async () => {
+    setActionButtonModal("Eliminar");
+    const responseModalDelete = await deleteMedicineFunction(idMedicine);
+
+    if (responseModalDelete.status === statusOk) {
+      await getAllMedicineDataFunction(setAllDataMedicine);
+      setTextAlert(`Se eliminó ${nameMedicine}`);
+      handleCloseModalDelete();
+      handleShowFloatAlter();
+    } else {
+      handleCloseModalDelete();
+      setTextAlert(`Error al eliminar medicamento`);
+
+      handleShowFloatAlter();
+    }
+  };
+
   return (
     <div className="container mt-5">
       <div className=" card mt-4 row">
@@ -250,9 +276,13 @@ export function TablaGeneric({ title, data }) {
             </table>
           </div>
           <ModalMedicine show={showModal} handleClose={handleCloseModal} />
-          <MyModalDelete
+          <ModalDelete
             show={showModalDelete}
             handleClose={handleCloseModalDelete}
+            funtionToDeleted={funtionToDeleted}
+            messageToDelete={
+              "¿Está seguro de que desea eliminar este medicamento?"
+            }
           />
         </div>
       </div>

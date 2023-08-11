@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { Modal, Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { GetTheAppContext } from "../../Context/AppContext";
+import { statusCreated, statusOk  } from "../HttpStatus/HTTPStatusCode";
 export const FormPatient = ({ isGetData = {} }) => {
   const currentDate = new Date().toISOString().split("T")[0];
 
@@ -30,7 +31,7 @@ export const FormPatient = ({ isGetData = {} }) => {
       handleCloseModal();
       const CreatePatientResponse = await createPatientFunction(data);
 
-      if (CreatePatientResponse.status === 201) {
+      if (CreatePatientResponse.status === statusCreated) {
         await getAllPatientDataFunction(setGetAllPatientsData);
         setTextAlert("Paciente agregado exitosamente");
         handleShowFloatAlter();
@@ -45,7 +46,7 @@ export const FormPatient = ({ isGetData = {} }) => {
         patientId
       );
 
-      if (updatePatientResponse.status === 201) {
+      if (updatePatientResponse.status === statusOk ) {
         setTextAlert(`Paciente ${data.name} actualizado exitosamente`);
         await getAllPatientDataFunction(setGetAllPatientsData);
         handleShowFloatAlter();
@@ -256,6 +257,9 @@ export const FormPatient = ({ isGetData = {} }) => {
 
         <div>
           <Modal.Footer>
+          <button type="button" class="btn btn btn-light  btn-outline-danger"
+          onClick={handleCloseModal}
+          data-bs-dismiss="modal">Cancelar</button>
             <Button
               type="submit"
               onClick={() => {

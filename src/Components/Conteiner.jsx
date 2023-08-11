@@ -7,6 +7,7 @@ import { Patient } from "./Routes/Patient";
 import { Medicine } from "./Routes/Medicine";
 import { Calendar } from "./Routes/Calendar";
 import { Prescriptions } from "./Routes/Prescriptions";
+import { MedicalHistory } from "./Routes/MedicalHistory";
 
 export function Conteiner() {
   const NotFound = () => {
@@ -29,6 +30,7 @@ export function Conteiner() {
         <Route path="/medicine" element={<Medicine />} />
         <Route path="/calendar" element={<Calendar />} />
         <Route path="/prescriptions" element={<Prescriptions />} />
+        <Route path="/medical-history" element={<MedicalHistory />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>

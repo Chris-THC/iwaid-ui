@@ -2,8 +2,7 @@ import { Modal, Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import React, { useContext } from "react";
 import { GetTheAppContext } from "../../Context/AppContext";
-
-import { statusCreated, statusUpdated } from "./HTTPStatus.js";
+import { statusCreated, statusOk  } from "../HttpStatus/HTTPStatusCode";
 
 export const FormMedicine = ({ isGetData = {} }) => {
   const {
@@ -46,7 +45,7 @@ export const FormMedicine = ({ isGetData = {} }) => {
         idMedicine
       );
 
-      if (responseUpdateMedicine.status === statusUpdated) {
+      if (responseUpdateMedicine.status === statusOk ) {
         setTextAlert(`Medicamento  ${data.name} actualizado exitosamente`);
         await getAllMedicineDataFunction(setAllDataMedicine);
         handleShowFloatAlter();
@@ -198,6 +197,9 @@ export const FormMedicine = ({ isGetData = {} }) => {
 
         <div>
           <Modal.Footer>
+          <button type="button" class="btn btn btn-light  btn-outline-danger"
+          onClick={handleCloseModal}
+          data-bs-dismiss="modal">Cancelar</button>
             <Button
               type="submit"
               onClick={() => {

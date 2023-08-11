@@ -19,15 +19,14 @@ export const Menu = () => {
   const toggleDates = () => {
     setIsDatesOpen((prevIsCitasOpen) => !prevIsCitasOpen);
   };
-
+  
   return (
     <nav className="navbar navbar-light shadow p-3 mb-2  " style={{ backgroundColor: "#e3f2fd" }}>
       <div className="container-fluid">
         <p className="navbar-brand mr-2 ">
         <Link 
-            className="nav-link active" aria-current="page" to="/">
+            className="nav-link active"  aria-current="page" to="/">
           <IMG/>
-          
         </Link>
         </p>
         <button

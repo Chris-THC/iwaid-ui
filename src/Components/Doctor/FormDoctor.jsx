@@ -197,6 +197,9 @@ export const FormDoctor = ({ isGetData = {} }) => {
 
         <div>
           <Modal.Footer>
+            <button type="button" class="btn btn btn-light  btn-outline-danger"
+          onClick={handleCloseModal}
+          data-bs-dismiss="modal">Cancelar</button>
             <Button
               type="submit"
               onClick={() => {

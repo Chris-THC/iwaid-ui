@@ -7,7 +7,6 @@ import { TypeaheadDoctor } from "./PrescriptionTypeahead/TypeaheadDoctor";
 import { statusCreated, statusOk } from "../HttpStatus/HTTPStatusCode";
 
 export const FormMedicalPrescriptions = ({ isGetData = {} }) => {
-
   const {
     handleCloseModal,
     actionButtonModal,
@@ -60,6 +59,7 @@ export const FormMedicalPrescriptions = ({ isGetData = {} }) => {
   };
 
   const updatePrescription = async (data) => {
+    data.doctorId = dataPrescription.id;
     handleCloseModal();
     if (data.patientId === "" || data.doctorId === "") {
       data.patientId = dataPrescription.patientId;
@@ -152,6 +152,14 @@ export const FormMedicalPrescriptions = ({ isGetData = {} }) => {
 
         <div>
           <Modal.Footer>
+            <button
+              type="button"
+              class="btn btn btn-light  btn-outline-danger"
+              onClick={handleCloseModal}
+              data-bs-dismiss="modal"
+            >
+              Cancelar
+            </button>
             <Button
               type="submit"
               onClick={() => {

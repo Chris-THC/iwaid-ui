@@ -34,9 +34,18 @@ import {
   updatePrescriptionFunction,
 } from "./Prescription.js";
 
+import {
+  allHistoryFromApiFunction,
+  createHistoryFunction,
+  updateHistoryFunction,
+  deleteHistoryFunction,
+} from "./History.js";
+
 export const GetTheAppContext = createContext();
 
 export const AppContext = (props) => {
+  const [MedicalHistoryData, setAllMedicalHistoryData] = useState([]);
+
   const [getDataFromTable, setGetDataFromTable] = useState({});
   const [actionButtonModal, setActionButtonModal] = useState("Agregar");
   const [textAlert, setTextAlert] = useState("");
@@ -60,6 +69,9 @@ export const AppContext = (props) => {
   const [idMedicine, setIdMedicine] = useState("");
   const [dataMedicineFromTable, setDataMedicineFromTable] = useState({});
 
+  const [dataMedicalHistory, setDataMedicalHistory] = useState({});
+  const [patientHistoryId, setPatientHistoryId] = useState("");
+
   const [showModal, setShowModal] = useState(false);
   const [nameMedicine, setNameMedicine] = useState(false);
 
@@ -79,6 +91,7 @@ export const AppContext = (props) => {
 
     getAllMedicineDataFunction(setAllDataMedicine);
     allPrescriptionsFromApiFunction(setAllPrescriptionsData);
+    allHistoryFromApiFunction(setAllMedicalHistoryData);
 
   }, []);
 
@@ -181,6 +194,19 @@ export const AppContext = (props) => {
         setDataPrescription,
         deletePrescriptionFunction,
         updatePrescriptionFunction,
+
+        dataMedicalHistory,
+        setDataMedicalHistory,
+
+        patientHistoryId,
+        setPatientHistoryId,
+
+        MedicalHistoryData,
+        setAllMedicalHistoryData,
+        createHistoryFunction,
+        allHistoryFromApiFunction,
+        updateHistoryFunction,
+        deleteHistoryFunction,
       }}
     >
       {props.children}

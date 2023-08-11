@@ -1,0 +1,116 @@
+#btnTables {
+  font-size: 12px;
+  height: 40px;
+  width: 50px;
+}
+
+#btnAdd {
+  font-size: 12px;
+  height: 40px;
+  width: 45px;
+}
+
+#iconoClear {
+  background-color: #0d6efd;
+  border: solid 1px #bcbcbc;
+  width: 60px;
+}
+
+.custom-table td,
+.custom-table th {
+  padding: 0;
+}
+.size-colTable {
+  width: "20%";
+}
+
+@media (max-width: 1000px) {
+  #lableMedicalHistory {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 900px) {
+  #titleMedicalHistoriId {
+    display: none;
+  }
+  td {
+    font-size: 12px;
+  }
+  #lableMedicalHistory {
+    font-size: 12px;
+  }
+
+  #inputSearchPatient {
+    font-size: 12px;
+  }
+  #selectSearchPatient {
+    font-size: 12px;
+  }
+
+  #input-table {
+    font-size: 12px;
+  }
+
+  .custom-label {
+    display: none;
+  }
+  .col-sm-4 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+  .col-sm-2 {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+}
+
+@media (max-width: 750px) {
+  #lableMedicalHistory {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 550px) {
+  #lableMedicalHistory {
+    font-size: 16px;
+  }
+  .custom-table {
+    font-size: 9px;
+  }
+
+  .btn-sm {
+    font-size: 9px;
+  }
+
+  #idTextPatient {
+    font-size: 9px;
+  }
+
+  #btnAdd {
+    font-size: 12px;
+  }
+
+  #inputSearchPatient {
+    font-size: 9px;
+  }
+
+  #selectSearchPatient {
+    font-size: 9px;
+  }
+  #input-table input {
+    font-size: 9px;
+    height: auto;
+  }
+
+  #input-table select {
+    font-size: 9px;
+    height: auto;
+  }
+
+  #btnTables {
+    font-size: 9px;
+    height: 30px;
+    width: 35px;
+  }
+}

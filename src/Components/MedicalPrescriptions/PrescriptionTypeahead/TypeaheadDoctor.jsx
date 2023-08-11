@@ -5,7 +5,7 @@ import "react-bootstrap-typeahead/css/Typeahead.css";
 import { GetTheAppContext } from "../../../Context/AppContext";
 
 export const TypeaheadDoctor = ({ infoDoctors }) => {
-  const { setPrescriptionDoctorId, dataPrescription } =
+  const { setPrescriptionDoctorId, dataPrescription, prescriptionDoctorId } =
     useContext(GetTheAppContext);
 
   const [selectedDoctor, setSelectedDoctor] = useState([]);
@@ -36,8 +36,9 @@ export const TypeaheadDoctor = ({ infoDoctors }) => {
 
   const getTypeHeadDoctorValue = () => {
     if (Object.keys(dataPrescription).length === 0) {
-      return "";
+      return "XDXDX";
     } else if (dataPrescription.doctor && dataPrescription.doctor.name) {
+      setPrescriptionDoctorId(prescriptionDoctorId);
       return dataPrescription.doctor.name;
     }
   };

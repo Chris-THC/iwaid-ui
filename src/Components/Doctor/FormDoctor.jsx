@@ -2,8 +2,7 @@ import { Modal, Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import React, { useContext } from "react";
 import { GetTheAppContext } from "../../Context/AppContext";
-
-import { statusCreated, statusUpdated } from "./HTTPstatus.js";
+import { statusCreated, statusOk } from "../HttpStatus/HTTPStatusCode";
 
 export const FormDoctor = ({ isGetData = {} }) => {
   const {
@@ -50,7 +49,7 @@ export const FormDoctor = ({ isGetData = {} }) => {
     } else if (actionButtonModal === "Editar") {
       handleCloseModal();
       const response = await updateDoctorFunction(data, doctorId);
-      if (response.status === statusUpdated) {
+      if (response.status === statusOk ) {
         getMessageForAlert(data);
         await getAllDoctorsDataFunction(setGetDataAllDoctors);
         handleShowFloatAlter();

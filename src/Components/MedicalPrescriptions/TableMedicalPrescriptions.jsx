@@ -9,7 +9,7 @@ import { Button } from "react-bootstrap";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import { ModalDelete } from "../../ModalDelete/ModalDelete";
-import { statusDeleted } from "./HTTPstatus";
+import { statusOk } from "../HttpStatus/HTTPStatusCode";
 
 export const TableMedicalPrescriptions = ({ dataTable }) => {
   const [showModalDelete, setShowModalDelete] = useState(false);
@@ -58,7 +58,7 @@ export const TableMedicalPrescriptions = ({ dataTable }) => {
     setActionButtonModal("Eliminar");
     const response = await deletePrescriptionFunction(dataPrescription.id);
 
-    if (response.status === statusDeleted) {
+    if (response.status === statusOk) {
       await allPrescriptionsFromApiFunction(setAllPrescriptionsData);
       handleCloseModalDelete();
       setTextAlert(

@@ -9,7 +9,7 @@ import { LuFilterX } from "react-icons/lu";
 import { Button } from "react-bootstrap";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
-import { statusDeleted } from "./HTTPstatus";
+import { statusOk } from "../HttpStatus/HTTPStatusCode";
 
 export function TablaGeneric({ title, data }) {
   const [showModalDelete, setShowModalDelete] = useState(false);
@@ -78,7 +78,7 @@ export function TablaGeneric({ title, data }) {
   const funtionToDeleted = async () => {
     setActionButtonModal("Eliminar");
     const response = await deleteDoctorFunction(doctorId);
-    if (response.status === statusDeleted) {
+    if (response.status === statusOk) {
       await getAllDoctorsDataFunction(setGetDataAllDoctors);
       handleCloseModalDelete();
       setTextAlert(`Se eliminó al médico ${dataUserDoctor.name}`);

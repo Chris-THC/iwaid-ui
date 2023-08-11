@@ -9,7 +9,7 @@ import { LuFilterX } from "react-icons/lu";
 import { Button } from "react-bootstrap";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
-import { statusDeleted } from "./HTTPStatus";
+import { statusOk } from "../HttpStatus/HTTPStatusCode";
 
 export function TablaGeneric({ title, data }) {
   const [showModalDelete, setShowModalDelete] = useState(false);
@@ -69,7 +69,7 @@ export function TablaGeneric({ title, data }) {
   const funtionToDeleted = async () => {
     setActionButtonModal("Eliminar");
     const responseModalDelete = await deleteDateFunction(idDate);
-    if (responseModalDelete.status === statusDeleted) {
+    if (responseModalDelete.status === statusOk) {
       await getAllDateDataFunction(setAllDataDate);
       setTextAlert(`Se eliminó la cita`);
       handleCloseModalDelete();

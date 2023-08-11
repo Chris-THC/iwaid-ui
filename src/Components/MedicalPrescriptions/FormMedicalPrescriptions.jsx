@@ -8,8 +8,6 @@ import { statusCreated } from "./HTTPstatus";
 import { statusDeleted } from "./HTTPstatus";
 
 export const FormMedicalPrescriptions = ({ isGetData = {} }) => {
-  const currentDate = new Date().toISOString().split("T")[0];
-
   const {
     handleCloseModal,
     actionButtonModal,
@@ -62,10 +60,11 @@ export const FormMedicalPrescriptions = ({ isGetData = {} }) => {
   };
 
   const updatePrescription = async (data) => {
+    data.doctorId = dataPrescription.id;
     handleCloseModal();
     if (data.patientId === "" || data.doctorId === "") {
       data.patientId = dataPrescription.patientId;
-      data.doctorId = dataPrescription.doctorId;
+      data.doctorId = prescriptionDoctorId;
     } else {
       data.patientId = prescriptionPatientId;
       data.doctorId = prescriptionDoctorId;
@@ -122,9 +121,6 @@ export const FormMedicalPrescriptions = ({ isGetData = {} }) => {
                 autoComplete="off"
                 {...register("registerDate", {
                   required: true,
-                  max: {
-                    value: currentDate,
-                  },
                 })}
               />
               {errors.date && (
@@ -157,6 +153,14 @@ export const FormMedicalPrescriptions = ({ isGetData = {} }) => {
 
         <div>
           <Modal.Footer>
+            <button
+              type="button"
+              class="btn btn btn-light  btn-outline-danger"
+              onClick={handleCloseModal}
+              data-bs-dismiss="modal"
+            >
+              Cancelar
+            </button>
             <Button
               type="submit"
               onClick={() => {

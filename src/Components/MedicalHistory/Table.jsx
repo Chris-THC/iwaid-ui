@@ -9,7 +9,8 @@ import { LuFilterX } from "react-icons/lu";
 import { Button } from "react-bootstrap";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
-import { ModalDelete } from "./ModalDelete";
+import { ModalDelete } from "../../ModalDelete/ModalDelete";
+import { statusDeleted } from "../../Context/HTTPStatus";
 
 export const Table = ({ dataTable }) => {
   const [showModalDelete, setShowModalDelete] = useState(false);
@@ -33,6 +34,13 @@ export const Table = ({ dataTable }) => {
     setGetDataFromTable,
     setActionButtonModal,
     setDataMedicalHistory,
+
+    setTextAlert,
+    handleShowFloatAlter,
+    deleteHistoryFunction,
+    dataMedicalHistory,
+    setAllMedicalHistoryData,
+    allHistoryFromApiFunction,
   } = useContext(GetTheAppContext);
 
   const [searchByName, setSearchByName] = useState("");
@@ -42,6 +50,24 @@ export const Table = ({ dataTable }) => {
     setShowFamilyHistory(false);
     setShowPathologicalHistory(false);
     setShowNonPathologicalHistory(false);
+  };
+
+  const funtionToDeleted = async () => {
+    setActionButtonModal("Eliminar");
+    const response = await deleteHistoryFunction(dataMedicalHistory.id);
+
+    if (response.status === statusDeleted) {
+      await allHistoryFromApiFunction(setAllMedicalHistoryData);
+      closeModalDeleteFuntion();
+      setTextAlert(
+        `Se eliminó el historial médico del paciente ${dataMedicalHistory.patient.name}`
+      );
+      handleShowFloatAlter();
+    } else {
+      closeModalDeleteFuntion();
+      setTextAlert("Error al eliminar la preinscripción");
+      handleShowFloatAlter();
+    }
   };
 
   return (
@@ -325,6 +351,10 @@ export const Table = ({ dataTable }) => {
           <ModalDelete
             show={showModalDelete}
             handleClose={closeModalDeleteFuntion}
+            funtionToDeleted={funtionToDeleted}
+            messageToDelete={
+              "¿Está seguro de que desea eliminar este historial?"
+            }
           />
         </div>
       </div>

@@ -60,7 +60,6 @@ export const FormMedicalPrescriptions = ({ isGetData = {} }) => {
   };
 
   const updatePrescription = async (data) => {
-    data.doctorId = dataPrescription.id;
     handleCloseModal();
     if (data.patientId === "" || data.doctorId === "") {
       data.patientId = dataPrescription.patientId;
@@ -69,6 +68,8 @@ export const FormMedicalPrescriptions = ({ isGetData = {} }) => {
       data.patientId = prescriptionPatientId;
       data.doctorId = prescriptionDoctorId;
     }
+
+    console.log(data);
 
     const updatePrescription = await updatePrescriptionFunction(
       data,

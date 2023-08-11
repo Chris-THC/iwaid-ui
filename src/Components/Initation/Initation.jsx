@@ -1,5 +1,5 @@
 import React from "react";
-import logoImage from "../Images/IWALogo (2).jpg";
+import logoImage from "../Images/IWALogo.jpg";
 import '../../Css/imagesCss.css';
 import consultorio from "../Images/consultorioimg.jpg";
 import exterior from "../Images/consultorio-exterior.jpg";
@@ -57,31 +57,37 @@ export const CarouselComponent = () => {
 export const Footer =()=>{
   return(
     <div class="card-group ">
-  <div class="card " style={{ backgroundColor: "#15ACF7" }}>
+  <div class="card " style={{ backgroundColor: "#374955" }}>
     <div class="card-body ">
     <img className="imgLogo"  src={LogoFooter} alt="Imagen Logo" />
-      <h5 class="card-title text-light">Valores que nos Definen</h5>
-      <p class="card-text text-light">En IWA Consultorio Médico, creemos en la dedicación incansable hacia tu bienestar. Nuestros valores de empatía, excelencia y compromiso nos impulsan a brindarte una atención médica integral que te mereces. Tu salud es nuestra prioridad y juntos construimos un camino hacia el bienestar duradero.</p>   
-      <p class="card-text text-light"><FaFacebook/> <FaWhatsapp/> <FaInstagram/> </p>
+      <h5 class="card-title " id= "text-footer">Valores que nos definen</h5>
+      <p class="card-text "  id= "text-footer">En IWA Consultorio Médico, creemos en la dedicación incansable hacia tu bienestar. Nuestros valores de empatía, excelencia y compromiso nos impulsan a brindarte una atención médica integral que te mereces. Tu salud es nuestra prioridad y juntos construimos un camino hacia el bienestar duradero.</p>   
+      <p class="card-text fw-bold"  id= "text-footer"><FaFacebook/> <FaWhatsapp/> <FaInstagram/> </p>
     </div>
   </div>
-  <div class="card " style={{ backgroundColor: "#15ACF7" }}>
+  <div class="card " style={{ backgroundColor: "#374955" }}>
     <div class="card-body">
-      <h5 class="card-title text-light">Nuestros Servicios</h5>
-      <p class="card-text text-light">Consulta Médica Integral: Un enfoque holístico para abordar tus necesidades médicas en su totalidad.
-Chequeos Preventivos: Identificamos posibles problemas de salud antes de que se conviertan en preocupaciones mayores.
-Cuidado de Enfermedades Crónicas: Manejamos con experiencia condiciones médicas a largo plazo para mejorar tu calidad de vida.
-Vacunación y Prevención: Protegemos tu salud a través de programas de vacunación personalizados.
-Atención en Urgencias Menores: Estamos aquí para brindarte atención en situaciones que requieren atención médica inmediata.
-Asesoría Nutricional: Guiamos hacia hábitos alimenticios que fomentan un estilo de vida saludable.</p>
+      <h5 class="card-title fw-bold" id= "text-footer">Nuestros Servicios</h5>
+      <p class="card-text  " id= "text-footer">Consulta Médica Integral: Un enfoque holístico para abordar tus necesidades médicas en su totalidad.
+      </p>
+      <p class="card-text  " id= "text-footer"> Chequeos Preventivos: Identificamos posibles problemas de salud antes de que se conviertan en preocupaciones mayores.
+      </p>
+      <p class="card-text  " id= "text-footer">Cuidado de Enfermedades Crónicas: Manejamos con experiencia condiciones médicas a largo plazo para mejorar tu calidad de vida.
+      </p>
+      <p class="card-text  " id= "text-footer">Vacunación y Prevención: Protegemos tu salud a través de programas de vacunación personalizados.
+      </p>
+      <p class="card-text  " id= "text-footer">Atención en Urgencias Menores: Estamos aquí para brindarte atención en situaciones que requieren atención médica inmediata.
+      </p>
+      <p class="card-text  " id= "text-footer">Asesoría Nutricional: Guiamos hacia hábitos alimenticios que fomentan un estilo de vida saludable.
+      </p>
     </div>
   </div>
-  <div class="card  "style={{ backgroundColor: "#15ACF7" }}>
+  <div class="card  "style={{ backgroundColor: "#374955" }}>
     <div class="card-body">
-      <h5 class="card-title text-light">Visítanos</h5>
-      <p class="card-text text-light ">IWA Consultorio Médico
-Dirección: Calle Ficticia #123, Colonia Imaginaria, Orizaba, Veracruz, México.
-Teléfono: (123) 456-7890</p>
+      <h5 class="card-title fw-bold" id= "text-footer">Visítanos</h5>
+      <p class="card-text  fw-bold " id= "text-footer">IWA Consultorio Médico</p>
+      <p class="card-text  fw-bold" id= "text-footer">Dirección: Calle Ficticia #123, Colonia Imaginaria, Orizaba, Veracruz, México.</p>
+      <p class="card-text  fw-bold" id= "text-footer">Teléfono: (123) 456-7890</p>
     </div>
   </div>
 </div>

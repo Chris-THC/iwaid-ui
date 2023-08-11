@@ -26,3 +26,11 @@ body{
   }
 }
 
+#text-footer{
+  color: 
+  #F1F1E6;  
+}
+
+.card {
+  --bs-card-border-radius: 0;
+}

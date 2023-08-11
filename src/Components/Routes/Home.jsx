@@ -1,10 +1,11 @@
 import React from "react";
+import { showCarouselComponent, showFooter } from "../Initation/Initation";
 
 export const Home = () => {
-  //TODO Request a tiket to work here 
   return (
     <div>
-      <h1>Inicio</h1>
+       {showCarouselComponent()}
+       {showFooter()}
     </div>
   );
 };

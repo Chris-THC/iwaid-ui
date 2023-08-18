@@ -3,7 +3,7 @@ import { Modal, Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { GetTheAppContext } from "../../Context/AppContext";
 import { TypeaheadPatient } from "./Typeahead/TypeaheadPatient";
-import { statusCreated, statusUpdatedHistiry } from "../../Context/HTTPStatus";
+import { statusCreated, statusUpdatedHistiry } from "../../Layouts/HttpStatus/HTTPStatusCode";
 
 export const FormMedicalHistory = ({ isGetData = {} }) => {
   

@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { ModalMedicalHistory } from "./ModalMedicalHistory";
+import { ModalGeneric } from "../../Layouts/Modal/modal";
 import { GetTheAppContext } from "../../Context/AppContext";
 import "../../Css/TableMedicalHistory.css";
 import { MdDeleteForever } from "react-icons/md";
@@ -9,8 +9,8 @@ import { LuFilterX } from "react-icons/lu";
 import { Button } from "react-bootstrap";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
-import { ModalDelete } from "../../ModalDelete/ModalDelete";
-import { statusDeleted } from "../../Context/HTTPStatus";
+import { ModalDelete } from "../../Layouts/Modal/ModalDelete";
+import { statusDeleted } from "../../Layouts/HttpStatus/HTTPStatusCode";
 
 export const Table = ({ dataTable }) => {
   const [showModalDelete, setShowModalDelete] = useState(false);
@@ -343,10 +343,7 @@ export const Table = ({ dataTable }) => {
               </tbody>
             </table>
           </div>
-          <ModalMedicalHistory
-            show={showModal}
-            handleClose={handleCloseModal}
-          />
+          <ModalGeneric show={showModal} handleClose={handleCloseModal} title={"historial médico"} type={"medicalHistory"} />
 
           <ModalDelete
             show={showModalDelete}

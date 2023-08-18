@@ -1,14 +1,20 @@
 body{
   width: 100%;
 }
-
+.return :hover{
+  background-color: "#fd7e14" !important;
+}
 .imgInicio{
   display: block !important;
   width: 100% !important;
 }
+.imgLogo{
+  width: 50px !important; /* Ajusta el ancho de la imagen según tus necesidades */
+  height: 50px !important; /* Ajusta la altura de la imagen según tus necesidades */
+  border-radius: 50%;
+}
 
 .slide{
-  width: 100%;
   height: 100%;
 }
 
@@ -17,13 +23,15 @@ body{
 }
 
 .slide> img{
-  width: 100%;
+ 
 }
 
 @media (max-width: 768px) {
   .imgI {
     max-height: 100px; 
   }
+
+
 }
 
 #text-footer{
@@ -33,4 +41,117 @@ body{
 
 .card {
   --bs-card-border-radius: 0;
+}
+.sidebar {
+  width: 20%; /* Ancho de la sidebar */
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%; /* Altura de la sidebar */
+  background-color: #171D45;
+  color: #fff;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.sidebar-header img {
+  width: auto;
+  height: auto;
+  margin-bottom: 30px;
+  margin-left: 5px;
+}
+
+.sidebar-menu {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar-menu > li {
+  margin-bottom: 20px;
+}
+
+.sidebar-menu a {
+  color: #fff;
+  text-decoration: none;
+  display: block;
+  padding: px 0;
+}
+
+.sub-menu {
+  display: none;
+  margin-top: 5px;
+  padding-left: 20px;
+  list-style-type: none;
+}
+
+.sub-menu.open {
+  display: block;
+
+}
+
+/* Otros estilos del sidebar */
+
+.sub-menu a {
+  color: #bbb;
+  text-decoration: none;
+  display: block;
+  padding: 5px 0;
+}
+
+.sub-menu a:hover {
+  color: #fff;
+}
+
+/* Añade estilos adicionales según sea necesario */
+
+.menu-item {
+  cursor: pointer;
+}
+
+.menu-item a {
+  margin-bottom: 5px;
+}
+
+.menu-title {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  font-size: 18px; /* Ajusta el valor según tus necesidades */    
+}
+
+.toggle-icon i {
+  transition: transform 0.3s ease-in-out;
+    margin-left: 1rem; /* Ajusta el valor según tus necesidades */
+}
+
+.sub-menu {
+  display: none;
+  flex-direction: column;
+  gap: 8px;
+  padding-left: 20px;
+}
+
+.sub-menu.open {
+  display: flex;
+  padding-left: 40px;
+}
+
+/* Estilo de iconos */
+
+.menu-title a {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.menu-title a i {
+  margin-left: 0px; 
+  margin-right: 10px; 
+}
+
+
+
+.navbar{
+height: 100vh;
+width: 20%;
 }

@@ -1,7 +1,7 @@
 import React, {useContext} from "react";
-import DateList from "../Date/DateList";
+import DateList from "../../Components/Date/DateList";
 import { GetTheAppContext } from "../../Context/AppContext";
-import { FloatingAlert } from "../../Alert/FloatingAlert";
+import { FloatingAlert } from "../../Layouts/Alert/FloatingAlert";
 
 export const Calendar = () => {
   const { showFloatingAlert, textAlert, handleCloseFloatAlert } =

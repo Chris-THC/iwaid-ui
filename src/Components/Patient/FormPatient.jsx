@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { Modal, Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { GetTheAppContext } from "../../Context/AppContext";
-import { statusCreated, statusOk  } from "../HttpStatus/HTTPStatusCode";
+import { statusCreated, statusOk  } from "../../Layouts/HttpStatus/HTTPStatusCode";
 export const FormPatient = ({ isGetData = {} }) => {
   const currentDate = new Date().toISOString().split("T")[0];
 

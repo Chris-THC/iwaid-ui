@@ -144,6 +144,7 @@ export const AppContext = (props) => {
         doctorId,
         setDoctorId,
         deleteDoctorFunction,
+        
         createPatientFunction,
         deletePatientFunction,
         getAllPatientDataFunction,
@@ -152,6 +153,7 @@ export const AppContext = (props) => {
         setGetAllPatientsData,
         patientId,
         setPatientId,
+
         dataGetAllDate, 
         getAllDateDataFunction,
         setAllDataDate,

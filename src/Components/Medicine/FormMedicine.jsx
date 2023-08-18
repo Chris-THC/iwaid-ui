@@ -2,7 +2,7 @@ import { Modal, Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import React, { useContext } from "react";
 import { GetTheAppContext } from "../../Context/AppContext";
-import { statusCreated, statusOk  } from "../HttpStatus/HTTPStatusCode";
+import { statusCreated, statusOk  } from "../../Layouts/HttpStatus/HTTPStatusCode";
 
 export const FormMedicine = ({ isGetData = {} }) => {
   const {

@@ -1,12 +1,12 @@
 import React, { useState, useContext } from "react";
-import { ModalPatient } from "./ModalPatient";
+import { ModalGeneric } from "../../Layouts/Modal/modal";
 import { GetTheAppContext } from "../../Context/AppContext";
 import "../../Css/TablePatients.css";
 import { MdDeleteForever } from "react-icons/md";
 import { BsPersonFillAdd, BsPencilFill } from "react-icons/bs";
 import { LuFilterX } from "react-icons/lu";
 import { Button } from "react-bootstrap";
-import { ModalDelete } from "../../ModalDelete/ModalDelete";
+import { ModalDelete } from "../../Layouts/Modal/ModalDelete";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 
@@ -331,7 +331,7 @@ export const TablePatient = ({ dataTable }) => {
               </tbody>
             </table>
           </div>
-          <ModalPatient show={showModal} handleClose={handleCloseModal} />
+          <ModalGeneric show={showModal} handleClose={handleCloseModal} title={"Paciente"} type={"patient"} />
           <ModalDelete
             show={showModalDelete}
             handleClose={handleCloseModalDelete}

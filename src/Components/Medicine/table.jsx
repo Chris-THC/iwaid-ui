@@ -1,15 +1,13 @@
 import React, { useState, useContext } from "react";
 import "../../Css/CssTable.css";
 import { GetTheAppContext } from "../../Context/AppContext";
-import { ModalMedicine } from "./modal";
-import { ModalDelete } from "../../ModalDelete/ModalDelete";
-import { BsPersonFillAdd, BsPencilFill } from "react-icons/bs";
-import { MdDeleteForever } from "react-icons/md";
-import { LuFilterX } from "react-icons/lu";
+import { ModalGeneric } from "../../Layouts/Modal/modal";
+import { ModalDelete } from "../../Layouts/Modal/ModalDelete";
+import Icon from "../../Assets/Icons/icons"
 import { Button } from "react-bootstrap";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
-import { statusOk } from "../HttpStatus/HTTPStatusCode";
+import { statusOk } from "../../Layouts/HttpStatus/HTTPStatusCode";
 
 export function TablaGeneric({ title, data }) {
   const [showModalDelete, setShowModalDelete] = useState(false);
@@ -38,6 +36,7 @@ export function TablaGeneric({ title, data }) {
     setTextAlert,
     handleShowFloatAlter,
     nameMedicine,
+    setGetDataFromTable
   } = useContext(GetTheAppContext);
 
   const displayedFields = [
@@ -95,48 +94,16 @@ export function TablaGeneric({ title, data }) {
   };
 
   return (
-    <div className="container mt-5">
-      <div className=" card mt-4 row">
-        <div className="card-header d-flex">
-          <div className="col-8">
-            <h2 className="card-title">{title}</h2>
-          </div>
-
-          <div className="col-4 d-flex flex-row-reverse ">
-            <OverlayTrigger
-              placement="top"
-              overlay={<Tooltip id="tooltip-clear">Agregar</Tooltip>}
-            >
-              <Button
-                id="btnAdd"
-                className="ms-2 me-2 mb-1"
-                variant="primary"
-                onClick={() => {
-                  handleShowModal();
-                  setActionButtonModal("Agregar");
-                }}
-              >
-                <BsPersonFillAdd size={18} />
-              </Button>
-            </OverlayTrigger>
-          </div>
-        </div>
-
-        <div className="card-header col-md-12">
-          <div className=" card-body table-responsive">
-            <div className="container mb-3">
-              <div className="col-md-4 mb-3">
-                <h4>Buscar</h4>
-              </div>
-              <div className="row">
-                <div className="container mb-4">
-                  <div className="row">
-                    <div className="col mb-4">
-                      <label>Nombre</label>
+    <>
+    <div class="me-2" style={{marginLeft: "20%", color: "#161F61"}} >
+            <h2 className="card-title mt-3 ms-5 fw-bold" >{title}</h2>
+            <div className="row mt-3 " style={{color: "#161F61" }}>
+                     <div className="col mb-4 ms-5 fw-semibold" >
+                       <label  >Nombre</label>
                       <input
                         autoComplete="off"
                         type="text"
-                        className="form-control"
+                        className="form-control shadow"
                         value={searchName}
                         onChange={(e) => {
                           setSearchName(e.target.value);
@@ -147,11 +114,11 @@ export function TablaGeneric({ title, data }) {
                         pattern="^[A-Za-z\s]+$"
                       />
                     </div>
-                    <div className="col mb-4">
+                    <div className="col mb-4 fw-semibold">
                       <label>Dosis</label>
                       <input
                         type="number"
-                        className="form-control"
+                        className="form-control shadow"
                         value={searchDoses}
                         onChange={(e) => {
                           setSearchDoses(e.target.value);
@@ -161,10 +128,10 @@ export function TablaGeneric({ title, data }) {
                         placeholder="Buscar por dosis..."
                       />
                     </div>
-                    <div className="col mb-4">
+                    <div className="col mb-4 fw-semibold">
                       <label>Presentación</label>
                       <select
-                        className="form-select"
+                        className="form-select shadow"
                         value={searchDosageFormsMatches}
                         onChange={(e) => {
                           SetSearchDosageFormsMatches(e.target.value);
@@ -187,36 +154,57 @@ export function TablaGeneric({ title, data }) {
                       >
                         <button
                           id="iconoClear"
-                          className="btn"
+                          className="btn shadow"
                           type="button"
                           onClick={handleClear}
                         >
-                          <LuFilterX color="white" />
+                          
+                          <Icon type={"filter"} color="white" />
                         </button>
                       </OverlayTrigger>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <table className="table table-bordered custom-table text-center">
-              <thead>
+                     </div>
+                  
+         
+
+           <div className="d-grid gap-2 d-md-flex justify-content-end  w-25 mt-4">
+             <OverlayTrigger
+              placement="top"
+              overlay={<Tooltip id="tooltip-clear">Agregar</Tooltip>}
+            >
+              <Button
+                id="btnAdd"
+                className="btn me-md-2 border-warning w-100 shadow"
+                style={{ backgroundColor: "#fd7e14" }}
+                variant="primary"
+                onClick={() => {
+                  handleShowModal();
+                  setGetDataFromTable("");
+                  setActionButtonModal("Agregar");
+                }}
+              > <p className="fw-bold h6 justify-content align-items-center "> Agregar</p>
+                {/* <Icon type={"add"} size={18}/> */}
+              </Button>
+            </OverlayTrigger>
+          </div>
+          <div class="mt-2" >
+    <table class="table  custom-table text-center" style={{color: "#161F61" }}>
+  <thead>
                 <tr>
-                  <th>Clave</th>
-                  <th>Nombre</th>
-                  <th>Dosis</th>
-                  <th>Presentación</th>
-                  <th>Descripción</th>
-                  <th>Cantidad</th>
-                  <th>Acciones</th>
+                  <th style={{color: "#161F61" }}>Clave</th>
+                  <th style={{color: "#161F61" }}>Nombre</th>
+                  <th style={{color: "#161F61" }}>Dosis</th>
+                  <th style={{color: "#161F61" }}>Presentación</th>
+                  <th style={{color: "#161F61" }}>Descripción</th>
+                  <th style={{color: "#161F61" }}>Cantidad</th>
+                  <th style={{color: "#161F61" }}>Acciones</th>
                 </tr>
-              </thead>
-              <tbody>
+                </thead>
+                <tbody>
                 {filteredData.map((item, index) => (
                   <tr key={index}>
                     {displayedFields.map((field) => (
                       <td key={field}>
-                        <div id="idTextMedicine" className="d-inline">
+                        <div id="idTextMedicine" className="d-inline fw-semibold" style={{color: "#171D45" }}>
                           {item[field]}
                         </div>
                       </td>
@@ -229,16 +217,18 @@ export function TablaGeneric({ title, data }) {
                         <Button
                           size={13}
                           id="btnTables"
-                          className="ms-2 me-2 mb-2 mt-2"
+                          className="ms-2 me-2 mb-2 mt-2 rounded-circle shadow"
                           variant="primary"
                           onClick={() => {
                             handleShowModal();
                             setIdMedicine(item.id);
                             setDataMedicineFromTable(item);
+                            setGetDataFromTable(item);
                             setActionButtonModal("Editar");
                           }}
                         >
-                          <BsPencilFill className="btn-icon-lg" />
+                          
+                          <Icon type={"edit"} className="btn-icon-lg"/>
                         </Button>
                       </OverlayTrigger>
 
@@ -249,7 +239,7 @@ export function TablaGeneric({ title, data }) {
                         <Button
                           size={16}
                           id="btnTables"
-                          className="ms-2 me-2 mb-2 mt-2 d-inline "
+                          className="ms-2 me-2 mb-2 mt-2 d-inline rounded-circle shadow"
                           variant="danger"
                           onClick={() => {
                             setIdMedicine(item.id);
@@ -258,25 +248,19 @@ export function TablaGeneric({ title, data }) {
                             handleShowModalDelete();
                           }}
                         >
-                          <MdDeleteForever
-                            size={13}
-                            onClick={() => {
-                              setDataUserMedicine(item);
-                              setNameMedicine(item.name);
-                            }}
+                          
+                          <Icon type={"delete"} size={13}
                             id="btnDeleteMedicine"
-                            className="btn-icon-lg"
-                          />
+                            className="btn-icon-lg"/>
                         </Button>
                       </OverlayTrigger>
                     </td>
                   </tr>
                 ))}
               </tbody>
-            </table>
-          </div>
-          <ModalMedicine show={showModal} handleClose={handleCloseModal} />
-          <ModalDelete
+</table>
+<ModalGeneric show={showModal} handleClose={handleCloseModal} title={"Medicamento"} type={"medicine"} />
+         <ModalDelete
             show={showModalDelete}
             handleClose={handleCloseModalDelete}
             funtionToDeleted={funtionToDeleted}
@@ -284,8 +268,12 @@ export function TablaGeneric({ title, data }) {
               "¿Está seguro de que desea eliminar este medicamento?"
             }
           />
-        </div>
-      </div>
-    </div>
+          
+           </div>
+           </div>
+           </div>
+
+          </>
+   
   );
 }

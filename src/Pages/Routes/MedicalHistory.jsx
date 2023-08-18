@@ -1,15 +1,14 @@
-import React, { useContext } from "react";
-import { MedicalPrescriptions } from "../MedicalPrescriptions/MedicalPrescriptions";
-import { FloatingAlert } from "../../Alert/FloatingAlert";
+import { useContext } from "react";
+import { CrudMedicalHistory } from "../../Components/MedicalHistory/CrudMedicalHistory";
+import { FloatingAlert } from "../../Layouts/Alert/FloatingAlert";
 import { GetTheAppContext } from "../../Context/AppContext";
 
-export const Prescriptions = () => {
+export const MedicalHistory = () => {
   const { showFloatingAlert, handleCloseFloatAlert, textAlert } =
     useContext(GetTheAppContext);
-
   return (
     <div>
-      <MedicalPrescriptions />
+      <CrudMedicalHistory />
       <FloatingAlert
         show={showFloatingAlert}
         message={`¡${textAlert}!`}

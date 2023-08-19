@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
-import { CrudPatient } from "../../Components/Patient/CrudPatient";
-import { FloatingAlert } from "../../Layouts/Alert/FloatingAlert";
+import { CrudPatient } from "../Patient/CrudPatient";
+import { FloatingAlert } from "../../Alert/FloatingAlert";
 import { GetTheAppContext } from "../../Context/AppContext";
 
 export const Patient = () => {

@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { Modal } from "react-bootstrap";
-import { GetTheAppContext } from "../../Context/AppContext";
+import { GetTheAppContext } from "../Context/AppContext";
 
 export const FloatingAlert = ({ show, message, onClose }) => {
   const { actionButtonModal } = useContext(GetTheAppContext);

@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { GetTheAppContext } from "../../Context/AppContext";
 import { TypeaheadPatient } from "./PrescriptionTypeahead/TypeaheadPatient";
 import { TypeaheadDoctor } from "./PrescriptionTypeahead/TypeaheadDoctor";
-import { statusCreated, statusOk } from "../../Layouts/HttpStatus/HTTPStatusCode";
+import { statusCreated, statusOk } from "../HttpStatus/HTTPStatusCode";
 
 export const FormMedicalPrescriptions = ({ isGetData = {} }) => {
   const {

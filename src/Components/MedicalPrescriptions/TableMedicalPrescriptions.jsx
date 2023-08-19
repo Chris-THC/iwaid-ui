@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { ModalGeneric } from "../../Layouts/Modal/modal";
+import { ModalMedicalPrescriptions } from "./ModalMedicalPrescriptions";
 import { GetTheAppContext } from "../../Context/AppContext";
 import "../../Css/TableMedicalPrescriptions.css";
 import { MdDeleteForever } from "react-icons/md";
@@ -8,8 +8,8 @@ import { LuFilterX } from "react-icons/lu";
 import { Button } from "react-bootstrap";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
-import { ModalDelete } from "../../Layouts/Modal/ModalDelete";
-import { statusOk } from "../../Layouts/HttpStatus/HTTPStatusCode";
+import { ModalDelete } from "../../ModalDelete/ModalDelete";
+import { statusOk } from "../HttpStatus/HTTPStatusCode";
 
 export const TableMedicalPrescriptions = ({ dataTable }) => {
   const [showModalDelete, setShowModalDelete] = useState(false);
@@ -263,6 +263,7 @@ export const TableMedicalPrescriptions = ({ dataTable }) => {
                               setGetDataFromTable(field);
                               setActionButtonModal("Editar");
                               setDataPrescription(field);
+                              console.log(field);
                               setPrescriptionDoctorId(field.doctor.id);
                             }}
                           >
@@ -300,7 +301,10 @@ export const TableMedicalPrescriptions = ({ dataTable }) => {
             </table>
           </div>
 
-          <ModalGeneric show={showModal} handleClose={handleCloseModal} title={"preinscripción médica"} type={"medicalPrescriptions"} />
+          <ModalMedicalPrescriptions
+            show={showModal}
+            handleClose={handleCloseModal}
+          />
 
           <ModalDelete
             show={showModalDelete}

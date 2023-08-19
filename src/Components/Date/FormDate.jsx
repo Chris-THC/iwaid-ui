@@ -3,10 +3,9 @@ import { Modal, Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { GetTheAppContext } from "../../Context/AppContext";
 import { Typeahead } from "react-bootstrap-typeahead";
-import { statusCreated, statusOk } from "../../Layouts/HttpStatus/HTTPStatusCode";
-import { addData } from "../../Layouts/Submit/onSubmitClick";
+import { statusCreated, statusOk } from "../HttpStatus/HTTPStatusCode";
 
-export const FormAppointment = ({ isGetData = {} }) => {
+export const FormCitas = ({ isGetData = {} }) => {
   const currentDate = new Date().toISOString().split("T")[0];
 
   const {
@@ -103,6 +102,7 @@ export const FormAppointment = ({ isGetData = {} }) => {
     if (actionButtonModal === "Agregar") {
       handleCloseModal();
       const responseCreateDate = await createDateFunction(data);
+      console.log(responseCreateDate);
       if (responseCreateDate.status === statusCreated) {
         await getAllDateDataFunction(setAllDataDate);
         setTextAlert("Cita agregada exitosamente");

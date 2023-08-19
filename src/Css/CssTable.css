@@ -3,9 +3,6 @@
   height: 40px;
   width: 50px;
 }
-.return :hover{
- background-color: #fd7e14 !important;
-}
 
 #btnAdd {
   font-size: 12px;

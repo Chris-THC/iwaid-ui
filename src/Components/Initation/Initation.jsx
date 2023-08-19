@@ -1,27 +1,25 @@
 import React from "react";
-import logoImage from "../../Assets/Images/iwa_logo.jpg";
+import logoImage from "../Images/iwa_logo.jpg";
 import '../../Css/imagesCss.css';
-import appointment from "../../Assets/Images/appointment.jpg";
-import outside from "../../Assets/Images/outside.jpg";
-import stretcher from "../../Assets/Images/stretcher.jpg";
-import doctor from "../../Assets/Images/doctor.jpg"
-import LogoFooter from"../../Assets/Images/iwa_logo_footer.jpg";
+import appointment from "../Images/appointment.jpg";
+import outside from "../Images/outside.jpg";
+import stretcher from "../Images/stretcher.jpg";
+import doctor from "../Images/doctor.jpg"
+import LogoFooter from"../Images/iwa_logo_footer.jpg";
 import { Carousel } from 'react-bootstrap';
 import { FaInstagram,FaWhatsapp, FaFacebook  } from 'react-icons/fa';
 
 export function showLogoImage(){
     return(
         <div>
-        <img className="imgLogo"  src={logoImage} alt="Imagen Logo"   />
+        <img className="imgLogo"  src={logoImage} alt="Imagen Logo"  width="150" height="50" />
         </div>
     );
 }
 
 export const showCarouselComponent = () => {
   return (
-    <div className="" style={{marginLeft: "20%"}}>
-    <section class="main">
-      <div class="main-top">
+    <>
         <Carousel>
       <Carousel.Item>
         <img className="d-block w-100 h-100" src={stretcher} alt="img-strecher" />
@@ -52,21 +50,16 @@ export const showCarouselComponent = () => {
         </Carousel.Caption>
       </Carousel.Item>
     </Carousel>
-    </div>
-    </section>
-    </div>
+    </>
   );
 };
 
 export const showFooter =()=>{
   return(
-    <div class="card-group "style={{marginLeft: "20%"}}>
+    <div class="card-group ">
   <div class="card " style={{ backgroundColor: "#374955" }}>
     <div class="card-body ">
-      <div className="d-flex flex-row mb-2">
-    <img className="imgLogo"  src={logoImage} alt="Imagen Logo"  />
-    <h2 className="p-2 mt-1 text-white fw-bold">IWA</h2>
-    </div >
+    <img className="imgLogo"  src={LogoFooter} alt="Imagen Logo" width="150" height="50" />
       <h5 class="card-title " id= "text-footer">Valores que nos definen</h5>
       <p class="card-text "  id= "text-footer">En IWA Consultorio Médico, creemos en la dedicación incansable hacia tu bienestar. Nuestros valores de empatía, excelencia y compromiso nos impulsan a brindarte una atención médica integral que te mereces. Tu salud es nuestra prioridad y juntos construimos un camino hacia el bienestar duradero.</p>   
       <p class="card-text fw-bold"  id= "text-footer"><FaFacebook/> <FaWhatsapp/> <FaInstagram/> </p>

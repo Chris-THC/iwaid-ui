@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
-import DoctorList from "../../Components/Doctor/DoctorList";
-import { FloatingAlert } from "../../Layouts/Alert/FloatingAlert";
+import DoctorList from "../Doctor/DoctorList";
+import { FloatingAlert } from "../../Alert/FloatingAlert";
 import { GetTheAppContext } from "../../Context/AppContext";
 
 export const Doctor = () => {

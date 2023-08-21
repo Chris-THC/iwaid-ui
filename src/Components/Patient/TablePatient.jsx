@@ -9,6 +9,7 @@ import { Button } from "react-bootstrap";
 import { ModalDelete } from "../../ModalDelete/ModalDelete";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
+import { statusOk } from "../HttpStatus/HTTPStatusCode";
 
 export const TablePatient = ({ dataTable }) => {
   const [showModalDelete, setShowModalDelete] = useState(false);
@@ -84,7 +85,7 @@ export const TablePatient = ({ dataTable }) => {
     setActionButtonModal("Eliminar");
     const response = await deletePatientFunction(patientId);
 
-    if (response.status === 200) {
+    if (response.status === statusOk) {
       await getAllPatientDataFunction(setGetAllPatientsData);
       handleCloseModalDelete();
       setTextAlert(`Se eliminó al paciente ${dataUserPatient.name}`);

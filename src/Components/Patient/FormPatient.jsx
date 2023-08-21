@@ -46,7 +46,7 @@ export const FormPatient = ({ isGetData = {} }) => {
         patientId
       );
 
-      if (updatePatientResponse.status === statusCreated ) {
+      if (updatePatientResponse.status === statusOk) {
         setTextAlert(`Paciente ${data.name} actualizado exitosamente`);
         await getAllPatientDataFunction(setGetAllPatientsData);
         handleShowFloatAlter();

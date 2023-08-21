@@ -101,13 +101,14 @@ export const FormCitas = ({ isGetData = {} }) => {
   const onSubmitClick = async (data) => {
     if (actionButtonModal === "Agregar") {
       handleCloseModal();
+      console.log(data);
       const responseCreateDate = await createDateFunction(data);
       console.log(responseCreateDate);
       if (responseCreateDate.status === statusCreated) {
         await getAllDateDataFunction(setAllDataDate);
         setTextAlert("Cita agregada exitosamente");
-        handleShowFloatAlter();  
-      }else {
+        handleShowFloatAlter();
+      } else {
         setError(true);
         setTextAlert("Error al agregar una cita");
         handleShowFloatAlter();
@@ -127,7 +128,6 @@ export const FormCitas = ({ isGetData = {} }) => {
         }
       } catch (error) {
         console.error("Error al enviar la solicitud:", error);
-
       }
     }
   };
@@ -235,9 +235,14 @@ export const FormCitas = ({ isGetData = {} }) => {
 
         <div>
           <Modal.Footer>
-            <button type="button" class="btn btn btn-light  btn-outline-danger"
-          onClick={handleCloseModal}
-          data-bs-dismiss="modal">Cancelar</button>
+            <button
+              type="button"
+              class="btn btn btn-light  btn-outline-danger"
+              onClick={handleCloseModal}
+              data-bs-dismiss="modal"
+            >
+              Cancelar
+            </button>
             <Button
               type="submit"
               onClick={() => {

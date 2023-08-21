@@ -10,7 +10,7 @@ import { Button } from "react-bootstrap";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import { ModalDelete } from "../../ModalDelete/ModalDelete";
-import { statusDeleted } from "../../Context/HTTPStatus";
+import { statusOk } from "../HttpStatus/HTTPStatusCode";
 
 export const Table = ({ dataTable }) => {
   const [showModalDelete, setShowModalDelete] = useState(false);
@@ -56,7 +56,7 @@ export const Table = ({ dataTable }) => {
     setActionButtonModal("Eliminar");
     const response = await deleteHistoryFunction(dataMedicalHistory.id);
 
-    if (response.status === statusDeleted) {
+    if (response.status === statusOk) {
       await allHistoryFromApiFunction(setAllMedicalHistoryData);
       closeModalDeleteFuntion();
       setTextAlert(

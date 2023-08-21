@@ -1,6 +1,6 @@
-#btnTable{
-height: 15px;
-padding-bottom: 5px;
+#btnTable {
+  height: 15px;
+  padding-bottom: 5px;
 }
 
 .container h3 {
@@ -168,13 +168,11 @@ padding-bottom: 5px;
 .table {
   width: 100%;
   max-width: 100%;
-  margin-bottom: 16px;
-  background-color: transparent;
 }
 
 .table thead tr th {
   font-size: 17px;
-  font-weight: 300;
+  font-weight: 100;
 }
 
 .table > thead > tr > th {
@@ -185,11 +183,10 @@ padding-bottom: 5px;
 }
 
 .table > tbody > tr > td {
-  padding: 12px 8px;
+  /* padding: 12px 8px; */
   vertical-align: middle;
   border-color: #ddd;
   font-weight: 300;
   font-size: 14px;
   color: #3c4858;
 }
-

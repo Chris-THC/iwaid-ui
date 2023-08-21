@@ -8,3 +8,8 @@
     z-index: 200;
   }
   
+  @media (max-width: 900px) {
+    #disableCell {
+      display: none;
+    }
+  }

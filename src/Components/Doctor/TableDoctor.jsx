@@ -111,7 +111,7 @@ export const TableDoctor = ({ dataTable }) => {
           <tr>
             <th>Nombre</th>
             <th>Especialidad</th>
-            <th>Telefono</th>
+            <th>Teléfono</th>
             <th id="disableCell">Dirección</th>
             <th id="disableCell">Correo</th>
             <th>Acciones</th>
@@ -143,7 +143,7 @@ export const TableDoctor = ({ dataTable }) => {
                 </td>
                 <td id="disableCell">{infoDoctor.email}</td>
 
-                <td className="td-actions text-right">
+                <td className="td-actions text-center">
                   <OverlayTrigger
                     placement="top"
                     overlay={<Tooltip id="tooltip-clear">Editar</Tooltip>}
@@ -151,7 +151,7 @@ export const TableDoctor = ({ dataTable }) => {
                     <button
                       type="button"
                       rel="tooltip"
-                      className="btn btn btn-primary btn-round btn-just-icon btn-sm"
+                      className="btn btn btn-primary btn-round btn-just-icon btn-sm m-1"
                       onClick={() => {
                         handleShowModal();
                         setDoctorId(infoDoctor.id);
@@ -191,11 +191,7 @@ export const TableDoctor = ({ dataTable }) => {
   return (
     <>
       <div className="container">
-        {dataTable === [] ? (
-          <div>
-            <h3>Falla en la conexion con la base de datos</h3>
-          </div>
-        ) : (
+        {Array.isArray(dataTable) ? (
           <>
             <div className="container mb-3 row">
               <div className="container mb-3">
@@ -210,7 +206,7 @@ export const TableDoctor = ({ dataTable }) => {
                         autoComplete="off"
                         type="text"
                         className="form-control"
-                        defaultValue={searchName || ""}
+                        value={searchName}
                         onChange={(e) => {
                           setSearchName(e.target.value);
                           setSearchEmail("");
@@ -266,6 +262,10 @@ export const TableDoctor = ({ dataTable }) => {
 
             <DoctorTable />
           </>
+        ) : (
+          <div>
+            <h3>Falla en la conexion con la base de datos</h3>
+          </div>
         )}
       </div>
 

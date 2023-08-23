@@ -1,5 +1,6 @@
 import axios from "axios";
 
+// const doctorURL = "http://192.168.1.79:8081/iwaid/doctors/";
 const doctorURL = "http://localhost:8081/iwaid/doctors/";
 
 export const getAllDoctorsDataFunction = async (setGetAllDoctors) => {

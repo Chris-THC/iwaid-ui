@@ -57,39 +57,6 @@
   display: inline-flex;
   vertical-align: middle;
 }
-.btn-group .btn {
-  padding: 6.5px 20px !important;
-}
-.btn.btn-round {
-  border-radius: 30px !important;
-}
-
-.btn-group .btn.btn-round {
-  border-radius: 30px !important;
-}
-
-.btn-group > .btn:not(:last-child):not(.dropdown-toggle) {
-  border-top-right-radius: 0 !important;
-  border-bottom-right-radius: 0 !important;
-}
-
-.btn-group > .btn:not(:first-child) {
-  border-top-left-radius: 0 !important;
-  border-bottom-left-radius: 0 !important;
-}
-
-.btn .material-icons {
-  position: relative;
-  display: inline-block;
-  top: 0;
-  margin-top: -1.2em;
-  margin-bottom: -1em;
-  font-size: 1.1rem;
-  vertical-align: middle;
-}
-.btn.btn-sm {
-  border-radius: 3px !important;
-}
 
 .btn.btn-just-icon.btn-sm {
   height: 30px;
@@ -98,13 +65,13 @@
 }
 
 .btn.btn-just-icon {
-  height: 41px;
-  min-width: 41px;
-  width: 41px;
+  height: 40px;
+  min-width: 40px;
+  width: 40px;
   padding: 0 !important;
   overflow: hidden;
   position: relative;
-  line-height: 41px;
+  line-height: 40px;
 }
 
 .btn.btn-just-icon.btn-round {
@@ -119,14 +86,13 @@
 
 .table thead tr th {
   font-size: 17px;
-  font-weight: 100;
 }
 
 .table > thead > tr > th {
   padding: 12px 8px;
   vertical-align: middle;
   border-color: #ddd;
-  font-weight: 300;
+  font-weight: 400;
 }
 
 .table > tbody > tr > td {

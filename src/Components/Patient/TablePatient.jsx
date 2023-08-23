@@ -105,7 +105,7 @@ export const TablePatient = ({ dataTable }) => {
             <h2 className="card-title">Pacientes</h2>
           </div>
 
-          <div className="col-4 d-flex flex-row-reverse ">
+          <div className="col-4 d-flex flex-row-reverse">
             <OverlayTrigger
               placement="top"
               overlay={<Tooltip id="tooltip-clear">Agregar</Tooltip>}

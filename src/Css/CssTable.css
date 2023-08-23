@@ -4,18 +4,6 @@
   width: 50px;
 }
 
-#btnAdd {
-  font-size: 12px;
-  height: 40px;
-  width: 45px;
-}
-
-#iconoClear {
-  background-color: #0d6efd;
-  border: solid 1px #bcbcbc;
-  width: 60px;
-}
-
 .custom-table td,
 .custom-table th {
   padding: 0;

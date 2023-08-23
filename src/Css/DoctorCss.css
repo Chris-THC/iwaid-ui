@@ -84,6 +84,11 @@
   max-width: 100%;
 }
 
+.table {
+  width: 100%;
+  max-width: 100%;
+}
+
 .table thead tr th {
   font-size: 17px;
 }

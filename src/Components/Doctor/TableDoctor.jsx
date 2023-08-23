@@ -106,91 +106,93 @@ export const TableDoctor = ({ dataTable }) => {
 
   const DoctorTable = () => {
     return (
-      <table className="table table-responsive">
-        <thead>
-          <tr>
-            <th>Nombre</th>
-            <th>Especialidad</th>
-            <th>Teléfono</th>
-            <th id="disableCell">Dirección</th>
-            <th id="disableCell">Correo</th>
-            <th>Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          {dataTable
-            .filter((item) => {
-              const nameMatches = item.name
-                .toLowerCase()
-                .includes(searchName.toLowerCase());
-              const emailMatches = item.email
-                .toLowerCase()
-                .includes(searchEmail.toLowerCase());
-              const specializationMatches = searchSpecialization
-                ? item.specialty.toLowerCase() ===
-                  searchSpecialization.toLowerCase()
-                : true;
+      <div id="tableConteiner" className="shadow bg-body rounded">
+        <table className="table table-responsive">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Especialidad</th>
+              <th>Teléfono</th>
+              <th id="disableCell">Dirección</th>
+              <th id="disableCell">Correo</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            {dataTable
+              .filter((item) => {
+                const nameMatches = item.name
+                  .toLowerCase()
+                  .includes(searchName.toLowerCase());
+                const emailMatches = item.email
+                  .toLowerCase()
+                  .includes(searchEmail.toLowerCase());
+                const specializationMatches = searchSpecialization
+                  ? item.specialty.toLowerCase() ===
+                    searchSpecialization.toLowerCase()
+                  : true;
 
-              return nameMatches && emailMatches && specializationMatches;
-            })
-            .map((infoDoctor) => (
-              <tr>
-                <td>{infoDoctor.name}</td>
-                <td>{infoDoctor.specialty}</td>
-                <td>{infoDoctor.phoneNumber}</td>
-                <td className="text-wrap" id="disableCell">
-                  {infoDoctor.address}
-                </td>
-                <td id="disableCell">{infoDoctor.email}</td>
+                return nameMatches && emailMatches && specializationMatches;
+              })
+              .map((infoDoctor) => (
+                <tr>
+                  <td>{infoDoctor.name}</td>
+                  <td>{infoDoctor.specialty}</td>
+                  <td>{infoDoctor.phoneNumber}</td>
+                  <td className="text-wrap" id="disableCell">
+                    {infoDoctor.address}
+                  </td>
+                  <td id="disableCell">{infoDoctor.email}</td>
 
-                <td className="td-actions text-center">
-                  <OverlayTrigger
-                    placement="top"
-                    overlay={<Tooltip id="tooltip-clear">Editar</Tooltip>}
-                  >
-                    <button
-                      type="button"
-                      rel="tooltip"
-                      className="btn btn btn-primary btn-round btn-just-icon btn-sm m-1"
-                      onClick={() => {
-                        handleShowModal();
-                        setDoctorId(infoDoctor.id);
-                        setGetDataFromTable(infoDoctor);
-                        setActionButtonModal("Editar");
-                      }}
+                  <td className="td-actions text-center">
+                    <OverlayTrigger
+                      placement="top"
+                      overlay={<Tooltip id="tooltip-clear">Editar</Tooltip>}
                     >
-                      <FontAwesomeIcon id="btnTable" icon={faPen} />
-                    </button>
-                  </OverlayTrigger>
+                      <button
+                        type="button"
+                        rel="tooltip"
+                        className="btn btn btn-primary btn-round btn-just-icon btn-sm m-1"
+                        onClick={() => {
+                          handleShowModal();
+                          setDoctorId(infoDoctor.id);
+                          setGetDataFromTable(infoDoctor);
+                          setActionButtonModal("Editar");
+                        }}
+                      >
+                        <FontAwesomeIcon id="btnTable" icon={faPen} />
+                      </button>
+                    </OverlayTrigger>
 
-                  <OverlayTrigger
-                    placement="top"
-                    overlay={<Tooltip id="tooltip-clear">Eliminar</Tooltip>}
-                  >
-                    <button
-                      type="button"
-                      rel="tooltip"
-                      className="btn btn-danger btn-round btn-just-icon btn-sm"
-                      onClick={() => {
-                        setDoctorId(infoDoctor.id);
-                        setDataUserDoctor(infoDoctor);
-                        handleShowModalDelete();
-                      }}
+                    <OverlayTrigger
+                      placement="top"
+                      overlay={<Tooltip id="tooltip-clear">Eliminar</Tooltip>}
                     >
-                      <FontAwesomeIcon id="btnTable" icon={faTrashCan} />
-                    </button>
-                  </OverlayTrigger>
-                </td>
-              </tr>
-            ))}
-        </tbody>
-      </table>
+                      <button
+                        type="button"
+                        rel="tooltip"
+                        className="btn btn-danger btn-round btn-just-icon btn-sm"
+                        onClick={() => {
+                          setDoctorId(infoDoctor.id);
+                          setDataUserDoctor(infoDoctor);
+                          handleShowModalDelete();
+                        }}
+                      >
+                        <FontAwesomeIcon id="btnTable" icon={faTrashCan} />
+                      </button>
+                    </OverlayTrigger>
+                  </td>
+                </tr>
+              ))}
+          </tbody>
+        </table>
+      </div>
     );
   };
 
   return (
     <>
-      <div className="container">
+      <div className="container" >
         {Array.isArray(dataTable) ? (
           <>
             <div className="container mb-3 row">

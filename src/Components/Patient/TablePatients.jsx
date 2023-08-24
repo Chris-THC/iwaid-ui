@@ -16,7 +16,7 @@ import {
   faUserPlus,
 } from "@fortawesome/free-solid-svg-icons";
 
-export const NewTable = ({ dataTable }) => {
+export const TablePatients = ({ dataTable }) => {
   const [showModalDelete, setShowModalDelete] = useState(false);
 
   const handleShowModalDelete = () => {

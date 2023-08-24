@@ -41,7 +41,7 @@ export const NavBar = () => {
           <ul className="nav sidebar-nav">
             <div className="sidebar-header">
               <div className="sidebar-brand">
-                <Link to="/">Brand</Link>
+                <Link to="/">iWA Consultorio</Link>
               </div>
             </div>
 

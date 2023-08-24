@@ -246,6 +246,9 @@ export const TablePatient = ({ dataTable }) => {
                 </div>
               </div>
             </div>
+
+
+            
             <table className="table table-bordered custom-table text-center">
               <thead>
                 <tr>

@@ -1,12 +1,12 @@
 import { useContext } from "react";
-import { TablePatient } from "./TablePatient";
+import { NewTable } from "./NewTable";
 import { GetTheAppContext } from "../../Context/AppContext";
 
 export const CrudPatient = () => {
   const { getAllPatientsData } = useContext(GetTheAppContext);
   return (
     <div>
-      <TablePatient dataTable={getAllPatientsData || []} />
+      <NewTable dataTable={getAllPatientsData || []} />
     </div>
   );
 };

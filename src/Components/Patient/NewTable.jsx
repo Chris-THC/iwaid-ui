@@ -110,7 +110,7 @@ export const NewTable = ({ dataTable }) => {
 
   const DoctorTable = () => {
     return (
-      <div id="tableConteiner" className="shadow bg-body rounded">
+      <div id="tableConteiner" className="shadow bg-body rounded mb-4">
         <table className="table table-responsive">
           <thead>
             <tr>

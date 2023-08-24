@@ -76,9 +76,8 @@ export const TablePatient = ({ dataTable }) => {
       .toLowerCase()
       .includes(searchByRfc.toLowerCase());
 
-    return (
-      nameMatches && genderMatches && cityMatches && dateMatches && rfcMatches
-    );
+    return;
+    nameMatches && genderMatches && cityMatches && dateMatches && rfcMatches;
   });
 
   const funtionToDeleted = async () => {
@@ -247,8 +246,6 @@ export const TablePatient = ({ dataTable }) => {
               </div>
             </div>
 
-
-            
             <table className="table table-bordered custom-table text-center">
               <thead>
                 <tr>

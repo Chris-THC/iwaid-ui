@@ -5,7 +5,7 @@ import { GetTheAppContext } from "../../Context/AppContext";
 export const CrudPatient = () => {
   const { getAllPatientsData } = useContext(GetTheAppContext);
   return (
-    <div>
+    <div style={{ height: "100vh" }}>
       <NewTable dataTable={getAllPatientsData || []} />
     </div>
   );

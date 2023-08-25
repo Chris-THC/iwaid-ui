@@ -1,12 +1,13 @@
-import React, { useContext,} from "react";
+import React, { useContext } from "react";
 import { GetTheAppContext } from "../../Context/AppContext";
-import { TablaGeneric } from "./table";
+// import { TablaGeneric } from "./table";
+import { MedicalDatesTable } from "./MedicalDatesTable";
 
 const DateList = () => {
- 
   const { dataGetAllDate } = useContext(GetTheAppContext);
-  
-   return <TablaGeneric title="CITAS MÉDICAS" data={dataGetAllDate || []} />;
+
+  return <MedicalDatesTable dataTable={dataGetAllDate || []} />;
+  //  return <TablaGeneric title="CITAS MÉDICAS" data={dataGetAllDate || []} />;
 };
 
 export default DateList;

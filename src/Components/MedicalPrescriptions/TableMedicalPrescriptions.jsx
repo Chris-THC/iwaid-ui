@@ -1,15 +1,20 @@
-import React, { useContext, useState } from "react";
-import { ModalMedicalPrescriptions } from "./ModalMedicalPrescriptions";
+import { useContext, useState } from "react";
+import "../../Css/DoctorCss.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { GetTheAppContext } from "../../Context/AppContext";
-import "../../Css/TableMedicalPrescriptions.css";
-import { MdDeleteForever } from "react-icons/md";
-import { BsPersonFillAdd, BsPencilFill } from "react-icons/bs";
-import { LuFilterX } from "react-icons/lu";
+import { ModalMedicalPrescriptions } from "./ModalMedicalPrescriptions";
+import { ModalDelete } from "../../ModalDelete/ModalDelete";
 import { Button } from "react-bootstrap";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
-import { ModalDelete } from "../../ModalDelete/ModalDelete";
 import { statusOk } from "../HttpStatus/HTTPStatusCode";
+
+import {
+  faFilter,
+  faPen,
+  faTrashCan,
+  faUserPlus,
+} from "@fortawesome/free-solid-svg-icons";
 
 export const TableMedicalPrescriptions = ({ dataTable }) => {
   const [showModalDelete, setShowModalDelete] = useState(false);
@@ -21,6 +26,7 @@ export const TableMedicalPrescriptions = ({ dataTable }) => {
   const handleCloseModalDelete = () => {
     setShowModalDelete(false);
   };
+
   const {
     handleShowModal,
     handleCloseModal,
@@ -72,47 +78,152 @@ export const TableMedicalPrescriptions = ({ dataTable }) => {
     }
   };
 
-  return (
-    <div className="container mt-5">
-      <div className=" card mt-4 row ">
-        <div className="card-header d-flex">
-          <div className="col-8">
-            <h2 className="card-title">Prescripciones Médicas</h2>
-          </div>
-
-          <div className="col-4 d-flex flex-row-reverse ">
-            <OverlayTrigger
-              placement="top"
-              overlay={<Tooltip id="tooltip-clear">Agregar</Tooltip>}
-            >
-              <Button
-                id="btnAdd"
-                className="ms-2 me-2 mb-1"
-                variant="primary"
-                onClick={() => {
-                  setDataPrescription({});
-                  handleShowModal();
-                  setActionButtonModal("Agregar");
-                }}
-              >
-                <BsPersonFillAdd size={18} />
-              </Button>
-            </OverlayTrigger>
-          </div>
+  const AddNewMedicalPrescription = () => {
+    return (
+      <>
+        <div>
+          <h1>Médicos</h1>
         </div>
+        <div className="col-12 d-flex flex-row-reverse ">
+          <OverlayTrigger
+            placement="top"
+            overlay={<Tooltip id="tooltip-clear">Agregar</Tooltip>}
+          >
+            <Button
+              id="btnAdd"
+              className="ms-2 me-2 mb-1"
+              variant="primary"
+              onClick={() => {
+                setDataPrescription({});
+                handleShowModal();
+                setActionButtonModal("Agregar");
+              }}
+            >
+              <FontAwesomeIcon icon={faUserPlus} style={{ height: "18px" }} />
+            </Button>
+          </OverlayTrigger>
+        </div>
+      </>
+    );
+  };
 
-        <div className="card-header col-md-12">
-          <div className=" card-body table-responsive">
-            <div className="container mb-3">
-              <div className="col-md-4 mb-3">
-                <h4>Buscar</h4>
-              </div>
-              <div className="row">
-                <div className="container mb-3">
-                  <div className="row">
-                    <div className="col-md-3 mb-3">
-                      <label>Paciente</label>
+  const MedicalPrescriptionTable = () => {
+    return (
+      <div id="tableConteiner" className="shadow bg-body rounded">
+        <table className="table table-responsive">
+          <thead>
+            <tr>
+              <th>Paciente</th>
+              <th>Médico</th>
+              <th>Fecha de Asignación</th>
+              <th id="disableCell">Descripción</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            {dataTable
+              .filter((field) => {
+                const patientNameMatches = field.patient.name
+                  .toLowerCase()
+                  .includes(searchByNamePatient.toLowerCase());
+
+                const doctorNameMatches = field.doctor.name
+                  .toLowerCase()
+                  .includes(searchByDoctor.toLowerCase());
+
+                const startDateMatch =
+                  !searchByStartDate ||
+                  (searchByStartDate &&
+                    new Date(field.registerDate) >=
+                      new Date(searchByStartDate));
+
+                const finalDateMatch =
+                  !searchByFinalDate ||
+                  (searchByFinalDate &&
+                    new Date(field.registerDate) <=
+                      new Date(searchByFinalDate));
+
+                return (
+                  patientNameMatches &&
+                  doctorNameMatches &&
+                  startDateMatch &&
+                  finalDateMatch
+                );
+              })
+              .map((infoMedicalPrescriotion) => (
+                <tr key={infoMedicalPrescriotion.id}>
+                  <td>{infoMedicalPrescriotion.patient.name}</td>
+                  <td>{infoMedicalPrescriotion.doctor.name}</td>
+                  <td>
+                    {changeDateFormat(infoMedicalPrescriotion.registerDate)}
+                  </td>
+                  <td id="disableCell">
+                    {infoMedicalPrescriotion.description}
+                  </td>
+
+                  <td className="td-actions text-center">
+                    <OverlayTrigger
+                      placement="top"
+                      overlay={<Tooltip id="tooltip-clear">Editar</Tooltip>}
+                    >
+                      <button
+                        type="button"
+                        rel="tooltip"
+                        className="btn btn btn-primary btn-round btn-just-icon btn-sm m-1"
+                        onClick={() => {
+                          handleShowModal();
+                          setGetDataFromTable(infoMedicalPrescriotion);
+                          setActionButtonModal("Editar");
+                          setDataPrescription(infoMedicalPrescriotion);
+                          setPrescriptionDoctorId(
+                            infoMedicalPrescriotion.doctor.id
+                          );
+                        }}
+                      >
+                        <FontAwesomeIcon id="btnTable" icon={faPen} />
+                      </button>
+                    </OverlayTrigger>
+
+                    <OverlayTrigger
+                      placement="top"
+                      overlay={<Tooltip id="tooltip-clear">Eliminar</Tooltip>}
+                    >
+                      <button
+                        type="button"
+                        rel="tooltip"
+                        className="btn btn-danger btn-round btn-just-icon btn-sm"
+                        onClick={() => {
+                          setDataPrescription(infoMedicalPrescriotion);
+                          handleShowModalDelete();
+                        }}
+                      >
+                        <FontAwesomeIcon id="btnTable" icon={faTrashCan} />
+                      </button>
+                    </OverlayTrigger>
+                  </td>
+                </tr>
+              ))}
+          </tbody>
+        </table>
+      </div>
+    );
+  };
+
+  return (
+    <>
+      <div className="container">
+        {Array.isArray(dataTable) ? (
+          <>
+            <div className="container mb-3 row">
+              <div className="container mb-3">
+                <AddNewMedicalPrescription />
+
+                <div className="row cont-filtros">
+                  <div className="col-md-3 mb-3">
+                    <h4>Nombre</h4>
+                    <div id="DivinputSearch">
                       <input
+                        id="inputSearch"
                         autoComplete="off"
                         type="text"
                         className="form-control"
@@ -127,9 +238,13 @@ export const TableMedicalPrescriptions = ({ dataTable }) => {
                         pattern="^[A-Za-z\s]+$"
                       />
                     </div>
-                    <div className="col-md-3 mb-3">
-                      <label>Médico</label>
+                  </div>
+
+                  <div className="col-md-3 mb-3">
+                    <h4>Médico</h4>
+                    <div id="DivinputSearch">
                       <input
+                        id="inputSearch"
                         autoComplete="off"
                         type="text"
                         className="form-control"
@@ -144,178 +259,91 @@ export const TableMedicalPrescriptions = ({ dataTable }) => {
                         pattern="^[A-Za-z\s]+$"
                       />
                     </div>
+                  </div>
 
-                    <div className="col-md-2 mb-3">
-                      <label>Fecha inicial</label>
-                      <div>
-                        <input
-                          type="date"
-                          className="form-control"
-                          value={searchByStartDate}
-                          onChange={(e) => {
-                            setSearchByStartDate(e.target.value);
-                            setSearchByDoctor("");
-                            setSearchByNamePatient("");
-                          }}
-                          placeholder="Buscar por fecha inicial..."
+                  <div className="col-md-2 mb-3">
+                    <h4>Fecha inicial</h4>
+                    <div id="DivinputSearch">
+                      <input
+                        id="inputSearch"
+                        autoComplete="off"
+                        type="date"
+                        className="form-control"
+                        value={searchByStartDate}
+                        onChange={(e) => {
+                          setSearchByStartDate(e.target.value);
+                          setSearchByDoctor("");
+                          setSearchByNamePatient("");
+                        }}
+                        placeholder="Buscar por fecha inicial..."
+                      />
+                    </div>
+                  </div>
+
+                  <div className="col-md-2 mb-3">
+                    <h4>Fecha final</h4>
+                    <div id="DivinputSearch">
+                      <input
+                        id="inputSearch"
+                        autoComplete="off"
+                        type="date"
+                        className="form-control"
+                        value={searchByFinalDate}
+                        onChange={(e) => {
+                          setSearchByFinalDate(e.target.value);
+                          setSearchByDoctor("");
+                          setSearchByNamePatient("");
+                        }}
+                        placeholder="Buscar por fecha final..."
+                      />
+                    </div>
+                  </div>
+
+                  <div className="mt-1 ml-4 col-md-1 d-flex ">
+                    <OverlayTrigger
+                      placement="top"
+                      overlay={<Tooltip id="tooltip-clear">Limpiar</Tooltip>}
+                    >
+                      <button
+                        id="iconoClear"
+                        className="btn"
+                        type="button"
+                        onClick={handleClear}
+                      >
+                        <FontAwesomeIcon
+                          color="#fff"
+                          icon={faFilter}
+                          style={{ height: "18px" }}
                         />
-                      </div>
-                    </div>
-
-                    <div className="col-md-2 mb-3">
-                      <label>Fecha final</label>
-                      <div>
-                        <input
-                          type="date"
-                          className="form-control"
-                          value={searchByFinalDate}
-                          onChange={(e) => {
-                            setSearchByFinalDate(e.target.value);
-                            setSearchByDoctor("");
-                            setSearchByNamePatient("");
-                          }}
-                          placeholder="Buscar por fecha final..."
-                        />
-                      </div>
-                    </div>
-
-                    <div className="col-md-2 d-flex flex-row-reverse">
-                      <div className="w-auto p-4">
-                        <OverlayTrigger
-                          placement="top"
-                          overlay={
-                            <Tooltip id="tooltip-clear">Limpiar</Tooltip>
-                          }
-                        >
-                          <button
-                            id="iconoClear"
-                            className="btn btn-secondary"
-                            type="button"
-                            onClick={handleClear}
-                          >
-                            <LuFilterX color="white" />
-                          </button>
-                        </OverlayTrigger>
-                      </div>
-                    </div>
+                      </button>
+                    </OverlayTrigger>
                   </div>
                 </div>
               </div>
             </div>
 
-            <table className="table table-bordered custom-table text-center">
-              <thead>
-                <tr>
-                  <th>Paciente</th>
-                  <th>Médico</th>
-                  <th style={{ width: "10%" }}>Fecha de Asignación</th>
-                  <th style={{ width: "35%" }}>Descripción</th>
-                  <th style={{ width: "20%" }}>Acciones</th>
-                </tr>
-              </thead>
-              <tbody>
-                {dataTable
-                  .filter((field) => {
-                    const patientNameMatches = field.patient.name
-                      .toLowerCase()
-                      .includes(searchByNamePatient.toLowerCase());
-
-                    const doctorNameMatches = field.doctor.name
-                      .toLowerCase()
-                      .includes(searchByDoctor.toLowerCase());
-
-                    const startDateMatch =
-                      !searchByStartDate ||
-                      (searchByStartDate &&
-                        new Date(field.registerDate) >=
-                          new Date(searchByStartDate));
-
-                    const finalDateMatch =
-                      !searchByFinalDate ||
-                      (searchByFinalDate &&
-                        new Date(field.registerDate) <=
-                          new Date(searchByFinalDate));
-
-                    return (
-                      patientNameMatches &&
-                      doctorNameMatches &&
-                      startDateMatch &&
-                      finalDateMatch
-                    );
-                  })
-                  .map((field) => (
-                    <tr key={field.id}>
-                      <td>{field.patient.name}</td>
-                      <td>{field.doctor.name}</td>
-                      <td>{changeDateFormat(field.registerDate)}</td>
-                      <td>{field.description}</td>
-                      <td>
-                        <OverlayTrigger
-                          placement="top"
-                          overlay={<Tooltip id="tooltip-clear">Editar</Tooltip>}
-                        >
-                          <Button
-                            id="btnTables"
-                            className="ms-2 me-2 mb-2 mt-2"
-                            variant="primary"
-                            onClick={() => {
-                              handleShowModal();
-                              setGetDataFromTable(field);
-                              setActionButtonModal("Editar");
-                              setDataPrescription(field);
-                              console.log(field);
-                              setPrescriptionDoctorId(field.doctor.id);
-                            }}
-                          >
-                            <BsPencilFill className="btn-icon-lg" />
-                          </Button>
-                        </OverlayTrigger>
-
-                        <OverlayTrigger
-                          placement="top"
-                          overlay={
-                            <Tooltip id="tooltip-clear">Eliminar</Tooltip>
-                          }
-                        >
-                          <Button
-                            size={16}
-                            id="btnTables"
-                            className="ms-2 me-2 mb-2 mt-2"
-                            variant="danger"
-                            onClick={() => {
-                              setDataPrescription(field);
-                              handleShowModalDelete();
-                            }}
-                          >
-                            <MdDeleteForever
-                              size={13}
-                              id="btnDeletePatient"
-                              className="btn-icon-lg"
-                            />
-                          </Button>
-                        </OverlayTrigger>
-                      </td>
-                    </tr>
-                  ))}
-              </tbody>
-            </table>
+            <MedicalPrescriptionTable />
+          </>
+        ) : (
+          <div>
+            <h3>Falla en la conexion con la base de datos</h3>
           </div>
-
-          <ModalMedicalPrescriptions
-            show={showModal}
-            handleClose={handleCloseModal}
-          />
-
-          <ModalDelete
-            show={showModalDelete}
-            handleClose={handleCloseModalDelete}
-            funtionToDeleted={funtionToDeleted}
-            messageToDelete={
-              "¿Está seguro de que desea eliminar esta prescripción?"
-            }
-          />
-        </div>
+        )}
       </div>
-    </div>
+
+      <ModalMedicalPrescriptions
+        show={showModal}
+        handleClose={handleCloseModal}
+      />
+
+      <ModalDelete
+        show={showModalDelete}
+        handleClose={handleCloseModalDelete}
+        funtionToDeleted={funtionToDeleted}
+        messageToDelete={
+          "¿Está seguro de que desea eliminar esta prescripción?"
+        }
+      />
+    </>
   );
 };

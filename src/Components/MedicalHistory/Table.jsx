@@ -34,7 +34,6 @@ export const Table = ({ dataTable }) => {
     setGetDataFromTable,
     setActionButtonModal,
     setDataMedicalHistory,
-
     setTextAlert,
     handleShowFloatAlter,
     deleteHistoryFunction,

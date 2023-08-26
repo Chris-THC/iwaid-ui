@@ -27,6 +27,14 @@
   margin-top: 35px;
 }
 
+.marginCheckBox {
+  margin-top: 70px;
+}
+
+#responsiveTextTable {
+  text-align: center;
+}
+
 /* TODO: ------------------- */
 
 .container h3 {
@@ -107,4 +115,21 @@
   font-weight: 300;
   font-size: 16px;
   color: #3c4858;
+}
+
+/* TODO: This is my section that when the page is small the component is adapte with it */
+@media (max-width: 900px) {
+  .marginCheckBox {
+    margin-top: 10px;
+  }
+}
+
+@media (max-width: 750px) {
+  #responsiveTextTable {
+    font-size: 12px;
+  }
+  #actionMedicalHistory {
+    font-size: 12px;
+    width: 20%;
+  }
 }

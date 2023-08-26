@@ -82,7 +82,7 @@ export const TableMedicalPrescriptions = ({ dataTable }) => {
     return (
       <>
         <div>
-          <h1>Médicos</h1>
+          <h1>Prescripciones Médicas</h1>
         </div>
         <div className="col-12 d-flex flex-row-reverse ">
           <OverlayTrigger

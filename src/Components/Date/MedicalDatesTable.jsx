@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import "../../Css/DoctorCss.css";
+import "../../Css/TableGenericCss.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ModalDates } from "./modal";
 import { Button } from "react-bootstrap";
@@ -42,11 +42,13 @@ export const MedicalDatesTable = ({ dataTable }) => {
   const handleCloseModalDelete = () => {
     setShowModalDelete(false);
   };
+  
 
   const formatDate = (originalDate) => {
     let piecesDate = originalDate.split("-");
     return piecesDate[2] + "/" + piecesDate[1] + "/" + piecesDate[0];
   };
+
   const [searchNameDoctor, setSearchNameDoctor] = useState("");
   const [searchNamePatient, setSearchNamePatient] = useState("");
 
@@ -121,12 +123,12 @@ export const MedicalDatesTable = ({ dataTable }) => {
         <table className="table table-responsive">
           <thead>
             <tr>
-              <th>Paciente</th>
+              <th id="responsiveTextTable">Paciente</th>
               <th id="disableCell">Médico</th>
-              <th>Fecha</th>
-              <th>Hora</th>
+              <th id="responsiveTextTable">Fecha</th>
+              <th id="responsiveTextTable">Hora</th>
               <th id="disableCell">Notas</th>
-              <th>Acciones</th>
+              <th id="btnActionTable">Acciones</th>
             </tr>
           </thead>
           <tbody>
@@ -144,13 +146,13 @@ export const MedicalDatesTable = ({ dataTable }) => {
               })
               .map((infoMedicalDates) => (
                 <tr key={infoMedicalDates.id}>
-                  <td>{infoMedicalDates.patientDTO.name}</td>
+                  <td id="responsiveTextTable">{infoMedicalDates.patientDTO.name}</td>
                   <td id="disableCell">{infoMedicalDates.doctorDTO.name}</td>
-                  <td>{formatDate(infoMedicalDates.date)}</td>
-                  <td>{hourMappings[infoMedicalDates.hour]}</td>
+                  <td id="responsiveTextTable">{formatDate(infoMedicalDates.date)}</td>
+                  <td id="responsiveTextTable">{hourMappings[infoMedicalDates.hour]}</td>
                   <td id="disableCell">{infoMedicalDates.notes}</td>
 
-                  <td className="td-actions text-center">
+                  <td id="btnActionTable" className="td-actions text-center">
                     <OverlayTrigger
                       placement="top"
                       overlay={<Tooltip id="tooltip-clear">Editar</Tooltip>}
@@ -206,7 +208,7 @@ export const MedicalDatesTable = ({ dataTable }) => {
                 <AddNewMedicalDate />
 
                 <div className="row cont-filtros">
-                  <div className="col-md-3 mb-3">
+                  <div className="col-md-5 mb-3">
                     <h4>Nombre del paciente</h4>
                     <div id="DivinputSearch">
                       <input
@@ -224,7 +226,7 @@ export const MedicalDatesTable = ({ dataTable }) => {
                     </div>
                   </div>
 
-                  <div className="col-md-3 mb-3">
+                  <div className="col-md-5 mb-3">
                     <h4>Nombre del paciente</h4>
                     <div id="DivinputSearch">
                       <input

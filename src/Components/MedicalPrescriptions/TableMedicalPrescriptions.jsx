@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import "../../Css/DoctorCss.css";
+import "../../Css/TableGenericCss.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { GetTheAppContext } from "../../Context/AppContext";
 import { ModalMedicalPrescriptions } from "./ModalMedicalPrescriptions";
@@ -113,11 +113,11 @@ export const TableMedicalPrescriptions = ({ dataTable }) => {
         <table className="table table-responsive">
           <thead>
             <tr>
-              <th>Paciente</th>
-              <th>Médico</th>
-              <th>Fecha de Asignación</th>
+              <th id="responsiveTextTable">Paciente</th>
+              <th id="responsiveTextTable">Médico</th>
+              <th id="responsiveTextTable">Fecha de Asignación</th>
               <th id="disableCell">Descripción</th>
-              <th>Acciones</th>
+              <th id="btnActionTable">Acciones</th>
             </tr>
           </thead>
           <tbody>
@@ -152,16 +152,16 @@ export const TableMedicalPrescriptions = ({ dataTable }) => {
               })
               .map((infoMedicalPrescriotion) => (
                 <tr key={infoMedicalPrescriotion.id}>
-                  <td>{infoMedicalPrescriotion.patient.name}</td>
-                  <td>{infoMedicalPrescriotion.doctor.name}</td>
-                  <td>
+                  <td id="responsiveTextTable">{infoMedicalPrescriotion.patient.name}</td>
+                  <td id="responsiveTextTable">{infoMedicalPrescriotion.doctor.name}</td>
+                  <td id="responsiveTextTable">
                     {changeDateFormat(infoMedicalPrescriotion.registerDate)}
                   </td>
                   <td id="disableCell">
                     {infoMedicalPrescriotion.description}
                   </td>
 
-                  <td className="td-actions text-center">
+                  <td id="btnActionTable" className="td-actions text-center">
                     <OverlayTrigger
                       placement="top"
                       overlay={<Tooltip id="tooltip-clear">Editar</Tooltip>}
@@ -219,7 +219,7 @@ export const TableMedicalPrescriptions = ({ dataTable }) => {
                 <AddNewMedicalPrescription />
 
                 <div className="row cont-filtros">
-                  <div className="col-md-3 mb-3">
+                  <div className="col-md-12 col-lg-3 mb-3">
                     <h4>Nombre</h4>
                     <div id="DivinputSearch">
                       <input
@@ -240,7 +240,7 @@ export const TableMedicalPrescriptions = ({ dataTable }) => {
                     </div>
                   </div>
 
-                  <div className="col-md-3 mb-3">
+                  <div className="col-md-12 col-lg-3 mb-3">
                     <h4>Médico</h4>
                     <div id="DivinputSearch">
                       <input
@@ -261,7 +261,7 @@ export const TableMedicalPrescriptions = ({ dataTable }) => {
                     </div>
                   </div>
 
-                  <div className="col-md-2 mb-3">
+                  <div className="col-md-12 col-lg-2 mb-3">
                     <h4>Fecha inicial</h4>
                     <div id="DivinputSearch">
                       <input
@@ -280,7 +280,7 @@ export const TableMedicalPrescriptions = ({ dataTable }) => {
                     </div>
                   </div>
 
-                  <div className="col-md-2 mb-3">
+                  <div className="col-md-12 col-lg-2 mb-3">
                     <h4>Fecha final</h4>
                     <div id="DivinputSearch">
                       <input

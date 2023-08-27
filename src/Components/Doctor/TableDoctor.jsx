@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import "../../Css/DoctorCss.css";
+import "../../Css/TableGenericCss.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { GetTheAppContext } from "../../Context/AppContext";
 import { ModalDoctor } from "./modal";
@@ -110,12 +110,12 @@ export const TableDoctor = ({ dataTable }) => {
         <table className="table table-responsive">
           <thead>
             <tr>
-              <th>Nombre</th>
-              <th>Especialidad</th>
-              <th>Teléfono</th>
+              <th id="responsiveTextTable">Nombre</th>
+              <th id="responsiveTextTable">Especialidad</th>
+              <th id="responsiveTextTable">Teléfono</th>
               <th id="disableCell">Dirección</th>
               <th id="disableCell">Correo</th>
-              <th>Acciones</th>
+              <th id="btnActionTable">Acciones</th>
             </tr>
           </thead>
           <tbody>
@@ -136,15 +136,15 @@ export const TableDoctor = ({ dataTable }) => {
               })
               .map((infoDoctor) => (
                 <tr>
-                  <td>{infoDoctor.name}</td>
-                  <td>{infoDoctor.specialty}</td>
-                  <td>{infoDoctor.phoneNumber}</td>
+                  <td id="responsiveTextTable">{infoDoctor.name}</td>
+                  <td id="responsiveTextTable">{infoDoctor.specialty}</td>
+                  <td id="responsiveTextTable">{infoDoctor.phoneNumber}</td>
                   <td className="text-wrap" id="disableCell">
                     {infoDoctor.address}
                   </td>
                   <td id="disableCell">{infoDoctor.email}</td>
 
-                  <td className="td-actions text-center">
+                  <td id="btnActionTable" className="td-actions text-center">
                     <OverlayTrigger
                       placement="top"
                       overlay={<Tooltip id="tooltip-clear">Editar</Tooltip>}
@@ -192,7 +192,7 @@ export const TableDoctor = ({ dataTable }) => {
 
   return (
     <>
-      <div className="container" >
+      <div className="container">
         {Array.isArray(dataTable) ? (
           <>
             <div className="container mb-3 row">

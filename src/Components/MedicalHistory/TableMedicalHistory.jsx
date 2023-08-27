@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import "../../Css/DoctorCss.css";
+import "../../Css/TableGenericCss.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { GetTheAppContext } from "../../Context/AppContext";
 import { ModalMedicalHistory } from "./ModalMedicalHistory";
@@ -111,11 +111,13 @@ export const TableMedicalHistory = ({ dataTable }) => {
         <table className="table table-responsive">
           <thead>
             <tr>
-              <th id="actionMedicalHistory">Paciente</th>
-              <th id="responsiveTextTable">Antecedentes heredofamiliares</th>
-              <th id="responsiveTextTable">Antecedentes patológicos</th>
-              <th id="responsiveTextTable">Antecedentes no patológicos</th>
-              <th id="actionMedicalHistory">Acciones</th>
+              <th id="responsiveTextTable">Paciente</th>
+              <th id="responsiveTextTable">
+                Heredo <br /> familiares
+              </th>
+              <th id="responsiveTextTable">Patológicos</th>
+              <th id="responsiveTextTable">No patológicos</th>
+              <th id="btnActionTable">Acciones</th>
             </tr>
           </thead>
           <tbody>
@@ -205,7 +207,7 @@ export const TableMedicalHistory = ({ dataTable }) => {
                     )}
                   </td>
 
-                  <td className="td-actions text-center">
+                  <td id="btnActionTable" className="td-actions text-center">
                     <OverlayTrigger
                       placement="top"
                       overlay={<Tooltip id="tooltip-clear">Editar</Tooltip>}

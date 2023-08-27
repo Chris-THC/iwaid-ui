@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import "../../Css/DoctorCss.css";
+import "../../Css/TableGenericCss.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { GetTheAppContext } from "../../Context/AppContext";
 import { ModalPatient } from "./ModalPatient";
@@ -79,7 +79,7 @@ export const TablePatients = ({ dataTable }) => {
     }
   };
 
-  const AddNewDoctor = () => {
+  const AddNewPatient = () => {
     return (
       <>
         <div>
@@ -108,18 +108,18 @@ export const TablePatients = ({ dataTable }) => {
     );
   };
 
-  const DoctorTable = () => {
+  const PatientTable = () => {
     return (
       <div id="tableConteiner" className="shadow bg-body rounded mb-4">
         <table className="table table-responsive">
           <thead>
             <tr>
-              <th>Nombre</th>
+              <th id="responsiveTextTable">Nombre</th>
               <th id="disableCell">Género</th>
-              <th>Ciudad</th>
-              <th>Año nacimiento</th>
+              <th id="responsiveTextTable">Ciudad</th>
+              <th id="responsiveTextTable">Año nacimiento</th>
               <th id="disableCell">RFC</th>
-              <th>Acciones</th>
+              <th id="btnActionTable">Acciones</th>
             </tr>
           </thead>
           <tbody>
@@ -155,15 +155,15 @@ export const TablePatients = ({ dataTable }) => {
               })
               .map((infoPatient) => (
                 <tr>
-                  <td>{infoPatient.name}</td>
+                  <td id="responsiveTextTable">{infoPatient.name}</td>
                   <td id="disableCell">{infoPatient.gender}</td>
-                  <td>{infoPatient.city}</td>
-                  <td className="text-wrap">
+                  <td id="responsiveTextTable">{infoPatient.city}</td>
+                  <td id="responsiveTextTable" className="text-wrap">
                     {changeDateFormat(infoPatient.dateOfBirth)}
                   </td>
                   <td id="disableCell">{infoPatient.rfc}</td>
 
-                  <td className="td-actions text-center">
+                  <td id="btnActionTable" className="td-actions text-center">
                     <OverlayTrigger
                       placement="top"
                       overlay={<Tooltip id="tooltip-clear">Editar</Tooltip>}
@@ -216,10 +216,10 @@ export const TablePatients = ({ dataTable }) => {
           <>
             <div className="container mb-3 row">
               <div className="container mb-3">
-                <AddNewDoctor />
+                <AddNewPatient />
 
                 <div className="row cont-filtros">
-                  <div className="col-md-2 mb-3">
+                  <div className="col-md-12 col-lg-2  mb-3">
                     <h4>Nombre</h4>
                     <div id="DivinputSearch">
                       <input
@@ -241,7 +241,7 @@ export const TablePatients = ({ dataTable }) => {
                     </div>
                   </div>
 
-                  <div className="col-md-2 mb-3">
+                  <div className="col-md-12 col-lg-2 mb-3">
                     <h4>Género</h4>
                     <div id="DivinputSearch">
                       <select
@@ -264,7 +264,7 @@ export const TablePatients = ({ dataTable }) => {
                     </div>
                   </div>
 
-                  <div className="col-md-2 mb-3">
+                  <div className="col-md-12 col-lg-2 mb-3">
                     <h4>Ciudad</h4>
                     <div id="DivinputSearch">
                       <input
@@ -284,7 +284,7 @@ export const TablePatients = ({ dataTable }) => {
                     </div>
                   </div>
 
-                  <div className="col-md-2 mb-3">
+                  <div className="col-md-12 col-lg-2 mb-3">
                     <h4>RFC</h4>
                     <div id="DivinputSearch">
                       <input
@@ -304,7 +304,7 @@ export const TablePatients = ({ dataTable }) => {
                     </div>
                   </div>
 
-                  <div className="col-md-2 mb-3">
+                  <div className="col-md-12 col-lg-2 mb-3">
                     <h4>Año</h4>
                     <div id="DivinputSearch">
                       <input
@@ -347,7 +347,7 @@ export const TablePatients = ({ dataTable }) => {
               </div>
             </div>
 
-            <DoctorTable />
+            <PatientTable />
           </>
         ) : (
           <div>

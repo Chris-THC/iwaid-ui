@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import "../../Css/DoctorCss.css";
+import "../../Css/TableGenericCss.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { GetTheAppContext } from "../../Context/AppContext";
 import { ModalMedicine } from "./modal";
@@ -45,11 +45,6 @@ export const TableMedicine = ({ dataTable }) => {
     nameMedicine,
   } = useContext(GetTheAppContext);
 
-  const changeDateFormat = (originalDate) => {
-    let piecesDate = originalDate.split("-");
-    return piecesDate[2] + "/" + piecesDate[1] + "/" + piecesDate[0];
-  };
-
   const filters = dataTable
     ? [...new Set(dataTable.map((item) => item.dosageForms))]
     : [];
@@ -84,7 +79,7 @@ export const TableMedicine = ({ dataTable }) => {
     return (
       <>
         <div>
-          <h1>Pacientes</h1>
+          <h1>Medicamentos</h1>
         </div>
         <div className="col-12 d-flex flex-row-reverse ">
           <OverlayTrigger
@@ -179,11 +174,11 @@ export const TableMedicine = ({ dataTable }) => {
                         rel="tooltip"
                         className="btn btn-danger btn-round btn-just-icon btn-sm"
                         onClick={() => {
-                            setIdMedicine(infoMedicine.id);
-                            setDataUserMedicine(infoMedicine);
-                            setNameMedicine(infoMedicine.name);
-                            handleShowModalDelete();
-                          }}
+                          setIdMedicine(infoMedicine.id);
+                          setDataUserMedicine(infoMedicine);
+                          setNameMedicine(infoMedicine.name);
+                          handleShowModalDelete();
+                        }}
                       >
                         <FontAwesomeIcon id="btnTable" icon={faTrashCan} />
                       </button>

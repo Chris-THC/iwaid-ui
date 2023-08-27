@@ -18,6 +18,11 @@
   background-color: #f8d7da;
 }
 
+.paddingButtonConteinerPrincipal {
+  height: auto;
+  padding-bottom: 1em;
+}
+
 /* ------------------------------------------------ */
 
 #idBarNavContent {
@@ -49,18 +54,24 @@
   box-shadow: none;
 }
 
-#tableConteiner table{
+#tableConteiner table {
   margin: 0;
 }
-
-/* #tableConteiner{
-  border: solid #3c4858 1px ;
-} */
 
 /* TODO: This section is to form all crud */
 
 @media (max-width: 900px) {
   #disableCell {
     display: none;
+  }
+}
+
+@media (max-width: 800px) {
+  h4 {
+    font-size: 14px;
+  }
+
+  #inputSearch {
+    font-size: 14px;
   }
 }

@@ -8,7 +8,7 @@ export const Prescriptions = () => {
     useContext(GetTheAppContext);
 
   return (
-    <div>
+    <div className="paddingButtonConteinerPrincipal">
       <MedicalPrescriptions />
       <FloatingAlert
         show={showFloatingAlert}

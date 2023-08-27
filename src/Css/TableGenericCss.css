@@ -11,8 +11,8 @@
   align-items: center;
   background-color: #0d6efd;
   border: solid 1px #bcbcbc;
-  height: 30px;
-  width: 60px;
+  height: 45px;
+  width: 50px;
 }
 
 #iconoClear {
@@ -32,6 +32,10 @@
 }
 
 #responsiveTextTable {
+  text-align: center;
+}
+
+#btnActionTable {
   text-align: center;
 }
 
@@ -124,12 +128,12 @@
   }
 }
 
-@media (max-width: 750px) {
+@media (max-width: 800px) {
   #responsiveTextTable {
-    font-size: 12px;
+    font-size: 13px;
   }
-  #actionMedicalHistory {
-    font-size: 12px;
-    width: 20%;
+  #btnActionTable {
+    font-size: 13px;
+    width: 30%;
   }
 }

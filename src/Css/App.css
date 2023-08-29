@@ -23,11 +23,51 @@
   padding-bottom: 1em;
 }
 
-/* ------------------------------------------------ */
+/* TODO: Carrucel section */
 
+#imgCarrusel {
+  height: 90vh;
+  width: 100vw;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.carousel-item {
+  min-height: 280px;
+}
+
+/* ------------------------------------------------ */
+/* TODO: This sectios is to principal image */
+#logoImgPrincipal {
+  padding: 0;
+  margin: 0;
+  height: 70px;
+  width: 160px;
+}
+
+/* ------------------------------------------------ */
+/* TODO: This sectios is the info or add info to test */
 #idBarNavContent {
   z-index: 200;
+  padding: 0;
+  margin: 0;
+  /* background-color: #fefcfc; */
 }
+
+#infoNanBar {
+  /* border: solid 1px #2977e5; */
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+}
+#infoNanBar p {
+  margin: 0;
+  padding: 0;
+}
+
+/* ------------------------------------------------- */
 
 #DivinputSearch {
   border: none;
@@ -36,12 +76,12 @@
 }
 
 #inputSearch {
+  background-color: #faf8ff;
   border: none;
   font-size: 18px;
   line-height: 1.5;
   margin: 10px 0;
   font-weight: 300;
-
   vertical-align: middle;
   border-color: #ddd;
   font-weight: 300;
@@ -73,5 +113,11 @@
 
   #inputSearch {
     font-size: 14px;
+  }
+
+  #infoNanBar {
+    flex-direction: column;
+    justify-content: space-evenly;
+    font-size: 13px;
   }
 }

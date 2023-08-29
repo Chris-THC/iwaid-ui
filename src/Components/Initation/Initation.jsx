@@ -1,5 +1,6 @@
 import React from "react";
-import logoImage from "../Images/iwa_logo.jpg";
+import logoImage from "../../Img/XDDXDX.png";
+// import logoImage from "../Images/iwa_logo.jpg";
 import "../../Css/imagesCss.css";
 import appointment from "../Images/appointment.jpg";
 import outside from "../Images/outside.jpg";
@@ -11,14 +12,8 @@ import { FaInstagram, FaWhatsapp, FaFacebook } from "react-icons/fa";
 
 export function showLogoImage() {
   return (
-    <div>
-      <img
-        className="imgLogo"
-        src={logoImage}
-        alt="Imagen Logo"
-        width="150"
-        height="50"
-      />
+    <div style={{ margin: "0", padding: "0" }}>
+      <img id="logoImgPrincipal" src={logoImage} alt="Imagen Logo" />
     </div>
   );
 }
@@ -85,13 +80,7 @@ export const showFooter = () => {
     <div className="card-group ">
       <div className="card " style={{ backgroundColor: "#374955" }}>
         <div className="card-body ">
-          <img
-            className="imgLogo"
-            src={LogoFooter}
-            alt="Imagen Logo"
-            width="150"
-            height="50"
-          />
+          <img src={LogoFooter} alt="Imagen Logo" width="150" height="50" />
           <h5 className="card-title " id="text-footer">
             Valores que nos definen
           </h5>

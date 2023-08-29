@@ -10,7 +10,7 @@ import { Calendar } from "./Routes/Calendar";
 import { Prescriptions } from "./Routes/Prescriptions";
 import { MedicalHistory } from "./Routes/MedicalHistory";
 import { Link } from "react-router-dom";
-import { showLogoImage } from "./Initation/Initation";
+import logoImage from "../Img/image-logoInvertido.png";
 
 export function Conteiner() {
   const NotFound = () => {
@@ -23,15 +23,23 @@ export function Conteiner() {
     );
   };
 
+  const ShowPrincipalImage = () => {
+    return (
+      <div style={{ margin: "0", padding: "0" }}>
+        <img id="logoImgPrincipal" src={logoImage} alt="Imagen Logo" />
+      </div>
+    );
+  };
+
   return (
-    <div style={{ backgroundColor: "#FAF8FF" , height:"100vh"}}>
+    <div style={{ backgroundColor: "#FAF8FF", height: "100vh" }}>
       <div id="idBarNavContent" className="d-flex">
         <Link
           className="nav-link active my-custom-margin mb-2 mt-2 "
           aria-current="page"
           to="/"
         >
-          {showLogoImage()}
+          <ShowPrincipalImage />
         </Link>
 
         <div id="infoNanBar">

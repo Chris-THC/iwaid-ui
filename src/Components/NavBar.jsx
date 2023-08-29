@@ -153,9 +153,9 @@ export const NavBar = () => {
             }`}
             onClick={handleHamburgerClick}
           >
-            <span className="hamb-top" />
-            <span className="hamb-middle" />
-            <span className="hamb-bottom" />
+            <span style={{ backgroundColor: "#fff" }} className="hamb-top" />
+            <span style={{ backgroundColor: "#fff" }} className="hamb-middle" />
+            <span style={{ backgroundColor: "#fff" }} className="hamb-bottom" />
           </button>
         </div>
         {/* <div style={{ zIndex: "1000" }}>{showLogoImage()}</div> */}

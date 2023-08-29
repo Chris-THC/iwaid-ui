@@ -49,9 +49,7 @@
 /* TODO: This sectios is the info or add info to test */
 #idBarNavContent {
   z-index: 200;
-  padding: 0;
-  margin: 0;
-  /* background-color: #fefcfc; */
+  background-color: #10162c;
 }
 
 #infoNanBar {
@@ -68,10 +66,27 @@
 }
 
 /* ------------------------------------------------- */
+/* TODO: Glass efect section */
+#glassEffect {
+  background: rgba(255, 255, 255, 0.1);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+
+  color: #10162c;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50%;
+  height: 23%;
+  border-radius: 8px;
+}
+
+/* ------------------------------------------------- */
 
 #DivinputSearch {
   border: none;
-  border-bottom: solid 0.5px #8c8c8e;
+  /* border-bottom: solid 0.5px #8c8c8e; */
   box-shadow: inset;
 }
 

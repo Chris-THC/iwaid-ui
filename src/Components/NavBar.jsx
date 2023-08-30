@@ -170,7 +170,6 @@ export const NavBar = () => {
             <span style={{ backgroundColor: "#fff" }} className="hamb-bottom" />
           </button>
         </div>
-        {/* <div style={{ zIndex: "1000" }}>{showLogoImage()}</div> */}
       </div>
     </>
   );

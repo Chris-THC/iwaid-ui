@@ -42,9 +42,9 @@ export function Conteiner() {
         </Link>
 
         <div id="infoNanBar">
-          <p className=" text-light">
-            Córdoba (271) 714 5520 | Orizaba (272) 725 5019 | Veracruz (229) 980
-            8913
+          <p className="text-light m-3">
+            Córdoba (271) 714 5350 | Orizaba (272) 123 5049 | Veracruz (229) 980
+            8463
           </p>
         </div>
       </div>

@@ -1,19 +1,13 @@
 import React from "react";
 
-import img1 from "../../Img/new3.jpg";
+import img1 from "../../Img/bed-img.jpg";
 import img2 from "../../Img/new2.jpg";
-// import img3 from "../../Img/bed.jpg";
 
 export const CarouselEffect = () => {
   const MainMessage = ({ titleMessage, message, imageMessage }) => {
     return (
       <>
-        <img
-          id="imgCarrusel"
-          src={imageMessage}
-          // className="d-block img-fluid"
-          alt="Slide 1"
-        />
+        <img id="imgCarrusel" src={imageMessage} alt="Slide 1" />
 
         <div id="glassEffect" className="carousel-caption  d-md-block">
           <h5 className=" text-light">{titleMessage}</h5>

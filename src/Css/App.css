@@ -41,8 +41,7 @@
 #imgCarrusel {
   height: 90vh;
   width: 100vw;
-  background-repeat: no-repeat;
-  background-size: cover;
+  object-fit: cover;
 }
 
 .carousel-item {
@@ -62,7 +61,7 @@
 /* TODO: This sectios is the info or add info to test */
 #idBarNavContent {
   z-index: 200;
-  background-color: #10162c;
+  background-color: #2a466a;
 }
 
 #infoNanBar {

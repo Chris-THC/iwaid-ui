@@ -1,8 +1,8 @@
 import React from "react";
 
-import img1 from "../../Img/bed.jpg";
-import img2 from "../../Img/doctor.jpg";
-import img3 from "../../Img/farmacia.jpg";
+import img1 from "../../Img/new3.jpg";
+import img2 from "../../Img/new2.jpg";
+// import img3 from "../../Img/bed.jpg";
 
 export const CarouselEffect = () => {
   const MainMessage = ({ titleMessage, message, imageMessage }) => {
@@ -11,13 +11,13 @@ export const CarouselEffect = () => {
         <img
           id="imgCarrusel"
           src={imageMessage}
-          className="d-block img-fluid"
+          // className="d-block img-fluid"
           alt="Slide 1"
         />
 
         <div id="glassEffect" className="carousel-caption  d-md-block">
-          <h5>{titleMessage}</h5>
-          <p>{message}</p>
+          <h5 className=" text-light">{titleMessage}</h5>
+          <p className=" text-light">{message}</p>
         </div>
       </>
     );
@@ -57,15 +57,6 @@ export const CarouselEffect = () => {
               titleMessage={"Second slide label "}
               message={
                 "Some demonstrative placeholder content for the first slide."
-              }
-            />
-          </div>
-          <div className="carousel-item">
-            <MainMessage
-              imageMessage={img3}
-              titleMessage={"Third slide label XDXD"}
-              message={
-                "Some demonstrative placeholder content for the third slide."
               }
             />
           </div>

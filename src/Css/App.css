@@ -3,6 +3,19 @@
   margin: 0;
   box-sizing: border-box;
 }
+/* TODO: This sectios is to my tables conteiner */
+
+#conteinerTables {
+  height: 100vh;
+  background-image: linear-gradient(
+    to right top,
+    #f1f1f1,
+    #f2f2f2,
+    #f4f3f3,
+    #f5f3f4,
+    #f7f4f4
+  );
+}
 
 /* TODO: This section is with set a color to floating alert */
 
@@ -86,12 +99,12 @@
 
 #DivinputSearch {
   border: none;
-  /* border-bottom: solid 0.5px #8c8c8e; */
+  border-bottom: solid 0.5px #8c8c8e;
   box-shadow: inset;
 }
 
 #inputSearch {
-  background-color: #faf8ff;
+  background-color: #f7f4f4;
   border: none;
   font-size: 18px;
   line-height: 1.5;
@@ -105,7 +118,7 @@
 }
 
 #inputSearch:focus {
-  border: none;
+  /* border: none; */
   box-shadow: none;
 }
 

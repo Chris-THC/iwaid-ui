@@ -1,5 +1,4 @@
 import React from "react";
-// import { Menu } from "./Menu";
 import { NavBar } from "./NavBar";
 import { Routes, Route } from "react-router-dom";
 import { Home } from "./Routes/Home";
@@ -32,7 +31,7 @@ export function Conteiner() {
   };
 
   return (
-    <div style={{ backgroundColor: "#FAF8FF", height: "100vh" }}>
+    <div id="conteinerTables">
       <div id="idBarNavContent" className="d-flex">
         <Link
           className="nav-link active my-custom-margin mb-2 mt-2 "
@@ -43,7 +42,7 @@ export function Conteiner() {
         </Link>
 
         <div id="infoNanBar">
-          <p>
+          <p className=" text-light">
             Córdoba (271) 714 5520 | Orizaba (272) 725 5019 | Veracruz (229) 980
             8913
           </p>

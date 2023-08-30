@@ -75,7 +75,7 @@ export const TableMedicine = ({ dataTable }) => {
     }
   };
 
-  const AddNewDoctor = () => {
+  const AddNewMedicine = () => {
     return (
       <>
         <div>
@@ -103,7 +103,7 @@ export const TableMedicine = ({ dataTable }) => {
     );
   };
 
-  const PatientTable = () => {
+  const MedicineTable = () => {
     return (
       <div id="tableConteiner" className="shadow bg-body rounded mb-4">
         <table className="table table-responsive">
@@ -199,7 +199,7 @@ export const TableMedicine = ({ dataTable }) => {
           <>
             <div className="container mb-3 row">
               <div className="container mb-3">
-                <AddNewDoctor />
+                <AddNewMedicine />
 
                 <div className="row cont-filtros">
                   <div className="col-md-3 mb-3">
@@ -288,7 +288,7 @@ export const TableMedicine = ({ dataTable }) => {
               </div>
             </div>
 
-            <PatientTable />
+            <MedicineTable />
           </>
         ) : (
           <div>

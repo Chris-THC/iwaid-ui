@@ -12,6 +12,7 @@ import {
   faHeartPulse,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import img3 from "../Img/image-logoInvertido.png";
 
 export const NavBar = () => {
   const [isClosed, setIsClosed] = useState(false);
@@ -41,7 +42,18 @@ export const NavBar = () => {
           <ul className="nav sidebar-nav">
             <div className="sidebar-header">
               <div className="sidebar-brand">
-                <Link to="/">iWA Consultorio</Link>
+                <Link to="/">
+                  <div style={{ marginBottom: "20px" }}>
+                    <img
+                      style={{
+                        height: "70px",
+                        width: "160px",
+                      }}
+                      src={img3}
+                      alt="img"
+                    />
+                  </div>
+                </Link>
               </div>
             </div>
 

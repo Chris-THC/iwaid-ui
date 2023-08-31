@@ -1,12 +1,15 @@
-import React, { useContext,} from "react";
+import React, { useContext } from "react";
 import { GetTheAppContext } from "../../Context/AppContext";
-import { TablaGeneric } from "./table";
+import { TableMedicine } from "./TableMedicine";
 
 const MedicineList = () => {
- 
   const { dataGetAllMedicine } = useContext(GetTheAppContext);
-  
-   return <TablaGeneric title="MEDICAMENTOS" data={dataGetAllMedicine || []} />;
+
+  return (
+    <>
+      <TableMedicine dataTable={dataGetAllMedicine || []} />
+    </>
+  );
 };
 
 export default MedicineList;

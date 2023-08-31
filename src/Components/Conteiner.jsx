@@ -1,5 +1,5 @@
 import React from "react";
-import { Menu } from "./Menu";
+import { NavBar } from "./NavBar";
 import { Routes, Route } from "react-router-dom";
 import { Home } from "./Routes/Home";
 import { Doctor } from "./Routes/Doctor";
@@ -8,6 +8,8 @@ import { Medicine } from "./Routes/Medicine";
 import { Calendar } from "./Routes/Calendar";
 import { Prescriptions } from "./Routes/Prescriptions";
 import { MedicalHistory } from "./Routes/MedicalHistory";
+import { Link } from "react-router-dom";
+import logoImage from "../Img/image-logoInvertido.png";
 
 export function Conteiner() {
   const NotFound = () => {
@@ -20,9 +22,34 @@ export function Conteiner() {
     );
   };
 
+  const ShowPrincipalImage = () => {
+    return (
+      <div style={{ margin: "0", padding: "0" }}>
+        <img id="logoImgPrincipal" src={logoImage} alt="Imagen Logo" />
+      </div>
+    );
+  };
+
   return (
-    <div>
-      <Menu />
+    <div id="conteinerTables">
+      <div id="idBarNavContent" className="d-flex">
+        <Link
+          className="nav-link active my-custom-margin mb-2 mt-2 "
+          aria-current="page"
+          to="/"
+        >
+          <ShowPrincipalImage />
+        </Link>
+
+        <div id="infoNanBar">
+          <p className="text-light m-3">
+            Córdoba (271) 714 5350 | Orizaba (272) 123 5049 | Veracruz (229) 980
+            8463
+          </p>
+        </div>
+      </div>
+
+      <NavBar style={{ "z-index": 1000 }} />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/doctor" element={<Doctor />} />

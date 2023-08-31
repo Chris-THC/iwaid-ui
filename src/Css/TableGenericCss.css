@@ -1,0 +1,139 @@
+/* TODO: This is my own css code */
+#btnTable {
+  height: 15px;
+  padding-bottom: 5px;
+}
+
+#btnAdd {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #0d6efd;
+  border: solid 1px #bcbcbc;
+  height: 45px;
+  width: 50px;
+}
+
+#iconoClear {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #0d6efd;
+  border: solid 1px #bcbcbc;
+  height: 40px;
+  width: 45px;
+  margin-top: 35px;
+}
+
+.marginCheckBox {
+  margin-top: 70px;
+}
+
+#responsiveTextTable {
+  text-align: center;
+}
+
+#btnActionTable {
+  text-align: center;
+}
+
+/* TODO: ------------------- */
+
+.container h3 {
+  font-size: 25px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-weight: 300;
+  color: #3c4858;
+}
+.container h4 {
+  font-size: 18px;
+  line-height: 1.5;
+  margin: 10px 0;
+  font-weight: 300;
+  color: #3c4858;
+}
+.container option {
+  font-size: 18px;
+  line-height: 1.5;
+  margin: 10px 0;
+  font-weight: 300;
+  color: #3c4858;
+}
+
+.btn-group {
+  position: relative;
+  margin: 10px 1px;
+  display: inline-flex;
+  vertical-align: middle;
+}
+
+.btn.btn-just-icon.btn-sm {
+  height: 30px;
+  min-width: 30px;
+  width: 30px;
+}
+
+.btn.btn-just-icon {
+  height: 40px;
+  min-width: 40px;
+  width: 40px;
+  padding: 0 !important;
+  overflow: hidden;
+  position: relative;
+  line-height: 40px;
+}
+
+.btn.btn-just-icon.btn-round {
+  border-radius: 50% !important;
+  margin-right: 1px;
+}
+
+.table {
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 5px;
+}
+
+.table {
+  width: 100%;
+  max-width: 100%;
+}
+
+.table thead tr th {
+  font-size: 17px;
+}
+
+.table > thead > tr > th {
+  padding: 12px 8px;
+  vertical-align: middle;
+  border-color: #ddd;
+  font-weight: 400;
+}
+
+.table > tbody > tr > td {
+  vertical-align: middle;
+  border-color: #ddd;
+  font-weight: 300;
+  font-size: 16px;
+  color: #3c4858;
+}
+
+/* TODO: This is my section that when the page is small the component is adapte with it */
+@media (max-width: 900px) {
+  .marginCheckBox {
+    margin-top: 10px;
+  }
+}
+
+@media (max-width: 800px) {
+  #responsiveTextTable {
+    font-size: 13px;
+  }
+  #btnActionTable {
+    font-size: 13px;
+    width: 30%;
+  }
+}

@@ -135,7 +135,7 @@ export const TableDoctor = ({ dataTable }) => {
                 return nameMatches && emailMatches && specializationMatches;
               })
               .map((infoDoctor) => (
-                <tr>
+                <tr key={infoDoctor.id}>
                   <td id="responsiveTextTable">{infoDoctor.name}</td>
                   <td id="responsiveTextTable">{infoDoctor.specialty}</td>
                   <td id="responsiveTextTable">{infoDoctor.phoneNumber}</td>

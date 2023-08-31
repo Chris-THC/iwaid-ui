@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { Modal, Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { GetTheAppContext } from "../../Context/AppContext";
-import { statusCreated, statusOk  } from "../HttpStatus/HTTPStatusCode";
+import { statusCreated, statusOk } from "../HttpStatus/HTTPStatusCode";
 export const FormPatient = ({ isGetData = {} }) => {
   const currentDate = new Date().toISOString().split("T")[0];
 
@@ -100,7 +100,7 @@ export const FormPatient = ({ isGetData = {} }) => {
           </div>
 
           <div className="form-group row">
-            <div className="form-group col-md-8">
+            <div className="form-group col-md-5">
               <label>Fecha de Nacimiento</label>
               <span className="text-danger">*</span>
               <input
@@ -122,7 +122,7 @@ export const FormPatient = ({ isGetData = {} }) => {
               )}
             </div>
 
-            <div className="form-group col-md-4 mb-3">
+            <div className="form-group col-md-7 mb-3">
               <label>Género</label>
               <span className="text-danger">*</span>
               <select
@@ -144,7 +144,7 @@ export const FormPatient = ({ isGetData = {} }) => {
         </div>
 
         <div className="form-group row ">
-          <div className="form-group col-md-8 mb-3">
+          <div className="form-group col-md-6 mb-3">
             <label>RFC</label>
             <span className="text-danger">*</span>
             <input
@@ -158,6 +158,38 @@ export const FormPatient = ({ isGetData = {} }) => {
               style={{ textTransform: "uppercase" }}
             />
             {rfcError && <span className="text-danger">{rfcError}</span>}
+          </div>
+
+          <div className="form-group col-md-6 mb-3">
+            <label htmlFor="inputPhone">Teléfono</label>
+            <span className="text-danger">*</span>
+            <input
+              type="tel"
+              className="form-control"
+              placeholder="Número de teléfono"
+              autoComplete="off"
+              {...register("phoneNumber", {
+                required: true,
+                pattern: /^[0-9]+$/,
+                minLength: 10,
+                maxLength: 10,
+              })}
+              defaultValue={isGetData.phoneNumber}
+            />
+            {errors.phoneNumber?.type === "required" && (
+              <span className="text-danger">Dato requerido</span>
+            )}
+            {errors.phoneNumber?.type === "pattern" && (
+              <span className="text-danger">Ingrese solo números</span>
+            )}
+            {errors.phoneNumber?.type === "minLength" && (
+              <span className="text-danger">
+                Debe tener al menos 10 dígitos
+              </span>
+            )}
+            {errors.phoneNumber?.type === "maxLength" && (
+              <span className="text-danger">Máximo 10 dígitos</span>
+            )}
           </div>
 
           <div className="form-group col-md-8 mb-3">
@@ -202,38 +234,6 @@ export const FormPatient = ({ isGetData = {} }) => {
 
         <div className="form-group row">
           <div className="form-group col-md-6 mb-3">
-            <label htmlFor="inputPhone">Teléfono</label>
-            <span className="text-danger">*</span>
-            <input
-              type="tel"
-              className="form-control"
-              placeholder="Número de teléfono"
-              autoComplete="off"
-              {...register("phoneNumber", {
-                required: true,
-                pattern: /^[0-9]+$/,
-                minLength: 10,
-                maxLength: 10,
-              })}
-              defaultValue={isGetData.phoneNumber}
-            />
-            {errors.phoneNumber?.type === "required" && (
-              <span className="text-danger">Dato requerido</span>
-            )}
-            {errors.phoneNumber?.type === "pattern" && (
-              <span className="text-danger">Ingrese solo números</span>
-            )}
-            {errors.phoneNumber?.type === "minLength" && (
-              <span className="text-danger">
-                Debe tener al menos 10 dígitos
-              </span>
-            )}
-            {errors.phoneNumber?.type === "maxLength" && (
-              <span className="text-danger">Máximo 10 dígitos</span>
-            )}
-          </div>
-
-          <div className="form-group col-md-6 mb-3">
             <label htmlFor="inputEmail">Correo</label>
             <span className="text-danger">*</span>
             <input
@@ -253,13 +253,36 @@ export const FormPatient = ({ isGetData = {} }) => {
               <span className="text-danger">Formato de correo inválido</span>
             )}
           </div>
+
+          <div className="form-group col-md-6 mb-3">
+            <label htmlFor="inputPhone">Contraseña</label>
+            <span className="text-danger">*</span>
+            <input
+              type="password"
+              className="form-control"
+              placeholder="Contraseña"
+              autoComplete="off"
+              {...register("password", {
+                required: true,
+              })}
+              defaultValue={isGetData.password}
+            />
+            {errors.phoneNumber?.type === "required" && (
+              <span className="text-danger">Dato requerido</span>
+            )}
+          </div>
         </div>
 
         <div>
           <Modal.Footer>
-          <button type="button" className="btn btn btn-light  btn-outline-danger"
-          onClick={handleCloseModal}
-          data-bs-dismiss="modal">Cancelar</button>
+            <button
+              type="button"
+              className="btn btn btn-light  btn-outline-danger"
+              onClick={handleCloseModal}
+              data-bs-dismiss="modal"
+            >
+              Cancelar
+            </button>
             <Button
               type="submit"
               onClick={() => {

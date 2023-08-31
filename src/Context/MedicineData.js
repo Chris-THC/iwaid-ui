@@ -1,5 +1,6 @@
 import axios from "axios";
-const MedicineURL = "http://localhost:8081/iwaid/medicines/";
+import { URL_API_BACKEND } from "../config/config.js";
+const MedicineURL = `${URL_API_BACKEND}/medicines/`;
 
 export const getAllMedicineDataFunction = async (setAllDataMedicine) => {
   try {

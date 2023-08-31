@@ -1,5 +1,6 @@
 import axios from "axios";
-const prescriptions_URL = "http://localhost:8081/iwaid/medicalhistory/";
+import { URL_API_BACKEND } from "../config/config.js";
+const prescriptions_URL = `${URL_API_BACKEND}/medicalhistory/`;
 
 const handleRequest = async (urlClient, methodClient, dataClient = null) => {
   try {

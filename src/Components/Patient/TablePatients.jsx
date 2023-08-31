@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import "../../Css/TableGenericCss.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { GetTheAppContext } from "../../Context/AppContext";
-import { ModalMedicalPrescriptions } from "./ModalMedicalPrescriptions";
+import { ModalPatient } from "./ModalPatient";
 import { ModalDelete } from "../../ModalDelete/ModalDelete";
 import { Button } from "react-bootstrap";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
@@ -16,7 +16,7 @@ import {
   faUserPlus,
 } from "@fortawesome/free-solid-svg-icons";
 
-export const TableMedicalPrescriptions = ({ dataTable }) => {
+export const TablePatients = ({ dataTable }) => {
   const [showModalDelete, setShowModalDelete] = useState(false);
 
   const handleShowModalDelete = () => {
@@ -33,56 +33,57 @@ export const TableMedicalPrescriptions = ({ dataTable }) => {
     showModal,
     setGetDataFromTable,
     setActionButtonModal,
-    setDataPrescription,
-    allPrescriptionsFromApiFunction,
-    deletePrescriptionFunction,
-    setAllPrescriptionsData,
     setTextAlert,
+    setDataUserPatient,
+    setPatientId,
+    deletePatientFunction,
+    getAllPatientDataFunction,
+    setGetAllPatientsData,
+    patientId,
+    dataUserPatient,
     handleShowFloatAlter,
-    dataPrescription,
-    setPrescriptionDoctorId,
   } = useContext(GetTheAppContext);
-
-  const [searchByNamePatient, setSearchByNamePatient] = useState("");
-  const [searchByDoctor, setSearchByDoctor] = useState("");
-  const [searchByStartDate, setSearchByStartDate] = useState("");
-  const [searchByFinalDate, setSearchByFinalDate] = useState("");
-
-  const handleClear = () => {
-    setSearchByNamePatient("");
-    setSearchByDoctor("");
-    setSearchByStartDate("");
-    setSearchByFinalDate("");
-  };
 
   const changeDateFormat = (originalDate) => {
     let piecesDate = originalDate.split("-");
     return piecesDate[2] + "/" + piecesDate[1] + "/" + piecesDate[0];
   };
 
+  const [searchByName, setSearchByName] = useState("");
+  const [searchByGender, setSearchByGender] = useState("");
+  const [searchByCity, setSearchByCity] = useState("");
+  const [searchByDateOfBirth, setSearchByDateOfBirth] = useState("");
+  const [searchByRfc, setSearchByRfc] = useState("");
+
+  const handleClear = () => {
+    setSearchByName("");
+    setSearchByGender("");
+    setSearchByCity("");
+    setSearchByDateOfBirth("");
+    setSearchByRfc("");
+  };
+
   const funtionToDeleted = async () => {
     setActionButtonModal("Eliminar");
-    const response = await deletePrescriptionFunction(dataPrescription.id);
+    const response = await deletePatientFunction(patientId);
 
     if (response.status === statusOk) {
-      await allPrescriptionsFromApiFunction(setAllPrescriptionsData);
+      await getAllPatientDataFunction(setGetAllPatientsData);
       handleCloseModalDelete();
-      setTextAlert(
-        `Se eliminó la prescripción del paciente ${dataPrescription.patient.name}`
-      );
+      setTextAlert(`Se eliminó al paciente ${dataUserPatient.name}`);
       handleShowFloatAlter();
     } else {
       handleCloseModalDelete();
-      setTextAlert("Error al eliminar la prescripción");
+      setTextAlert("Error al eliminar el paciente");
       handleShowFloatAlter();
     }
   };
 
-  const AddNewMedicalPrescription = () => {
+  const AddNewPatient = () => {
     return (
       <>
         <div>
-          <h1>Prescripciones Médicas</h1>
+          <h1>Pacientes</h1>
         </div>
         <div className="col-12 d-flex flex-row-reverse ">
           <OverlayTrigger
@@ -94,8 +95,8 @@ export const TableMedicalPrescriptions = ({ dataTable }) => {
               className="ms-2 me-2 mb-1"
               variant="primary"
               onClick={() => {
-                setDataPrescription({});
                 handleShowModal();
+                setGetDataFromTable([]);
                 setActionButtonModal("Agregar");
               }}
             >
@@ -107,59 +108,60 @@ export const TableMedicalPrescriptions = ({ dataTable }) => {
     );
   };
 
-  const MedicalPrescriptionTable = () => {
+  const PatientTable = () => {
     return (
-      <div id="tableConteiner" className="shadow bg-body rounded">
+      <div id="tableConteiner" className="shadow bg-body rounded mb-4">
         <table className="table table-responsive">
           <thead>
             <tr>
-              <th id="responsiveTextTable">Paciente</th>
-              <th id="responsiveTextTable">Médico</th>
-              <th id="responsiveTextTable">Fecha de Asignación</th>
-              <th id="disableCell">Descripción</th>
+              <th id="responsiveTextTable">Nombre</th>
+              <th id="disableCell">Género</th>
+              <th id="responsiveTextTable">Ciudad</th>
+              <th id="responsiveTextTable">Año nacimiento</th>
+              <th id="disableCell">RFC</th>
               <th id="btnActionTable">Acciones</th>
             </tr>
           </thead>
           <tbody>
             {dataTable
-              .filter((field) => {
-                const patientNameMatches = field.patient.name
+              .filter((item) => {
+                const nameMatches = item.name
                   .toLowerCase()
-                  .includes(searchByNamePatient.toLowerCase());
+                  .includes(searchByName.toLowerCase());
 
-                const doctorNameMatches = field.doctor.name
+                const genderMatches = item.gender
                   .toLowerCase()
-                  .includes(searchByDoctor.toLowerCase());
+                  .includes(searchByGender.toLowerCase());
 
-                const startDateMatch =
-                  !searchByStartDate ||
-                  (searchByStartDate &&
-                    new Date(field.registerDate) >=
-                      new Date(searchByStartDate));
+                const cityMatches = item.city
+                  .toLowerCase()
+                  .includes(searchByCity.toLowerCase());
 
-                const finalDateMatch =
-                  !searchByFinalDate ||
-                  (searchByFinalDate &&
-                    new Date(field.registerDate) <=
-                      new Date(searchByFinalDate));
+                const dateMatches = item.dateOfBirth
+                  .toLowerCase()
+                  .includes(searchByDateOfBirth.toLowerCase());
+
+                const rfcMatches = item.rfc
+                  .toLowerCase()
+                  .includes(searchByRfc.toLowerCase());
 
                 return (
-                  patientNameMatches &&
-                  doctorNameMatches &&
-                  startDateMatch &&
-                  finalDateMatch
+                  nameMatches &&
+                  genderMatches &&
+                  cityMatches &&
+                  dateMatches &&
+                  rfcMatches
                 );
               })
-              .map((infoMedicalPrescriotion) => (
-                <tr key={infoMedicalPrescriotion.id}>
-                  <td id="responsiveTextTable">{infoMedicalPrescriotion.patient.name}</td>
-                  <td id="responsiveTextTable">{infoMedicalPrescriotion.doctor.name}</td>
-                  <td id="responsiveTextTable">
-                    {changeDateFormat(infoMedicalPrescriotion.registerDate)}
+              .map((infoPatient) => (
+                <tr>
+                  <td id="responsiveTextTable">{infoPatient.name}</td>
+                  <td id="disableCell">{infoPatient.gender}</td>
+                  <td id="responsiveTextTable">{infoPatient.city}</td>
+                  <td id="responsiveTextTable" className="text-wrap">
+                    {changeDateFormat(infoPatient.dateOfBirth)}
                   </td>
-                  <td id="disableCell">
-                    {infoMedicalPrescriotion.description}
-                  </td>
+                  <td id="disableCell">{infoPatient.rfc}</td>
 
                   <td id="btnActionTable" className="td-actions text-center">
                     <OverlayTrigger
@@ -172,12 +174,9 @@ export const TableMedicalPrescriptions = ({ dataTable }) => {
                         className="btn btn btn-primary btn-round btn-just-icon btn-sm m-1"
                         onClick={() => {
                           handleShowModal();
-                          setGetDataFromTable(infoMedicalPrescriotion);
+                          setGetDataFromTable(infoPatient);
+                          setPatientId(infoPatient.id);
                           setActionButtonModal("Editar");
-                          setDataPrescription(infoMedicalPrescriotion);
-                          setPrescriptionDoctorId(
-                            infoMedicalPrescriotion.doctor.id
-                          );
                         }}
                       >
                         <FontAwesomeIcon id="btnTable" icon={faPen} />
@@ -193,7 +192,8 @@ export const TableMedicalPrescriptions = ({ dataTable }) => {
                         rel="tooltip"
                         className="btn btn-danger btn-round btn-just-icon btn-sm"
                         onClick={() => {
-                          setDataPrescription(infoMedicalPrescriotion);
+                          setPatientId(infoPatient.id);
+                          setDataUserPatient(infoPatient);
                           handleShowModalDelete();
                         }}
                       >
@@ -216,90 +216,115 @@ export const TableMedicalPrescriptions = ({ dataTable }) => {
           <>
             <div className="container mb-3 row">
               <div className="container mb-3">
-                <AddNewMedicalPrescription />
+                <AddNewPatient />
 
                 <div className="row cont-filtros">
-                  <div className="col-md-12 col-lg-3 mb-3">
+                  <div className="col-md-12 col-lg-2  mb-3">
                     <h4>Nombre</h4>
                     <div id="DivinputSearch">
                       <input
                         id="inputSearch"
                         autoComplete="off"
                         type="text"
-                        className="form-control"
-                        value={searchByNamePatient}
+                        className="form-control inputTable"
+                        value={searchByName}
                         onChange={(e) => {
-                          setSearchByNamePatient(e.target.value);
-                          setSearchByDoctor("");
-                          setSearchByStartDate("");
-                          setSearchByFinalDate("");
+                          setSearchByName(e.target.value);
+                          setSearchByGender("");
+                          setSearchByCity("");
+                          setSearchByDateOfBirth("");
+                          setSearchByRfc("");
                         }}
                         placeholder="Buscar por nombre..."
-                        pattern="^[A-Za-z\s]+$"
+                        pattern="^[a-zA-Z\sÀ-ÖØ-öø-ÿ]+$"
                       />
                     </div>
                   </div>
 
-                  <div className="col-md-12 col-lg-3 mb-3">
-                    <h4>Médico</h4>
+                  <div className="col-md-12 col-lg-2 mb-3">
+                    <h4>Género</h4>
+                    <div id="DivinputSearch">
+                      <select
+                        id="inputSearch"
+                        className="form-control inputTable"
+                        value={searchByGender}
+                        onChange={(e) => {
+                          setSearchByGender(e.target.value);
+                          setSearchByName("");
+                          setSearchByCity("");
+                          setSearchByDateOfBirth("");
+                          setSearchByRfc("");
+                        }}
+                      >
+                        <option value="">Seleccionar género...</option>
+                        <option value="Masculino">Masculino</option>
+                        <option value="Femenino">Femenino</option>
+                        <option value="Otro">Otro</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div className="col-md-12 col-lg-2 mb-3">
+                    <h4>Ciudad</h4>
                     <div id="DivinputSearch">
                       <input
                         id="inputSearch"
-                        autoComplete="off"
                         type="text"
-                        className="form-control"
-                        value={searchByDoctor}
+                        className="form-control inputTable"
+                        value={searchByCity}
                         onChange={(e) => {
-                          setSearchByDoctor(e.target.value);
-                          setSearchByNamePatient("");
-                          setSearchByStartDate("");
-                          setSearchByFinalDate("");
+                          setSearchByCity(e.target.value);
+                          setSearchByName("");
+                          setSearchByGender("");
+                          setSearchByDateOfBirth("");
+                          setSearchByRfc("");
                         }}
-                        placeholder="Buscar por médico..."
-                        pattern="^[A-Za-z\s]+$"
+                        placeholder="Buscar por ciudad..."
                       />
                     </div>
                   </div>
 
                   <div className="col-md-12 col-lg-2 mb-3">
-                    <h4>Fecha inicial</h4>
+                    <h4>RFC</h4>
                     <div id="DivinputSearch">
                       <input
                         id="inputSearch"
-                        autoComplete="off"
-                        type="date"
-                        className="form-control"
-                        value={searchByStartDate}
+                        type="text"
+                        className="form-control inputTable"
+                        value={searchByRfc}
                         onChange={(e) => {
-                          setSearchByStartDate(e.target.value);
-                          setSearchByDoctor("");
-                          setSearchByNamePatient("");
+                          setSearchByRfc(e.target.value);
+                          setSearchByDateOfBirth("");
+                          setSearchByName("");
+                          setSearchByGender("");
+                          setSearchByCity("");
                         }}
-                        placeholder="Buscar por fecha inicial..."
+                        placeholder="Buscar por RFC..."
                       />
                     </div>
                   </div>
 
                   <div className="col-md-12 col-lg-2 mb-3">
-                    <h4>Fecha final</h4>
+                    <h4>Año</h4>
                     <div id="DivinputSearch">
                       <input
                         id="inputSearch"
-                        autoComplete="off"
-                        type="date"
-                        className="form-control"
-                        value={searchByFinalDate}
+                        type="number"
+                        className="form-control inputTable"
+                        value={searchByDateOfBirth}
                         onChange={(e) => {
-                          setSearchByFinalDate(e.target.value);
-                          setSearchByDoctor("");
-                          setSearchByNamePatient("");
+                          setSearchByDateOfBirth(e.target.value);
+                          setSearchByName("");
+                          setSearchByGender("");
+                          setSearchByCity("");
+                          setSearchByRfc("");
                         }}
-                        placeholder="Buscar por fecha final..."
+                        placeholder="Buscar año de nacimiento..."
                       />
                     </div>
                   </div>
 
-                  <div className="mt-1 ml-4 col-md-1 d-flex ">
+                  <div className="mt-2 ml-4 col-md-2 d-flex justify-content align-items-center">
                     <OverlayTrigger
                       placement="top"
                       overlay={<Tooltip id="tooltip-clear">Limpiar</Tooltip>}
@@ -322,7 +347,7 @@ export const TableMedicalPrescriptions = ({ dataTable }) => {
               </div>
             </div>
 
-            <MedicalPrescriptionTable />
+            <PatientTable />
           </>
         ) : (
           <div>
@@ -331,18 +356,12 @@ export const TableMedicalPrescriptions = ({ dataTable }) => {
         )}
       </div>
 
-      <ModalMedicalPrescriptions
-        show={showModal}
-        handleClose={handleCloseModal}
-      />
-
+      <ModalPatient show={showModal} handleClose={handleCloseModal} />
       <ModalDelete
         show={showModalDelete}
         handleClose={handleCloseModalDelete}
         funtionToDeleted={funtionToDeleted}
-        messageToDelete={
-          "¿Está seguro de que desea eliminar esta prescripción?"
-        }
+        messageToDelete={"¿Está seguro de que desea eliminar este paciente?"}
       />
     </>
   );

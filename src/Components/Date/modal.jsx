@@ -3,9 +3,9 @@ import { Modal } from "react-bootstrap";
 import { FormCitas } from "./FormDate";
 import { GetTheAppContext } from "../../Context/AppContext";
 
-export const ModalMedicine = ({ show, handleClose }) => {
+export const ModalDates = ({ show, handleClose }) => {
   const { setGetDataFromTable, getDataFromTable, actionButtonModal } =
-  useContext(GetTheAppContext);
+    useContext(GetTheAppContext);
 
   return (
     <Modal
@@ -16,8 +16,8 @@ export const ModalMedicine = ({ show, handleClose }) => {
         setGetDataFromTable({});
       }}
     >
-      <Modal.Header >
-        <Modal.Title>{actionButtonModal} cita médica</Modal.Title>
+      <Modal.Header>
+        <Modal.Title>{actionButtonModal} médico</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <FormCitas isGetData={getDataFromTable} />

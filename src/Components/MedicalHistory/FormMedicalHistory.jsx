@@ -372,7 +372,7 @@ export const FormMedicalHistory = ({ isGetData = {} }) => {
           <Modal.Footer>
             <button
               type="button"
-              class="btn btn btn-light  btn-outline-danger"
+              className="btn btn btn-light  btn-outline-danger"
               onClick={handleCloseModal}
               data-bs-dismiss="modal"
             >

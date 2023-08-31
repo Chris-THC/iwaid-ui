@@ -7,7 +7,7 @@ export const Doctor = () => {
   const { showFloatingAlert, textAlert, handleCloseFloatAlert } =
     useContext(GetTheAppContext);
   return (
-    <div>
+    <div className="paddingButtonConteinerPrincipal">
       <DoctorList />
       <FloatingAlert
         show={showFloatingAlert}

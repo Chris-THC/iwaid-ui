@@ -1,35 +1,49 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import "../../Css/NavLink.css";
 
 export const Tabs = () => {
   return (
     <div>
       <ul className="nav nav-tabs">
         <li className="nav-item">
-          <Link
-            className="nav-link active"
+          <NavLink
+            id="navLinkColor"
+            className="nav-link"
             aria-current="page"
-            to="/patient/personal/information"
+            to="/patient/home/"
           >
             Informacion Personal
-          </Link>
+          </NavLink>
         </li>
         <li className="nav-item">
-          <Link className="nav-link" to="/patient/medical/dates">
+          <NavLink
+            id="navLinkColor"
+            className="nav-link"
+            to="/patient/home/medical/dates"
+          >
             Citas programadas
-          </Link>
+          </NavLink>
         </li>
 
         <li className="nav-item">
-          <Link className="nav-link" to="/patient/medical/prescriptions">
+          <NavLink
+            id="navLinkColor"
+            className="nav-link"
+            to="/patient/home/medical/prescriptions"
+          >
             Recetas medicas
-          </Link>
+          </NavLink>
         </li>
 
         <li className="nav-item">
-          <Link className="nav-link" to="/patient/medical/history">
+          <NavLink
+            id="navLinkColor"
+            className="nav-link"
+            to="/patient/home/medical/history"
+          >
             Historial Médico
-          </Link>
+          </NavLink>
         </li>
       </ul>
     </div>

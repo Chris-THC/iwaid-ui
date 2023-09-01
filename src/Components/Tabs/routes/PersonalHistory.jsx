@@ -2,6 +2,6 @@ import React from 'react'
 
 export const PersonalHistory = () => {
   return (
-    <div>PersonalHistory</div>
+    <div>Personal History</div>
   )
 }

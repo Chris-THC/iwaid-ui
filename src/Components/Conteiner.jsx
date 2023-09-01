@@ -1,6 +1,7 @@
 import React from "react";
+import logoImage from "../Img/image-logoInvertido.png";
 import { NavBar } from "./NavBar";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Link } from "react-router-dom";
 import { Home } from "./Routes/Home";
 import { Doctor } from "./Routes/Doctor";
 import { Patient } from "./Routes/Patient";
@@ -8,13 +9,18 @@ import { Medicine } from "./Routes/Medicine";
 import { Calendar } from "./Routes/Calendar";
 import { Prescriptions } from "./Routes/Prescriptions";
 import { MedicalHistory } from "./Routes/MedicalHistory";
-import { Link } from "react-router-dom";
-import logoImage from "../Img/image-logoInvertido.png";
+import { PatientHomePage } from "./Routes/PatientHomePage";
+// TODO:This sectios is the patient personal information
+import { PersonalDates } from "./Tabs/routes/PersonalDates";
+import { PersonalHistory } from "./Tabs/routes/PersonalHistory";
+import { PersonalPrescriptions } from "./Tabs/routes/PersonalPrescriptions";
+import { Personalformation } from "./Tabs/routes/Personalformation";
+import { Tabs } from "./Tabs/Tabs";
 
 export function Conteiner() {
   const NotFound = () => {
     return (
-      <div className=" container alert alert-danger">
+      <div className="container alert alert-danger">
         <h1 className="text-center">
           Lo sentimos, la página que estás buscando no se encuentra disponible.
         </h1>
@@ -29,6 +35,8 @@ export function Conteiner() {
       </div>
     );
   };
+
+  const isPatientRegister = true;
 
   return (
     <div id="conteinerTables">
@@ -50,6 +58,9 @@ export function Conteiner() {
       </div>
 
       <NavBar style={{ "z-index": 1000 }} />
+
+      {isPatientRegister ? <Tabs /> : null}
+
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/doctor" element={<Doctor />} />
@@ -57,7 +68,20 @@ export function Conteiner() {
         <Route path="/medicine" element={<Medicine />} />
         <Route path="/calendar" element={<Calendar />} />
         <Route path="/prescriptions" element={<Prescriptions />} />
-        <Route path="/medical-history" element={<MedicalHistory />} />
+        <Route path="/medical/history" element={<MedicalHistory />} />
+        <Route path="/patient/home" element={<PatientHomePage />} />
+
+        <Route
+          path="/patient/personal/information"
+          element={<Personalformation />}
+        />
+        <Route path="/patient/medical/dates" element={<PersonalDates />} />
+        <Route
+          path="/patient/medical/prescriptions"
+          element={<PersonalPrescriptions />}
+        />
+        <Route path="/patient/medical/history" element={<PersonalHistory />} />
+
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>

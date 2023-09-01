@@ -143,7 +143,7 @@ export const NavBar = () => {
                   </Link>
                 </li>
                 <li>
-                  <Link className="dropdown-item" to="/medical-history">
+                  <Link className="dropdown-item" to="/medical/history">
                     <FontAwesomeIcon
                       className="ms-6 me-2"
                       icon={faHeartPulse}

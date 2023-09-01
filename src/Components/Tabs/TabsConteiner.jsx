@@ -1,9 +1,9 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import { PersonalDates } from "./page/PersonalDates";
-import { PersonalHistory } from "./page/PersonalHistory";
-import { PersonalPrescriptions } from "./page/PersonalPrescriptions";
-import { Personalformation } from "./page/Personalformation";
+import { PersonalDates } from "./pages/PersonalDates";
+import { PersonalHistory } from "./pages/PersonalHistory";
+import { PersonalPrescriptions } from "./pages/PersonalPrescriptions";
+import { Personalformation } from "./pages/Personalformation";
 import { Tabs } from "./Tabs";
 
 export const TabsConteiner = () => {

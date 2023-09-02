@@ -10,12 +10,6 @@ import { Calendar } from "./Routes/Calendar";
 import { Prescriptions } from "./Routes/Prescriptions";
 import { MedicalHistory } from "./Routes/MedicalHistory";
 import { PatientHomePage } from "./Routes/PatientHomePage";
-// TODO:This sectios is the patient personal information
-// import { PersonalDates } from "./Tabs/routes/PersonalDates";
-// import { PersonalHistory } from "./Tabs/routes/PersonalHistory";
-// import { PersonalPrescriptions } from "./Tabs/routes/PersonalPrescriptions";
-// import { Personalformation } from "./Tabs/routes/Personalformation";
-// import { Tabs } from "./Tabs/Tabs";
 
 export function Conteiner() {
   const NotFound = () => {

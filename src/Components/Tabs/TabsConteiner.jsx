@@ -18,10 +18,7 @@ export const TabsConteiner = () => {
           element={<PersonalPrescriptions />}
         />
         <Route path="/medical/history" element={<PersonalHistory />} />
-        <Route
-          path="/*"
-          element={<div>Error 404 Not Found Page</div>}
-        />
+        <Route path="/*" element={<div>Error 404 Not Found Page</div>} />
       </Routes>
     </div>
   );

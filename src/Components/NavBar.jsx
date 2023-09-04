@@ -10,6 +10,7 @@ import {
   faCalendarDays,
   faFileWaveform,
   faHeartPulse,
+  faAddressCard,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import img3 from "../Img/image-logoInvertido.png";
@@ -72,6 +73,7 @@ export const NavBar = () => {
                 />
                 Datos Maestros <span className="caret" />
               </a>
+
               <ul className="dropdown-menu animated fadeInLeft">
                 <li>
                   <Link className="dropdown-item" to="/doctor">
@@ -150,6 +152,38 @@ export const NavBar = () => {
                       style={{ color: "#ffffff", height: "20px" }}
                     />
                     Historial Médico
+                  </Link>
+                </li>
+              </ul>
+            </li>
+
+            <li className="nav-item dropdown position-relative">
+              <a
+                href="#works"
+                className="nav-link dropdown-toggle"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                <FontAwesomeIcon
+                  className="ms-6 me-2"
+                  icon={faUser}
+                  style={{ color: "#ffffff", height: "20px" }}
+                />
+                Pacinete <span className="caret" />
+              </a>
+              <ul className="dropdown-menu animated fadeInLeft">
+                <li>
+                  <Link
+                    className="dropdown-item"
+                    to="/patient/medical/information"
+                  >
+                    <FontAwesomeIcon
+                      className="ms-6 me-2"
+                      icon={faAddressCard}
+                      style={{ color: "#ffffff", height: "20px" }}
+                    />
+                    Informacion Personal
                   </Link>
                 </li>
               </ul>

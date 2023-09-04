@@ -1,3 +1,9 @@
-#navLinkColor{
-    color: #2a466a;
+#navLinkColor {
+  color: #2a466a;
+}
+
+#desableInputPatinetInfo {
+  color: #50555b;
+  cursor: not-allowed;
+  background-color: #ffffff;
 }

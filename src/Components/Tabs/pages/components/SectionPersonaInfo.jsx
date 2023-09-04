@@ -16,10 +16,12 @@ export const SectionPersonaInfo = ({ isGetData = {} }) => {
                       Nombre Completo <span className="text-danger">*</span>
                     </label>
                     <input
+                      id="desableInputPatinetInfo"
                       type="text"
                       defaultValue={isGetData.name}
                       className="form-control"
                       placeholder="Nombre Completo"
+                      disabled
                     />
                   </div>
 
@@ -28,6 +30,8 @@ export const SectionPersonaInfo = ({ isGetData = {} }) => {
                       Fecha de Nacimiento <span className="text-danger">*</span>
                     </label>
                     <input
+                      id="desableInputPatinetInfo"
+                      disabled
                       type="date"
                       className="form-control"
                       defaultValue={isGetData.dateOfBirth}
@@ -43,6 +47,8 @@ export const SectionPersonaInfo = ({ isGetData = {} }) => {
                       className="form-control"
                       defaultValue={isGetData.gender}
                       placeholder="Genero"
+                      id="desableInputPatinetInfo"
+                      disabled
                     />
                   </div>
 
@@ -55,6 +61,8 @@ export const SectionPersonaInfo = ({ isGetData = {} }) => {
                       className="form-control"
                       defaultValue={isGetData.rfc}
                       placeholder="RFC"
+                      id="desableInputPatinetInfo"
+                      disabled
                     />
                   </div>
 
@@ -67,6 +75,8 @@ export const SectionPersonaInfo = ({ isGetData = {} }) => {
                       className="form-control"
                       defaultValue={isGetData.phoneNumber}
                       placeholder="Teléfono"
+                      id="desableInputPatinetInfo"
+                      disabled
                     />
                   </div>
 
@@ -79,6 +89,8 @@ export const SectionPersonaInfo = ({ isGetData = {} }) => {
                       className="form-control"
                       defaultValue={isGetData.city}
                       placeholder="Teléfono"
+                      id="desableInputPatinetInfo"
+                      disabled
                     />
                   </div>
 
@@ -91,6 +103,8 @@ export const SectionPersonaInfo = ({ isGetData = {} }) => {
                       className="form-control"
                       defaultValue={isGetData.address}
                       placeholder="Ingrese su dirección"
+                      id="desableInputPatinetInfo"
+                      disabled
                     />
                   </div>
 
@@ -103,6 +117,8 @@ export const SectionPersonaInfo = ({ isGetData = {} }) => {
                       className="form-control"
                       defaultValue={isGetData.email}
                       placeholder="Correo electronico"
+                      id="desableInputPatinetInfo"
+                      disabled
                     />
                   </div>
 
@@ -115,6 +131,8 @@ export const SectionPersonaInfo = ({ isGetData = {} }) => {
                       className="form-control"
                       defaultValue={isGetData.password}
                       placeholder="Contraseña"
+                      id="desableInputPatinetInfo"
+                      disabled
                     />
                   </div>
                 </div>

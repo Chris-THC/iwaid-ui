@@ -171,7 +171,7 @@ export const NavBar = () => {
                   icon={faUser}
                   style={{ color: "#ffffff", height: "20px" }}
                 />
-                Pacinete <span className="caret" />
+                Paciente <span className="caret" />
               </a>
               <ul className="dropdown-menu animated fadeInLeft">
                 <li>
@@ -191,7 +191,7 @@ export const NavBar = () => {
             </li>
 
             <li>
-              <Link className="dropdown-item" to="/patient/medical/information">
+              <Link className="dropdown-item" to="/">
                 <FontAwesomeIcon
                   className="ms-6 me-2"
                   icon={faRightFromBracket}
@@ -206,12 +206,15 @@ export const NavBar = () => {
                 <FontAwesomeIcon
                   className="ms-6 me-2"
                   icon={faRightFromBracket}
-                  style={{ color: "#ffffff", height: "20px", transform:"scaleX(-1)" }}
+                  style={{
+                    color: "#ffffff",
+                    height: "20px",
+                    transform: "scaleX(-1)",
+                  }}
                 />
                 Cerrar Sesión
               </Link>
             </li>
-            
           </ul>
         </nav>
 

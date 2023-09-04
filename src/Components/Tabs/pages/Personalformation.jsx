@@ -22,7 +22,7 @@ export const Personalformation = () => {
 
   return (
     <div style={{ backgroundColor: "#f1f1f1" }} className="conteiner">
-      <SectionPersonaInfo isGetData={personalInformation} />
+      <SectionPersonaInfo isGetData={personalInformation || {}} />
     </div>
   );
 };

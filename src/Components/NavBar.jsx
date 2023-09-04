@@ -11,6 +11,7 @@ import {
   faFileWaveform,
   faHeartPulse,
   faAddressCard,
+  faRightFromBracket,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import img3 from "../Img/image-logoInvertido.png";
@@ -188,6 +189,29 @@ export const NavBar = () => {
                 </li>
               </ul>
             </li>
+
+            <li>
+              <Link className="dropdown-item" to="/patient/medical/information">
+                <FontAwesomeIcon
+                  className="ms-6 me-2"
+                  icon={faRightFromBracket}
+                  style={{ color: "#ffffff", height: "20px" }}
+                />
+                Iniciar Sesión
+              </Link>
+            </li>
+
+            <li>
+              <Link className="dropdown-item" to="/">
+                <FontAwesomeIcon
+                  className="ms-6 me-2"
+                  icon={faRightFromBracket}
+                  style={{ color: "#ffffff", height: "20px", transform:"scaleX(-1)" }}
+                />
+                Cerrar Sesión
+              </Link>
+            </li>
+            
           </ul>
         </nav>
 

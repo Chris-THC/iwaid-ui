@@ -11,6 +11,11 @@ import { Prescriptions } from "./Routes/Prescriptions";
 import { MedicalHistory } from "./Routes/MedicalHistory";
 import { PatientHomePage } from "./Routes/PatientHomePage";
 
+import { PersonalDates } from "./Tabs/pages/PersonalDates";
+import { PersonalHistory } from "./Tabs/pages/PersonalHistory";
+import { PersonalPrescriptions } from "./Tabs/pages/PersonalPrescriptions";
+import { Personalformation } from "./Tabs/pages/Personalformation";
+
 export function Conteiner() {
   const NotFound = () => {
     return (
@@ -30,8 +35,8 @@ export function Conteiner() {
     );
   };
 
-  return (
-    <div id="conteinerTables">
+  const ShowNavBarInformation = () => {
+    return (
       <div id="idBarNavContent" className="d-flex">
         <Link
           className="nav-link active my-custom-margin mb-2 mt-2 "
@@ -48,10 +53,14 @@ export function Conteiner() {
           </p>
         </div>
       </div>
+    );
+  };
+
+  return (
+    <div id="conteinerTables">
+      <ShowNavBarInformation />
 
       <NavBar style={{ "z-index": 1000 }} />
-
-      {/* {isPatientRegister ? <Tabs /> : null} */}
 
       <Routes>
         <Route path="/" element={<Home />} />
@@ -61,7 +70,13 @@ export function Conteiner() {
         <Route path="/calendar" element={<Calendar />} />
         <Route path="/prescriptions" element={<Prescriptions />} />
         <Route path="/medical/history" element={<MedicalHistory />} />
-        <Route path="/patient/home/*" element={<PatientHomePage />} />
+        <Route path="/patient/medical/*" element={<PatientHomePage />}>
+          <Route path="information" element={<Personalformation />} />
+          <Route path="dates" element={<PersonalDates />} />
+          <Route path="prescriptions" element={<PersonalPrescriptions />} />
+          <Route path="history" element={<PersonalHistory />} />
+          <Route path="*" element={<NotFound />} />
+        </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>

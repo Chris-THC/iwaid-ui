@@ -11,7 +11,7 @@ export const Tabs = () => {
             id="navLinkColor"
             className="nav-link"
             aria-current="page"
-            to="/patient/home/"
+            to="/patient/medical/information"
           >
             Informacion Personal
           </NavLink>
@@ -20,7 +20,7 @@ export const Tabs = () => {
           <NavLink
             id="navLinkColor"
             className="nav-link"
-            to="/patient/home/medical/dates"
+            to="/patient/medical/dates"
           >
             Citas programadas
           </NavLink>
@@ -30,7 +30,7 @@ export const Tabs = () => {
           <NavLink
             id="navLinkColor"
             className="nav-link"
-            to="/patient/home/medical/prescriptions"
+            to="/patient/medical/prescriptions"
           >
             Recetas medicas
           </NavLink>
@@ -40,7 +40,7 @@ export const Tabs = () => {
           <NavLink
             id="navLinkColor"
             className="nav-link"
-            to="/patient/home/medical/history"
+            to="/patient/medical/history"
           >
             Historial Médico
           </NavLink>

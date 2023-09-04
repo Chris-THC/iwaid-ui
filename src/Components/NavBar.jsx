@@ -191,7 +191,7 @@ export const NavBar = () => {
             </li>
 
             <li>
-              <Link className="dropdown-item" to="/">
+              <Link className="dropdown-item" to="/login">
                 <FontAwesomeIcon
                   className="ms-6 me-2"
                   icon={faRightFromBracket}

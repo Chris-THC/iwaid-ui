@@ -90,7 +90,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   width: 50%;
-  height: 23%;
+  height: auto;
   border-radius: 8px;
 }
 

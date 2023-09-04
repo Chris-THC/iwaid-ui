@@ -10,11 +10,14 @@ import { Calendar } from "./Routes/Calendar";
 import { Prescriptions } from "./Routes/Prescriptions";
 import { MedicalHistory } from "./Routes/MedicalHistory";
 import { PatientHomePage } from "./Routes/PatientHomePage";
-
 import { PersonalDates } from "./Tabs/pages/PersonalDates";
 import { PersonalHistory } from "./Tabs/pages/PersonalHistory";
 import { PersonalPrescriptions } from "./Tabs/pages/PersonalPrescriptions";
 import { Personalformation } from "./Tabs/pages/Personalformation";
+import { Login } from "./Logs/Login";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 
 export function Conteiner() {
   const NotFound = () => {
@@ -51,6 +54,21 @@ export function Conteiner() {
             Córdoba (271) 714 5350 | Orizaba (272) 123 5049 | Veracruz (229) 980
             8463
           </p>
+
+          <p>
+            <Link
+              className="nav-link active my-custom-margin mb-2 mt-2 text-light"
+              aria-current="page"
+              to="/login"
+            >
+              <FontAwesomeIcon
+                className="ms-6 me-2"
+                icon={faRightFromBracket}
+                style={{ color: "#ffffff", height: "20px" }}
+              />
+              Inciar Sesion
+            </Link>
+          </p>
         </div>
       </div>
     );
@@ -70,6 +88,8 @@ export function Conteiner() {
         <Route path="/calendar" element={<Calendar />} />
         <Route path="/prescriptions" element={<Prescriptions />} />
         <Route path="/medical/history" element={<MedicalHistory />} />
+        <Route path="/login" element={<Login />} />
+
         <Route path="/patient/medical/*" element={<PatientHomePage />}>
           <Route path="information" element={<Personalformation />} />
           <Route path="dates" element={<PersonalDates />} />
@@ -77,6 +97,7 @@ export function Conteiner() {
           <Route path="history" element={<PersonalHistory />} />
           <Route path="*" element={<NotFound />} />
         </Route>
+
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>

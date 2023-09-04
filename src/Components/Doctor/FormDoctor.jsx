@@ -220,9 +220,7 @@ export const FormDoctor = ({ isGetData = {} }) => {
               defaultValue={isGetData.password}
             />
             {errors.password?.type === "required" && (
-              <span className="text-danger">
-                El correo electrónico es requerido
-              </span>
+              <span className="text-danger">La contraseña es requerida</span>
             )}
           </div>
         </div>

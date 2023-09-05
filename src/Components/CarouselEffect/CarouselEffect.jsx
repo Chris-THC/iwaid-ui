@@ -26,8 +26,6 @@ export const CarouselEffect = () => {
               </p>
             </li>
             <li className="d-flex justify-content-center">
-              <p className="text-light">Mandanos un correo Electronico</p>
-              <br />
               <p className="text-light">contacto@iwa.com.mx</p>
             </li>
           </ul>
@@ -43,8 +41,6 @@ export const CarouselEffect = () => {
 
         <div id="glassEffect" className="carousel-caption  d-md-block">
           <InformationMessage className="text-light" />
-          {/* <h5 className="text-light">{titleMessage}</h5> */}
-          {/* <p className="text-light">{message}</p> */}
         </div>
       </>
     );

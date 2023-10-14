@@ -156,7 +156,10 @@ export const FormMedicalPrescriptions = ({ isGetData = {} }) => {
             <button
               type="button"
               className="btn btn btn-light  btn-outline-danger"
-              onClick={handleCloseModal}
+              onClick={()=>{
+                handleCloseModal();
+                setGetDataFromTable({});
+              }}
               data-bs-dismiss="modal"
             >
               Cancelar

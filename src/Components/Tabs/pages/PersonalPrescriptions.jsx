@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { URL_API_BACKEND } from "../../../config/config.js";
 import axios from "axios";
 
-const patientIdToFilter = 3;
+const patientIdToFilter = 1;
 
 export const PersonalPrescriptions = () => {
   const [patienInfo, setPatienInfo] = useState([]);

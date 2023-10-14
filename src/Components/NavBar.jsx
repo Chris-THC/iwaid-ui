@@ -220,6 +220,7 @@ export const NavBar = () => {
 
         <div id="page-content-wrapper">
           <button
+            id="idBTNHamburger"
             type="button"
             className={`hamburger animated fadeInLeft ${
               isClosed ? "is-open" : "is-closed"

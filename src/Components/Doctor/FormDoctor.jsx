@@ -38,6 +38,7 @@ export const FormDoctor = ({ isGetData = {} }) => {
   const onSubmitClick = async (data) => {
     if (actionButtonModal === "Agregar") {
       handleCloseModal();
+      console.log(data);
       const response = await createDoctorFunction(data);
 
       if (response.status === statusCreated) {

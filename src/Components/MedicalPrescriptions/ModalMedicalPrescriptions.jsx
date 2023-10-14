@@ -12,8 +12,8 @@ export const ModalMedicalPrescriptions = ({ show, handleClose }) => {
       size="lg"
       show={show}
       onHide={() => {
-        handleClose();
         setGetDataFromTable({});
+        handleClose();
       }}
     >
       <Modal.Header >

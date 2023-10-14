@@ -101,9 +101,8 @@ export const FormCitas = ({ isGetData = {} }) => {
   const onSubmitClick = async (data) => {
     if (actionButtonModal === "Agregar") {
       handleCloseModal();
-      console.log(data);
       const responseCreateDate = await createDateFunction(data);
-      console.log(responseCreateDate);
+      
       if (responseCreateDate.status === statusCreated) {
         await getAllDateDataFunction(setAllDataDate);
         setTextAlert("Cita agregada exitosamente");
@@ -135,15 +134,13 @@ export const FormCitas = ({ isGetData = {} }) => {
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmitClick)}>
-        <div className="form-group mb-3">
-          <div className="form-group col-md-4 mb-3">
+        <div className="form-group row mb-3">
+          <div className="form-group col-md-6 mb-3">
             <label>
               Seleccione un médico
               <span className="text-danger">*</span>
             </label>
-            <div
-              style={{ width: "300px", margin: "0 auto", paddingTop: "20px" }}
-            >
+            <div>
               <Typeahead
                 id="typehead"
                 labelKey="doctor"
@@ -157,14 +154,12 @@ export const FormCitas = ({ isGetData = {} }) => {
             </div>
           </div>
 
-          <div className="form-group col-md-4 mb-3">
+          <div className="form-group col-md-6 mb-3">
             <label>
               Seleccione un paciente
               <span className="text-danger">*</span>
             </label>
-            <div
-              style={{ width: "300px", margin: "0 auto", paddingTop: "20px" }}
-            >
+            <div>
               <Typeahead
                 id="typehead"
                 labelKey="patient"
@@ -178,7 +173,7 @@ export const FormCitas = ({ isGetData = {} }) => {
             </div>
           </div>
 
-          <div className="form-group col-md-8">
+          <div className="form-group col-md-6 mb-3">
             <label>Fecha de cita</label>
             <span className="text-danger">*</span>
             <input
@@ -200,37 +195,39 @@ export const FormCitas = ({ isGetData = {} }) => {
               </span>
             )}
           </div>
-        </div>
 
-        <div className="form-group col-md-4 mb-3">
-          <label>Seleccione horario</label>
-          <span className="text-danger">*</span>
-          <select
-            defaultValue={isGetData.hour}
-            className="form-select"
-            autoComplete="off"
-            {...register("hour", { required: true })}
-          >
-            <option value="">Seleccione una opción</option>
-            {timeOptions.map((option) => (
-              <option key={option.value} value={option.value}>
-                {option.label}
-              </option>
-            ))}
-          </select>
-          {errors.time && <span className="text-danger">Dato requerido</span>}
-        </div>
+          <div className="form-group col-md-6 mb-3">
+            <label>Seleccione horario</label>
+            <span className="text-danger">*</span>
+            <select
+              defaultValue={isGetData.hour}
+              className="form-select"
+              autoComplete="off"
+              {...register("hour", { required: true })}
+            >
+              <option value="">Seleccione una opción</option>
+              {timeOptions.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+            {errors.time && <span className="text-danger">Dato requerido</span>}
+          </div>
 
-        <div className="form-group mb-3">
-          <label>Anotaciones</label>
-          <textarea
-            className="form-control"
-            rows="3"
-            placeholder="Notas"
-            {...register("notes", { required: true })}
-            defaultValue={isGetData.notes}
-          ></textarea>
-          {errors.notes && <span className="text-danger">Dato requerido</span>}
+          <div className="form-group mb-3">
+            <label>Anotaciones</label>
+            <textarea
+              className="form-control"
+              rows="3"
+              placeholder="Notas"
+              {...register("notes", { required: true })}
+              defaultValue={isGetData.notes}
+            ></textarea>
+            {errors.notes && (
+              <span className="text-danger">Dato requerido</span>
+            )}
+          </div>
         </div>
 
         <div>

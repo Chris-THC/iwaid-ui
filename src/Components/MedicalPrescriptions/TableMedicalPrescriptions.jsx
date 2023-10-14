@@ -23,10 +23,6 @@ export const TableMedicalPrescriptions = ({ dataTable }) => {
     setShowModalDelete(true);
   };
 
-  const handleCloseModalDelete = () => {
-    setShowModalDelete(false);
-  };
-
   const {
     handleShowModal,
     handleCloseModal,
@@ -42,6 +38,11 @@ export const TableMedicalPrescriptions = ({ dataTable }) => {
     dataPrescription,
     setPrescriptionDoctorId,
   } = useContext(GetTheAppContext);
+
+  const handleCloseModalDelete = () => {
+    setGetDataFromTable({});
+    setShowModalDelete(false);
+  };
 
   const [searchByNamePatient, setSearchByNamePatient] = useState("");
   const [searchByDoctor, setSearchByDoctor] = useState("");
@@ -152,8 +153,12 @@ export const TableMedicalPrescriptions = ({ dataTable }) => {
               })
               .map((infoMedicalPrescriotion) => (
                 <tr key={infoMedicalPrescriotion.id}>
-                  <td id="responsiveTextTable">{infoMedicalPrescriotion.patient.name}</td>
-                  <td id="responsiveTextTable">{infoMedicalPrescriotion.doctor.name}</td>
+                  <td id="responsiveTextTable">
+                    {infoMedicalPrescriotion.patient.name}
+                  </td>
+                  <td id="responsiveTextTable">
+                    {infoMedicalPrescriotion.doctor.name}
+                  </td>
                   <td id="responsiveTextTable">
                     {changeDateFormat(infoMedicalPrescriotion.registerDate)}
                   </td>

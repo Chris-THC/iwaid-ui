@@ -107,6 +107,7 @@ export const MedicalDatesTable = ({ dataTable }) => {
                 handleShowModal();
                 setGetDataFromTable([]);
                 setActionButtonModal("Agregar");
+                
               }}
             >
               <FontAwesomeIcon icon={faUserPlus} style={{ height: "18px" }} />
@@ -209,7 +210,7 @@ export const MedicalDatesTable = ({ dataTable }) => {
 
                 <div className="row cont-filtros">
                   <div className="col-md-5 mb-3">
-                    <h4>Nombre del paciente</h4>
+                    <h4>Nombre del Doctor</h4>
                     <div id="DivinputSearch">
                       <input
                         id="inputSearch"
@@ -220,7 +221,7 @@ export const MedicalDatesTable = ({ dataTable }) => {
                         onChange={(e) => {
                           setSearchNameDoctor(e.target.value);
                         }}
-                        placeholder="Buscar por nombre..."
+                        placeholder="Buscar por nombre del doctor ..."
                         pattern="^[a-zA-Z\sÀ-ÖØ-öø-ÿ]+$"
                       />
                     </div>
@@ -238,7 +239,7 @@ export const MedicalDatesTable = ({ dataTable }) => {
                         onChange={(e) => {
                           setSearchNamePatient(e.target.value);
                         }}
-                        placeholder="Buscar por nombre..."
+                        placeholder="Buscar por nombre del paciente..."
                         pattern="^[a-zA-Z\sÀ-ÖØ-öø-ÿ]+$"
                       />
                     </div>

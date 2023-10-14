@@ -4,7 +4,7 @@ import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faMinus } from "@fortawesome/free-solid-svg-icons";
 
-const patientIdToFilter = 3;
+const patientIdToFilter = 1;
 
 export const PersonalHistory = () => {
   const [patienInfo, setPatienInfo] = useState([]);

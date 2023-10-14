@@ -12,12 +12,12 @@ export const ModalDates = ({ show, handleClose }) => {
       size="lg"
       show={show}
       onHide={() => {
-        handleClose();
         setGetDataFromTable({});
+        handleClose();
       }}
     >
       <Modal.Header>
-        <Modal.Title>{actionButtonModal} médico</Modal.Title>
+        <Modal.Title>{actionButtonModal} cita médica</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <FormCitas isGetData={getDataFromTable} />

@@ -1,4 +1,5 @@
-import React from "react";
+import { useContext } from "react";
+import { GetTheAppContext } from "../Context/AppContext";
 import logoImage from "../Img/image-logoInvertido.png";
 import { NavBar } from "./NavBar";
 import { Routes, Route, Link } from "react-router-dom";
@@ -16,10 +17,19 @@ import { PersonalPrescriptions } from "./Tabs/pages/PersonalPrescriptions";
 import { Personalformation } from "./Tabs/pages/Personalformation";
 import { Login } from "./Logs/Login";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
 import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 
+import { ProtectedRoutes } from "./Routes/ProtectedRoutes";
+
 export function Conteiner() {
+  const { isLoggedIn, setIsLoggedIn, setUser, user, userRoll } =
+    useContext(GetTheAppContext);
+
+  const logout = () => {
+    setUser(null);
+    setIsLoggedIn(false);
+  };
+
   const NotFound = () => {
     return (
       <div className="container alert alert-danger">
@@ -35,6 +45,45 @@ export function Conteiner() {
       <div style={{ margin: "0", padding: "0" }}>
         <img id="logoImgPrincipal" src={logoImage} alt="Imagen Logo" />
       </div>
+    );
+  };
+
+  const IsLoggedInComponent = () => {
+    return isLoggedIn === false ? (
+      <>
+        <Link
+          className="nav-link active my-custom-margin mb-2 mt-2 text-light"
+          to="/login"
+        >
+          <FontAwesomeIcon
+            className="ms-6 me-2"
+            icon={faRightFromBracket}
+            style={{ color: "#ffffff", height: "20px" }}
+          />
+          Iniciar Sesión
+        </Link>
+      </>
+    ) : (
+      <>
+        <Link
+          onClick={() => {
+            logout();
+          }}
+          className="nav-link active my-custom-margin mb-2 mt-2 text-light"
+          to="/"
+        >
+          <FontAwesomeIcon
+            className="ms-6 me-2"
+            icon={faRightFromBracket}
+            style={{
+              color: "#ffffff",
+              height: "20px",
+              transform: "scaleX(-1)",
+            }}
+          />
+          Cerrar Sesión
+        </Link>
+      </>
     );
   };
 
@@ -56,18 +105,7 @@ export function Conteiner() {
           </p>
 
           <p>
-            <Link
-              className="nav-link active my-custom-margin mb-2 mt-2 text-light"
-              aria-current="page"
-              to="/login"
-            >
-              <FontAwesomeIcon
-                className="ms-6 me-2"
-                icon={faRightFromBracket}
-                style={{ color: "#ffffff", height: "20px" }}
-              />
-              Inciar Sesion
-            </Link>
+            <IsLoggedInComponent />
           </p>
         </div>
       </div>
@@ -81,13 +119,58 @@ export function Conteiner() {
       <NavBar style={{ "z-index": 1000 }} />
 
       <Routes>
+        <Route index element={<Home />} />
         <Route path="/" element={<Home />} />
-        <Route path="/doctor" element={<Doctor />} />
-        <Route path="/patient" element={<Patient />} />
-        <Route path="/medicine" element={<Medicine />} />
-        <Route path="/calendar" element={<Calendar />} />
-        <Route path="/prescriptions" element={<Prescriptions />} />
-        <Route path="/medical/history" element={<MedicalHistory />} />
+        <Route
+          path="/doctor"
+          element={
+            <ProtectedRoutes user={user} userRoll={userRoll}>
+              <Doctor />
+            </ProtectedRoutes>
+          }
+        />
+        <Route
+          path="/patient"
+          element={
+            <ProtectedRoutes user={user} userRoll={userRoll}>
+              <Patient />
+            </ProtectedRoutes>
+          }
+        />
+        <Route
+          path="/medicine"
+          element={
+            <ProtectedRoutes user={user} userRoll={userRoll}>
+              <Medicine />
+            </ProtectedRoutes>
+          }
+        />
+
+        <Route
+          path="/calendar"
+          element={
+            <ProtectedRoutes user={user} userRoll={userRoll}>
+              <Calendar />
+            </ProtectedRoutes>
+          }
+        />
+        <Route
+          path="/prescriptions"
+          element={
+            <ProtectedRoutes user={user} userRoll={userRoll}>
+              <Prescriptions />
+            </ProtectedRoutes>
+          }
+        />
+        <Route
+          path="/medical/history"
+          element={
+            <ProtectedRoutes user={user} userRoll={userRoll}>
+              <MedicalHistory />
+            </ProtectedRoutes>
+          }
+        />
+
         <Route path="/login" element={<Login />} />
 
         <Route path="/patient/medical/*" element={<PatientHomePage />}>

@@ -1,16 +1,29 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import "../../Css/PersonalInfo.css";
+import { GetTheAppContext } from "../../Context/AppContext";
 
 const RenderFromLogin = () => {
+  const { setUserRoll, setUser, setIsLoggedIn } = useContext(GetTheAppContext);
+
   const {
     register,
     handleSubmit,
     formState: { errors, isValid },
   } = useForm({ mode: "all" });
 
+  const login = () => {
+    setUser({
+      id: 1,
+      name: "John Doe",
+      roll: "doctor",
+    });
+    setIsLoggedIn(true);
+    setUserRoll("doctor");
+  };
+
   const ManagerEventSubmmit = (data) => {
-    console.log(data);
+    login();
   };
 
   return (
@@ -61,13 +74,7 @@ const RenderFromLogin = () => {
           </div>
 
           <div>
-            <button
-              className="btn btn-primary"
-              onClick={() => {
-                console.log("Cliked");
-              }}
-              disabled={!isValid}
-            >
+            <button className="btn btn-primary" disabled={!isValid}>
               Iniciar Sesión
             </button>
           </div>
@@ -119,8 +126,6 @@ export const Login = () => {
               </ul>
             </div>
           </div>
-
-          
         </div>
       </div>
     </>

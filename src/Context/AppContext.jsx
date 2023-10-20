@@ -1,11 +1,10 @@
 import { createContext, useState, useEffect } from "react";
-import{
+import {
   getAllDateDataFunction,
   createDateFunction,
   deleteDateFunction,
-  updateDateFunction
- 
- } from "./DateData";
+  updateDateFunction,
+} from "./DateData";
 import {
   createPatientFunction,
   deletePatientFunction,
@@ -92,7 +91,6 @@ export const AppContext = (props) => {
     getAllMedicineDataFunction(setAllDataMedicine);
     allPrescriptionsFromApiFunction(setAllPrescriptionsData);
     allHistoryFromApiFunction(setAllMedicalHistoryData);
-
   }, []);
 
   const handleShowModal = () => {
@@ -112,6 +110,16 @@ export const AppContext = (props) => {
   const handleCloseFloatAlert = () => {
     setShowFloatingAlert(false);
   };
+
+  // Section to loging
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  // TestToLogin
+
+  //Todo this code is to test the login
+
+  const [user, setUser] = useState(null);
+  const [userRoll, setUserRoll] = useState("");
 
   return (
     <GetTheAppContext.Provider
@@ -152,21 +160,21 @@ export const AppContext = (props) => {
         setGetAllPatientsData,
         patientId,
         setPatientId,
-        dataGetAllDate, 
+        dataGetAllDate,
         getAllDateDataFunction,
         setAllDataDate,
         dataUserDate,
         setDataUserDate,
-        idDate, 
+        idDate,
         setIdDate,
-        doctorSelected, 
+        doctorSelected,
         setDoctorSelected,
-        patientSelected, 
+        patientSelected,
         setPatientSelected,
         createDateFunction,
         updateDateFunction,
         deleteDateFunction,
-        Error, 
+        Error,
         setError,
 
         dataGetAllMedicine,
@@ -207,6 +215,16 @@ export const AppContext = (props) => {
         allHistoryFromApiFunction,
         updateHistoryFunction,
         deleteHistoryFunction,
+
+        // Section to loging
+        isLoggedIn,
+        setIsLoggedIn,
+        // login to test
+        user,
+        setUser,
+        // User Roll
+        userRoll,
+        setUserRoll,
       }}
     >
       {props.children}

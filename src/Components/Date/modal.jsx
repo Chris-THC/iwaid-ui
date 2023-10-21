@@ -1,11 +1,21 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Modal } from "react-bootstrap";
 import { FormCitas } from "./FormDate";
 import { GetTheAppContext } from "../../Context/AppContext";
 
 export const ModalDates = ({ show, handleClose }) => {
-  const { setGetDataFromTable, getDataFromTable, actionButtonModal } =
-    useContext(GetTheAppContext);
+  const {
+    setGetDataFromTable,
+    getDataFromTable,
+    actionButtonModal,
+    token,
+    getAllDateDataFunction,
+    setAllDataDate,
+  } = useContext(GetTheAppContext);
+
+  useEffect(() => {
+    getAllDateDataFunction(setAllDataDate, token);
+  }, []);
 
   return (
     <Modal

@@ -80,6 +80,7 @@ export const AppContext = (props) => {
   const [dataUserDate, setDataUserDate] = useState({});
   const [idDate, setIdDate] = useState("");
   const [Error, setError] = useState(false);
+  const [dateDoctorId, setDateDoctorId] = useState("");
 
   const [doctorSelected, setDoctorSelected] = useState([]);
 
@@ -87,12 +88,12 @@ export const AppContext = (props) => {
   useEffect(() => {
     // getAllDoctorsDataFunction(setGetDataAllDoctors);
     // getAllPatientDataFunction(setGetAllPatientsData);
-    getAllMedicineDataFunction(setAllDataMedicine);
+    // getAllMedicineDataFunction(setAllDataMedicine);
 
-    getAllDateDataFunction(setAllDataDate);
-
-    allPrescriptionsFromApiFunction(setAllPrescriptionsData);
-    allHistoryFromApiFunction(setAllMedicalHistoryData);
+    
+    // getAllDateDataFunction(setAllDataDate);
+    // allPrescriptionsFromApiFunction(setAllPrescriptionsData);
+    // allHistoryFromApiFunction(setAllMedicalHistoryData);
   }, []);
 
   const handleShowModal = () => {
@@ -127,6 +128,11 @@ export const AppContext = (props) => {
   return (
     <GetTheAppContext.Provider
       value={{
+        // Seccion de date
+        dateDoctorId,
+        setDateDoctorId,
+        //
+
         handleCloseModal,
         handleShowModal,
         showModal,

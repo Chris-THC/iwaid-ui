@@ -16,7 +16,6 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 export const MedicalDatesTable = ({ dataTable }) => {
-  
   const {
     handleShowModal,
     handleCloseModal,
@@ -31,6 +30,7 @@ export const MedicalDatesTable = ({ dataTable }) => {
     setAllDataDate,
     setTextAlert,
     handleShowFloatAlter,
+    token,
   } = useContext(GetTheAppContext);
 
   const [showModalDelete, setShowModalDelete] = useState(false);
@@ -42,7 +42,6 @@ export const MedicalDatesTable = ({ dataTable }) => {
   const handleCloseModalDelete = () => {
     setShowModalDelete(false);
   };
-  
 
   const formatDate = (originalDate) => {
     let piecesDate = originalDate.split("-");
@@ -59,9 +58,9 @@ export const MedicalDatesTable = ({ dataTable }) => {
 
   const funtionToDeleted = async () => {
     setActionButtonModal("Eliminar");
-    const responseModalDelete = await deleteDateFunction(idDate);
+    const responseModalDelete = await deleteDateFunction(idDate, token);
     if (responseModalDelete.status === statusOk) {
-      await getAllDateDataFunction(setAllDataDate);
+      await getAllDateDataFunction(setAllDataDate, token);
       setTextAlert(`Se eliminó la cita`);
       handleCloseModalDelete();
       handleShowFloatAlter();
@@ -107,7 +106,6 @@ export const MedicalDatesTable = ({ dataTable }) => {
                 handleShowModal();
                 setGetDataFromTable([]);
                 setActionButtonModal("Agregar");
-                
               }}
             >
               <FontAwesomeIcon icon={faUserPlus} style={{ height: "18px" }} />
@@ -147,10 +145,16 @@ export const MedicalDatesTable = ({ dataTable }) => {
               })
               .map((infoMedicalDates) => (
                 <tr key={infoMedicalDates.id}>
-                  <td id="responsiveTextTable">{infoMedicalDates.patientDTO.name}</td>
+                  <td id="responsiveTextTable">
+                    {infoMedicalDates.patientDTO.name}
+                  </td>
                   <td id="disableCell">{infoMedicalDates.doctorDTO.name}</td>
-                  <td id="responsiveTextTable">{formatDate(infoMedicalDates.date)}</td>
-                  <td id="responsiveTextTable">{hourMappings[infoMedicalDates.hour]}</td>
+                  <td id="responsiveTextTable">
+                    {formatDate(infoMedicalDates.date)}
+                  </td>
+                  <td id="responsiveTextTable">
+                    {hourMappings[infoMedicalDates.hour]}
+                  </td>
                   <td id="disableCell">{infoMedicalDates.notes}</td>
 
                   <td id="btnActionTable" className="td-actions text-center">

@@ -26,6 +26,7 @@ export const FormCitas = ({ isGetData = {} }) => {
     patientSelected,
     setPatientSelected,
     setError,
+    token,
   } = useContext(GetTheAppContext);
 
   const timeOptions = [
@@ -101,10 +102,10 @@ export const FormCitas = ({ isGetData = {} }) => {
   const onSubmitClick = async (data) => {
     if (actionButtonModal === "Agregar") {
       handleCloseModal();
-      const responseCreateDate = await createDateFunction(data);
-      
+      const responseCreateDate = await createDateFunction(data, token);
+
       if (responseCreateDate.status === statusCreated) {
-        await getAllDateDataFunction(setAllDataDate);
+        await getAllDateDataFunction(setAllDataDate, token);
         setTextAlert("Cita agregada exitosamente");
         handleShowFloatAlter();
       } else {
@@ -114,11 +115,11 @@ export const FormCitas = ({ isGetData = {} }) => {
       }
     } else if (actionButtonModal === "Editar") {
       handleCloseModal();
-      const responseUpdateDate = await updateDateFunction(data, idDate);
+      const responseUpdateDate = await updateDateFunction(data, idDate, token);
       try {
         if (responseUpdateDate.status === statusOk) {
           setTextAlert(`Cita actualizada exitosamente`);
-          await getAllDateDataFunction(setAllDataDate);
+          await getAllDateDataFunction(setAllDataDate, token);
           handleShowFloatAlter();
         } else {
           setError(true);

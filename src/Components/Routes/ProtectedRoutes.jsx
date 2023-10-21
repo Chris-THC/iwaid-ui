@@ -10,7 +10,8 @@ export const ProtectedRoutes = ({
   redirectTo = "/login",
 }) => {
   console.log(user);
-  if (!user || userRoll !== "doctor") {
+  console.log(userRoll);
+  if (!user || userRoll !== "Doctor") {
     return <Navigate to={redirectTo} />;
   }
 

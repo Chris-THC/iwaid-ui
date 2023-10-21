@@ -1,11 +1,19 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { GetTheAppContext } from "../../Context/AppContext";
 import { TableDoctor } from "./TableDoctor";
 
 const DoctorList = () => {
-  const { dataGetAllDoctors } = useContext(GetTheAppContext);
-  return (
-    <TableDoctor dataTable={dataGetAllDoctors || []} />
-  );
+  const {
+    dataGetAllDoctors,
+    token,
+    getAllDoctorsDataFunction,
+    setGetDataAllDoctors,
+  } = useContext(GetTheAppContext);
+
+  useEffect(() => {
+    getAllDoctorsDataFunction(setGetDataAllDoctors, token);
+  }, []);
+
+  return <TableDoctor dataTable={dataGetAllDoctors || []} />;
 };
 export default DoctorList;

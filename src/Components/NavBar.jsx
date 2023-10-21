@@ -78,7 +78,7 @@ export const NavBar = () => {
   };
 
   const MaterDataIfIsLoggedAndUserDoctor = () => {
-    return isLoggedIn === true && userRoll === "doctor" ? (
+    return isLoggedIn === true && userRoll === "Doctor" ? (
       <>
         <li className="nav-item dropdown position-relative">
           <a

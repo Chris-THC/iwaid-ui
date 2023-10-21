@@ -40,6 +40,8 @@ import {
   deleteHistoryFunction,
 } from "./History.js";
 
+import { LoginFuntion } from "./LoginControler";
+
 export const GetTheAppContext = createContext();
 
 export const AppContext = (props) => {
@@ -114,12 +116,14 @@ export const AppContext = (props) => {
   // Section to loging
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  // TestToLogin
 
   //Todo this code is to test the login
 
   const [user, setUser] = useState(null);
+
   const [userRoll, setUserRoll] = useState("");
+
+  const [token, setToken] = useState("");
 
   return (
     <GetTheAppContext.Provider
@@ -220,11 +224,16 @@ export const AppContext = (props) => {
         isLoggedIn,
         setIsLoggedIn,
         // login to test
-        user,
         setUser,
+        user,
         // User Roll
         userRoll,
         setUserRoll,
+        // Tocken del usuario
+        token,
+        setToken,
+        // login Funtion
+        LoginFuntion,
       }}
     >
       {props.children}

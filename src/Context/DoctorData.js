@@ -3,9 +3,10 @@ import { URL_API_BACKEND } from "../config/config.js";
 
 const doctorURL = `${URL_API_BACKEND}/doctors/`;
 
-export const getAllDoctorsDataFunction = async (setGetAllDoctors) => {
-  const token =
-    "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJJRCBQYXRpZW50OiAiOjAsIklEIERvY3RvcjogIjoxLCJSb2xlOiAiOiJEb2N0b3IiLCJpYXQiOjE2OTc4MjIzNTAsImV4cCI6MTY5NzgyMzc5MH0.fc__AlUjL5l1aBDkEUKMZt0s9ZTkpCdIN3X4DIffFR0";
+export const getAllDoctorsDataFunction = async (
+  setGetAllDoctors,
+  token = ""
+) => {
   try {
     const dataGetAll = {
       name: null,

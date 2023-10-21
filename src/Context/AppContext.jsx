@@ -85,12 +85,12 @@ export const AppContext = (props) => {
 
   const [patientSelected, setPatientSelected] = useState([]);
   useEffect(() => {
-    getAllDoctorsDataFunction(setGetDataAllDoctors);
-    getAllPatientDataFunction(setGetAllPatientsData);
+    // getAllDoctorsDataFunction(setGetDataAllDoctors);
+    // getAllPatientDataFunction(setGetAllPatientsData);
+    getAllMedicineDataFunction(setAllDataMedicine);
 
     getAllDateDataFunction(setAllDataDate);
 
-    getAllMedicineDataFunction(setAllDataMedicine);
     allPrescriptionsFromApiFunction(setAllPrescriptionsData);
     allHistoryFromApiFunction(setAllMedicalHistoryData);
   }, []);
@@ -115,7 +115,6 @@ export const AppContext = (props) => {
 
   // Section to loging
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-
 
   //Todo this code is to test the login
 

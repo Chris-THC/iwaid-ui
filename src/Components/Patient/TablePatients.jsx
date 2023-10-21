@@ -42,6 +42,7 @@ export const TablePatients = ({ dataTable }) => {
     patientId,
     dataUserPatient,
     handleShowFloatAlter,
+    token,
   } = useContext(GetTheAppContext);
 
   const changeDateFormat = (originalDate) => {
@@ -65,10 +66,10 @@ export const TablePatients = ({ dataTable }) => {
 
   const funtionToDeleted = async () => {
     setActionButtonModal("Eliminar");
-    const response = await deletePatientFunction(patientId);
+    const response = await deletePatientFunction(patientId, token);
 
     if (response.status === statusOk) {
-      await getAllPatientDataFunction(setGetAllPatientsData);
+      await getAllPatientDataFunction(setGetAllPatientsData, token);
       handleCloseModalDelete();
       setTextAlert(`Se eliminó al paciente ${dataUserPatient.name}`);
       handleShowFloatAlter();

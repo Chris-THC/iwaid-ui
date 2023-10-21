@@ -17,6 +17,7 @@ export const FormPatient = ({ isGetData = {} }) => {
     updatePatientFunction,
     setGetAllPatientsData,
     patientId,
+    token,
   } = useContext(GetTheAppContext);
 
   const {
@@ -29,10 +30,10 @@ export const FormPatient = ({ isGetData = {} }) => {
   const onSubmitClick = async (data) => {
     if (actionButtonModal === "Agregar") {
       handleCloseModal();
-      const CreatePatientResponse = await createPatientFunction(data);
+      const CreatePatientResponse = await createPatientFunction(data, token);
 
       if (CreatePatientResponse.status === statusCreated) {
-        await getAllPatientDataFunction(setGetAllPatientsData);
+        await getAllPatientDataFunction(setGetAllPatientsData, token);
         setTextAlert("Paciente agregado exitosamente");
         handleShowFloatAlter();
       } else {
@@ -43,12 +44,13 @@ export const FormPatient = ({ isGetData = {} }) => {
       handleCloseModal();
       const updatePatientResponse = await updatePatientFunction(
         data,
-        patientId
+        patientId,
+        token
       );
 
       if (updatePatientResponse.status === statusOk) {
         setTextAlert(`Paciente ${data.name} actualizado exitosamente`);
-        await getAllPatientDataFunction(setGetAllPatientsData);
+        await getAllPatientDataFunction(setGetAllPatientsData, token);
         handleShowFloatAlter();
       } else {
         setTextAlert("Error al actualizar al paciente");

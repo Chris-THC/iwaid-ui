@@ -43,6 +43,7 @@ export const TableDoctor = ({ dataTable }) => {
     setTextAlert,
     handleShowFloatAlter,
     dataUserDoctor,
+    token,
   } = useContext(GetTheAppContext);
 
   const allSpecializations = [
@@ -62,9 +63,9 @@ export const TableDoctor = ({ dataTable }) => {
 
   const funtionToDeleted = async () => {
     setActionButtonModal("Eliminar");
-    const response = await deleteDoctorFunction(doctorId);
+    const response = await deleteDoctorFunction(doctorId, token);
     if (response.status === statusOk) {
-      await getAllDoctorsDataFunction(setGetDataAllDoctors);
+      await getAllDoctorsDataFunction(setGetDataAllDoctors, token);
       handleCloseModalDelete();
       setTextAlert(`Se eliminó al médico ${dataUserDoctor.name}`);
       handleShowFloatAlter();

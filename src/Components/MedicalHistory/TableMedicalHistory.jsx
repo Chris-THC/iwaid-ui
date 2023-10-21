@@ -32,6 +32,7 @@ export const TableMedicalHistory = ({ dataTable }) => {
     dataMedicalHistory,
     setAllMedicalHistoryData,
     allHistoryFromApiFunction,
+    token,
   } = useContext(GetTheAppContext);
 
   const [showModalDelete, setShowModalDelete] = useState(false);
@@ -60,10 +61,10 @@ export const TableMedicalHistory = ({ dataTable }) => {
 
   const funtionToDeleted = async () => {
     setActionButtonModal("Eliminar");
-    const response = await deleteHistoryFunction(dataMedicalHistory.id);
+    const response = await deleteHistoryFunction(dataMedicalHistory.id, token);
 
     if (response.status === statusOk) {
-      await allHistoryFromApiFunction(setAllMedicalHistoryData);
+      await allHistoryFromApiFunction(setAllMedicalHistoryData, token);
       closeModalDeleteFuntion();
       setTextAlert(
         `Se eliminó el historial médico del paciente ${dataMedicalHistory.patient.name}`

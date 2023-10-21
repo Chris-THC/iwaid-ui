@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState } from "react";
 import {
   getAllDateDataFunction,
   createDateFunction,
@@ -85,16 +85,6 @@ export const AppContext = (props) => {
   const [doctorSelected, setDoctorSelected] = useState([]);
 
   const [patientSelected, setPatientSelected] = useState([]);
-  useEffect(() => {
-    // getAllDoctorsDataFunction(setGetDataAllDoctors);
-    // getAllPatientDataFunction(setGetAllPatientsData);
-    // getAllMedicineDataFunction(setAllDataMedicine);
-
-    
-    // getAllDateDataFunction(setAllDataDate);
-    // allPrescriptionsFromApiFunction(setAllPrescriptionsData);
-    // allHistoryFromApiFunction(setAllMedicalHistoryData);
-  }, []);
 
   const handleShowModal = () => {
     setShowModal(true);

@@ -28,6 +28,7 @@ export const FormMedicalHistory = ({ isGetData = {} }) => {
     setAllMedicalHistoryData,
     allHistoryFromApiFunction,
     updateHistoryFunction,
+    token,
   } = useContext(GetTheAppContext);
 
   const {
@@ -89,10 +90,10 @@ export const FormMedicalHistory = ({ isGetData = {} }) => {
 
     if (actionButtonModal === "Agregar") {
       handleCloseModal();
-      const response = await createHistoryFunction(data);
+      const response = await createHistoryFunction(data, token);
 
       if (response.status === statusCreated) {
-        await allHistoryFromApiFunction(setAllMedicalHistoryData);
+        await allHistoryFromApiFunction(setAllMedicalHistoryData, token);
         getMessageForAlert();
         handleShowFloatAlter();
       } else {
@@ -102,10 +103,14 @@ export const FormMedicalHistory = ({ isGetData = {} }) => {
     } else if (actionButtonModal === "Editar") {
       data.patientId = dataMedicalHistory.patient.id;
       handleCloseModal();
-      const response = await updateHistoryFunction(data, dataMedicalHistory.id);
+      const response = await updateHistoryFunction(
+        data,
+        dataMedicalHistory.id,
+        token
+      );
 
       if (response.status === statusOk) {
-        await allHistoryFromApiFunction(setAllMedicalHistoryData);
+        await allHistoryFromApiFunction(setAllMedicalHistoryData, token);
         getMessageForAlert();
         handleShowFloatAlter();
       } else {

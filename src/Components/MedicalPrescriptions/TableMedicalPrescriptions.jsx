@@ -37,6 +37,7 @@ export const TableMedicalPrescriptions = ({ dataTable }) => {
     handleShowFloatAlter,
     dataPrescription,
     setPrescriptionDoctorId,
+    token,
   } = useContext(GetTheAppContext);
 
   const handleCloseModalDelete = () => {
@@ -63,10 +64,13 @@ export const TableMedicalPrescriptions = ({ dataTable }) => {
 
   const funtionToDeleted = async () => {
     setActionButtonModal("Eliminar");
-    const response = await deletePrescriptionFunction(dataPrescription.id);
+    const response = await deletePrescriptionFunction(
+      dataPrescription.id,
+      token
+    );
 
     if (response.status === statusOk) {
-      await allPrescriptionsFromApiFunction(setAllPrescriptionsData);
+      await allPrescriptionsFromApiFunction(setAllPrescriptionsData, token);
       handleCloseModalDelete();
       setTextAlert(
         `Se eliminó la prescripción del paciente ${dataPrescription.patient.name}`

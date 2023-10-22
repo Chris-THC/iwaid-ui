@@ -1,16 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { URL_API_BACKEND } from "../../../config/config.js";
 import axios from "axios";
-
-const patientIdToFilter = 1;
+import { GetTheAppContext } from "../../../Context/AppContext";
 
 export const PersonalDates = () => {
+  
+  const { user, token } = useContext(GetTheAppContext);
+
   const [patienInfo, setPatienInfo] = useState([]);
+  const patientIdToFilter = user.idPatient;
 
   const filterPatientInfo = async () => {
     console.log(`${URL_API_BACKEND}/appointments/`);
     try {
-      const response = await axios.get(`${URL_API_BACKEND}/appointments/`);
+      const response = await axios.get(`${URL_API_BACKEND}/appointments/`, {
+        headers: {
+          Authorization: `Bearer ${token}`, // Agregar el token en el encabezado
+        },
+      });
       setPatienInfo(response.data);
       return response.data;
     } catch (error) {

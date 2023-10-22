@@ -9,9 +9,20 @@ export const ProtectedRoutes = ({
   children,
   redirectTo = "/login",
 }) => {
-  console.log(user);
-  console.log(userRoll);
   if (!user || userRoll !== "Doctor") {
+    return <Navigate to={redirectTo} />;
+  }
+
+  return children;
+};
+
+export const ProtectedRoutesPatient = ({
+  user,
+  userRoll,
+  children,
+  redirectTo = "/login",
+}) => {
+  if (!user || userRoll !== "Patient") {
     return <Navigate to={redirectTo} />;
   }
 

@@ -28,10 +28,15 @@ export const Login = () => {
       if (isLogin.status === 200) {
         let loggedUserInfo = TokenSeparator(isLogin.data.token);
         setUser(loggedUserInfo);
+        console.log(loggedUserInfo);
         setToken(isLogin.data.token);
         setIsLoggedIn(true);
         setUserRoll(loggedUserInfo.role);
-        navigeteTo("/doctor");
+        if (loggedUserInfo.role === "Doctor") {
+          navigeteTo("/doctor");
+        } else if (loggedUserInfo.role === "Patient") {
+          navigeteTo("/patient/medical/information");
+        }
         alert("Sesión iniciada correctamente");
       } else {
         alert("NO se pudo iniciar sesion");

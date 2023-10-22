@@ -19,7 +19,10 @@ import { Login } from "./Logs/Login";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 
-import { ProtectedRoutes } from "./Routes/ProtectedRoutes";
+import {
+  ProtectedRoutes,
+  ProtectedRoutesPatient,
+} from "./Routes/ProtectedRoutes";
 
 export function Conteiner() {
   const { isLoggedIn, setIsLoggedIn, setUser, user, userRoll } =
@@ -174,10 +177,39 @@ export function Conteiner() {
         <Route path="/login" element={<Login />} />
 
         <Route path="/patient/medical/*" element={<PatientHomePage />}>
-          <Route path="information" element={<Personalformation />} />
-          <Route path="dates" element={<PersonalDates />} />
-          <Route path="prescriptions" element={<PersonalPrescriptions />} />
-          <Route path="history" element={<PersonalHistory />} />
+          <Route
+            path="information"
+            element={
+              <ProtectedRoutesPatient user={user} userRoll={userRoll}>
+                <Personalformation />
+              </ProtectedRoutesPatient>
+            }
+          />
+          <Route
+            path="dates"
+            element={
+              <ProtectedRoutesPatient user={user} userRoll={userRoll}>
+                <PersonalDates />
+              </ProtectedRoutesPatient>
+            }
+          />
+          <Route
+            path="prescriptions"
+            element={
+              <ProtectedRoutesPatient user={user} userRoll={userRoll}>
+                <PersonalPrescriptions />
+              </ProtectedRoutesPatient>
+            }
+          />
+          <Route
+            path="history"
+            element={
+              <ProtectedRoutesPatient user={user} userRoll={userRoll}>
+                <PersonalHistory />
+              </ProtectedRoutesPatient>
+            }
+          />
+
           <Route path="*" element={<NotFound />} />
         </Route>
 

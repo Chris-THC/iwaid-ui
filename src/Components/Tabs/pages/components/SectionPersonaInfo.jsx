@@ -4,7 +4,7 @@ import "../../../../Css/PersonalInfo.css";
 const RenderFormBody = ({ isGetData }) => {
   return (
     <>
-      {isGetData === null || isGetData === {} ? (
+      {isGetData === null ? (
         <div>Loading...</div>
       ) : (
         <form id="contactForm" name="contactForm">

@@ -1,17 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { URL_API_BACKEND } from "../../../config/config.js";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faMinus } from "@fortawesome/free-solid-svg-icons";
-
-const patientIdToFilter = 1;
+import { GetTheAppContext } from "../../../Context/AppContext";
 
 export const PersonalHistory = () => {
+  
+  const { user, token } = useContext(GetTheAppContext);
   const [patienInfo, setPatienInfo] = useState([]);
+  const patientIdToFilter = user.idPatient;
 
   const filterPatientInfo = async () => {
     try {
-      const response = await axios.get(`${URL_API_BACKEND}/medicalhistory/`);
+      const response = await axios.get(`${URL_API_BACKEND}/medicalhistory/`, {
+        headers: {
+          Authorization: `Bearer ${token}`, // Agregar el token en el encabezado
+        },
+      });
       setPatienInfo(response.data);
       return response.data;
     } catch (error) {

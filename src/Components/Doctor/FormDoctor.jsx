@@ -16,6 +16,7 @@ export const FormDoctor = ({ isGetData = {} }) => {
     setGetDataAllDoctors,
     updateDoctorFunction,
     doctorId,
+    token,
   } = useContext(GetTheAppContext);
 
   const {
@@ -26,10 +27,8 @@ export const FormDoctor = ({ isGetData = {} }) => {
 
   const getMessageForAlert = (data) => {
     if (actionButtonModal === "Agregar") {
-      console.log(data);
       return setTextAlert("Médico agregado exitosamente");
     } else if (actionButtonModal === "Editar") {
-      console.log(data);
       return setTextAlert(`Médico ${data.name} actualizado exitosamente`);
     }
     return "";
@@ -38,10 +37,10 @@ export const FormDoctor = ({ isGetData = {} }) => {
   const onSubmitClick = async (data) => {
     if (actionButtonModal === "Agregar") {
       handleCloseModal();
-      const response = await createDoctorFunction(data);
+      const response = await createDoctorFunction(data, token);
 
       if (response.status === statusCreated) {
-        await getAllDoctorsDataFunction(setGetDataAllDoctors);
+        await getAllDoctorsDataFunction(setGetDataAllDoctors, token);
         getMessageForAlert();
         handleShowFloatAlter();
       } else {
@@ -50,10 +49,10 @@ export const FormDoctor = ({ isGetData = {} }) => {
       }
     } else if (actionButtonModal === "Editar") {
       handleCloseModal();
-      const response = await updateDoctorFunction(data, doctorId);
+      const response = await updateDoctorFunction(data, doctorId, token);
       if (response.status === statusOk) {
         getMessageForAlert(data);
-        await getAllDoctorsDataFunction(setGetDataAllDoctors);
+        await getAllDoctorsDataFunction(setGetDataAllDoctors, token);
         handleShowFloatAlter();
       } else {
         setTextAlert("Error al agregar el médico");
@@ -220,9 +219,7 @@ export const FormDoctor = ({ isGetData = {} }) => {
               defaultValue={isGetData.password}
             />
             {errors.password?.type === "required" && (
-              <span className="text-danger">
-                El correo electrónico es requerido
-              </span>
+              <span className="text-danger">La contraseña es requerida</span>
             )}
           </div>
         </div>

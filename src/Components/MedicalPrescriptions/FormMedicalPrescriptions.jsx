@@ -22,6 +22,7 @@ export const FormMedicalPrescriptions = ({ isGetData = {} }) => {
     allPrescriptionsFromApiFunction,
     updatePrescriptionFunction,
     dataPrescription,
+    token,
   } = useContext(GetTheAppContext);
 
   const {
@@ -43,10 +44,10 @@ export const FormMedicalPrescriptions = ({ isGetData = {} }) => {
 
   const createPrescription = async (data) => {
     handleCloseModal();
-    const newPrescription = await createPrescriptionFunction(data);
+    const newPrescription = await createPrescriptionFunction(data, token);
 
     if (newPrescription.status === statusCreated) {
-      await allPrescriptionsFromApiFunction(setAllPrescriptionsData);
+      await allPrescriptionsFromApiFunction(setAllPrescriptionsData, token);
 
       getMessageForAlert();
 
@@ -68,17 +69,16 @@ export const FormMedicalPrescriptions = ({ isGetData = {} }) => {
       data.doctorId = prescriptionDoctorId;
     }
 
-    console.log(data);
-
     const updatePrescription = await updatePrescriptionFunction(
       data,
-      dataPrescription.id
+      dataPrescription.id,
+      token
     );
 
-    if (updatePrescription.status === statusOk ) {
+    if (updatePrescription.status === statusOk) {
       getMessageForAlert();
 
-      await allPrescriptionsFromApiFunction(setAllPrescriptionsData);
+      await allPrescriptionsFromApiFunction(setAllPrescriptionsData, token);
 
       handleShowFloatAlter();
     } else {
@@ -156,7 +156,10 @@ export const FormMedicalPrescriptions = ({ isGetData = {} }) => {
             <button
               type="button"
               className="btn btn btn-light  btn-outline-danger"
-              onClick={handleCloseModal}
+              onClick={() => {
+                handleCloseModal();
+                setGetDataFromTable({});
+              }}
               data-bs-dismiss="modal"
             >
               Cancelar

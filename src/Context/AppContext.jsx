@@ -1,11 +1,10 @@
-import { createContext, useState, useEffect } from "react";
-import{
+import { createContext, useState } from "react";
+import {
   getAllDateDataFunction,
   createDateFunction,
   deleteDateFunction,
-  updateDateFunction
- 
- } from "./DateData";
+  updateDateFunction,
+} from "./DateData";
 import {
   createPatientFunction,
   deletePatientFunction,
@@ -40,6 +39,8 @@ import {
   updateHistoryFunction,
   deleteHistoryFunction,
 } from "./History.js";
+
+import { LoginFuntion } from "./LoginControler";
 
 export const GetTheAppContext = createContext();
 
@@ -79,21 +80,11 @@ export const AppContext = (props) => {
   const [dataUserDate, setDataUserDate] = useState({});
   const [idDate, setIdDate] = useState("");
   const [Error, setError] = useState(false);
+  const [dateDoctorId, setDateDoctorId] = useState("");
 
   const [doctorSelected, setDoctorSelected] = useState([]);
 
   const [patientSelected, setPatientSelected] = useState([]);
-  useEffect(() => {
-    getAllDoctorsDataFunction(setGetDataAllDoctors);
-    getAllPatientDataFunction(setGetAllPatientsData);
-
-    getAllDateDataFunction(setAllDataDate);
-
-    getAllMedicineDataFunction(setAllDataMedicine);
-    allPrescriptionsFromApiFunction(setAllPrescriptionsData);
-    allHistoryFromApiFunction(setAllMedicalHistoryData);
-
-  }, []);
 
   const handleShowModal = () => {
     setShowModal(true);
@@ -113,9 +104,25 @@ export const AppContext = (props) => {
     setShowFloatingAlert(false);
   };
 
+  // Section to loging
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  //Todo this code is to test the login
+
+  const [user, setUser] = useState(null);
+
+  const [userRoll, setUserRoll] = useState("");
+
+  const [token, setToken] = useState("");
+
   return (
     <GetTheAppContext.Provider
       value={{
+        // Seccion de date
+        dateDoctorId,
+        setDateDoctorId,
+        //
+
         handleCloseModal,
         handleShowModal,
         showModal,
@@ -152,21 +159,21 @@ export const AppContext = (props) => {
         setGetAllPatientsData,
         patientId,
         setPatientId,
-        dataGetAllDate, 
+        dataGetAllDate,
         getAllDateDataFunction,
         setAllDataDate,
         dataUserDate,
         setDataUserDate,
-        idDate, 
+        idDate,
         setIdDate,
-        doctorSelected, 
+        doctorSelected,
         setDoctorSelected,
-        patientSelected, 
+        patientSelected,
         setPatientSelected,
         createDateFunction,
         updateDateFunction,
         deleteDateFunction,
-        Error, 
+        Error,
         setError,
 
         dataGetAllMedicine,
@@ -207,6 +214,21 @@ export const AppContext = (props) => {
         allHistoryFromApiFunction,
         updateHistoryFunction,
         deleteHistoryFunction,
+
+        // Section to loging
+        isLoggedIn,
+        setIsLoggedIn,
+        // login to test
+        setUser,
+        user,
+        // User Roll
+        userRoll,
+        setUserRoll,
+        // Tocken del usuario
+        token,
+        setToken,
+        // login Funtion
+        LoginFuntion,
       }}
     >
       {props.children}

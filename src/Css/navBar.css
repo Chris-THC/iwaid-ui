@@ -6,6 +6,11 @@
 /*           Wrappers            */
 /*-------------------------------*/
 
+#idBTNHamburger {
+  background-color: #2a466a;
+  border-radius: 5px;
+}
+
 #wrapper {
   padding-left: 0;
   -webkit-transition: all 0.5s ease;
@@ -83,7 +88,7 @@
   z-index: -1;
   height: 100%;
   width: 3px;
-  background-color: #1c1c1c;
+  background-color: #2896d1;
   -webkit-transition: width 0.2s ease-in;
   -moz-transition: width 0.2s ease-in;
   -ms-transition: width 0.2s ease-in;

@@ -43,6 +43,7 @@ export const TableMedicine = ({ dataTable }) => {
     getAllMedicineDataFunction,
     setAllDataMedicine,
     nameMedicine,
+    token,
   } = useContext(GetTheAppContext);
 
   const filters = dataTable
@@ -60,10 +61,10 @@ export const TableMedicine = ({ dataTable }) => {
 
   const funtionToDeleted = async () => {
     setActionButtonModal("Eliminar");
-    const responseModalDelete = await deleteMedicineFunction(idMedicine);
+    const responseModalDelete = await deleteMedicineFunction(idMedicine, token);
 
     if (responseModalDelete.status === statusOk) {
-      await getAllMedicineDataFunction(setAllDataMedicine);
+      await getAllMedicineDataFunction(setAllDataMedicine, token);
       setTextAlert(`Se eliminó ${nameMedicine}`);
       handleCloseModalDelete();
       handleShowFloatAlter();

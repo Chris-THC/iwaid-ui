@@ -1,23 +1,33 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Modal } from "react-bootstrap";
 import { FormCitas } from "./FormDate";
 import { GetTheAppContext } from "../../Context/AppContext";
 
 export const ModalDates = ({ show, handleClose }) => {
-  const { setGetDataFromTable, getDataFromTable, actionButtonModal } =
-    useContext(GetTheAppContext);
+  const {
+    setGetDataFromTable,
+    getDataFromTable,
+    actionButtonModal,
+    token,
+    getAllDateDataFunction,
+    setAllDataDate,
+  } = useContext(GetTheAppContext);
+
+  useEffect(() => {
+    getAllDateDataFunction(setAllDataDate, token);
+  }, []);
 
   return (
     <Modal
       size="lg"
       show={show}
       onHide={() => {
-        handleClose();
         setGetDataFromTable({});
+        handleClose();
       }}
     >
       <Modal.Header>
-        <Modal.Title>{actionButtonModal} médico</Modal.Title>
+        <Modal.Title>{actionButtonModal} cita médica</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <FormCitas isGetData={getDataFromTable} />

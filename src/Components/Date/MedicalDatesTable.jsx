@@ -16,7 +16,6 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 export const MedicalDatesTable = ({ dataTable }) => {
-  
   const {
     handleShowModal,
     handleCloseModal,
@@ -31,6 +30,7 @@ export const MedicalDatesTable = ({ dataTable }) => {
     setAllDataDate,
     setTextAlert,
     handleShowFloatAlter,
+    token,
   } = useContext(GetTheAppContext);
 
   const [showModalDelete, setShowModalDelete] = useState(false);
@@ -42,7 +42,6 @@ export const MedicalDatesTable = ({ dataTable }) => {
   const handleCloseModalDelete = () => {
     setShowModalDelete(false);
   };
-  
 
   const formatDate = (originalDate) => {
     let piecesDate = originalDate.split("-");
@@ -59,9 +58,9 @@ export const MedicalDatesTable = ({ dataTable }) => {
 
   const funtionToDeleted = async () => {
     setActionButtonModal("Eliminar");
-    const responseModalDelete = await deleteDateFunction(idDate);
+    const responseModalDelete = await deleteDateFunction(idDate, token);
     if (responseModalDelete.status === statusOk) {
-      await getAllDateDataFunction(setAllDataDate);
+      await getAllDateDataFunction(setAllDataDate, token);
       setTextAlert(`Se eliminó la cita`);
       handleCloseModalDelete();
       handleShowFloatAlter();
@@ -146,10 +145,16 @@ export const MedicalDatesTable = ({ dataTable }) => {
               })
               .map((infoMedicalDates) => (
                 <tr key={infoMedicalDates.id}>
-                  <td id="responsiveTextTable">{infoMedicalDates.patientDTO.name}</td>
+                  <td id="responsiveTextTable">
+                    {infoMedicalDates.patientDTO.name}
+                  </td>
                   <td id="disableCell">{infoMedicalDates.doctorDTO.name}</td>
-                  <td id="responsiveTextTable">{formatDate(infoMedicalDates.date)}</td>
-                  <td id="responsiveTextTable">{hourMappings[infoMedicalDates.hour]}</td>
+                  <td id="responsiveTextTable">
+                    {formatDate(infoMedicalDates.date)}
+                  </td>
+                  <td id="responsiveTextTable">
+                    {hourMappings[infoMedicalDates.hour]}
+                  </td>
                   <td id="disableCell">{infoMedicalDates.notes}</td>
 
                   <td id="btnActionTable" className="td-actions text-center">
@@ -209,7 +214,7 @@ export const MedicalDatesTable = ({ dataTable }) => {
 
                 <div className="row cont-filtros">
                   <div className="col-md-5 mb-3">
-                    <h4>Nombre del paciente</h4>
+                    <h4>Nombre del Doctor</h4>
                     <div id="DivinputSearch">
                       <input
                         id="inputSearch"
@@ -220,7 +225,7 @@ export const MedicalDatesTable = ({ dataTable }) => {
                         onChange={(e) => {
                           setSearchNameDoctor(e.target.value);
                         }}
-                        placeholder="Buscar por nombre..."
+                        placeholder="Buscar por nombre del doctor ..."
                         pattern="^[a-zA-Z\sÀ-ÖØ-öø-ÿ]+$"
                       />
                     </div>
@@ -238,7 +243,7 @@ export const MedicalDatesTable = ({ dataTable }) => {
                         onChange={(e) => {
                           setSearchNamePatient(e.target.value);
                         }}
-                        placeholder="Buscar por nombre..."
+                        placeholder="Buscar por nombre del paciente..."
                         pattern="^[a-zA-Z\sÀ-ÖØ-öø-ÿ]+$"
                       />
                     </div>

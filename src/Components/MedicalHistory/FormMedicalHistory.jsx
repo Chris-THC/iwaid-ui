@@ -6,7 +6,6 @@ import { TypeaheadPatient } from "./Typeahead/TypeaheadPatient";
 import { statusCreated, statusOk } from "../HttpStatus/HTTPStatusCode";
 
 export const FormMedicalHistory = ({ isGetData = {} }) => {
-  
   const [isSelectedFamilyMedicalHistory, setIsSelectedFamilyMedicalHistory] =
     useState(false);
 
@@ -29,6 +28,7 @@ export const FormMedicalHistory = ({ isGetData = {} }) => {
     setAllMedicalHistoryData,
     allHistoryFromApiFunction,
     updateHistoryFunction,
+    token,
   } = useContext(GetTheAppContext);
 
   const {
@@ -90,32 +90,30 @@ export const FormMedicalHistory = ({ isGetData = {} }) => {
 
     if (actionButtonModal === "Agregar") {
       handleCloseModal();
-      const response = await createHistoryFunction(data);
+      const response = await createHistoryFunction(data, token);
 
       if (response.status === statusCreated) {
-
-        await allHistoryFromApiFunction(setAllMedicalHistoryData);
+        await allHistoryFromApiFunction(setAllMedicalHistoryData, token);
         getMessageForAlert();
         handleShowFloatAlter();
       } else {
         setTextAlert("Error al agregar la prescripción médica");
         handleShowFloatAlter();
       }
-
     } else if (actionButtonModal === "Editar") {
-
       data.patientId = dataMedicalHistory.patient.id;
       handleCloseModal();
-      const response = await updateHistoryFunction(data, dataMedicalHistory.id);
+      const response = await updateHistoryFunction(
+        data,
+        dataMedicalHistory.id,
+        token
+      );
 
       if (response.status === statusOk) {
-
-        await allHistoryFromApiFunction(setAllMedicalHistoryData);
+        await allHistoryFromApiFunction(setAllMedicalHistoryData, token);
         getMessageForAlert();
         handleShowFloatAlter();
-
       } else {
-
         setTextAlert("Error al editar la prescripción médica");
         handleShowFloatAlter();
       }
@@ -373,7 +371,10 @@ export const FormMedicalHistory = ({ isGetData = {} }) => {
             <button
               type="button"
               className="btn btn btn-light  btn-outline-danger"
-              onClick={handleCloseModal}
+              onClick={() => {
+                handleCloseModal();
+                setGetDataFromTable({});
+              }}
               data-bs-dismiss="modal"
             >
               Cancelar

@@ -7,7 +7,7 @@ First install Node JS, if you don't already have it, to be able to execute the f
 ## Available Scripts
 
 Then you have to execute the command 
-### `npm install`
+### `yarn add .`
 
 In the project directory, you can run:
 ### `npm start`

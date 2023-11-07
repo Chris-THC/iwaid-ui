@@ -13,6 +13,7 @@ import { MedicalHistory } from "./Routes/MedicalHistory";
 import { PatientHomePage } from "./Routes/PatientHomePage";
 import { PersonalDates } from "./Tabs/pages/PersonalDates";
 import { PersonalHistory } from "./Tabs/pages/PersonalHistory";
+import { PaypalSales } from "./Tabs/pages/Paypal";
 import { PersonalPrescriptions } from "./Tabs/pages/PersonalPrescriptions";
 import { Personalformation } from "./Tabs/pages/Personalformation";
 import { Login } from "./Logs/Login";
@@ -206,6 +207,15 @@ export function Conteiner() {
             element={
               <ProtectedRoutesPatient user={user} userRoll={userRoll}>
                 <PersonalHistory />
+              </ProtectedRoutesPatient>
+            }
+          />
+
+          <Route
+            path="pay"
+            element={
+              <ProtectedRoutesPatient user={user} userRoll={userRoll}>
+                <PaypalSales />
               </ProtectedRoutesPatient>
             }
           />

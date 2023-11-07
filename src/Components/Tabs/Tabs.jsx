@@ -13,7 +13,7 @@ export const Tabs = () => {
             aria-current="page"
             to="/patient/medical/information"
           >
-            Informacion Personal
+            Informacion
           </NavLink>
         </li>
         <li className="nav-item">
@@ -22,7 +22,7 @@ export const Tabs = () => {
             className="nav-link"
             to="/patient/medical/dates"
           >
-            Citas programadas
+            Citas
           </NavLink>
         </li>
 
@@ -43,6 +43,16 @@ export const Tabs = () => {
             to="/patient/medical/history"
           >
             Historial Médico
+          </NavLink>
+        </li>
+
+        <li className="nav-item">
+          <NavLink
+            id="navLinkColor"
+            className="nav-link"
+            to="/patient/medical/pay"
+          >
+            Pagos
           </NavLink>
         </li>
       </ul>

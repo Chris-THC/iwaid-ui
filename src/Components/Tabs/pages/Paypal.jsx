@@ -64,6 +64,7 @@ export const PaypalSales = () => {
       ...data,
       currency: "USD",
       intent: "sale",
+      amount: amountType,
     };
 
     setInfoToPay(dataPay);
@@ -90,13 +91,7 @@ export const PaypalSales = () => {
                       className="pb-3"
                       onSubmit={handleSubmit(onSubmitClick)}
                     >
-                      <h4
-                        style={{ fontWeight: "bold" }}
-                        className="text-success"
-                      >
-                        ${`${amountType}`}
-                      </h4>
-                      <h4>Factura Médica</h4>
+                      <h3>Factura Médica</h3>
 
                       <p>
                         Las reclamaciones de seguro y todas las dependencias
@@ -104,26 +99,27 @@ export const PaypalSales = () => {
                         cubierta de este pedido
                       </p>
                       <div className="rounded" style={{ padding: "1px" }}>
-                        <div className="form-outline">
-                          <label className="form-label">Cantidad a pagar</label>
-                          <input
-                            style={{
-                              backgroundColor: "#f8f9fa",
-                              borderRadius: "5px",
+                        <div className="form-outline my-4">
+                          <label className="form-label">
+                            Selecciona un servicio:
+                          </label>
+                          <br />
+                          <select
+                            onChange={(evet) => {
+                              setAmountType(evet.target.value);
+                              console.log(evet.target.value);
                             }}
-                            type="number"
-                            id="formControlLg"
-                            className="form-control form-control-lg"
-                            onChangeCapture={(event) => {
-                              setAmountType(event.target.value);
-                            }}
-                            {...register("amount", {
-                              required: true,
-                            })}
-                          />
-                          {errors.amount && (
-                            <span className="text-danger">Dato requerido</span>
-                          )}
+                            className="form-select"
+                          >
+                            <option selected value={0}>
+                              Seleciona una opción
+                            </option>
+
+                            <option value={29}>
+                              Consulta Básica ($500.00 MXN)
+                            </option>
+                            <option value={60}>Urgencias ($1000.00 MXN)</option>
+                          </select>
                         </div>
 
                         <div className="form-outline my-2">
@@ -183,6 +179,7 @@ export const PaypalSales = () => {
                             </p>
                           </div>
                         </div>
+
                         <input
                           type="submit"
                           defaultValue="Proceed to payment"
@@ -197,7 +194,7 @@ export const PaypalSales = () => {
                     <div className="py-4 d-flex justify-content-end">
                       <h6>
                         <Link to="/patient/medical/information">
-                          Cancelar y volver al sitio web
+                          Cancelar y volver
                         </Link>
                       </h6>
                     </div>
@@ -210,7 +207,7 @@ export const PaypalSales = () => {
                       </div>
                       <div className="p-2 d-flex">
                         <div className="col-8">Monto a pagar</div>
-                        <div className="ms-auto">${`${amountType}`}</div>
+                        <div className="ms-auto">${`${amountType} USD`}</div>
                       </div>
 
                       <div className="border-top px-2 mx-2" />
@@ -230,7 +227,7 @@ export const PaypalSales = () => {
                           <b>Total</b>
                         </div>
                         <div className="ms-auto">
-                          <b className="text-success">${`${amountType}`}</b>
+                          <b className="text-success">${`${amountType} USD`}</b>
                         </div>
                       </div>
                     </div>

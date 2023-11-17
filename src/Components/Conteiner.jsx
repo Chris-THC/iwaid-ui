@@ -58,6 +58,7 @@ export function Conteiner() {
         <Link
           className="nav-link active my-custom-margin mb-2 mt-2 text-light"
           to="/login"
+          id="linkNavMenu"
         >
           <FontAwesomeIcon
             className="ms-6 me-2"
@@ -75,6 +76,7 @@ export function Conteiner() {
           }}
           className="nav-link active my-custom-margin mb-2 mt-2 text-light"
           to="/"
+          id="linkNavMenu"
         >
           <FontAwesomeIcon
             className="ms-6 me-2"

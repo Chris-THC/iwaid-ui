@@ -127,9 +127,20 @@
 
 /* TODO: This section is to form all crud */
 
+@media (max-width: 1000px) {
+  #linkNavMenu {
+    display: none;
+  }
+  
+}
+
 @media (max-width: 900px) {
   #disableCell {
     display: none;
+  }
+
+  #linkNavMenu {
+    border: solid 1px #10162c;
   }
 }
 
